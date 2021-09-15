@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Chat-Android</string>
+
+    <string name="username_or_pwd_miss">Username or password is empty</string>
+    <string name="sign_up_success">Sign up success!</string>
+    <string name="sign_in_success">Sign in success!</string>
+    <string name="sign_out_success">Sign out success!</string>
+    <string name="send_message_success">Send message success!</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_up">Sign up</string>
+    <string name="enter_content">Enter content</string>
+    <string name="send_message">Send message</string>
+    <string name="log_hint">Show log area...</string>
+    <string name="has_login_before">An account has been signed in, please sign out first and then sign in</string>
+    <string name="sign_in_first">Please sign in first</string>
+</resources>
