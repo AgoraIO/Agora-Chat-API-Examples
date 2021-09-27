@@ -1,4 +1,4 @@
-package io.agora.chat;
+package io.agora.chat.utils;
 
 import android.os.Handler;
 import android.os.Looper;

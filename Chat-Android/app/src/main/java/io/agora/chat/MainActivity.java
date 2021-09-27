@@ -1,11 +1,12 @@
 package io.agora.chat;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -13,13 +14,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 import io.agora.CallBack;
+import io.agora.chat.utils.ImageUtils;
+import io.agora.chat.utils.LogUtils;
+import io.agora.chat.utils.PermissionsManager;
+import io.agora.chat.utils.ThreadManager;
 import io.agora.exceptions.ChatException;
+import io.agora.util.UriUtils;
 
 
 public class MainActivity extends AppCompatActivity {
     private EditText et_username;
     private TextView tv_log;
+    private EditText et_to_chat_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         et_username = findViewById(R.id.et_username);
         tv_log = findViewById(R.id.tv_log);
         tv_log.setMovementMethod(new ScrollingMovementMethod());
+        et_to_chat_name = findViewById(R.id.et_to_chat_name);
     }
 
 //=================== init SDK start ========================
@@ -137,26 +147,16 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.showErrorLog(tv_log, getString(R.string.sign_in_first));
             return;
         }
+        String toSendName = et_to_chat_name.getText().toString().trim();
+        if(TextUtils.isEmpty(toSendName)) {
+            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
+            return;
+        }
         EditText et_msg_content = findViewById(R.id.et_msg_content);
         String content = et_msg_content.getText().toString().trim();
-        ChatMessage message = ChatMessage.createTxtSendMessage(content, "som");
-        message.setMessageStatusCallback(new CallBack() {
-            @Override
-            public void onSuccess() {
-                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.send_message_success));
-            }
 
-            @Override
-            public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: " + error );
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-        });
-        ChatClient.getInstance().chatManager().sendMessage(message);
+        ChatMessage message = ChatMessage.createTxtSendMessage(content, toSendName);
+        sendMessage(message);
     }
 
     /**
@@ -190,6 +190,75 @@ public class MainActivity extends AppCompatActivity {
     public void joinChatRoom(View view) {
 
     }
+
+    private void sendImageMessage(String imageUrl) {
+        String toSendName = et_to_chat_name.getText().toString().trim();
+        if(TextUtils.isEmpty(toSendName)) {
+            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
+            return;
+        }
+        ChatMessage message = ChatMessage.createImageSendMessage(imageUrl, false, toSendName);
+        sendMessage(message);
+    }
+
+    private void sendImageMessage(Uri imageUri) {
+        String toSendName = et_to_chat_name.getText().toString().trim();
+        if(TextUtils.isEmpty(toSendName)) {
+            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
+            return;
+        }
+        ChatMessage message = ChatMessage.createImageSendMessage(imageUri, false, toSendName);
+        sendMessage(message);
+    }
+
+    private void sendMessage(ChatMessage message) {
+        if(message == null) {
+            LogUtils.showErrorToast(this, tv_log, getString(R.string.message_is_null));
+            return;
+        }
+        message.setMessageStatusCallback(new CallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.send_message_success));
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: " + error );
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
+        ChatClient.getInstance().chatManager().sendMessage(message);
+    }
+
+    protected void onActivityResultForLocalPhotos(@Nullable Intent data) {
+        if (data != null) {
+            Uri selectedImage = data.getData();
+            if (selectedImage != null) {
+                String filePath = UriUtils.getFilePath(this, selectedImage);
+                if(!TextUtils.isEmpty(filePath) && new File(filePath).exists()) {
+                    sendImageMessage(filePath);
+                }else {
+                    sendImageMessage(selectedImage);
+                }
+            }
+        }
+    }
 //=================== click event end ========================
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data != null) {
+            if(resultCode == RESULT_OK) {
+                if(requestCode == 200) {
+                    onActivityResultForLocalPhotos(data);
+                }
+            }
+        }
+    }
 }

@@ -12,8 +12,12 @@
     <string name="sign_out">Sign out</string>
     <string name="sign_up">Sign up</string>
     <string name="enter_content">Enter content</string>
-    <string name="send_message">Send message</string>
+    <string name="enter_to_send_name">Enter the username you want to send</string>
+    <string name="send_message">Send text</string>
+    <string name="send_image_message">Send image</string>
     <string name="log_hint">Show log area...</string>
     <string name="has_login_before">An account has been signed in, please sign out first and then sign in</string>
     <string name="sign_in_first">Please sign in first</string>
+    <string name="not_find_send_name">Please enter the username who you want to send first!</string>
+    <string name="message_is_null">Message is null!</string>
 </resources>
