@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_username;
     private TextView tv_log;
     private EditText et_to_chat_name;
+    private EditText et_group_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         tv_log = findViewById(R.id.tv_log);
         tv_log.setMovementMethod(new ScrollingMovementMethod());
         et_to_chat_name = findViewById(R.id.et_to_chat_name);
+        et_group_id = findViewById(R.id.et_group_id);
     }
 
 //=================== init SDK start ========================
@@ -174,14 +176,52 @@ public class MainActivity extends AppCompatActivity {
      * Join your first chat group
      */
     public void joinChatGroup(View view) {
+        String groupId = et_group_id.getText().toString().trim();
+        if(TextUtils.isEmpty(groupId)) {
+            groupId = "";
+        }
+        ChatClient.getInstance().groupManager().asyncJoinGroup(groupId, new CallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.join_group_success));
+            }
 
+            @Override
+            public void onError(int code, String error) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
     }
 
     /**
      * Exit your joined chat group
      */
-    public void exitChatGroup(View view) {
+    public void leaveChatGroup(View view) {
+        String groupId = et_group_id.getText().toString().trim();
+        if(TextUtils.isEmpty(groupId)) {
+            groupId = "";
+        }
+        ChatClient.getInstance().groupManager().asyncLeaveGroup(groupId, new CallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.leave_group_success));
+            }
 
+            @Override
+            public void onError(int code, String error) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
     }
 
     /**

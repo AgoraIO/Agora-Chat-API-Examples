@@ -20,4 +20,9 @@
     <string name="sign_in_first">Please sign in first</string>
     <string name="not_find_send_name">Please enter the username who you want to send first!</string>
     <string name="message_is_null">Message is null!</string>
+    <string name="enter_group_id">Enter group id</string>
+    <string name="join_group">Join group</string>
+    <string name="quit_group">Quit group</string>
+    <string name="join_group_success">Join group success!</string>
+    <string name="leave_group_success">Leave group success!</string>
 </resources>
