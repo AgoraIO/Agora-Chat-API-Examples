@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         options.setAppKey(sdkAppkey);
         options.setUsingHttpsOnly(true);
         ChatClient.getInstance().init(this, options);
+        ChatClient.getInstance().setDebugMode(true);
     }
 //=================== init SDK end ========================
 
