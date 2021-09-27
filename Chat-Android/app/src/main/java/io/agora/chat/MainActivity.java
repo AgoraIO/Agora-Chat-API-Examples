@@ -2,6 +2,7 @@ package io.agora.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -58,16 +59,16 @@ public class MainActivity extends AppCompatActivity {
         String username = et_username.getText().toString().trim();
         String pwd = ((EditText) findViewById(R.id.et_pwd)).getText().toString().trim();
         if(TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-            showErrorToast(getString(R.string.username_or_pwd_miss));
+            LogUtils.showErrorToast(this, tv_log, getString(R.string.username_or_pwd_miss));
             return;
         }
-        execute(()-> {
+        ThreadManager.getInstance().execute(()-> {
             try {
                 ChatClient.getInstance().createAccount(username, pwd);
-                showToast(getString(R.string.sign_up_success));
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_up_success));
             } catch (ChatException e) {
                 e.printStackTrace();
-                showErrorLog(e.getDescription());
+                LogUtils.showErrorLog(tv_log, e.getDescription());
             }
         });
     }
@@ -77,24 +78,24 @@ public class MainActivity extends AppCompatActivity {
      */
     public void signInWithToken(View view) {
         if(ChatClient.getInstance().isLoggedInBefore()) {
-            showErrorLog(getString(R.string.has_login_before));
+            LogUtils.showErrorLog(tv_log, getString(R.string.has_login_before));
             return;
         }
         String username = et_username.getText().toString().trim();
         String pwd = ((EditText) findViewById(R.id.et_pwd)).getText().toString().trim();
         if(TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-            showErrorToast(getString(R.string.username_or_pwd_miss));
+            LogUtils.showErrorToast(MainActivity.this, tv_log, getString(R.string.username_or_pwd_miss));
             return;
         }
         ChatClient.getInstance().login(username, pwd, new CallBack() {
             @Override
             public void onSuccess() {
-                showToast(getString(R.string.sign_in_success));
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
             }
 
             @Override
             public void onError(int code, String error) {
-                showErrorToast("code: "+code + " error: "+error);
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
             }
 
             @Override
@@ -112,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
             ChatClient.getInstance().logout(true, new CallBack() {
                 @Override
                 public void onSuccess() {
-                    showToast(getString(R.string.sign_out_success));
+                    LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_out_success));
                 }
 
                 @Override
                 public void onError(int code, String error) {
-                    showErrorToast("code: "+code + " error: "+error);
+                    LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
                 }
 
                 @Override
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void sendFirstMessage(View view) {
         if(!ChatClient.getInstance().isLoggedInBefore()) {
-            showErrorLog(getString(R.string.sign_in_first));
+            LogUtils.showErrorLog(tv_log, getString(R.string.sign_in_first));
             return;
         }
         EditText et_msg_content = findViewById(R.id.et_msg_content);
@@ -142,12 +143,12 @@ public class MainActivity extends AppCompatActivity {
         message.setMessageStatusCallback(new CallBack() {
             @Override
             public void onSuccess() {
-                showToast(getString(R.string.send_message_success));
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.send_message_success));
             }
 
             @Override
             public void onError(int code, String error) {
-                showErrorToast("code: "+code + " error: " + error );
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: " + error );
             }
 
             @Override
@@ -162,7 +163,11 @@ public class MainActivity extends AppCompatActivity {
      * Send your first image message
      */
     public void sendImageMessage(View view) {
-
+        if(!PermissionsManager.getInstance().hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            PermissionsManager.getInstance().requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+            return;
+        }
+        ImageUtils.openPhotoAlbum(this, 200);
     }
 
     /**
@@ -187,52 +192,4 @@ public class MainActivity extends AppCompatActivity {
     }
 //=================== click event end ========================
 
-//=================== utils start ========================
-
-    private void executeUI(Runnable runnable) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(runnable);
-    }
-
-    private void execute(Runnable runnable) {
-        new Thread(runnable).start();
-    }
-
-    private void showErrorLog(String content) {
-        showLog(content);
-    }
-
-    private void showNormalLog(String content) {
-        showLog(content);
-    }
-
-    private void showLog(String content) {
-        if(TextUtils.isEmpty(content)) {
-            return;
-        }
-        String preContent = tv_log.getText().toString().trim();
-        content = content + "\n" + preContent;
-        tv_log.setText(content);
-    }
-
-    private void showErrorToast(String content) {
-        if(TextUtils.isEmpty(content)) {
-            return;
-        }
-        executeUI(()-> {
-            Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT).show();
-            showErrorLog(content);
-        });
-    }
-
-    private void showToast(String content) {
-        if(TextUtils.isEmpty(content)) {
-            return;
-        }
-        executeUI(()-> {
-            Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT).show();
-            showNormalLog(content);
-        });
-    }
-//=================== utils end ========================
 }
