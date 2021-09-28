@@ -50,14 +50,19 @@ public class MainActivity extends AppCompatActivity {
 //=================== init SDK start ========================
     private void initSDK() {
         ChatOptions options = new ChatOptions();
+        // Set your appkey applied from Agora Console
         String sdkAppkey = BuildConfig.SDK_APPKEY;
         if(TextUtils.isEmpty(sdkAppkey)) {
             Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
             return;
         }
+        // Set your appkey to options
         options.setAppKey(sdkAppkey);
+        // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
+        // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
+        // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
     }
 //=================== init SDK end ========================
@@ -157,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         EditText et_msg_content = findViewById(R.id.et_msg_content);
         String content = et_msg_content.getText().toString().trim();
 
+        // Create a text message
         ChatMessage message = ChatMessage.createTxtSendMessage(content, toSendName);
         sendMessage(message);
     }
@@ -165,10 +171,12 @@ public class MainActivity extends AppCompatActivity {
      * Send your first image message
      */
     public void sendImageMessage(View view) {
+        // Check if have the permission of READ_EXTERNAL_STORAGE
         if(!PermissionsManager.getInstance().hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             PermissionsManager.getInstance().requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
             return;
         }
+        // Open the photo album
         ImageUtils.openPhotoAlbum(this, 200);
     }
 
@@ -178,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
     public void joinChatGroup(View view) {
         String groupId = et_group_id.getText().toString().trim();
         if(TextUtils.isEmpty(groupId)) {
+            // If you not enter the id of the group you want to join, the default value will be used
+            // todo add the public group id
             groupId = "";
         }
         ChatClient.getInstance().groupManager().asyncJoinGroup(groupId, new CallBack() {
@@ -204,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
     public void leaveChatGroup(View view) {
         String groupId = et_group_id.getText().toString().trim();
         if(TextUtils.isEmpty(groupId)) {
+            // todo add the public group id
             groupId = "";
         }
         ChatClient.getInstance().groupManager().asyncLeaveGroup(groupId, new CallBack() {
@@ -231,12 +242,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//=================== click event end ========================
+
     private void sendImageMessage(String imageUrl) {
         String toSendName = et_to_chat_name.getText().toString().trim();
         if(TextUtils.isEmpty(toSendName)) {
             LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
             return;
         }
+        // Create a image message with the absolute path
         ChatMessage message = ChatMessage.createImageSendMessage(imageUrl, false, toSendName);
         sendMessage(message);
     }
@@ -247,15 +261,18 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
             return;
         }
+        // Create a image message with the image uri
         ChatMessage message = ChatMessage.createImageSendMessage(imageUri, false, toSendName);
         sendMessage(message);
     }
 
     private void sendMessage(ChatMessage message) {
+        // Check if the message is null
         if(message == null) {
             LogUtils.showErrorToast(this, tv_log, getString(R.string.message_is_null));
             return;
         }
+        // Set the message callback before sending the message
         message.setMessageStatusCallback(new CallBack() {
             @Override
             public void onSuccess() {
@@ -272,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // Send the message
         ChatClient.getInstance().chatManager().sendMessage(message);
     }
 
@@ -288,7 +306,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-//=================== click event end ========================
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
