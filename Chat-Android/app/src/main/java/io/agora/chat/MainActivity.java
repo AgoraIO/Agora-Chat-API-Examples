@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void initSDK() {
         ChatOptions options = new ChatOptions();
         // Set your appkey applied from Agora Console
-        String sdkAppkey = BuildConfig.SDK_APPKEY;
+        String sdkAppkey = getString(R.string.app_key);
         if(TextUtils.isEmpty(sdkAppkey)) {
             Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
             return;

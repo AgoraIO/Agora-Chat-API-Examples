@@ -6,11 +6,6 @@ plugins {
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
 
 android {
-    // load local.properties
-    Properties properties = new Properties()
-    InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
-    properties.load( inputStream )
-
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -22,9 +17,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        def sdk_appkey = properties.getProperty("SDK_APPKEY", "")
-        buildConfigField "String", "SDK_APPKEY", "\"${sdk_appkey}\""
     }
 
     buildTypes {
@@ -53,7 +45,6 @@ dependencies {
     // FCM: Declare the dependencies for the Firebase Cloud Messaging
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging'
-
 
     // Required: Agora Chat SDK
     implementation 'io.hyphenate:chat-sdk:3.8.5'

@@ -30,4 +30,6 @@
     <string name="quit_chat_room">Quit chatroom</string>
     <string name="join_chat_room_success">Join chat room success!</string>
     <string name="leave_chat_room_success">Leave chat room success!</string>
+
+    <string name="app_key">Your App Key</string>
 </resources>
