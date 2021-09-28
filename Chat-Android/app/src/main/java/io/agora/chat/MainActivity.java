@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.io.File;
 
 import io.agora.CallBack;
+import io.agora.ValueCallBack;
 import io.agora.chat.utils.ImageUtils;
 import io.agora.chat.utils.LogUtils;
 import io.agora.chat.utils.PermissionsManager;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_log;
     private EditText et_to_chat_name;
     private EditText et_group_id;
+    private EditText et_chat_room_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         tv_log.setMovementMethod(new ScrollingMovementMethod());
         et_to_chat_name = findViewById(R.id.et_to_chat_name);
         et_group_id = findViewById(R.id.et_group_id);
+        et_chat_room_id = findViewById(R.id.et_chat_room_id);
     }
 
 //=================== init SDK start ========================
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: "+code + " error: "+error);
             }
 
             @Override
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(int code, String error) {
-                    LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+                    LogUtils.showErrorToast(MainActivity.this, tv_log, "Sign out failed! code: "+code + " error: "+error);
                 }
 
                 @Override
@@ -198,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Join group failed! code: "+code + " error: "+error);
             }
 
             @Override
@@ -225,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: "+error);
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Leave group failed! code: "+code + " error: "+error);
             }
 
             @Override
@@ -239,7 +242,36 @@ public class MainActivity extends AppCompatActivity {
      * Join your first chat room
      */
     public void joinChatRoom(View view) {
+        String roomId = et_chat_room_id.getText().toString().trim();
+        if(TextUtils.isEmpty(roomId)) {
+            // todo add the public group id
+            roomId = "";
+        }
+        ChatClient.getInstance().chatroomManager().joinChatRoom(roomId, new ValueCallBack<ChatRoom>() {
+            @Override
+            public void onSuccess(ChatRoom value) {
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.join_chat_room_success));
+            }
 
+            @Override
+            public void onError(int error, String errorMsg) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Join chat room failed! code: "+error + " error: "+error);
+            }
+        });
+    }
+
+    /**
+     * Leave the chat room you joined
+     */
+    public void leaveChatRoom(View view) {
+        String roomId = et_chat_room_id.getText().toString().trim();
+        if(TextUtils.isEmpty(roomId)) {
+            // todo add the public group id
+            roomId = "";
+        }
+        // If you fail to log out, the server will remove you from the chat room
+        // after you have been offline for a certain amount of time.
+        ChatClient.getInstance().chatroomManager().leaveChatRoom(roomId);
     }
 
 //=================== click event end ========================
@@ -281,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "code: "+code + " error: " + error );
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Send message failed! code: "+code + " error: " + error );
             }
 
             @Override
