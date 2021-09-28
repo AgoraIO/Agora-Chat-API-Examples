@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "605765206982",
+    "project_id": "chat-android-38ba1",
+    "storage_bucket": "chat-android-38ba1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605765206982:android:39979f581320cac91868c7",
+        "android_client_info": {
+          "package_name": "io.agora.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605765206982-pa7079rsgdtbnce851b9lc9ls3vul4r7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO2jeYL4qrmxF9wEk0Ts1tG3YePlogi5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605765206982-pa7079rsgdtbnce851b9lc9ls3vul4r7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

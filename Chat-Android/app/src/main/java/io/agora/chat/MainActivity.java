@@ -1,5 +1,6 @@
 package io.agora.chat;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailabilityLight;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.io.File;
 
 import io.agora.CallBack;
@@ -23,6 +30,11 @@ import io.agora.chat.utils.LogUtils;
 import io.agora.chat.utils.PermissionsManager;
 import io.agora.chat.utils.ThreadManager;
 import io.agora.exceptions.ChatException;
+import io.agora.push.PushConfig;
+import io.agora.push.PushHelper;
+import io.agora.push.PushListener;
+import io.agora.push.PushType;
+import io.agora.util.EMLog;
 import io.agora.util.UriUtils;
 
 
@@ -63,10 +75,60 @@ public class MainActivity extends AppCompatActivity {
         options.setAppKey(sdkAppkey);
         // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
+        initFCM(options);
         // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
+        // Upload FCM token
+        uploadFCMToken();
+    }
+
+    private void initFCM(ChatOptions options) {
+        PushConfig.Builder builder = new PushConfig.Builder(this);
+        builder.enableFCM("605765206982");
+        options.setPushConfig(builder.build());
+
+        PushHelper.getInstance().setPushListener(new PushListener() {
+            @Override
+            public void onError(PushType pushType, long errorCode) {
+                EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
+            }
+
+            @Override
+            public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
+                // Set whether FCM is supported
+                if(pushType == PushType.FCM) {
+                    return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
+                            == ConnectionResult.SUCCESS;
+                }
+                return super.isSupportPush(pushType, pushConfig);
+            }
+        });
+    }
+
+    private void uploadFCMToken() {
+        // If not login before, should not upload
+        if(!ChatClient.getInstance().isLoggedInBefore()) {
+            return;
+        }
+        // Check whether FCM is supported
+        if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) == ConnectionResult.SUCCESS) {
+            return;
+        }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    EMLog.d("PushClient", "Fetching FCM registration token failed:"+task.getException());
+                    return;
+                }
+                // Get new FCM registration token
+                String token = task.getResult();
+                EMLog.d("FCM", token);
+                ChatClient.getInstance().sendFCMTokenToServer(token);
+            }
+        });
     }
 //=================== init SDK end ========================
 
@@ -111,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
+                // After login successful, you can upload FCM token
+                uploadFCMToken();
             }
 
             @Override

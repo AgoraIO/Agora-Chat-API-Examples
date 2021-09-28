@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
 }
 
+// FCM: Add the following line:
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
 android {
     // load local.properties
     Properties properties = new Properties()
@@ -44,6 +47,13 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // FCM: Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    // FCM: Declare the dependencies for the Firebase Cloud Messaging
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-messaging'
+
 
     // Required: Agora Chat SDK
     implementation 'io.hyphenate:chat-sdk:3.8.5'
