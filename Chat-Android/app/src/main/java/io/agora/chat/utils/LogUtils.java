@@ -6,6 +6,12 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class LogUtils {
     private static final String TAG = LogUtils.class.getSimpleName();
 
@@ -22,8 +28,13 @@ public class LogUtils {
             return;
         }
         String preContent = tvLog.getText().toString().trim();
-        content = content + "\n" + preContent;
-        tvLog.setText(content);
+        StringBuilder builder = new StringBuilder();
+        builder.append(formatCurrentTime())
+                .append(" ")
+                .append(content)
+                .append("\n")
+                .append(preContent);
+        tvLog.setText(builder);
     }
 
     public static void showErrorToast(Activity activity, TextView tvLog, String content) {
@@ -48,5 +59,10 @@ public class LogUtils {
             Toast.makeText(activity, content, Toast.LENGTH_SHORT).show();
             showNormalLog(tvLog, content);
         });
+    }
+
+    private static String formatCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date());
     }
 }
