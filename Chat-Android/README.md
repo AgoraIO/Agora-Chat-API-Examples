@@ -1,14 +1,13 @@
 # 快速发送 Agora Chat 消息
 
-本文详细介绍如何建立一个简单的项目并使用 Agora Chat SDK 实现消息的发送，加入群组及搭建三方推送。
+本文详细介绍如何建立一个简单的项目并使用 Agora Chat SDK 实现消息的发送和加入群组。
 
 ## 消息发送与接收流程
 // todo 需要增加一张流程图
 
 登录 Agora Chat 系统包括以下流程：
-1. 客户端向业务服务器请求 Token。
-2. 业务服务器返回 Token。
-3. 客户端使用获得的 Token 登录 Chat 服务器。
+1. 客户端使用帐号和密码进行注册。
+2. 客户端注册成功后，登录到 Chat 服务器。
 
 // todo 需要增加一张流程图
 
@@ -27,20 +26,9 @@
 
  ### 1.创建 Agora 项目并获取AppKey
 
-// todo 图片需要替换或者更换到本地
- 1. 在我的应用中，点击【创建IM应用】按钮:
+// todo 增加跳转链接
 
- ![](https://docs-im.easemob.com/_media/im/quickstart/guide/3_.png)
-
- 2. 填写创建应用的名称（内容只限于数字、大小写字母）:
-
- ![](https://docs-im.easemob.com/_media/im/quickstart/guide/%E5%88%9B%E5%BB%BA%E5%BC%B9%E7%AA%97.png)
-
- 应用名称会存在于你生成的 AppKey 中，如：AppKey 为easemob-demo#chatdemo，则 chatdemo 为填写的应用名称。注册授权根据需要自行选择，AppKey的长度限制为1k字节以内。
-
- 3. 填写好应用名称后，点确定。创建成功，系统会为你生成 AppKey 以及相关配置信息:
-
- ![](https://docs-im.easemob.com/_media/im/quickstart/guide/%E5%BA%94%E7%94%A8%E8%AF%A6%E6%83%85.png)
+详情见：//跳转到链接
 
  ### 2.创建 Android 项目
 
@@ -117,8 +105,6 @@ dependencies {
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 ```
 
 ### 6.实现用户界面和资源文件
@@ -128,9 +114,6 @@ dependencies {
 - 登录和退出
 - 发送一条文本消息
 - 加入群组和从群组退出
-- 加入聊天室和从聊天室退出
-- 发送一条图片消息
-- 配置 FCM 推送
 
 1. 打开 app/res/layout/activity_main.xml 并将文件内容替换为以下 XML 代码：
 ```xml
@@ -169,6 +152,7 @@ dependencies {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_password"
+                android:inputType="textPassword"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_username"
@@ -185,8 +169,8 @@ dependencies {
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintRight_toLeftOf="@id/btn_sign_out"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"/>
 
             <Button
@@ -198,8 +182,8 @@ dependencies {
                 app:layout_constraintLeft_toRightOf="@id/btn_sign_in"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintRight_toLeftOf="@id/btn_sign_up"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"/>
 
             <Button
@@ -212,8 +196,8 @@ dependencies {
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintTop_toTopOf="@id/btn_sign_in"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"/>
 
             <EditText
                 android:id="@+id/et_to_chat_name"
@@ -233,11 +217,11 @@ dependencies {
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_content"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_send_message"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_to_chat_name"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="10dp"/>
 
             <Button
                 android:id="@+id/btn_send_message"
@@ -245,23 +229,12 @@ dependencies {
                 android:layout_height="wrap_content"
                 android:text="@string/send_message"
                 android:onClick="sendFirstMessage"
-                app:layout_constraintLeft_toRightOf="@id/et_msg_content"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/et_msg_content"
+                app:layout_constraintTop_toBottomOf="@id/et_msg_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"/>
-
-            <Button
-                android:id="@+id/btn_send_image_message"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/send_image_message"
-                android:onClick="sendImageMessage"
-                app:layout_constraintLeft_toLeftOf="@id/btn_send_message"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_send_message"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/et_group_id"
@@ -269,11 +242,11 @@ dependencies {
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_group_id"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_join_group"
-                app:layout_constraintTop_toBottomOf="@id/btn_send_image_message"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_send_message"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:id="@+id/btn_join_group"
@@ -281,9 +254,9 @@ dependencies {
                 android:layout_height="wrap_content"
                 android:text="@string/join_group"
                 android:onClick="joinChatGroup"
-                app:layout_constraintLeft_toRightOf="@id/et_group_id"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/et_group_id"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_leave_group"
+                app:layout_constraintTop_toBottomOf="@id/et_group_id"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp"/>
 
@@ -293,47 +266,11 @@ dependencies {
                 android:layout_height="wrap_content"
                 android:text="@string/quit_group"
                 android:onClick="leaveChatGroup"
-                app:layout_constraintLeft_toLeftOf="@id/btn_join_group"
+                app:layout_constraintLeft_toRightOf="@id/btn_join_group"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_join_group"
+                app:layout_constraintBottom_toBottomOf="@id/btn_join_group"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"/>
-
-            <EditText
-                android:id="@+id/et_chat_room_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_chat_room_id"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_join_chat_room"
-                app:layout_constraintTop_toBottomOf="@id/btn_leave_group"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="30dp"/>
-
-            <Button
-                android:id="@+id/btn_join_chat_room"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/join_chat_room"
-                android:onClick="joinChatRoom"
-                app:layout_constraintLeft_toRightOf="@id/et_chat_room_id"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/et_chat_room_id"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"/>
-
-            <Button
-                android:id="@+id/btn_leave_chat_room"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/quit_chat_room"
-                android:onClick="leaveChatRoom"
-                app:layout_constraintLeft_toLeftOf="@id/btn_join_chat_room"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_join_chat_room"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="10dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -379,219 +316,24 @@ dependencies {
     <string name="quit_group">Quit group</string>
     <string name="join_group_success">Join group success!</string>
     <string name="leave_group_success">Leave group success!</string>
-    <string name="enter_chat_room_id">Enter chat room id</string>
-    <string name="join_chat_room">Join chatroom</string>
-    <string name="quit_chat_room">Quit chatroom</string>
-    <string name="join_chat_room_success">Join chat room success!</string>
-    <string name="leave_chat_room_success">Leave chat room success!</string>
 
     <string name="app_key">Your App Key</string>
-    <string name="fcm_sender_id">Your FCM sender id</string>
 </resources>
 ```
 
 你需要编辑以下字段：
 
 - 将 Your App Key 替换为你的 App Key。
-- 将 Your FCM sender id 替换为你申请的 FCM 的 sender id。
 
-### 7.配置发送图片的设置
-发送图片需要打开相册，Android 7.0以后要求需要在AndroidManifest.xml中增加以下配置：
-```java
-<!-- After android 7.0, you should add -->
-<provider
-    android:name="androidx.core.content.FileProvider"
-    android:authorities="${applicationId}.fileProvider"
-    android:grantUriPermissions="true"
-    android:exported="false">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths" />
-</provider>
-```
-将上面的代码放到标签 application 内，与标签activity平级的地方。
-
-同时需要在 app/res 文件夹中增加文件夹xml及file_paths.xml文件，代码如下：
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path path="Android/data/io/agora/agorachatquickstart/" name="files_root" />
-    <external-path path="." name="external_storage_root" />
-</paths>
-```
-
-### 8.配置 FCM 推送
-// todo 增加配置FCM推送的链接
-详细配置参见：配置 FCM 推送
-
-在本项目中需要增加如下配置：
-1. 将 Firebase Android 配置文件（google-services.json）添加到 app 文件夹下。
-2. 将 app/res/values/strings.xml 中 "fcm_sender_id" 对应的 Your FCM sender id 替换为你申请的 FCM sender id。
-3. 在项目根目录的 build.gradle 文件中添加 Google 服务插件
-
-```java
-buildscript {
-
-  repositories {
-    // Check that you have the following line (if not, add it):
-    google()  // Google's Maven repository
-  }
-
-  dependencies {
-    // ...
-
-    // Add the following line:
-    classpath 'com.google.gms:google-services:4.3.10'  // Google Services plugin
-  }
-}
-
-allprojects {
-  // ...
-
-  repositories {
-    // Check that you have the following line (if not, add it):
-    google()  // Google's Maven repository
-    // ...
-  }
-}
-```
-4. 在项目的 /app/build.gradle 文件中应用 Google 服务 Gradle 插件
-```java
-apply plugin: 'com.android.application'
-// Add the following line:
-apply plugin: 'com.google.gms.google-services'  // Google Services plugin
-
-android {
-  // ...
-}
-```
-5. 在项目的 /app/build.gradle 文件配置Firebase SDK
-```java
-dependencies {
-    // ...
-
-    // FCM: Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:28.4.1')
-    // FCM: Declare the dependencies for the Firebase Cloud Messaging
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-messaging'
-
-}
-```
-6.同步应用后，继承 FirebaseMessagingService 的服务，并将其在AndroidManifest.xml中注册
-```xml
-<service
-    android:name=".java.MyFirebaseMessagingService"
-    android:exported="false">
-    <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-    </intent-filter>
-</service>
-```
-MyFirebaseMessagingService的实现逻辑如下：
-
-```java
-package io.agora.agorachatquickstart;
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.messaging.FirebaseMessagingService;
-
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
-    @Override
-    public void onNewToken(@NonNull String token) {
-        Log.i("MessagingService", "onNewToken: " + token);
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // FCM registration token to your app server.
-        if(ChatClient.getInstance().isSdkInited()) {
-            ChatClient.getInstance().sendFCMTokenToServer(token);
-        }
-    }
-}
-
-```
-7. 初始化并注册 FCM 到 Chat SDK
-此部分代码均在下一步替换 MainActivity.java 中。这里简要介绍一下思路。
-
-（1）在 Chat SDK 初始化时注册 FCM
-```java
-private void initSDK() {
-    ChatOptions options = new ChatOpti
-    ...
-    initFCM(options);
-    // To initialize Agora Chat SDK
-    ChatClient.getInstance().init(this, options);
-    ...
-}
-
-private void initFCM(ChatOptions options) {
-    PushConfig.Builder builder = new PushConfig.Builder(this);
-    // Replace to Your FCM sender id
-    builder.enableFCM("Your FCM sender id");
-    options.setPushConfig(builder.build());
-    PushHelper.getInstance().setPushListener(new PushListener() {
-        @Override
-        public void onError(PushType pushType, long errorCode) {
-            EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
-        }
-        @Override
-        public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
-            // Set whether FCM is supported
-            if(pushType == PushType.FCM) {
-                return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
-                        == ConnectionResult.SUCCESS;
-            }
-            return super.isSupportPush(pushType, pushConfig);
-        }
-    });
-}
-``` 
-
-(2) 登录成功后，上传 FCM Token
-```java
-private void uploadFCMToken() {
-    // If not login before, should not upload
-    if(!ChatClient.getInstance().isLoggedInBefore()) {
-        return;
-    }
-    // Check whether FCM is supported
-    if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) == ConnectionResult.SUCCESS) {
-        return;
-    }
-    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-        @Override
-        public void onComplete(@NonNull Task<String> task) {
-            if (!task.isSuccessful()) {
-                EMLog.d("PushClient", "Fetching FCM registration token failed:"+task.getException());
-                return;
-            }
-            // Get new FCM registration token
-            String token = task.getResult();
-            EMLog.d("FCM", token);
-            ChatClient.getInstance().sendFCMTokenToServer(token);
-        }
-    });
-}
-```
-
-### 9.实现消息发送与加入群组逻辑
+### 7.实现消息发送与加入群组逻辑
 
 1. 打开 app/java/io.agora.agorachatquickstart/MainActivity.java 并将内容替换为以下 Java 代码：
 
 ```java
 package io.agora.agorachatquickstart;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -600,27 +342,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailabilityLight;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.io.File;
+import java.util.List;
 
 import io.agora.CallBack;
-import io.agora.ValueCallBack;
-import io.agora.agorachatquickstart.utils.ImageUtils;
+import io.agora.MessageListener;
 import io.agora.agorachatquickstart.utils.LogUtils;
-import io.agora.agorachatquickstart.utils.PermissionsManager;
 import io.agora.agorachatquickstart.utils.ThreadManager;
 import io.agora.exceptions.ChatException;
-import io.agora.push.PushConfig;
-import io.agora.push.PushHelper;
-import io.agora.push.PushListener;
-import io.agora.push.PushType;
-import io.agora.util.EMLog;
-import io.agora.util.UriUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -628,7 +356,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_log;
     private EditText et_to_chat_name;
     private EditText et_group_id;
-    private EditText et_chat_room_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -636,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initSDK();
+        addMessageListener();
     }
 
     private void initView() {
@@ -644,7 +372,6 @@ public class MainActivity extends AppCompatActivity {
         tv_log.setMovementMethod(new ScrollingMovementMethod());
         et_to_chat_name = findViewById(R.id.et_to_chat_name);
         et_group_id = findViewById(R.id.et_group_id);
-        et_chat_room_id = findViewById(R.id.et_chat_room_id);
     }
 
 //=================== init SDK start ========================
@@ -660,64 +387,66 @@ public class MainActivity extends AppCompatActivity {
         options.setAppKey(sdkAppkey);
         // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
-        initFCM(options);
         // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
-        // Upload FCM token
-        uploadFCMToken();
-    }
-
-    private void initFCM(ChatOptions options) {
-        PushConfig.Builder builder = new PushConfig.Builder(this);
-        // Replace to Your FCM sender id
-        builder.enableFCM("Your FCM sender id");
-        options.setPushConfig(builder.build());
-
-        PushHelper.getInstance().setPushListener(new PushListener() {
-            @Override
-            public void onError(PushType pushType, long errorCode) {
-                EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
-            }
-
-            @Override
-            public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
-                // Set whether FCM is supported
-                if(pushType == PushType.FCM) {
-                    return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
-                            == ConnectionResult.SUCCESS;
-                }
-                return super.isSupportPush(pushType, pushConfig);
-            }
-        });
-    }
-
-    private void uploadFCMToken() {
-        // If not login before, should not upload
-        if(!ChatClient.getInstance().isLoggedInBefore()) {
-            return;
-        }
-        // Check whether FCM is supported
-        if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) == ConnectionResult.SUCCESS) {
-            return;
-        }
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    EMLog.d("PushClient", "Fetching FCM registration token failed:"+task.getException());
-                    return;
-                }
-                // Get new FCM registration token
-                String token = task.getResult();
-                EMLog.d("FCM", token);
-                ChatClient.getInstance().sendFCMTokenToServer(token);
-            }
-        });
     }
 //=================== init SDK end ========================
+//================= SDK listener start ====================
+    private void addMessageListener() {
+        ChatClient.getInstance().chatManager().addMessageListener(new MessageListener() {
+            @Override
+            public void onMessageReceived(List<ChatMessage> messages) {
+                parseMessage(messages);
+            }
 
+            @Override
+            public void onCmdMessageReceived(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onCmdMessageReceived");
+            }
+
+            @Override
+            public void onMessageRead(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageRead");
+            }
+
+            @Override
+            public void onMessageDelivered(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageDelivered");
+            }
+
+            @Override
+            public void onMessageRecalled(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageRecalled");
+            }
+
+            @Override
+            public void onMessageChanged(ChatMessage message, Object change) {
+                LogUtils.showLog(tv_log, "onMessageChanged");
+            }
+        });
+    }
+
+    private void parseMessage(List<ChatMessage> messages) {
+        if(messages != null && !messages.isEmpty()) {
+            for(ChatMessage message : messages) {
+                ChatMessage.Type type = message.getType();
+                String from = message.getFrom();
+                StringBuilder builder = new StringBuilder();
+                builder.append("Receive a ")
+                        .append(type.name())
+                        .append(" message from: ")
+                        .append(from);
+                if(type == ChatMessage.Type.TXT) {
+                    builder.append(" content:")
+                            .append(((TextMessageBody)message.getBody()).getMessage());
+                }
+                LogUtils.showLog(tv_log, builder.toString());
+            }
+        }
+    }
+//================= SDK listener end ====================
 //=================== click event start ========================
 
     /**
@@ -759,8 +488,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
-                // After login successful, you can upload FCM token
-                uploadFCMToken();
             }
 
             @Override
@@ -821,19 +548,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Send your first image message
-     */
-    public void sendImageMessage(View view) {
-        // Check if have the permission of READ_EXTERNAL_STORAGE
-        if(!PermissionsManager.getInstance().hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            PermissionsManager.getInstance().requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
-            return;
-        }
-        // Open the photo album
-        ImageUtils.openPhotoAlbum(this, 200);
-    }
-
-    /**
      * Join your first chat group
      */
     public void joinChatGroup(View view) {
@@ -888,65 +602,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Join your first chat room
-     */
-    public void joinChatRoom(View view) {
-        String roomId = et_chat_room_id.getText().toString().trim();
-        if(TextUtils.isEmpty(roomId)) {
-            // todo add the public group id
-            roomId = "";
-        }
-        ChatClient.getInstance().chatroomManager().joinChatRoom(roomId, new ValueCallBack<ChatRoom>() {
-            @Override
-            public void onSuccess(ChatRoom value) {
-                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.join_chat_room_success));
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "Join chat room failed! code: "+error + " error: "+error);
-            }
-        });
-    }
-
-    /**
-     * Leave the chat room you joined
-     */
-    public void leaveChatRoom(View view) {
-        String roomId = et_chat_room_id.getText().toString().trim();
-        if(TextUtils.isEmpty(roomId)) {
-            // todo add the public group id
-            roomId = "";
-        }
-        // If you fail to log out, the server will remove you from the chat room
-        // after you have been offline for a certain amount of time.
-        ChatClient.getInstance().chatroomManager().leaveChatRoom(roomId);
-    }
-
 //=================== click event end ========================
-
-    private void sendImageMessage(String imageUrl) {
-        String toSendName = et_to_chat_name.getText().toString().trim();
-        if(TextUtils.isEmpty(toSendName)) {
-            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
-            return;
-        }
-        // Create a image message with the absolute path
-        ChatMessage message = ChatMessage.createImageSendMessage(imageUrl, false, toSendName);
-        sendMessage(message);
-    }
-
-    private void sendImageMessage(Uri imageUri) {
-        String toSendName = et_to_chat_name.getText().toString().trim();
-        if(TextUtils.isEmpty(toSendName)) {
-            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
-            return;
-        }
-        // Create a image message with the image uri
-        ChatMessage message = ChatMessage.createImageSendMessage(imageUri, false, toSendName);
-        sendMessage(message);
-    }
 
     private void sendMessage(ChatMessage message) {
         // Check if the message is null
@@ -975,67 +631,9 @@ public class MainActivity extends AppCompatActivity {
         ChatClient.getInstance().chatManager().sendMessage(message);
     }
 
-    protected void onActivityResultForLocalPhotos(@Nullable Intent data) {
-        if (data != null) {
-            Uri selectedImage = data.getData();
-            if (selectedImage != null) {
-                String filePath = UriUtils.getFilePath(this, selectedImage);
-                if(!TextUtils.isEmpty(filePath) && new File(filePath).exists()) {
-                    sendImageMessage(filePath);
-                }else {
-                    sendImageMessage(selectedImage);
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(data != null) {
-            if(resultCode == RESULT_OK) {
-                if(requestCode == 200) {
-                    onActivityResultForLocalPhotos(data);
-                }
-            }
-        }
-    }
 }
 ```
 2. 此外 MainActivity 中用到几个工具类，将这个几个工具类拷贝复制到项目中的utils文件夹中，如下：
-
-- ImageUtils
-```java
-package io.agora.agorachatquickstart.utils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
-import android.provider.MediaStore;
-
-
-public class ImageUtils {
-
-    /**
-     * Open system Album
-     * @param activity
-     * @param requestCode
-     */
-    public static void openPhotoAlbum(Activity activity, int requestCode) {
-        Intent intent = null;
-        if(Build.VERSION.SDK_INT >= 29 && activity.getApplicationInfo().targetSdkVersion >= 29) {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }else {
-            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        }
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        intent.setType("image/*");
-        activity.startActivityForResult(intent, requestCode);
-    }
-}
-
-```
 
 - LogUtils
 ```java
@@ -1046,6 +644,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class LogUtils {
     private static final String TAG = LogUtils.class.getSimpleName();
@@ -1063,8 +665,15 @@ public class LogUtils {
             return;
         }
         String preContent = tvLog.getText().toString().trim();
-        content = content + "\n" + preContent;
-        tvLog.setText(content);
+        StringBuilder builder = new StringBuilder();
+        builder.append(formatCurrentTime())
+                .append(" ")
+                .append(content)
+                .append("\n")
+                .append(preContent);
+        ThreadManager.getInstance().executeUI(()-> {
+            tvLog.setText(builder);
+        });
     }
 
     public static void showErrorToast(Activity activity, TextView tvLog, String content) {
@@ -1089,6 +698,11 @@ public class LogUtils {
             Toast.makeText(activity, content, Toast.LENGTH_SHORT).show();
             showNormalLog(tvLog, content);
         });
+    }
+
+    private static String formatCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date());
     }
 }
 
@@ -1130,65 +744,13 @@ public class ThreadManager {
 
 ```
 
-- PermissionsManager
-```java
-package io.agora.agorachatquickstart.utils;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-
-public class PermissionsManager {
-    private static PermissionsManager mInstance = null;
-
-    public static PermissionsManager getInstance() {
-        if (mInstance == null) {
-            mInstance = new PermissionsManager();
-        }
-        return mInstance;
-    }
-
-    private PermissionsManager() {}
-
-    /**
-     * Check if has permission
-     * @param context
-     * @param permission
-     * @return
-     */
-    @SuppressWarnings("unused")
-    public synchronized boolean hasPermission(@Nullable Context context, @NonNull String permission) {
-        return context != null && ActivityCompat.checkSelfPermission(context, permission)
-                == PackageManager.PERMISSION_GRANTED;
-    }
-
-    /**
-     * Request permissions
-     * @param activity
-     * @param permissions
-     * @param requestCode
-     */
-    public synchronized void requestPermissions(Activity activity, String[] permissions, int requestCode) {
-        ActivityCompat.requestPermissions(activity, permissions, requestCode);
-    }
-}
-
-```
-
-### 10.编译并运行项目
+### 8.编译并运行项目
 
 使用 Android Studio 在模拟器或真机上编译并运行项目。运行成功之后，你可以进行以下操作：
 
-- 登录和退出
+- 注册，登录和退出
 - 发送一条文本消息
 - 加入群组和从群组退出
-- 加入聊天室和从聊天室退出
-- 发送一条图片消息
-- 接收 FCM 离线推送
 
 运行效果如下图所示：
 
