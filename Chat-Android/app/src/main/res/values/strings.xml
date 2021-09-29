@@ -25,11 +25,6 @@
     <string name="quit_group">Quit group</string>
     <string name="join_group_success">Join group success!</string>
     <string name="leave_group_success">Leave group success!</string>
-    <string name="enter_chat_room_id">Enter chat room id</string>
-    <string name="join_chat_room">Join chatroom</string>
-    <string name="quit_chat_room">Quit chatroom</string>
-    <string name="join_chat_room_success">Join chat room success!</string>
-    <string name="leave_chat_room_success">Leave chat room success!</string>
 
     <string name="app_key">Your App Key</string>
 </resources>
