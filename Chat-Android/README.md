@@ -386,12 +386,14 @@ dependencies {
     <string name="leave_chat_room_success">Leave chat room success!</string>
 
     <string name="app_key">Your App Key</string>
+    <string name="fcm_sender_id">Your FCM sender id</string>
 </resources>
 ```
 
 你需要编辑以下字段：
 
 - 将 Your App Key 替换为你的 App Key。
+- 将 Your FCM sender id 替换为你申请的 FCM 的 sender id。
 
 ### 7.配置发送图片的设置
 发送图片需要打开相册，Android 7.0以后要求需要在AndroidManifest.xml中增加以下配置：
@@ -424,7 +426,8 @@ dependencies {
 
 在本项目中需要增加如下配置：
 1. 将 Firebase Android 配置文件（google-services.json）添加到 app 文件夹下。
-2. 在项目根目录的 build.gradle 文件中添加 Google 服务插件
+2. 将 app/res/values/strings.xml 中 "fcm_sender_id" 对应的 Your FCM sender id 替换为你申请的 FCM sender id。
+3. 在项目根目录的 build.gradle 文件中添加 Google 服务插件
 
 ```java
 buildscript {
@@ -452,7 +455,7 @@ allprojects {
   }
 }
 ```
-3. 在项目的 /app/build.gradle 文件中应用 Google 服务 Gradle 插件
+4. 在项目的 /app/build.gradle 文件中应用 Google 服务 Gradle 插件
 ```java
 apply plugin: 'com.android.application'
 // Add the following line:
@@ -462,7 +465,7 @@ android {
   // ...
 }
 ```
-4. 在项目的 /app/build.gradle 文件配置Firebase SDK
+5. 在项目的 /app/build.gradle 文件配置Firebase SDK
 ```java
 dependencies {
     // ...
@@ -475,7 +478,7 @@ dependencies {
 
 }
 ```
-5.同步应用后，继承 FirebaseMessagingService 的服务，并将其在AndroidManifest.xml中注册
+6.同步应用后，继承 FirebaseMessagingService 的服务，并将其在AndroidManifest.xml中注册
 ```xml
 <service
     android:name=".java.MyFirebaseMessagingService"
@@ -511,7 +514,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 }
 
 ```
-6. 初始化并注册 FCM 到 Chat SDK
+7. 初始化并注册 FCM 到 Chat SDK
 此部分代码均在下一步替换 MainActivity.java 中。这里简要介绍一下思路。
 
 （1）在 Chat SDK 初始化时注册 FCM

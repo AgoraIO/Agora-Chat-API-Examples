@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFCM(ChatOptions options) {
         PushConfig.Builder builder = new PushConfig.Builder(this);
-        builder.enableFCM("605765206982");
+        builder.enableFCM(getString(R.string.fcm_sender_id));
         options.setPushConfig(builder.build());
 
         PushHelper.getInstance().setPushListener(new PushListener() {
