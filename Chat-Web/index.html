@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agora Chat Examples</title>
+    <script src="./dist/bundle.js"></script>
+</head>
+
+<body>
+    <h2 class="left-align">Agora Chat Examples</h5>
+        <form id="loginForm">
+            <div class="col" style="min-width: 433px; max-width: 443px">
+                <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
+                    <div class="row card-content" style="margin-bottom: 0px; margin-top: 10px;">
+                        <div class="input-field">
+                            <label>Username</label>
+                            <input type="text" placeholder="Username" id="userID">
+                        </div>
+                        <div class="input-field">
+                            <label>Password</label>
+                            <input type="passward" placeholder="Password" id="password">
+                        </div>
+                        <div class="row">
+                            <div>
+                                <button type="button" id="register">Register</button>
+                                <button type="button" id="login">Login</button>
+                                <button type="button" id="logout">Logout</button>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label>Peer username</label>
+                            <input type="text" placeholder="Peer username" id="peerId">
+                        </div>
+                        <div class="input-field">
+                            <label>Peer Message</label>
+                            <input type="text" placeholder="Peer message" id="peerMessage">
+                            <button type="button" id="send_peer_message">send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <div id="log"></div>
+</body>
+
+</html>
