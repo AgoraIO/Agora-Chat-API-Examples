@@ -14,7 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import io.agora.CallBack;
+import io.agora.MessageListener;
 import io.agora.chat.utils.ImageUtils;
 import io.agora.chat.utils.LogUtils;
 import io.agora.chat.utils.PermissionsManager;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initSDK();
+        addMessageListener();
     }
 
     private void initView() {
@@ -63,7 +67,60 @@ public class MainActivity extends AppCompatActivity {
         ChatClient.getInstance().setDebugMode(true);
     }
 //=================== init SDK end ========================
+//================= SDK listener start ====================
+    private void addMessageListener() {
+        ChatClient.getInstance().chatManager().addMessageListener(new MessageListener() {
+            @Override
+            public void onMessageReceived(List<ChatMessage> messages) {
+                parseMessage(messages);
+            }
 
+            @Override
+            public void onCmdMessageReceived(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onCmdMessageReceived");
+            }
+
+            @Override
+            public void onMessageRead(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageRead");
+            }
+
+            @Override
+            public void onMessageDelivered(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageDelivered");
+            }
+
+            @Override
+            public void onMessageRecalled(List<ChatMessage> messages) {
+                LogUtils.showLog(tv_log, "onMessageRecalled");
+            }
+
+            @Override
+            public void onMessageChanged(ChatMessage message, Object change) {
+                LogUtils.showLog(tv_log, "onMessageChanged");
+            }
+        });
+    }
+
+    private void parseMessage(List<ChatMessage> messages) {
+        if(messages != null && !messages.isEmpty()) {
+            for(ChatMessage message : messages) {
+                ChatMessage.Type type = message.getType();
+                String from = message.getFrom();
+                StringBuilder builder = new StringBuilder();
+                builder.append("Receive a ")
+                        .append(type.name())
+                        .append(" message from: ")
+                        .append(from);
+                if(type == ChatMessage.Type.TXT) {
+                    builder.append(" content:")
+                            .append(((TextMessageBody)message.getBody()).getMessage());
+                }
+                LogUtils.showLog(tv_log, builder.toString());
+            }
+        }
+    }
+//================= SDK listener end ====================
 //=================== click event start ========================
 
     /**

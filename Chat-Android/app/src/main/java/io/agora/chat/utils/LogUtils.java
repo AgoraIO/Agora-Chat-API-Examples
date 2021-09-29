@@ -34,7 +34,9 @@ public class LogUtils {
                 .append(content)
                 .append("\n")
                 .append(preContent);
-        tvLog.setText(builder);
+        ThreadManager.getInstance().executeUI(()-> {
+            tvLog.setText(builder);
+        });
     }
 
     public static void showErrorToast(Activity activity, TextView tvLog, String content) {
