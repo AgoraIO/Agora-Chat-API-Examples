@@ -1,6 +1,5 @@
 package io.agora.chat;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,27 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailabilityLight;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.io.File;
-
 import io.agora.CallBack;
-import io.agora.ValueCallBack;
 import io.agora.chat.utils.ImageUtils;
 import io.agora.chat.utils.LogUtils;
 import io.agora.chat.utils.PermissionsManager;
 import io.agora.chat.utils.ThreadManager;
 import io.agora.exceptions.ChatException;
-import io.agora.push.PushConfig;
-import io.agora.push.PushHelper;
-import io.agora.push.PushListener;
-import io.agora.push.PushType;
-import io.agora.util.EMLog;
-import io.agora.util.UriUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_log;
     private EditText et_to_chat_name;
     private EditText et_group_id;
-    private EditText et_chat_room_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         tv_log.setMovementMethod(new ScrollingMovementMethod());
         et_to_chat_name = findViewById(R.id.et_to_chat_name);
         et_group_id = findViewById(R.id.et_group_id);
-        et_chat_room_id = findViewById(R.id.et_chat_room_id);
     }
 
 //=================== init SDK start ========================
@@ -75,60 +57,10 @@ public class MainActivity extends AppCompatActivity {
         options.setAppKey(sdkAppkey);
         // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
-        initFCM(options);
         // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
-        // Upload FCM token
-        uploadFCMToken();
-    }
-
-    private void initFCM(ChatOptions options) {
-        PushConfig.Builder builder = new PushConfig.Builder(this);
-        builder.enableFCM(getString(R.string.fcm_sender_id));
-        options.setPushConfig(builder.build());
-
-        PushHelper.getInstance().setPushListener(new PushListener() {
-            @Override
-            public void onError(PushType pushType, long errorCode) {
-                EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
-            }
-
-            @Override
-            public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
-                // Set whether FCM is supported
-                if(pushType == PushType.FCM) {
-                    return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
-                            == ConnectionResult.SUCCESS;
-                }
-                return super.isSupportPush(pushType, pushConfig);
-            }
-        });
-    }
-
-    private void uploadFCMToken() {
-        // If not login before, should not upload
-        if(!ChatClient.getInstance().isLoggedInBefore()) {
-            return;
-        }
-        // Check whether FCM is supported
-        if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) == ConnectionResult.SUCCESS) {
-            return;
-        }
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    EMLog.d("PushClient", "Fetching FCM registration token failed:"+task.getException());
-                    return;
-                }
-                // Get new FCM registration token
-                String token = task.getResult();
-                EMLog.d("FCM", token);
-                ChatClient.getInstance().sendFCMTokenToServer(token);
-            }
-        });
     }
 //=================== init SDK end ========================
 
@@ -173,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
-                // After login successful, you can upload FCM token
-                uploadFCMToken();
             }
 
             @Override
@@ -302,55 +232,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Join your first chat room
-     */
-    public void joinChatRoom(View view) {
-        String roomId = et_chat_room_id.getText().toString().trim();
-        if(TextUtils.isEmpty(roomId)) {
-            // todo add the public group id
-            roomId = "";
-        }
-        ChatClient.getInstance().chatroomManager().joinChatRoom(roomId, new ValueCallBack<ChatRoom>() {
-            @Override
-            public void onSuccess(ChatRoom value) {
-                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.join_chat_room_success));
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "Join chat room failed! code: "+error + " error: "+error);
-            }
-        });
-    }
-
-    /**
-     * Leave the chat room you joined
-     */
-    public void leaveChatRoom(View view) {
-        String roomId = et_chat_room_id.getText().toString().trim();
-        if(TextUtils.isEmpty(roomId)) {
-            // todo add the public group id
-            roomId = "";
-        }
-        // If you fail to log out, the server will remove you from the chat room
-        // after you have been offline for a certain amount of time.
-        ChatClient.getInstance().chatroomManager().leaveChatRoom(roomId);
-    }
-
 //=================== click event end ========================
-
-    private void sendImageMessage(String imageUrl) {
-        String toSendName = et_to_chat_name.getText().toString().trim();
-        if(TextUtils.isEmpty(toSendName)) {
-            LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
-            return;
-        }
-        // Create a image message with the absolute path
-        ChatMessage message = ChatMessage.createImageSendMessage(imageUrl, false, toSendName);
-        sendMessage(message);
-    }
-
     private void sendImageMessage(Uri imageUri) {
         String toSendName = et_to_chat_name.getText().toString().trim();
         if(TextUtils.isEmpty(toSendName)) {
@@ -389,16 +271,11 @@ public class MainActivity extends AppCompatActivity {
         ChatClient.getInstance().chatManager().sendMessage(message);
     }
 
-    protected void onActivityResultForLocalPhotos(@Nullable Intent data) {
+    private void onActivityResultForLocalPhotos(@Nullable Intent data) {
         if (data != null) {
             Uri selectedImage = data.getData();
             if (selectedImage != null) {
-                String filePath = UriUtils.getFilePath(this, selectedImage);
-                if(!TextUtils.isEmpty(filePath) && new File(filePath).exists()) {
-                    sendImageMessage(filePath);
-                }else {
-                    sendImageMessage(selectedImage);
-                }
+                sendImageMessage(selectedImage);
             }
         }
     }

@@ -32,5 +32,4 @@
     <string name="leave_chat_room_success">Leave chat room success!</string>
 
     <string name="app_key">Your App Key</string>
-    <string name="fcm_sender_id">Your FCM sender id</string>
 </resources>
