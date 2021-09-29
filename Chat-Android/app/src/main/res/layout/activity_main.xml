@@ -33,6 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_password"
+                android:inputType="textPassword"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_username"
@@ -49,8 +50,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintRight_toLeftOf="@id/btn_sign_out"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"/>
 
             <Button
@@ -62,8 +63,8 @@
                 app:layout_constraintLeft_toRightOf="@id/btn_sign_in"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintRight_toLeftOf="@id/btn_sign_up"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"/>
 
             <Button
@@ -76,8 +77,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_pwd"
                 app:layout_constraintTop_toTopOf="@id/btn_sign_in"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"/>
 
             <EditText
                 android:id="@+id/et_to_chat_name"
@@ -97,11 +98,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_content"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_send_message"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_to_chat_name"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="10dp"/>
 
             <Button
                 android:id="@+id/btn_send_message"
@@ -109,11 +110,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/send_message"
                 android:onClick="sendFirstMessage"
-                app:layout_constraintLeft_toRightOf="@id/et_msg_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/et_msg_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_send_image_message"
+                app:layout_constraintTop_toBottomOf="@id/et_msg_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:id="@+id/btn_send_image_message"
@@ -121,9 +123,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/send_image_message"
                 android:onClick="sendImageMessage"
-                app:layout_constraintLeft_toLeftOf="@id/btn_send_message"
+                app:layout_constraintLeft_toRightOf="@id/btn_send_message"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_send_message"
+                app:layout_constraintBottom_toBottomOf="@id/btn_send_message"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"/>
 
@@ -133,11 +135,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_group_id"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_join_group"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_send_image_message"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:id="@+id/btn_join_group"
@@ -145,9 +147,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/join_group"
                 android:onClick="joinChatGroup"
-                app:layout_constraintLeft_toRightOf="@id/et_group_id"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/et_group_id"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_leave_group"
+                app:layout_constraintTop_toBottomOf="@id/et_group_id"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp"/>
 
@@ -157,9 +159,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/quit_group"
                 android:onClick="leaveChatGroup"
-                app:layout_constraintLeft_toLeftOf="@id/btn_join_group"
+                app:layout_constraintLeft_toRightOf="@id/btn_join_group"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_join_group"
+                app:layout_constraintBottom_toBottomOf="@id/btn_join_group"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"/>
 
