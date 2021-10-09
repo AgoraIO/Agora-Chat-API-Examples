@@ -21,16 +21,11 @@
  - Android SDK (版本取决于目标平台)。
  - Java Development Kit (JDK)，版本选择参考 Android 官方文档。
  - 有效的 Agora 开发者账号。
+ - 创建 Agora 项目并获取 AppKey 。//todo 增加跳转链接
 
- ## 操作步骤
+ ## 建立项目
 
- ### 1.创建 Agora 项目并获取AppKey
-
-// todo 增加跳转链接
-
-详情见：//跳转到链接
-
- ### 2.创建 Android 项目
+ ### 1.创建 Android 项目
 
  使用 Android Studio 创建一个 [Android 项目](https://developer.android.google.cn/studio/projects/create-project)。
 
@@ -39,10 +34,9 @@
 - Package name 设为 io.agora.agorachatquickstart。
 - Language 选择 Java。
 
-### 3.集成 Agora Chat SDK
-选择以下任意一种方式将 Agora chat SDK 集成到你的项目中。本文使用方法 1 进行集成。
+### 2.集成 Agora Chat SDK
 
-**方法 1：使用 MavenCentral 自动集成**
+将 Agora chat SDK 集成到你的项目中。
 
 在项目根目录的 build.gradle 文件中添加 MavenCentral 远程仓库。
 
@@ -54,11 +48,11 @@ buildscript {
     }
 }
 allprojects {
-        repositories {
-            ...
-            mavenCentral()
-        }
+    repositories {
+        ...
+        mavenCentral()
     }
+}
 ```
 在项目的 /app/build.gradle 文件添加 io.hyphenate:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
 
@@ -75,22 +69,7 @@ dependencies {
     implementation 'io.hyphenate:chat-sdk:X.Y.Z'
 }
 ```
-
-**方法 2：手动下载 SDK 包**
-
-// todo 需要添加下载链接
-1. 下载最新版的 [Agora Chat SDK for Android]() 并解压。
-2. 将 SDK 包内 libs 路径下的以下文件，拷贝到你的项目路径下：
-
-| 文件                                           | 对应项目文件                                     |
-|:-----------------------------------------------|:----------------------------------------------|
-| agorachat_3.8.5.jar                            | ~/app/libs/                                   |
-| /arm64-v8a/libagora-chat-sdk.so及libsqlite.so  | ~/app/src/main/jniLibs/arm64-v8a/             |
-| /armeabi-v7a/libagora-chat-sdk.so及libsqlite.so | ~/app/src/main/jniLibs/armeabi-v7a/          |
-| /x86/libagora-chat-sdk.so及libsqlite.so        | ~/app/src/main/jniLibs/x86/                   |
-| /x86_64/libagora-chat-sdk.so及libsqlite.so     | ~/app/src/main/jniLibs/x86_64/                 |
-
-### 4.防止代码混淆
+### 3.防止代码混淆
 
 在 app/proguard-rules.pro 文件中添加如下行，防止代码混淆：
 ```java
@@ -98,7 +77,7 @@ dependencies {
 -dontwarn  io.agora.**
 ```
 
-### 5.添加权限
+### 4.添加权限
 
 在 AndroidManifest.xml 中添加以下权限：
 ```xml
@@ -106,8 +85,8 @@ dependencies {
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
 ```
-
-### 6.实现用户界面和资源文件
+## 项目实现
+### 1.创建用户界面
 
 为了帮助你快速实现并理解相关功能，本文通过最简方式，在一个 Activity 里实现以下操作：
 
@@ -325,7 +304,7 @@ dependencies {
 
 - 将 Your App Key 替换为你的 App Key。
 
-### 7.实现消息发送与加入群组逻辑
+### 2.实现消息发送与加入群组逻辑
 
 1. 打开 app/java/io.agora.agorachatquickstart/MainActivity.java 并将内容替换为以下 Java 代码：
 
@@ -744,7 +723,7 @@ public class ThreadManager {
 
 ```
 
-### 8.编译并运行项目
+### 3.编译并运行项目
 
 使用 Android Studio 在模拟器或真机上编译并运行项目。运行成功之后，你可以进行以下操作：
 
@@ -755,3 +734,19 @@ public class ThreadManager {
 运行效果如下图所示：
 
 // todo 需要增加一张运行图片
+
+## 其他
+
+### 1.手动集成 Agora Chat SDK
+
+// todo 需要添加下载链接
+1. 下载最新版的 [Agora Chat SDK for Android]() 并解压。
+2. 将 SDK 包内 libs 路径下的以下文件，拷贝到你的项目路径下：
+
+| 文件                                           | 对应项目文件                                     |
+|:-----------------------------------------------|:----------------------------------------------|
+| agorachat_3.8.5.jar                            | ~/app/libs/                                   |
+| /arm64-v8a/libagora-chat-sdk.so及libsqlite.so  | ~/app/src/main/jniLibs/arm64-v8a/             |
+| /armeabi-v7a/libagora-chat-sdk.so及libsqlite.so | ~/app/src/main/jniLibs/armeabi-v7a/          |
+| /x86/libagora-chat-sdk.so及libsqlite.so        | ~/app/src/main/jniLibs/x86/                   |
+| /x86_64/libagora-chat-sdk.so及libsqlite.so     | ~/app/src/main/jniLibs/x86_64/                 |
