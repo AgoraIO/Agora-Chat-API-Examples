@@ -25,6 +25,7 @@
 
  ## 建立项目
 
+按照如下步骤配置使用 Agora Chat SDK 的项目环境。
  ### 1.创建 Android 项目
 
  使用 Android Studio 创建一个 [Android 项目](https://developer.android.google.cn/studio/projects/create-project)。
@@ -85,7 +86,11 @@ dependencies {
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
 ```
+>注意：
+以上权限为保证项目运行的最基本要求，随着功能的增加，你需要根据项目情况增加必要的权限。
 ## 项目实现
+
+这部分向你展示了如何通过 Agora Chat SDK 一步一步实现消息发送的。
 ### 1.创建用户界面
 
 为了帮助你快速实现并理解相关功能，本文通过最简方式，在一个 Activity 里实现以下操作：
@@ -304,7 +309,7 @@ dependencies {
 
 - 将 Your App Key 替换为你的 App Key。
 
-### 2.实现消息发送与加入群组逻辑
+### 2.实现消息发送与接收
 
 1. 打开 app/java/io.agora.agorachatquickstart/MainActivity.java 并将内容替换为以下 Java 代码：
 
@@ -735,9 +740,46 @@ public class ThreadManager {
 
 // todo 需要增加一张运行图片
 
-## 其他
+## 相关信息
 
-### 1.手动集成 Agora Chat SDK
+### 1.集成 Agora Chat SDK
+选择以下任意一种方式将 Agora Chat SDK 集成到你的项目中。本文使用方法 1 进行集成。
+
+**方法 1：使用 MavenCentral 自动集成**
+
+在项目根目录的 build.gradle 文件中添加 MavenCentral 远程仓库。
+
+```java
+buildscript {
+    repositories {
+        ...
+        mavenCentral()
+    }
+}
+allprojects {
+    repositories {
+        ...
+        mavenCentral()
+    }
+}
+```
+在项目的 /app/build.gradle 文件添加 io.hyphenate:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
+
+```java
+android {
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+dependencies {
+    ...
+    implementation 'io.hyphenate:chat-sdk:X.Y.Z'
+}
+```
+
+**方法 2：手动下载 SDK 包**
 
 // todo 需要添加下载链接
 1. 下载最新版的 [Agora Chat SDK for Android]() 并解压。
@@ -745,8 +787,10 @@ public class ThreadManager {
 
 | 文件                                           | 对应项目文件                                     |
 |:-----------------------------------------------|:----------------------------------------------|
-| agorachat_3.8.5.jar                            | ~/app/libs/                                   |
+| agorachat_X.Y.Z.jar                            | ~/app/libs/                                   |
 | /arm64-v8a/libagora-chat-sdk.so及libsqlite.so  | ~/app/src/main/jniLibs/arm64-v8a/             |
 | /armeabi-v7a/libagora-chat-sdk.so及libsqlite.so | ~/app/src/main/jniLibs/armeabi-v7a/          |
 | /x86/libagora-chat-sdk.so及libsqlite.so        | ~/app/src/main/jniLibs/x86/                   |
 | /x86_64/libagora-chat-sdk.so及libsqlite.so     | ~/app/src/main/jniLibs/x86_64/                 |
+
+>注：表格中 agorachat_X.Y.Z.jar 的 X.Y.Z 代指 SDK jar 包的版本号，以你下载的为准。
