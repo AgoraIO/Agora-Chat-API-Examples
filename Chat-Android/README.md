@@ -20,8 +20,8 @@
  - Android Studio 3.2或更高版本。
  - Android SDK (版本取决于目标平台)。
  - Java Development Kit (JDK)，版本选择参考 Android 官方文档。
- - 有效的 Agora 开发者账号。
- - 创建 Agora 项目并获取 AppKey 。//todo 增加跳转链接
+ - 有效的 Agora Chat 开发者账号。
+ - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
 
  ## 建立项目
 
@@ -37,7 +37,7 @@
 
 ### 2.集成 Agora Chat SDK
 
-将 Agora chat SDK 集成到你的项目中。
+将 Agora Chat SDK 集成到你的项目中。
 
 在项目根目录的 build.gradle 文件中添加 MavenCentral 远程仓库。
 
