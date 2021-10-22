@@ -8,13 +8,14 @@
 - 有效的 Agora Chat 开发者账号。
 - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
 - [npm](https://www.npmjs.com/get-npm)
+- SDK 本身已支持 IE9+、FireFox10+、Chrome54+、Safari6+。
 
 
 ## 操作步骤
 
 ### 1. 准备开发环境
 
-本节介绍如何创建项目，将 Agora Chat SDK 集成进你的项目中，并添加相应的设备权限。
+本节介绍如何创建项目，将 Agora Chat SDK 集成进你的项目中。
 
 #### 新建 Web 项目
 
@@ -117,10 +118,11 @@ index.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 w
 
 ```Javascript
 import WebIM from 'agora-chat-sdk'
+const appKey = "<Your app key>"
 
 // 初始化客户端
 WebIM.conn = new WebIM.connection({
-    appKey: "<Your app key>",
+    appKey: appKey,
     isHttpDNS: true
 })
 
@@ -134,7 +136,7 @@ WebIM.conn.listen({
     }, // 连接关闭回调
     onTextMessage: function (message) {
         console.log(message)
-        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.msg)
+        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
     }, // 收到文本消息
 })
 
@@ -162,7 +164,7 @@ window.onload = function () {
         WebIM.conn.open({
             user: username,
             pwd: password,
-            appKey: "<Your app key>"
+            appKey: appKey
         });
     }
 
@@ -265,6 +267,8 @@ $ npm run build
 # 使用 webpack-dev-server 运行项目
 $ npm run start:dev
 ```
+
+项目启动之后，在页面输入用户名、密码进行注册，然后用注册的用户名密码登录，在登录成功之后，输入对方的用户名和要发送的消息，点击“发送”按钮进行发送，可以同时再打开一个页面相互收发消息。
 
 ### 6. 参考信息
 
