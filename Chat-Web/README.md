@@ -67,7 +67,6 @@ index.html 的内容如下。<script src="./dist/bundle.js"></script> 用来引�
 <head>
     <meta charset="UTF-8">
     <title>Agora Chat Examples</title>
-    <script src="./dist/bundle.js"></script>
 </head>
 
 <body>
@@ -104,12 +103,10 @@ index.html 的内容如下。<script src="./dist/bundle.js"></script> 用来引�
                 </div>
             </div>
         </form>
-
         <hr>
-
         <div id="log"></div>
 </body>
-
+<script src="./dist/bundle.js"></script>
 </html>
 ```
 
@@ -122,10 +119,9 @@ index.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 w
 import WebIM from 'agora-chat-sdk'
 
 // 初始化客户端
-WebIM.conn = new WebIM.connect({
+WebIM.conn = new WebIM.connection({
     appKey: "<Your app key>",
-    isHttpDNS: true,
-    https: true
+    isHttpDNS: true
 })
 
 // 添加回调函数
@@ -218,9 +214,9 @@ window.onload = function () {
     },
     "dependencies": {
         "agora-chat-sdk": "latest",
-        "webpack": "5.28.0",
-        "webpack-dev-server": "3.11.2",
-        "webpack-cli": "4.5.0"
+        "webpack": "^5.50.0",
+        "webpack-dev-server": "^3.11.2",
+        "webpack-cli": "^4.8.0"
     },
     "author": "",
     "license": "ISC"
@@ -234,6 +230,7 @@ const path = require('path');
 
 module.exports = {
     entry: './index.js',
+    mode: 'production',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
