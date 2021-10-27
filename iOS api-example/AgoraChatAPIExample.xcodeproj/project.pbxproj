@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,8 +16,6 @@
 		9E429FC726F2EB4A00F0B94D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E429FC526F2EB4A00F0B94D /* LaunchScreen.storyboard */; };
 		9E429FCA26F2EB4A00F0B94D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FC926F2EB4A00F0B94D /* main.m */; };
 		9E429FD226F341A700F0B94D /* EMHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FD026F341A700F0B94D /* EMHttpRequest.m */; };
-		9ED854DE27055B7C0092884C /* HyphenateChat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED854DC27055B780092884C /* HyphenateChat.xcframework */; };
-		9ED854DF27055B7C0092884C /* HyphenateChat.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED854DC27055B780092884C /* HyphenateChat.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +25,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9ED854DF27055B7C0092884C /* HyphenateChat.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,7 +48,6 @@
 		9E429FC926F2EB4A00F0B94D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9E429FD026F341A700F0B94D /* EMHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHttpRequest.m; sourceTree = "<group>"; };
 		9E429FD126F341A700F0B94D /* EMHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHttpRequest.h; sourceTree = "<group>"; };
-		9ED854DC27055B780092884C /* HyphenateChat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = HyphenateChat.xcframework; sourceTree = "<group>"; };
 		F9D74CF70EFC86F7B1A919A8 /* Pods-AgoraChatAPIExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraChatAPIExample.release.xcconfig"; path = "Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9ED854DE27055B7C0092884C /* HyphenateChat.xcframework in Frameworks */,
 				1DF02E3749245E88F9BD5271 /* libPods-AgoraChatAPIExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +66,6 @@
 		9E429FAB26F2EB4800F0B94D = {
 			isa = PBXGroup;
 			children = (
-				9ED854DC27055B780092884C /* HyphenateChat.xcframework */,
 				9E429FB626F2EB4800F0B94D /* AgoraChatAPIExample */,
 				9E429FB526F2EB4800F0B94D /* Products */,
 				E9401167370812DC2569FBFB /* Pods */,
@@ -136,6 +130,7 @@
 				9E429FB126F2EB4800F0B94D /* Frameworks */,
 				9E429FB226F2EB4800F0B94D /* Resources */,
 				9ED854DB270453F30092884C /* Embed Frameworks */,
+				717E17D0C42B029D805AFCE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +186,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		717E17D0C42B029D805AFCE8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8AF5C4D9C97B40E8F03428CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -16,12 +16,12 @@
 2. Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息。
 
 ## 前提条件
- - iOS 9及以上版本
- - 有效的 Agora 开发者账号
+ - iOS 10 及以上版本
+ - 有效的 Agora Chat 开发者账号
 
  ## 操作步骤
 
- ### 1.创建 Agora 项目并获取AppKey
+### 1.创建 Agora Chat 项目并获取AppKey
 
 // todo 增加跳转链接
 
@@ -33,7 +33,9 @@
 
 **方法 1：使用 pod 方式集成SDK**
 
-创建一个podfile文件，并在podfile里添加相关SDK，示例如下：
+1. 开始前确保你已安装 Cocoapods。参考 [Getting Started with CocoaPods](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装说明。
+2. 在终端里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 `Podfile` 文本文件。
+3. 打开 `Podfile` 文件，在podfile文件里添加相关SDK。注意将 `AgoraChatAPIExample` 替换为你的 Target 名称。
 
 ```objective-c
 platform :ios, '11.0'
@@ -46,18 +48,20 @@ target 'AgoraChatAPIExample' do
   	pod 'Masonry'
 end
 ```
-在终端 Terminal cd到podfile文件所在目录厚执行如下命令集成SDK
+4. 在终端 Terminal cd 到 podfile 文件所在目录，执行如下命令集成 SDK。
 
 ```objective-c
 pod install
 ```
+
+5. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
 
 **方法 2：手动集成 SDK framework 包**
 
 // todo 需要添加下载链接
 1. 下载最新版的 [Agora Chat SDK for iOS]() 并解压。
 2. 将 SDK 包内的 AgoraChat.framework 加入到项目中，AgoraChat.framework 包含 arm64，armv7，x86_64 指令集。
-3. 选中项目的 Target，并在 General -> Frameworks,libraries,and... -> 将AgoraChat.framework的“Embed”的选项设置为“Embed & sign”。
+3. 选中项目的 Target，并在 General -> Frameworks,libraries,and... -> 将AgoraChat.framework 的 “Embed”选项设置为 “Embed & sign”。
 
 ### 3.添加权限
 
@@ -77,7 +81,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 - 发送图片
 - 加入群组
 
-在项目的 ViewController 文件里添加如下相关代码：
+在项目的 ViewController.m 文件里添加如下相关代码：
 
 1. 导入头文件
 
@@ -154,8 +158,6 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 ```
-
-
 
 4. 加载页面元素
 
@@ -405,8 +407,6 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }];
 }
 ```
-
-
 
 ### 5.实现注册登录消息收发与加入群组等逻辑
 
@@ -871,12 +871,12 @@ NS_ASSUME_NONNULL_END
 使用 Xcode 在模拟器或真机上编译并运行项目。运行成功之后，你可以进行以下操作：
 
 - 注册，登录和退出
-- 输入会话ID
+- 输入会话 ID
 - 发送文本消息
 - 发送图片消息
 - 加入群组
 
-功能执行结果在页面下半部分会有相关日志记录展示
+功能执行结果在页面下半部分会有相关日志记录展示。
 
 运行效果如下图所示：
 

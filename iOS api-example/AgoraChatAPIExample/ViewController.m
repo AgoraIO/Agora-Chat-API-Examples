@@ -8,13 +8,13 @@
 #import "ViewController.h"
 #import <Masonry/Masonry.h>
 #import "EMHttpRequest.h"
-#import <HyphenateChat/HyphenateChat.h>
-#import <HyphenateChat/EMOptions+PrivateDeploy.h>
+#import <AgoraChat/AgoraChat.h>
+#import <AgoraChat/AgoraChatOptions+PrivateDeploy.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, EMClientDelegate, EMChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, AgoraChatClientDelegate, AgoraChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *pswdField;
@@ -58,17 +58,17 @@
 
 - (void)initSdk
 {
-    EMOptions *options = [EMOptions optionsWithAppkey:@"52366312#441909"];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"52366312#441909"];
     options.chatPort = 6717;
     options.chatServer = @"hk-tls.easemob.com";
     options.restServer = @"hk-test.easemob.com";
     options.enableDnsConfig = NO;
     options.enableConsoleLog = YES;
     options.usingHttpsOnly = YES;
-    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
 
-    [[EMClient sharedClient] addDelegate:self delegateQueue:nil];
-    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    [[AgoraChatClient sharedClient] addDelegate:self delegateQueue:nil];
+    [[AgoraChatClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
 - (void)handleTapTableViewAction:(UITapGestureRecognizer *)aTap
@@ -363,7 +363,7 @@
     }
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient] registerWithUsername:name password:pswd completion:^(NSString *aUsername, EMError *aError) {
+    [[AgoraChatClient sharedClient] registerWithUsername:name password:pswd completion:^(NSString *aUsername, AgoraChatError *aError) {
         if (!aError) {
             [weakself printLog:[NSString stringWithFormat:@"register success ! name : %@",name]];
         } else {
@@ -375,7 +375,7 @@
 
 - (void)loginAction
 {
-    if (EMClient.sharedClient.isLoggedIn) {
+    if (AgoraChatClient.sharedClient.isLoggedIn) {
         [self logoutAction];
     }
     [self.view endEditing:YES];
@@ -389,7 +389,7 @@
     }
     
     __weak typeof(self) weakself = self;
-    void (^finishBlock) (NSString *aName, EMError *aError) = ^(NSString *aName, EMError *aError) {
+    void (^finishBlock) (NSString *aName, AgoraChatError *aError) = ^(NSString *aName, AgoraChatError *aError) {
         if (!aError) {
             [weakself printLog:[NSString stringWithFormat:@"login success ! name : %@",aName]];
             return ;
@@ -406,7 +406,7 @@
                 NSString *token = [responsedict objectForKey:@"accessToken"];
                 if (token && token.length > 0) {
                     [weakself printLog:@"login appserver success !"];
-                    [[EMClient sharedClient] loginWithUsername:name agoraToken:token completion:finishBlock];
+                    [[AgoraChatClient sharedClient] loginWithUsername:name agoraToken:token completion:finishBlock];
                 } else {
                     [weakself printLog:@"parseing token fail !"];
                 }
@@ -419,27 +419,27 @@
 
 - (void)logoutAction
 {
-    [[EMClient sharedClient] logout:YES];
+    [[AgoraChatClient sharedClient] logout:YES];
 }
 
-- (void)_sendMessageWithBody:(EMMessageBody *)body
+- (void)_sendMessageWithBody:(AgoraChatMessageBody *)body
                         ext:(NSDictionary * __nullable)aExt
 {
-    NSString *from = [[EMClient sharedClient] currentUsername];
+    NSString *from = [[AgoraChatClient sharedClient] currentUsername];
     NSString *to = self.conversationIdField.text;
     if (to.length == 0) {
         [self printLog:@"conversationId is null !"];
         return;
     }
     
-    EMMessage *message = [[EMMessage alloc] initWithConversationID:to from:from to:to body:body ext:nil];
-    message.chatType = EMChatTypeChat;
+    AgoraChatMessage *message = [[AgoraChatMessage alloc] initWithConversationID:to from:from to:to body:body ext:nil];
+    message.chatType = AgoraChatTypeChat;
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMMessage *message, EMError *error) {
+    [[AgoraChatClient sharedClient].chatManager sendMessage:message progress:nil completion:^(AgoraChatMessage *message, AgoraChatError *error) {
         if (!error) {
-            if (message.body.type == EMMessageBodyTypeText) {
-                EMTextMessageBody *body = (EMTextMessageBody *)message.body;
+            if (message.body.type == AgoraChatMessageBodyTypeText) {
+                AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody *)message.body;
                 [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
             } else {
                 [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:message.body.type]]];
@@ -452,11 +452,11 @@
 
 - (void)chatAction
 {
-    if (!EMClient.sharedClient.isLoggedIn) {
+    if (!AgoraChatClient.sharedClient.isLoggedIn) {
         [self printLog:@"not loggin"];
         return;
     }
-    EMMessageBody *body = [[EMTextMessageBody alloc] initWithText:self.msgField.text];
+    AgoraChatMessageBody *body = [[AgoraChatTextMessageBody alloc] initWithText:self.msgField.text];
     [self _sendMessageWithBody:body ext:nil];
 }
 
@@ -539,7 +539,7 @@
 
 - (void)_sendImageDataAction:(NSData *)aImageData
 {
-    EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:aImageData displayName:@"image"];
+    AgoraChatImageMessageBody *body = [[AgoraChatImageMessageBody alloc] initWithData:aImageData displayName:@"image"];
     [self _sendMessageWithBody:body ext:nil];
 }
 
@@ -562,7 +562,7 @@
     }
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient].groupManager joinPublicGroup:groupId completion:^(EMGroup *aGroup, EMError *aError) {
+    [[AgoraChatClient sharedClient].groupManager joinPublicGroup:groupId completion:^(AgoraChatGroup *aGroup, AgoraChatError *aError) {
         if (!aError) {
             [weakself printLog:[NSString stringWithFormat:@"join group success ! groupID : %@",aGroup.groupId]];
         } else {
@@ -576,9 +576,9 @@
 {
     __weak typeof(self) weakself = self;
     for (int i = 0; i < [aMessages count]; i++) {
-        EMMessage *msg = aMessages[i];
-        if(msg.body.type == EMMessageBodyTypeText) {
-            EMTextMessageBody *body = (EMTextMessageBody*)msg.body;
+        AgoraChatMessage *msg = aMessages[i];
+        if(msg.body.type == AgoraChatMessageBodyTypeText) {
+            AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody*)msg.body;
             [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
         } else {
             [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:msg.body.type]]];
@@ -586,30 +586,30 @@
     }
 }
 
-- (NSString *)getBodyType:(EMMessageBodyType)bodyType
+- (NSString *)getBodyType:(AgoraChatMessageBodyType)bodyType
 {
     NSString *type = @"";
     switch (bodyType) {
-        case EMMessageBodyTypeImage:
-            type = @"EMMessageBodyTypeImage";
+        case AgoraChatMessageBodyTypeImage:
+            type = @"AgoraChatMessageBodyTypeImage";
             break;
-        case EMMessageBodyTypeVideo:
-            type = @"EMMessageBodyTypeVideo";
+        case AgoraChatMessageBodyTypeVideo:
+            type = @"AgoraChatMessageBodyTypeVideo";
             break;
-        case EMMessageBodyTypeLocation:
-            type = @"EMMessageBodyTypeLocation";
+        case AgoraChatMessageBodyTypeLocation:
+            type = @"AgoraChatMessageBodyTypeLocation";
             break;
-        case EMMessageBodyTypeVoice:
-            type = @"EMMessageBodyTypeVoice";
+        case AgoraChatMessageBodyTypeVoice:
+            type = @"AgoraChatMessageBodyTypeVoice";
             break;
-        case EMMessageBodyTypeFile:
-            type = @"EMMessageBodyTypeFile";
+        case AgoraChatMessageBodyTypeFile:
+            type = @"AgoraChatMessageBodyTypeFile";
             break;
-        case EMMessageBodyTypeCmd:
-            type = @"EMMessageBodyTypeCmd";
+        case AgoraChatMessageBodyTypeCmd:
+            type = @"AgoraChatMessageBodyTypeCmd";
             break;
-        case EMMessageBodyTypeCustom:
-            type = @"EMMessageBodyTypeCustom";
+        case AgoraChatMessageBodyTypeCustom:
+            type = @"AgoraChatMessageBodyTypeCustom";
             break;
         default:
             break;
@@ -619,8 +619,8 @@
 
 - (void)tokenWillExpire:(int)aErrorCode
 {
-    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == EMErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
-    if (aErrorCode == EMErrorTokeWillExpire) {
+    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
+    if (aErrorCode == AgoraChatErrorTokeWillExpire) {
         [self printLog:[NSString stringWithFormat:@"========= token expire rennew token ! code : %d",aErrorCode]];
         NSString *name = [self.nameField.text lowercaseString];
         NSString *pswd = [self.pswdField.text lowercaseString];
@@ -631,8 +631,8 @@
                     NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
                     NSString *token = [responsedict objectForKey:@"accessToken"];
                     if (token && token.length > 0) {
-                        if (aErrorCode == EMErrorTokeWillExpire) {
-                            EMError *error = [[EMClient sharedClient] renewToken:token];
+                        if (aErrorCode == AgoraChatErrorTokeWillExpire) {
+                            AgoraChatError *error = [[AgoraChatClient sharedClient] renewToken:token];
                             if (error) {
                                 [self printLog:[NSString stringWithFormat:@"renew token fail ！ errDesc : %@",error.errorDescription]];
                             } else {
@@ -652,8 +652,8 @@
 
 - (void)tokenDidExpire:(int)aErrorCode
 {
-    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == EMErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
-    if (aErrorCode == EMErrorTokenExpire || aErrorCode == 401) {
+    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
+    if (aErrorCode == AgoraChatErrorTokenExpire || aErrorCode == 401) {
         [self loginAction];
         return;
     }
