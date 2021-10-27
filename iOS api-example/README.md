@@ -21,11 +21,15 @@
 
  ## 操作步骤
 
-### 1.创建 Agora Chat 项目并获取AppKey
+### 1.创建 Agora Chat 项目
 
-// todo 增加跳转链接
+参考以下步骤在 Xcode 中创建一个 iOS 平台下的 Single View App，项目设置如下：
 
-详情见：//跳转到链接
+1. Product Name 设为 AgoraChatExamplet。
+
+2. Organization Identifier 设为 agorachat。
+3. User Interface 选择 Storyboard。
+4. Language 选择 Objective-C。
 
 ### 2.集成 Agora Chat SDK
 
