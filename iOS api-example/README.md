@@ -90,10 +90,10 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 1. 导入头文件
 
 ```objective-c
-#import <AgoraChat/AgoraChat.h>
-#import <AgoraChat/EMOptions+PrivateDeploy.h>
 #import <Masonry/Masonry.h>
 #import "EMHttpRequest.h"
+#import <AgoraChat/AgoraChat.h>
+#import <AgoraChat/AgoraChatOptions+PrivateDeploy.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -101,7 +101,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 2. 实现相关代理并声明属性
 
 ```objective-c
-@interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, EMClientDelegate, EMChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, AgoraChatClientDelegate, AgoraChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITextField *nameField; 
 @property (nonatomic, strong) UITextField *pswdField;
@@ -149,17 +149,12 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)initSdk
 {
-    EMOptions *options = [EMOptions optionsWithAppkey:@"appkey"];
-    options.chatPort = 6717;
-    options.chatServer = @"hk-tls.easemob.com";
-    options.restServer = @"hk-test.easemob.com";
-    options.enableDnsConfig = NO;
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41351358#427351"];
     options.enableConsoleLog = YES;
-    options.usingHttpsOnly = YES;
-    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
 
-    [[EMClient sharedClient] addDelegate:self delegateQueue:nil];
-    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    [[AgoraChatClient sharedClient] addDelegate:self delegateQueue:nil];
+    [[AgoraChatClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 ```
 
@@ -430,19 +425,33 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient] registerWithUsername:name password:pswd completion:^(NSString *aUsername, EMError *aError) {
-        if (!aError) {
-            [weakself printLog:[NSString stringWithFormat:@"register success ! name : %@",name]];
-        } else {
-            [weakself printLog:[NSString stringWithFormat:@"register fail ! errDesc : %@",aError.errorDescription]];
-        }
+    //register unify token user
+    [[EMHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            NSString *alertStr = @"login.signup.fail";
+            if (response != nil) {
+                NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                if (responsedict != nil) {
+                    NSString *result = [responsedict objectForKey:@"code"];
+                    if ([result isEqualToString:@"RES_OK"]) {
+                        alertStr = NSLocalizedString(@"login.signup.success", @"Sign up success");
+                    }
+                } else {
+                    alertStr = NSLocalizedString(@"login.signup.failure", @"Sign up failure");
+                }
+            } else {
+                alertStr = NSLocalizedString(@"login.signup.failure", @"Sign up failure");
+            }
+            [weakself printLog:alertStr];
+        });
     }];
     
 }
 
 - (void)loginAction
 {
-    if (EMClient.sharedClient.isLoggedIn) {
+    if (AgoraChatClient.sharedClient.isLoggedIn) {
         [self logoutAction];
     }
     [self.view endEditing:YES];
@@ -456,7 +465,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }
     
     __weak typeof(self) weakself = self;
-    void (^finishBlock) (NSString *aName, EMError *aError) = ^(NSString *aName, EMError *aError) {
+    void (^finishBlock) (NSString *aName, AgoraChatError *aError) = ^(NSString *aName, AgoraChatError *aError) {
         if (!aError) {
             [weakself printLog:[NSString stringWithFormat:@"login success ! name : %@",aName]];
             return ;
@@ -471,9 +480,10 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
                 NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
                 NSString *token = [responsedict objectForKey:@"accessToken"];
+                NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                 if (token && token.length > 0) {
                     [weakself printLog:@"login appserver success !"];
-                    [[EMClient sharedClient] loginWithUsername:name agoraToken:token completion:finishBlock];
+                    [[AgoraChatClient sharedClient] loginWithUsername:loginName agoraToken:token completion:finishBlock];
                 } else {
                     [weakself printLog:@"parseing token fail !"];
                 }
@@ -486,27 +496,27 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)logoutAction
 {
-    [[EMClient sharedClient] logout:YES];
+    [[AgoraChatClient sharedClient] logout:YES];
 }
 
-- (void)_sendMessageWithBody:(EMMessageBody *)body
+- (void)_sendMessageWithBody:(AgoraChatMessageBody *)body
                         ext:(NSDictionary * __nullable)aExt
 {
-    NSString *from = [[EMClient sharedClient] currentUsername];
+    NSString *from = [[AgoraChatClient sharedClient] currentUsername];
     NSString *to = self.conversationIdField.text;
     if (to.length == 0) {
         [self printLog:@"conversationId is null !"];
         return;
     }
     
-    EMMessage *message = [[EMMessage alloc] initWithConversationID:to from:from to:to body:body ext:nil];
-    message.chatType = EMChatTypeChat;
+    AgoraChatMessage *message = [[AgoraChatMessage alloc] initWithConversationID:to from:from to:to body:body ext:nil];
+    message.chatType = AgoraChatTypeChat;
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMMessage *message, EMError *error) {
+    [[AgoraChatClient sharedClient].chatManager sendMessage:message progress:nil completion:^(AgoraChatMessage *message, AgoraChatError *error) {
         if (!error) {
-            if (message.body.type == EMMessageBodyTypeText) {
-                EMTextMessageBody *body = (EMTextMessageBody *)message.body;
+            if (message.body.type == AgoraChatMessageBodyTypeText) {
+                AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody *)message.body;
                 [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
             } else {
                 [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:message.body.type]]];
@@ -519,11 +529,11 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)chatAction
 {
-    if (!EMClient.sharedClient.isLoggedIn) {
+    if (!AgoraChatClient.sharedClient.isLoggedIn) {
         [self printLog:@"not loggin"];
         return;
     }
-    EMMessageBody *body = [[EMTextMessageBody alloc] initWithText:self.msgField.text];
+    AgoraChatMessageBody *body = [[AgoraChatTextMessageBody alloc] initWithText:self.msgField.text];
     [self _sendMessageWithBody:body ext:nil];
 }
 
@@ -602,7 +612,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)_sendImageDataAction:(NSData *)aImageData
 {
-    EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:aImageData displayName:@"image"];
+    AgoraChatImageMessageBody *body = [[AgoraChatImageMessageBody alloc] initWithData:aImageData displayName:@"image"];
     [self _sendMessageWithBody:body ext:nil];
 }
 
@@ -621,11 +631,11 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 {
     NSString *groupId = self.groupField.text;
     if (groupId.length == 0) {
-        groupId = @"groupID";
+        groupId = @"xxxxxxxxxxxxxxxxxx";
     }
     
     __weak typeof(self) weakself = self;
-    [[EMClient sharedClient].groupManager joinPublicGroup:groupId completion:^(EMGroup *aGroup, EMError *aError) {
+    [[AgoraChatClient sharedClient].groupManager joinPublicGroup:groupId completion:^(AgoraChatGroup *aGroup, AgoraChatError *aError) {
         if (!aError) {
             [weakself printLog:[NSString stringWithFormat:@"join group success ! groupID : %@",aGroup.groupId]];
         } else {
@@ -639,9 +649,9 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 {
     __weak typeof(self) weakself = self;
     for (int i = 0; i < [aMessages count]; i++) {
-        EMMessage *msg = aMessages[i];
-        if(msg.body.type == EMMessageBodyTypeText) {
-            EMTextMessageBody *body = (EMTextMessageBody*)msg.body;
+        AgoraChatMessage *msg = aMessages[i];
+        if(msg.body.type == AgoraChatMessageBodyTypeText) {
+            AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody*)msg.body;
             [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
         } else {
             [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:msg.body.type]]];
@@ -649,30 +659,30 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }
 }
 
-- (NSString *)getBodyType:(EMMessageBodyType)bodyType
+- (NSString *)getBodyType:(AgoraChatMessageBodyType)bodyType
 {
     NSString *type = @"";
     switch (bodyType) {
-        case EMMessageBodyTypeImage:
-            type = @"EMMessageBodyTypeImage";
+        case AgoraChatMessageBodyTypeImage:
+            type = @"AgoraChatMessageBodyTypeImage";
             break;
-        case EMMessageBodyTypeVideo:
-            type = @"EMMessageBodyTypeVideo";
+        case AgoraChatMessageBodyTypeVideo:
+            type = @"AgoraChatMessageBodyTypeVideo";
             break;
-        case EMMessageBodyTypeLocation:
-            type = @"EMMessageBodyTypeLocation";
+        case AgoraChatMessageBodyTypeLocation:
+            type = @"AgoraChatMessageBodyTypeLocation";
             break;
-        case EMMessageBodyTypeVoice:
-            type = @"EMMessageBodyTypeVoice";
+        case AgoraChatMessageBodyTypeVoice:
+            type = @"AgoraChatMessageBodyTypeVoice";
             break;
-        case EMMessageBodyTypeFile:
-            type = @"EMMessageBodyTypeFile";
+        case AgoraChatMessageBodyTypeFile:
+            type = @"AgoraChatMessageBodyTypeFile";
             break;
-        case EMMessageBodyTypeCmd:
-            type = @"EMMessageBodyTypeCmd";
+        case AgoraChatMessageBodyTypeCmd:
+            type = @"AgoraChatMessageBodyTypeCmd";
             break;
-        case EMMessageBodyTypeCustom:
-            type = @"EMMessageBodyTypeCustom";
+        case AgoraChatMessageBodyTypeCustom:
+            type = @"AgoraChatMessageBodyTypeCustom";
             break;
         default:
             break;
@@ -682,8 +692,8 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)tokenWillExpire:(int)aErrorCode
 {
-    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == EMErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
-    if (aErrorCode == EMErrorTokeWillExpire) {
+    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
+    if (aErrorCode == AgoraChatErrorTokeWillExpire) {
         [self printLog:[NSString stringWithFormat:@"========= token expire rennew token ! code : %d",aErrorCode]];
         NSString *name = [self.nameField.text lowercaseString];
         NSString *pswd = [self.pswdField.text lowercaseString];
@@ -694,8 +704,8 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
                     NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
                     NSString *token = [responsedict objectForKey:@"accessToken"];
                     if (token && token.length > 0) {
-                        if (aErrorCode == EMErrorTokeWillExpire) {
-                            EMError *error = [[EMClient sharedClient] renewToken:token];
+                        if (aErrorCode == AgoraChatErrorTokeWillExpire) {
+                            AgoraChatError *error = [[AgoraChatClient sharedClient] renewToken:token];
                             if (error) {
                                 [self printLog:[NSString stringWithFormat:@"renew token fail ！ errDesc : %@",error.errorDescription]];
                             } else {
@@ -715,8 +725,8 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)tokenDidExpire:(int)aErrorCode
 {
-    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == EMErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
-    if (aErrorCode == EMErrorTokenExpire || aErrorCode == 401) {
+    [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
+    if (aErrorCode == AgoraChatErrorTokenExpire || aErrorCode == 401) {
         [self loginAction];
         return;
     }
@@ -810,7 +820,8 @@ NS_ASSUME_NONNULL_END
                           pwd:(NSString *)pwd
                    completion:(void (^)(NSInteger statusCode, NSString *aUsername))aCompletionBlock
 {
-    NSURL *url = [NSURL URLWithString:@"https://hk-test.easemob.com/app/user/register"];
+    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/register";
+    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/register"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -836,7 +847,8 @@ NS_ASSUME_NONNULL_END
                        pwd:(NSString *)pwd
                 completion:(void (^)(NSInteger statusCode, NSString *response))aCompletionBlock
 {
-    NSURL *url = [NSURL URLWithString:@"https://hk-test.easemob.com/app/easemob/user/login"];
+    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/login";
+    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/login"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";

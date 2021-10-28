@@ -58,13 +58,13 @@
 
 - (void)initSdk
 {
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"52366312#441909"];
-    options.chatPort = 6717;
-    options.chatServer = @"hk-tls.easemob.com";
-    options.restServer = @"hk-test.easemob.com";
-    options.enableDnsConfig = NO;
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41351358#427351"];
+    
+//    options.chatPort = 6717;
+//    options.chatServer = @"hk-tls.easemob.com";
+//    options.restServer = @"https://hk-test.easemob.com";
+//    options.enableDnsConfig = NO;
     options.enableConsoleLog = YES;
-    options.usingHttpsOnly = YES;
     [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
 
     [[AgoraChatClient sharedClient] addDelegate:self delegateQueue:nil];
@@ -363,13 +363,36 @@
     }
     
     __weak typeof(self) weakself = self;
-    [[AgoraChatClient sharedClient] registerWithUsername:name password:pswd completion:^(NSString *aUsername, AgoraChatError *aError) {
-        if (!aError) {
-            [weakself printLog:[NSString stringWithFormat:@"register success ! name : %@",name]];
-        } else {
-            [weakself printLog:[NSString stringWithFormat:@"register fail ! errDesc : %@",aError.errorDescription]];
-        }
+    //register unify token user
+    [[EMHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            NSString *alertStr = @"login.signup.fail";
+            if (response != nil) {
+                NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                if (responsedict != nil) {
+                    NSString *result = [responsedict objectForKey:@"code"];
+                    if ([result isEqualToString:@"RES_OK"]) {
+                        alertStr = NSLocalizedString(@"login.signup.success", @"Sign up success");
+                    }
+                } else {
+                    alertStr = NSLocalizedString(@"login.signup.failure", @"Sign up failure");
+                }
+            } else {
+                alertStr = NSLocalizedString(@"login.signup.failure", @"Sign up failure");
+            }
+            [weakself printLog:alertStr];
+        });
     }];
+    
+//
+//    [[AgoraChatClient sharedClient] registerWithUsername:name password:pswd completion:^(NSString *aUsername, AgoraChatError *aError) {
+//        if (!aError) {
+//            [weakself printLog:[NSString stringWithFormat:@"register success ! name : %@",name]];
+//        } else {
+//            [weakself printLog:[NSString stringWithFormat:@"register fail ! errDesc : %@",aError.errorDescription]];
+//        }
+//    }];
     
 }
 
@@ -404,9 +427,10 @@
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
                 NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
                 NSString *token = [responsedict objectForKey:@"accessToken"];
+                NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                 if (token && token.length > 0) {
                     [weakself printLog:@"login appserver success !"];
-                    [[AgoraChatClient sharedClient] loginWithUsername:name agoraToken:token completion:finishBlock];
+                    [[AgoraChatClient sharedClient] loginWithUsername:loginName agoraToken:token completion:finishBlock];
                 } else {
                     [weakself printLog:@"parseing token fail !"];
                 }
