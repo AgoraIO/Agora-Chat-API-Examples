@@ -1,8 +1,5 @@
 package io.agora.chat;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,18 +11,40 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.agora.CallBack;
+import io.agora.ConnectionListener;
+import io.agora.Error;
 import io.agora.MessageListener;
+import io.agora.chat.bean.RegisterReq;
 import io.agora.chat.utils.ImageUtils;
 import io.agora.chat.utils.LogUtils;
 import io.agora.chat.utils.PermissionsManager;
 import io.agora.chat.utils.ThreadManager;
-import io.agora.exceptions.ChatException;
+import io.agora.chat.utils.Type;
+import io.agora.cloud.HttpClientManager;
+import io.agora.cloud.HttpResponse;
+import io.agora.util.EMLog;
+
+import static io.agora.chat.Constant.LOGIN_URL;
+import static io.agora.chat.Constant.REGISTER_URL;
+import static io.agora.chat.utils.Type.NEW_LOGIN;
+import static io.agora.chat.utils.Type.RENEW_TOKEN;
+import static io.agora.cloud.HttpClientManager.Method_POST;
 
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
     private EditText et_username;
     private TextView tv_log;
     private EditText et_to_chat_name;
@@ -38,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initSDK();
         addMessageListener();
+        addConnectionListener();
     }
 
     private void initView() {
@@ -120,6 +140,43 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    private void addConnectionListener() {
+        ChatClient.getInstance().addConnectionListener(new ConnectionListener(){
+            @Override
+            public void onConnected() {
+            }
+
+            @Override
+            public void onDisconnected(int error) {
+                //3.2 连接异常回调
+                if (error == Error.USER_REMOVED) {
+                    onUserException(Constant.ACCOUNT_REMOVED);
+                } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
+                    onUserException(Constant.ACCOUNT_CONFLICT);
+                } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
+                    onUserException(Constant.ACCOUNT_FORBIDDEN);
+                } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
+                    onUserException(Constant.ACCOUNT_KICKED_BY_CHANGE_PASSWORD);
+                } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
+                    onUserException(Constant.ACCOUNT_KICKED_BY_OTHER_DEVICE);
+                }
+            }
+
+            @Override
+            public void onTokenExpired() {
+                //login again
+                signInWithToken(null);
+                LogUtils.showLog(tv_log,"ConnectionListener onTokenExpired");
+            }
+
+            @Override
+            public void onTokenWillExpire() {
+                getTokenFromAppServer(RENEW_TOKEN);
+                LogUtils.showLog(tv_log, "ConnectionListener onTokenWillExpire");
+            }
+        });
+    }
+
 //================= SDK listener end ====================
 //=================== click event start ========================
 
@@ -135,11 +192,36 @@ public class MainActivity extends AppCompatActivity {
         }
         ThreadManager.getInstance().execute(()-> {
             try {
-                ChatClient.getInstance().createAccount(username, pwd);
-                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_up_success));
-            } catch (ChatException e) {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+
+                RegisterReq requestBody = new RegisterReq(username, pwd);
+                String json = new Gson().toJson(requestBody);
+
+                LogUtils.showErrorLog(tv_log,"begin to signUp...");
+
+                HttpResponse response = HttpClientManager.httpExecute(REGISTER_URL, headers, json, Method_POST);
+                int code=  response.code;
+                String responseInfo = response.content;
+                if (code == 200) {
+                    if (responseInfo != null && responseInfo.length() > 0) {
+                        JSONObject object = new JSONObject(responseInfo);
+                        String resultCode = object.getString("code");
+                        if(resultCode.equals("RES_OK")) {
+                            LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_up_success));
+                        }else{
+                            String errorInfo = object.getString("errorInfo");
+                            LogUtils.showErrorLog(tv_log,errorInfo);
+                        }
+                    } else {
+                        LogUtils.showErrorLog(tv_log,responseInfo);
+                    }
+                } else {
+                    LogUtils.showErrorLog(tv_log,responseInfo);
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
-                LogUtils.showErrorLog(tv_log, e.getDescription());
+                LogUtils.showErrorLog(tv_log, e.getMessage());
             }
         });
     }
@@ -148,6 +230,10 @@ public class MainActivity extends AppCompatActivity {
      * Login with token
      */
     public void signInWithToken(View view) {
+        getTokenFromAppServer(NEW_LOGIN);
+    }
+
+    private void getTokenFromAppServer(Type requestType) {
         if(ChatClient.getInstance().isLoggedInBefore()) {
             LogUtils.showErrorLog(tv_log, getString(R.string.has_login_before));
             return;
@@ -158,19 +244,53 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.showErrorToast(MainActivity.this, tv_log, getString(R.string.username_or_pwd_miss));
             return;
         }
-        ChatClient.getInstance().login(username, pwd, new CallBack() {
-            @Override
-            public void onSuccess() {
-                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
-            }
+        ThreadManager.getInstance().execute(()-> {
+            try {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
 
-            @Override
-            public void onError(int code, String error) {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: "+code + " error: "+error);
-            }
+                RegisterReq requestBody = new RegisterReq(username, pwd);
+                String json = new Gson().toJson(requestBody);
 
-            @Override
-            public void onProgress(int progress, String status) {
+                LogUtils.showErrorLog(tv_log,"begin to getTokenFromAppServer ...");
+
+                HttpResponse response = HttpClientManager.httpExecute(LOGIN_URL, headers, json, Method_POST);
+                int code = response.code;
+                String responseInfo = response.content;
+                if (code == 200) {
+                    if (responseInfo != null && responseInfo.length() > 0) {
+                        JSONObject object = new JSONObject(responseInfo);
+                        String token = object.getString("accessToken");
+                        if(requestType== NEW_LOGIN) {
+                            ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+                                @Override
+                                public void onSuccess() {
+                                    LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
+                                }
+
+                                @Override
+                                public void onError(int code, String error) {
+                                    LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: " + code + " error: " + error);
+                                }
+
+                                @Override
+                                public void onProgress(int progress, String status) {
+
+                                }
+                            });
+                        }else if(requestType==RENEW_TOKEN) {
+                            ChatClient.getInstance().renewToken(token);
+                        }
+                        
+                    } else {
+                        LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+                    }
+                } else {
+                    LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.getMessage());
 
             }
         });
@@ -347,5 +467,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    /**
+     * user met some exception: conflict, removed or forbidden， goto login activity
+     */
+    protected void onUserException(String exception) {
+        EMLog.e(TAG, "onUserException: " + exception);
+        //退出登录
+        ChatClient.getInstance().logout(false, null);
+//        finishOtherActivities();
+        //可跳转到登录页面
+//        startActivity(new Intent(mContext, LoginActivity.class));
+//        finish();
     }
 }

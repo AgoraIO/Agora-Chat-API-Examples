@@ -36,9 +36,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     // Required: Agora Chat SDK
-    implementation 'io.hyphenate:chat-sdk:3.8.5'
+    implementation 'io.hyphenate:chat-sdk:3.8.7'
     // You can add documentfile library when you encounter the error of
     // "java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/documentfile/provider/DocumentFile;"
     implementation "androidx.documentfile:documentfile:1.0.1"
