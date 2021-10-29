@@ -6,8 +6,9 @@
 // todo 需要增加一张流程图
 
 登录 Agora Chat 系统包括以下流程：
-1. 客户端使用帐号和密码进行注册。
-2. 客户端注册成功后，登录到 Chat 服务器。
+1. 客户端使用帐号和密码在 App Server 上注册。
+2. 客户端注册成功后，使用账号和密码从  App Server 中获取 Token 。
+3. 客户端使用账号和 Token 登录到 Chat 服务器。
 
 // todo 需要增加一张流程图
 
@@ -307,8 +308,11 @@ dependencies {
 
 你需要编辑以下字段：
 
-- 将 Your App Key 替换为你的 App Key。
+- 将 Your App Key 替换为你的 App Key 。
+- 在本示例中，你可以使用 41351358#427351 替换 Your App Key 。
 
+**注意**
+>如果你已经搭建了获取鉴权 Token 的 App Server，你需要将 Your App Key 替换为你的  App Key 。
 ### 2.实现消息发送与接收
 
 1. 打开 app/java/io.agora.agorachatquickstart/MainActivity.java 并将内容替换为以下 Java 代码：
@@ -838,7 +842,7 @@ public class LogUtils {
 
 运行效果如下图所示：
 
-// todo 需要增加一张运行图片
+![avatar](./image/android-api-example.jpg)
 
 ## 相关信息
 
@@ -894,3 +898,7 @@ dependencies {
 | /x86_64/libagora-chat-sdk.so及libsqlite.so     | ~/app/src/main/jniLibs/x86_64/                 |
 
 >注：表格中 agorachat_X.Y.Z.jar 的 X.Y.Z 代指 SDK jar 包的版本号，以你下载的为准。
+
+### 2.搭建自己获取 Token 的 App Server。
+1. 在实际开发中，用户需要搭建自己的 App Server 去获取鉴权的 Token。
+2. 在用户的 App Server 中需要配置用户申请的 AppKey。
