@@ -2,6 +2,20 @@
 
 本页面介绍了如何快速集成 Agora Chat SDK 来实现单聊。
 
+## 消息发送与接收流程
+// todo 需要增加一张流程图
+
+登录 Agora Chat 流程如下：
+
+使用帐号和密码在 App Server 上注册。
+注册成功后，使用账号和密码从 App Server 中获取 Token 。
+使用账号和 Token 登录到 Chat 服务器。
+// todo 需要增加一张流程图
+
+发送和接收点对点消息包括以下流程：
+
+客户端 A 发送点对点消息到 Chat 服务器。
+Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息。
 
 ## 前提条件
 
@@ -120,6 +134,8 @@ index.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 w
 import WebIM from 'agora-chat-sdk'
 const appKey = "<Your app key>"
 
+let username, password
+
 // 初始化客户端
 WebIM.conn = new WebIM.connection({
     appKey: appKey,
@@ -138,34 +154,70 @@ WebIM.conn.listen({
         console.log(message)
         document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
     }, // 收到文本消息
+    onTokenWillexpire: function (params) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
+        refreshToken(username, password)
+    }, // token 将要过期
+    onTokenExpired: function (params) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired")
+        refreshToken(username, password)
+    }, // token 已经过期
 })
+
+// 从 app server 获取token
+function refreshToken(username, password) {
+    postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+        .then((res) => {
+            let agoraToken = res.accessToken
+            WebIM.conn.resetToken(agoraToken)
+        })
+}
+
+// 发送请求
+function postData(url, data) {
+    return fetch(url, {
+        body: JSON.stringify(data),
+        cache: 'no-cache',
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer',
+    })
+        .then(response => response.json())
+}
 
 // 按钮行为定义
 window.onload = function () {
     // 注册
     document.getElementById("register").onclick = function(){
-        let username = document.getElementById("userID").value.toString()
-        let password = document.getElementById("password").value.toString()
-        WebIM.conn.registerUser({
-            username: username,
-            password: password,
-            success: function () {
-                document.getElementById("log").appendChild(document.createElement('div')).append("registerUser success: " + username)
-            },
-            error: function (error) {
-                document.getElementById("log").appendChild(document.createElement('div')).append("registerUser error")
-            },
-        });
+        username = document.getElementById("userID").value.toString()
+        password = document.getElementById("password").value.toString()
+        postData('http://a1-hsb.easemob.com/app/user/register', { "userAccount": username, "userPassword": password })
+            .then((res) => {
+                if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
+                    document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
+                    return
+                }
+                document.getElementById("log").appendChild(document.createElement('div')).append(`${username} regist success`)
+            })
     }
     // 登录
     document.getElementById("login").onclick = function () {
-        let username = document.getElementById("userID").value.toString()
-        let password = document.getElementById("password").value.toString()
-        WebIM.conn.open({
-            user: username,
-            pwd: password,
-            appKey: appKey
-        });
+        username = document.getElementById("userID").value.toString()
+        password = document.getElementById("password").value.toString()
+        postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+            .then((res) => {
+                let agoraToken = res.accessToken
+                let easemobUserName = res.easemobUserName
+                WebIM.conn.open({
+                    user: easemobUserName,
+                    agoraToken: agoraToken,
+                    appKey: "easemob-demo#chatdemoui"
+                });
+            })
     }
 
     // 登出
