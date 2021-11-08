@@ -871,7 +871,10 @@ allprojects {
 
 ```java
 android {
-    
+    defaultConfig {
+            // 支持SDK版本为19以上
+            minSdkVersion 19
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
