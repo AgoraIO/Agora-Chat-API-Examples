@@ -81,7 +81,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
 }
 
 - (void)_setupSubviews
@@ -125,13 +124,14 @@
     }];
     
     self.nameField = [[UITextField alloc] init];
-    self.nameField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.nameField.backgroundColor = [UIColor systemGrayColor];
     self.nameField.delegate = self;
     self.nameField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"用户ID" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"user ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.nameField.attributedPlaceholder = attrStr;
     self.nameField.returnKeyType = UIReturnKeyDone;
     self.nameField.font = [UIFont systemFontOfSize:17];
+    self.nameField.textColor = [UIColor whiteColor];
     self.nameField.layer.cornerRadius = 5;
     self.nameField.layer.borderWidth = 1;
     self.nameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -144,12 +144,13 @@
     }];
     
     self.pswdField = [[UITextField alloc] init];
-    self.pswdField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.pswdField.backgroundColor = [UIColor systemGrayColor];
     self.pswdField.delegate = self;
     self.pswdField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *psdAttrStr = [[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *psdAttrStr = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.pswdField.attributedPlaceholder = psdAttrStr;
     self.pswdField.font = [UIFont systemFontOfSize:17];
+    self.pswdField.textColor = [UIColor whiteColor];
     self.pswdField.returnKeyType = UIReturnKeyDone;
     self.pswdField.layer.cornerRadius = 5;
     self.pswdField.layer.borderWidth = 1;
@@ -167,7 +168,7 @@
     self.registerBtn.layer.cornerRadius = 5;
     self.registerBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.registerBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [self.registerBtn setTitle:@"Sign up" forState:UIControlStateNormal];
     [self.registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.registerBtn];
@@ -183,7 +184,7 @@
     self.loginBtn.layer.cornerRadius = 5;
     self.loginBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.loginBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [self.loginBtn setTitle:@"Sign in" forState:UIControlStateNormal];
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginBtn addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.loginBtn];
@@ -199,7 +200,7 @@
     self.logoutBtn.layer.cornerRadius = 5;
     self.logoutBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.logoutBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.logoutBtn setTitle:@"退出" forState:UIControlStateNormal];
+    [self.logoutBtn setTitle:@"Sign out" forState:UIControlStateNormal];
     [self.logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.logoutBtn];
@@ -211,12 +212,13 @@
     }];
     
     self.conversationIdField = [[UITextField alloc] init];
-    self.conversationIdField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.conversationIdField.backgroundColor = [UIColor systemGrayColor];
     self.conversationIdField.delegate = self;
     self.conversationIdField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *convAttrStr = [[NSAttributedString alloc] initWithString:@"单聊会话 ID" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *convAttrStr = [[NSAttributedString alloc] initWithString:@"single chat ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.conversationIdField.attributedPlaceholder = convAttrStr;
     self.conversationIdField.font = [UIFont systemFontOfSize:17];
+    self.conversationIdField.textColor = [UIColor whiteColor];
     self.conversationIdField.returnKeyType = UIReturnKeyDone;
     self.conversationIdField.layer.cornerRadius = 5;
     self.conversationIdField.layer.borderWidth = 1;
@@ -230,8 +232,9 @@
     }];
     
     self.msgField = [[UITextView alloc] init];
-    self.msgField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
-    self.msgField.text = @"消息内容";
+    //self.msgField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.msgField.backgroundColor = [UIColor systemGrayColor];
+    self.msgField.text = @"message content";
     self.msgField.textColor = [UIColor whiteColor];
     self.msgField.font = [UIFont systemFontOfSize:17];
     self.msgField.returnKeyType = UIReturnKeyDone;
@@ -242,7 +245,7 @@
     self.msgField.textAlignment = NSTextAlignmentLeft;
     [self.scrollView addSubview:self.msgField];
     [self.msgField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.conversationIdField);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.conversationIdField.mas_bottom).offset(20);
         make.height.mas_equalTo(@150);
         make.width.mas_equalTo(@320);
@@ -253,7 +256,7 @@
     self.chatBtn.layer.cornerRadius = 5;
     self.chatBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.chatBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.chatBtn setTitle:@"发送消息" forState:UIControlStateNormal];
+    [self.chatBtn setTitle:@"send" forState:UIControlStateNormal];
     [self.chatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.chatBtn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.chatBtn];
@@ -269,31 +272,32 @@
     self.imgBtn.layer.cornerRadius = 5;
     self.imgBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.imgBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.imgBtn setTitle:@"发送图片" forState:UIControlStateNormal];
+    [self.imgBtn setTitle:@"send image" forState:UIControlStateNormal];
     [self.imgBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.imgBtn addTarget:self action:@selector(sendImageMsg) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.imgBtn];
     [self.imgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chatBtn);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.chatBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@150);
     }];
     
     self.groupField = [[UITextField alloc] init];
-    self.groupField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.groupField.backgroundColor = [UIColor systemGrayColor];
     self.groupField.delegate = self;
     self.groupField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *groupAttrStr = [[NSAttributedString alloc] initWithString:@"1231241241324124332412" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *groupAttrStr = [[NSAttributedString alloc] initWithString:@"group ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.groupField.attributedPlaceholder = groupAttrStr;
     self.groupField.font = [UIFont systemFontOfSize:17];
+    self.groupField.textColor = [UIColor whiteColor];
     self.groupField.returnKeyType = UIReturnKeyDone;
     self.groupField.layer.cornerRadius = 5;
     self.groupField.layer.borderWidth = 1;
     self.groupField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.scrollView addSubview:self.groupField];
     [self.groupField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chatBtn);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.imgBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@320);
@@ -304,7 +308,7 @@
     self.joinGroupBtn.layer.cornerRadius = 5;
     self.joinGroupBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.joinGroupBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.joinGroupBtn setTitle:@"加群" forState:UIControlStateNormal];
+    [self.joinGroupBtn setTitle:@"join group" forState:UIControlStateNormal];
     [self.joinGroupBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.joinGroupBtn addTarget:self action:@selector(joinGroup) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.joinGroupBtn];
@@ -313,6 +317,7 @@
         make.top.equalTo(self.groupField.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@150);
+        make.bottom.equalTo(self.scrollView).offset(-20);
     }];
     
 //    self.chatroomField = [[UITextField alloc] init];
@@ -414,7 +419,7 @@
     __weak typeof(self) weakself = self;
     void (^finishBlock) (NSString *aName, AgoraChatError *aError) = ^(NSString *aName, AgoraChatError *aError) {
         if (!aError) {
-            [weakself printLog:[NSString stringWithFormat:@"login success ! name : %@",aName]];
+            [weakself printLog:[NSString stringWithFormat:@"login SDK success ! name : %@",aName]];
             return ;
         }
         
@@ -443,7 +448,8 @@
 
 - (void)logoutAction
 {
-    [[AgoraChatClient sharedClient] logout:YES];
+    AgoraChatError *error = [[AgoraChatClient sharedClient] logout:YES];
+    [self printLog:[NSString stringWithFormat:@"logout result : %@",!error ? @"success !" : error.errorDescription]];
 }
 
 - (void)_sendMessageWithBody:(AgoraChatMessageBody *)body
@@ -476,6 +482,7 @@
 
 - (void)chatAction
 {
+    [self.view endEditing:YES];
     if (!AgoraChatClient.sharedClient.isLoggedIn) {
         [self printLog:@"not loggin"];
         return;
@@ -493,23 +500,21 @@
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (status == permissions) {
-                //limit权限
+                //limit
                 self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
                 [self presentViewController:self.imagePicker animated:YES completion:nil];
             }
             if (status == PHAuthorizationStatusAuthorized) {
-                //已获取权限
+                //permission
                 self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
                 [self presentViewController:self.imagePicker animated:YES completion:nil];
             }
             if (status == PHAuthorizationStatusDenied) {
-                //用户已经明确否认了这一照片数据的应用程序访问
                 [self printLog:@"Access to albums is not allowed"];
             }
             if (status == PHAuthorizationStatusRestricted) {
-                //此应用程序没有被授权访问的照片数据。可能是家长控制权限
                 [self printLog:@"Access to the album is not authorized"];
             }
         });
@@ -582,7 +587,7 @@
 {
     NSString *groupId = self.groupField.text;
     if (groupId.length == 0) {
-        groupId = @"4123431234323412";
+        groupId = @"";
     }
     
     __weak typeof(self) weakself = self;
@@ -595,7 +600,7 @@
     }];
 }
 
-//收到消息
+//receive message
 - (void)messagesDidReceive:(NSArray *)aMessages
 {
     __weak typeof(self) weakself = self;
@@ -603,9 +608,9 @@
         AgoraChatMessage *msg = aMessages[i];
         if(msg.body.type == AgoraChatMessageBodyTypeText) {
             AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody*)msg.body;
-            [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
+            [weakself printLog:[NSString stringWithFormat:@"receive a AgoraChatMessageBodyTypeText message :%@, from : %@",body.text,msg.from]];
         } else {
-            [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:msg.body.type]]];
+            [weakself printLog:[NSString stringWithFormat:@"receive a %@ message, from : %@",[weakself getBodyType:msg.body.type],msg.from]];
         }
     }
 }
@@ -676,6 +681,7 @@
 
 - (void)tokenDidExpire:(int)aErrorCode
 {
+    [[AgoraChatClient sharedClient] logout:NO];
     [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
     if (aErrorCode == AgoraChatErrorTokenExpire || aErrorCode == 401) {
         [self loginAction];

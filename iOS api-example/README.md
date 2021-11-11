@@ -171,7 +171,6 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
 }
 
 - (void)_setupSubviews
@@ -215,13 +214,14 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }];
     
     self.nameField = [[UITextField alloc] init];
-    self.nameField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.nameField.backgroundColor = [UIColor systemGrayColor];
     self.nameField.delegate = self;
     self.nameField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"ID" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"user ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.nameField.attributedPlaceholder = attrStr;
     self.nameField.returnKeyType = UIReturnKeyDone;
     self.nameField.font = [UIFont systemFontOfSize:17];
+    self.nameField.textColor = [UIColor whiteColor];
     self.nameField.layer.cornerRadius = 5;
     self.nameField.layer.borderWidth = 1;
     self.nameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -234,12 +234,13 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }];
     
     self.pswdField = [[UITextField alloc] init];
-    self.pswdField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.pswdField.backgroundColor = [UIColor systemGrayColor];
     self.pswdField.delegate = self;
     self.pswdField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *psdAttrStr = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *psdAttrStr = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.pswdField.attributedPlaceholder = psdAttrStr;
     self.pswdField.font = [UIFont systemFontOfSize:17];
+    self.pswdField.textColor = [UIColor whiteColor];
     self.pswdField.returnKeyType = UIReturnKeyDone;
     self.pswdField.layer.cornerRadius = 5;
     self.pswdField.layer.borderWidth = 1;
@@ -257,7 +258,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.registerBtn.layer.cornerRadius = 5;
     self.registerBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.registerBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.registerBtn setTitle:@"register" forState:UIControlStateNormal];
+    [self.registerBtn setTitle:@"Sign up" forState:UIControlStateNormal];
     [self.registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.registerBtn addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.registerBtn];
@@ -273,7 +274,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.loginBtn.layer.cornerRadius = 5;
     self.loginBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.loginBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.loginBtn setTitle:@"login" forState:UIControlStateNormal];
+    [self.loginBtn setTitle:@"Sign in" forState:UIControlStateNormal];
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginBtn addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.loginBtn];
@@ -289,7 +290,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.logoutBtn.layer.cornerRadius = 5;
     self.logoutBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.logoutBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.logoutBtn setTitle:@"logout" forState:UIControlStateNormal];
+    [self.logoutBtn setTitle:@"Sign out" forState:UIControlStateNormal];
     [self.logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.logoutBtn];
@@ -301,12 +302,13 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }];
     
     self.conversationIdField = [[UITextField alloc] init];
-    self.conversationIdField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.conversationIdField.backgroundColor = [UIColor systemGrayColor];
     self.conversationIdField.delegate = self;
     self.conversationIdField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *convAttrStr = [[NSAttributedString alloc] initWithString:@"single chat conversation ID" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *convAttrStr = [[NSAttributedString alloc] initWithString:@"single chat ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.conversationIdField.attributedPlaceholder = convAttrStr;
     self.conversationIdField.font = [UIFont systemFontOfSize:17];
+    self.conversationIdField.textColor = [UIColor whiteColor];
     self.conversationIdField.returnKeyType = UIReturnKeyDone;
     self.conversationIdField.layer.cornerRadius = 5;
     self.conversationIdField.layer.borderWidth = 1;
@@ -320,7 +322,8 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     }];
     
     self.msgField = [[UITextView alloc] init];
-    self.msgField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    //self.msgField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.msgField.backgroundColor = [UIColor systemGrayColor];
     self.msgField.text = @"message content";
     self.msgField.textColor = [UIColor whiteColor];
     self.msgField.font = [UIFont systemFontOfSize:17];
@@ -332,7 +335,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.msgField.textAlignment = NSTextAlignmentLeft;
     [self.scrollView addSubview:self.msgField];
     [self.msgField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.conversationIdField);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.conversationIdField.mas_bottom).offset(20);
         make.height.mas_equalTo(@150);
         make.width.mas_equalTo(@320);
@@ -343,7 +346,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.chatBtn.layer.cornerRadius = 5;
     self.chatBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.chatBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.chatBtn setTitle:@"sendMsg" forState:UIControlStateNormal];
+    [self.chatBtn setTitle:@"send" forState:UIControlStateNormal];
     [self.chatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.chatBtn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.chatBtn];
@@ -359,31 +362,32 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.imgBtn.layer.cornerRadius = 5;
     self.imgBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.imgBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.imgBtn setTitle:@"sendImg" forState:UIControlStateNormal];
+    [self.imgBtn setTitle:@"send image" forState:UIControlStateNormal];
     [self.imgBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.imgBtn addTarget:self action:@selector(sendImageMsg) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.imgBtn];
     [self.imgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chatBtn);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.chatBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@150);
     }];
     
     self.groupField = [[UITextField alloc] init];
-    self.groupField.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
+    self.groupField.backgroundColor = [UIColor systemGrayColor];
     self.groupField.delegate = self;
     self.groupField.borderStyle = UITextBorderStyleNone;
-    NSAttributedString *groupAttrStr = [[NSAttributedString alloc] initWithString:@"groupID" attributes:@{NSForegroundColorAttributeName:[UIColor systemGrayColor]}];
+    NSAttributedString *groupAttrStr = [[NSAttributedString alloc] initWithString:@"group ID" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.groupField.attributedPlaceholder = groupAttrStr;
     self.groupField.font = [UIFont systemFontOfSize:17];
+    self.groupField.textColor = [UIColor whiteColor];
     self.groupField.returnKeyType = UIReturnKeyDone;
     self.groupField.layer.cornerRadius = 5;
     self.groupField.layer.borderWidth = 1;
     self.groupField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.scrollView addSubview:self.groupField];
     [self.groupField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chatBtn);
+        make.left.equalTo(self.scrollView).offset(30);
         make.top.equalTo(self.imgBtn.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@320);
@@ -394,7 +398,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     self.joinGroupBtn.layer.cornerRadius = 5;
     self.joinGroupBtn.backgroundColor = [UIColor colorWithRed:((float) 78 / 255.0f) green:0 blue:((float) 234 / 255.0f) alpha:1];
     self.joinGroupBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.joinGroupBtn setTitle:@"joinGroup" forState:UIControlStateNormal];
+    [self.joinGroupBtn setTitle:@"join group" forState:UIControlStateNormal];
     [self.joinGroupBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.joinGroupBtn addTarget:self action:@selector(joinGroup) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.joinGroupBtn];
@@ -403,6 +407,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         make.top.equalTo(self.groupField.mas_bottom).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@150);
+        make.bottom.equalTo(self.scrollView).offset(-20);
     }];
 }
 ```
@@ -496,7 +501,8 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)logoutAction
 {
-    [[AgoraChatClient sharedClient] logout:YES];
+    AgoraChatError *error = [[AgoraChatClient sharedClient] logout:YES];
+    [self printLog:[NSString stringWithFormat:@"logout result : %@",!error ? @"success !" : error.errorDescription]];
 }
 
 - (void)_sendMessageWithBody:(AgoraChatMessageBody *)body
@@ -529,6 +535,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)chatAction
 {
+    [self.view endEditing:YES];
     if (!AgoraChatClient.sharedClient.isLoggedIn) {
         [self printLog:@"not loggin"];
         return;
@@ -652,9 +659,9 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         AgoraChatMessage *msg = aMessages[i];
         if(msg.body.type == AgoraChatMessageBodyTypeText) {
             AgoraChatTextMessageBody *body = (AgoraChatTextMessageBody*)msg.body;
-            [weakself printLog:[NSString stringWithFormat:@"send message success：%@",body.text]];
+            [weakself printLog:[NSString stringWithFormat:@"receive a AgoraChatMessageBodyTypeText message :%@, from : %@",body.text,msg.from]];
         } else {
-            [weakself printLog:[NSString stringWithFormat:@"send message success ! messageType : %@",[weakself getBodyType:msg.body.type]]];
+            [weakself printLog:[NSString stringWithFormat:@"receive a %@ message, from : %@",[weakself getBodyType:msg.body.type],msg.from]];
         }
     }
 }
@@ -725,6 +732,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)tokenDidExpire:(int)aErrorCode
 {
+  	[[AgoraChatClient sharedClient] logout:NO];
     [self printLog:[NSString stringWithFormat:@"token %@", aErrorCode == AgoraChatErrorTokeWillExpire ? @"TokeWillExpire" : @"TokeExpire"]];
     if (aErrorCode == AgoraChatErrorTokenExpire || aErrorCode == 401) {
         [self loginAction];
@@ -893,7 +901,3 @@ NS_ASSUME_NONNULL_END
 - 加入群组
 
 功能执行结果在页面下半部分会有相关日志记录展示。
-
-运行效果如下图所示：
-
-// todo 需要增加一张运行图片
