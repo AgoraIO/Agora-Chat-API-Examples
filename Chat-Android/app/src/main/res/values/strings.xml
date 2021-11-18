@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chat-Android</string>
+    <string name="app_name">AgoraChatQuickstart</string>
 
     <string name="username_or_pwd_miss">Username or password is empty</string>
     <string name="sign_up_success">Sign up success!</string>
@@ -26,5 +26,5 @@
     <string name="join_group_success">Join group success!</string>
     <string name="leave_group_success">Leave group success!</string>
 
-    <string name="app_key">41351358#427351</string>
+    <string name="app_key">41117440#383391</string>
 </resources>

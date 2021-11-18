@@ -275,7 +275,7 @@ dependencies {
 
 ```java
 <resources>
-    <string name="app_name">Chat-Android</string>
+    <string name="app_name">AgoraChatQuickstart</string>
 
     <string name="username_or_pwd_miss">Username or password is empty</string>
     <string name="sign_up_success">Sign up success!</string>
@@ -309,7 +309,7 @@ dependencies {
 你需要编辑以下字段：
 
 - 将 Your App Key 替换为你的 App Key 。
-- 在本示例中，你可以使用 41351358#427351 替换 Your App Key 。
+- 在本示例中，你可以使用 41117440#383391 替换 Your App Key 。
 
 **注意**
 >如果你已经搭建了获取鉴权 Token 的 App Server，你需要将 Your App Key 替换为你的  App Key 。
