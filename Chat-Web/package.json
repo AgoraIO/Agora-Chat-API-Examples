@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "agora-rtc-sdk-ng": "^4.6.3",
-    "agora-chat-sdk": "^3.6.3"
+    "agora-chat-sdk": "^4.0.1-beta",
+    "agora-rtc-sdk-ng": "^4.6.3"
   },
   "devDependencies": {
     "webpack": "^5.50.0",

@@ -2,12 +2,7 @@ import WebIM from 'agora-chat-sdk'
 var username, password
 // 初始化客户端
 WebIM.conn = new WebIM.connection({
-    appKey: "easemob-demo#easeim",
-    isHttpDNS: false,
-    https: true,
-    url: 'http://im-api-v2.easemob.com/ws',
-    apiUrl: 'http://a1.easemob.com',
-    isDebug: true
+    appKey: "41117440#383391",
 })
 // 添加回调函数
 WebIM.conn.listen({
@@ -36,7 +31,7 @@ WebIM.conn.listen({
 
 // 重新获取并设置 agora token
 function refreshToken(username, password) {
-    postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+    postData('http://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             WebIM.conn.resetToken(agoraToken)
@@ -44,20 +39,18 @@ function refreshToken(username, password) {
 }
 
 function postData(url, data) {
-    // Default options are marked with *
     return fetch(url, {
-        body: JSON.stringify(data), // must match 'Content-Type' header
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        // credentials: 'same-origin', // include, same-origin, *omit
+        body: JSON.stringify(data),
+        cache: 'no-cache',
         headers: {
             'content-type': 'application/json'
         },
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, cors, *same-origin
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // *client, no-referrer
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer',
     })
-        .then(response => response.json()) // parses response to JSON
+        .then(response => response.json())
 }
 
 // 按钮行为定义
@@ -66,42 +59,36 @@ window.onload = function () {
     document.getElementById("register").onclick = function () {
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        // 使用 token 方式
-        // postData('http://a1-hsb.easemob.com/app/user/register', { "userAccount": username, "userPassword": password })
-        //     .then((res) => {
-        //         if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
-        //             document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
-        //         }
-        //     })
-        WebIM.conn.registerUser({username, password})
+        // 1.使用 token 方式
+        postData('http://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
+            .then((res) => {
+                if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
+                    document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
+                }
+            })
+        // 2.使用用户名密码的方式
+        // WebIM.conn.registerUser({username, password})
         document.getElementById("log").appendChild(document.createElement('div')).append("register user"+username)
     }
     // 登录
     document.getElementById("login").onclick = function () {
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        // 使用 token 方式
-        // postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
-        //     .then((res) => {
-        //         let agoraToken = res.accessToken
-        //         let easemobUserName = res.easemobUserName
-        //         console.log('-------', {
-        //             user: easemobUserName,
-        //             agoraToken: agoraToken,
-        //             appKey: "easemob-demo#chatdemoui"
-        //         })
-        //         WebIM.conn.open({
-        //             user: easemobUserName,
-        //             agoraToken: agoraToken,
-        //             appKey: "easemob-demo#chatdemoui"
-        //         });
-        //     })
-
-        WebIM.conn.open({
-            user: username,
-            pwd: password,
-            appKey: "easemob-demo#easeim"
-        });
+        // 1.使用 token 方式
+        postData('http://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
+            .then((res) => {
+                let agoraToken = res.accessToken
+                let easemobUserName = res.chatUserName
+                WebIM.conn.open({
+                    user: easemobUserName,
+                    agoraToken: agoraToken
+                });
+            })
+        // 2.使用用户名密码的方式
+        // WebIM.conn.open({
+        //     user: username,
+        //     pwd: password,
+        // });
     }
 
     // 登出
