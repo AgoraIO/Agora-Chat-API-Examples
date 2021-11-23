@@ -58,7 +58,7 @@
 
 - (void)initSdk
 {
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41351358#427351"];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
     
 //    options.chatPort = 6717;
 //    options.chatServer = @"hk-tls.easemob.com";

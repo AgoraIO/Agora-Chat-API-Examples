@@ -149,7 +149,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - (void)initSdk
 {
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41351358#427351"];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
     options.enableConsoleLog = YES;
     [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
 
