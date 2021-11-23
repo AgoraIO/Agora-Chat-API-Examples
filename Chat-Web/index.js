@@ -34,7 +34,7 @@ function refreshToken(username, password) {
     postData('http://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
-            WebIM.conn.resetToken(agoraToken)
+            WebIM.conn.renewToken(agoraToken)
         })
 }
 
