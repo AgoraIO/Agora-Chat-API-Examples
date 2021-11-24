@@ -16,7 +16,7 @@ WebIM.conn.listen({
         console.log(message)
         document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
     }, // 收到文本消息
-    onTokenWillexpire: function (params) {
+    onTokenWillExpire: function (params) {
         document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
         refreshToken(username, password)
     },
@@ -31,10 +31,11 @@ WebIM.conn.listen({
 
 // 重新获取并设置 agora token
 function refreshToken(username, password) {
-    postData('http://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
+    postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             WebIM.conn.renewToken(agoraToken)
+            document.getElementById("log").appendChild(document.createElement('div')).append("Token has been updated")
         })
 }
 
@@ -60,22 +61,24 @@ window.onload = function () {
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
         // 1.使用 token 方式
-        postData('http://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
             .then((res) => {
-                if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
-                    document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
-                }
+                document.getElementById("log").appendChild(document.createElement('div')).append(`register user ${username} success`)
+            })
+            .catch((res)=> {
+                document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
             })
         // 2.使用用户名密码的方式
         // WebIM.conn.registerUser({username, password})
-        document.getElementById("log").appendChild(document.createElement('div')).append("register user"+username)
+        // document.getElementById("log").appendChild(document.createElement('div')).append("register user "+username)
     }
     // 登录
     document.getElementById("login").onclick = function () {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Logging in...")
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
         // 1.使用 token 方式
-        postData('http://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
             .then((res) => {
                 let agoraToken = res.accessToken
                 let easemobUserName = res.chatUserName
@@ -83,6 +86,9 @@ window.onload = function () {
                     user: easemobUserName,
                     agoraToken: agoraToken
                 });
+            })
+            .catch((res)=> {
+                document.getElementById("log").appendChild(document.createElement('div')).append(`Login failed`)
             })
         // 2.使用用户名密码的方式
         // WebIM.conn.open({
