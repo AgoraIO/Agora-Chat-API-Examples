@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 LogUtils.showLog(tv_log, "onMessageRecalled");
             }
 
+            @Deprecated
             @Override
             public void onMessageChanged(ChatMessage message, Object change) {
                 LogUtils.showLog(tv_log, "onMessageChanged");
