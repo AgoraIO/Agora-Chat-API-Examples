@@ -352,11 +352,6 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
     private static final String NEW_LOGIN = "NEW_LOGIN";
     private static final String RENEW_TOKEN = "RENEW_TOKEN";
-    private static final String ACCOUNT_REMOVED = "account_removed";
-    private static final String ACCOUNT_CONFLICT = "conflict";
-    private static final String ACCOUNT_FORBIDDEN = "user_forbidden";
-    private static final String ACCOUNT_KICKED_BY_CHANGE_PASSWORD = "kicked_by_change_password";
-    private static final String ACCOUNT_KICKED_BY_OTHER_DEVICE = "kicked_by_another_device";
     private static final String LOGIN_URL = "https://a41.easemob.com/app/chat/user/login";
     private static final String REGISTER_URL = "https://a41.easemob.com/app/chat/user/register";
     private EditText et_username;
@@ -463,17 +458,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDisconnected(int error) {
-                //3.2 连接异常回调
                 if (error == Error.USER_REMOVED) {
-                    onUserException(ACCOUNT_REMOVED);
+                    onUserException("account_removed");
                 } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
-                    onUserException(ACCOUNT_CONFLICT);
+                    onUserException("account_conflict");
                 } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
-                    onUserException(ACCOUNT_FORBIDDEN);
+                    onUserException("account_forbidden");
                 } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
-                    onUserException(ACCOUNT_KICKED_BY_CHANGE_PASSWORD);
+                    onUserException("account_kicked_by_change_password");
                 } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
-                    onUserException(ACCOUNT_KICKED_BY_OTHER_DEVICE);
+                    onUserException("account_kicked_by_other_device");
+                } else if(error == Error.USER_BIND_ANOTHER_DEVICE) {
+                    onUserException("user_bind_another_device");
+                } else if(error == Error.USER_DEVICE_CHANGED) {
+                    onUserException("user_device_changed");
+                } else if(error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
+                    onUserException("user_login_too_many_devices");
                 }
             }
 
