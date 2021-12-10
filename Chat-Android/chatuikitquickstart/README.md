@@ -32,7 +32,7 @@
  使用 Android Studio 创建一个 [Android 项目](https://developer.android.google.cn/studio/projects/create-project)。
 
 - Project Template 选择 Empty Activity。
-- Name 设为 AgoraChatQuickstart。
+- Name 设为 AgoraChatUIKitQuickstart。
 - Package name 设为 io.agora.chatuikitquickstart。
 - Language 选择 Java。
 
