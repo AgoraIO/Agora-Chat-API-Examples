@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 .setOnChatRecordTouchListener(new OnChatRecordTouchListener() {
                     @Override
                     public boolean onRecordTouch(View v, MotionEvent event) {
-                        return checkPermissions(Manifest.permission.RECORD_AUDIO, 113);
+                        return !checkPermissions(Manifest.permission.RECORD_AUDIO, 113);
                     }
                 })
                 .setOnMessageSendCallBack(new OnMessageSendCallBack() {
