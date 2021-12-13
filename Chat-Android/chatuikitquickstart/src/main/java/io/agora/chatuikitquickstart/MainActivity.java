@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         options.setAppKey(sdkAppkey);
         // Set whether confirmation of delivery is required by the recipient. Default: false
         options.setRequireDeliveryAck(true);
+        // Set not to log in automatically
+        options.setAutoLogin(false);
         // Use uikit to initialize Agora Chat SDK
         EaseUIKit.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // 1: single chat; 2: group chat; 3: chat room
         EaseChatFragment fragment = new EaseChatFragment.Builder(toChatUsername, 1)
-                .setUseHeader(false)
+                .useHeader(false)
                 .setOnChatExtendMenuItemClickListener(new OnChatExtendMenuItemClickListener() {
                     @Override
                     public boolean onChatExtendMenuItemClick(View view, int itemId) {
@@ -258,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 //=================== get token from server start ========================
 
     private void getTokenFromAppServer(String requestType) {
-        if(ChatClient.getInstance().isLoggedInBefore()) {
+        if(ChatClient.getInstance().getOptions().getAutoLogin() && ChatClient.getInstance().isLoggedInBefore()) {
             LogUtils.showErrorLog(tv_log, getString(R.string.has_login_before));
             return;
         }
