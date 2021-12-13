@@ -56,7 +56,7 @@ allprojects {
     }
 }
 ```
-在项目的 /app/build.gradle 文件添加 io.hyphenate:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
+在项目的 /app/build.gradle 文件添加 io.agora.rtc:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
 
 ```java
 android {
@@ -68,7 +68,7 @@ android {
 }
 dependencies {
     ...
-    implementation 'io.hyphenate:chat-sdk:X.Y.Z'
+    implementation 'io.agora.rtc:chat-sdk:X.Y.Z'
 }
 ```
 ### 3.防止代码混淆
@@ -868,7 +868,7 @@ allprojects {
     }
 }
 ```
-在项目的 /app/build.gradle 文件添加 io.hyphenate:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
+在项目的 /app/build.gradle 文件添加 io.agora.rtc:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
 
 ```java
 android {
@@ -883,7 +883,7 @@ android {
 }
 dependencies {
     ...
-    implementation 'io.hyphenate:chat-sdk:X.Y.Z'
+    implementation 'io.agora.rtc:chat-sdk:X.Y.Z'
 }
 ```
 
