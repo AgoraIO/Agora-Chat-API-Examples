@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9E69E579272696D1008DDEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E578272696D1008DDEF5 /* AppDelegate.m */; };
+		9E69E57C272696D1008DDEF5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E57B272696D1008DDEF5 /* SceneDelegate.m */; };
+		9E69E582272696D1008DDEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E580272696D1008DDEF5 /* Main.storyboard */; };
+		9E69E584272696D3008DDEF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E583272696D3008DDEF5 /* Assets.xcassets */; };
+		9E69E587272696D3008DDEF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E585272696D3008DDEF5 /* LaunchScreen.storyboard */; };
+		9E69E58A272696D3008DDEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E589272696D3008DDEF5 /* main.m */; };
+		9EC883B5272BD4F200FFE0A8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */; };
+		9ECE6758274F8165007CF85F /* AgoraChatHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE6757274F8165007CF85F /* AgoraChatHttpRequest.m */; };
+		9ECE675B274F8343007CF85F /* AgoraLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */; };
+		9ECE675E274F8375007CF85F /* UIViewController+ComponentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE675C274F8375007CF85F /* UIViewController+ComponentSize.m */; };
+		9ECE6769274F874F007CF85F /* login_agoraChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6761274F874D007CF85F /* login_agoraChat@2x.png */; };
+		9ECE676A274F874F007CF85F /* login_agoraChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6762274F874D007CF85F /* login_agoraChat@3x.png */; };
+		9ECE676B274F874F007CF85F /* loginFail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6763274F874E007CF85F /* loginFail@3x.png */; };
+		9ECE676C274F874F007CF85F /* loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6764274F874E007CF85F /* loading@2x.png */; };
+		9ECE676D274F874F007CF85F /* loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6765274F874E007CF85F /* loading@3x.png */; };
+		9ECE676E274F874F007CF85F /* login_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6766274F874E007CF85F /* login_logo@2x.png */; };
+		9ECE676F274F874F007CF85F /* loginFail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6767274F874F007CF85F /* loginFail@2x.png */; };
+		9ECE6770274F874F007CF85F /* login_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6768274F874F007CF85F /* login_logo@3x.png */; };
+		9ECE6773274F87E7007CF85F /* UIColor+EaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE6772274F87E7007CF85F /* UIColor+EaseUI.m */; };
+		9ECE6776274F9747007CF85F /* black_goBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6774274F9747007CF85F /* black_goBack@2x.png */; };
+		9ECE6777274F9747007CF85F /* black_goBack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE6775274F9747007CF85F /* black_goBack@3x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9E69E574272696D1008DDEF5 /* ChatKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E69E577272696D1008DDEF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9E69E578272696D1008DDEF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9E69E57A272696D1008DDEF5 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		9E69E57B272696D1008DDEF5 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		9E69E581272696D1008DDEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9E69E583272696D3008DDEF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9E69E586272696D3008DDEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9E69E588272696D3008DDEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E69E589272696D3008DDEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9EC883B3272BD4F200FFE0A8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		9ECE6756274F8164007CF85F /* AgoraChatHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraChatHttpRequest.h; sourceTree = "<group>"; };
+		9ECE6757274F8165007CF85F /* AgoraChatHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraChatHttpRequest.m; sourceTree = "<group>"; };
+		9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraLoginViewController.m; sourceTree = "<group>"; };
+		9ECE675A274F8343007CF85F /* AgoraLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraLoginViewController.h; sourceTree = "<group>"; };
+		9ECE675C274F8375007CF85F /* UIViewController+ComponentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ComponentSize.m"; sourceTree = "<group>"; };
+		9ECE675D274F8375007CF85F /* UIViewController+ComponentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ComponentSize.h"; sourceTree = "<group>"; };
+		9ECE6761274F874D007CF85F /* login_agoraChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_agoraChat@2x.png"; sourceTree = "<group>"; };
+		9ECE6762274F874D007CF85F /* login_agoraChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_agoraChat@3x.png"; sourceTree = "<group>"; };
+		9ECE6763274F874E007CF85F /* loginFail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginFail@3x.png"; sourceTree = "<group>"; };
+		9ECE6764274F874E007CF85F /* loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading@2x.png"; sourceTree = "<group>"; };
+		9ECE6765274F874E007CF85F /* loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading@3x.png"; sourceTree = "<group>"; };
+		9ECE6766274F874E007CF85F /* login_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_logo@2x.png"; sourceTree = "<group>"; };
+		9ECE6767274F874F007CF85F /* loginFail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginFail@2x.png"; sourceTree = "<group>"; };
+		9ECE6768274F874F007CF85F /* login_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_logo@3x.png"; sourceTree = "<group>"; };
+		9ECE6771274F87E6007CF85F /* UIColor+EaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EaseUI.h"; sourceTree = "<group>"; };
+		9ECE6772274F87E7007CF85F /* UIColor+EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EaseUI.m"; sourceTree = "<group>"; };
+		9ECE6774274F9747007CF85F /* black_goBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@2x.png"; sourceTree = "<group>"; };
+		9ECE6775274F9747007CF85F /* black_goBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@3x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9E69E571272696D1008DDEF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9E69E56B272696D1008DDEF5 = {
+			isa = PBXGroup;
+			children = (
+				9E69E576272696D1008DDEF5 /* ChatKitExample */,
+				9E69E575272696D1008DDEF5 /* Products */,
+				9E69E590272696F8008DDEF5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9E69E575272696D1008DDEF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E69E574272696D1008DDEF5 /* ChatKitExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9E69E576272696D1008DDEF5 /* ChatKitExample */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE6760274F84D5007CF85F /* Resources */,
+				9E69E577272696D1008DDEF5 /* AppDelegate.h */,
+				9E69E578272696D1008DDEF5 /* AppDelegate.m */,
+				9E69E57A272696D1008DDEF5 /* SceneDelegate.h */,
+				9E69E57B272696D1008DDEF5 /* SceneDelegate.m */,
+				9EC883B3272BD4F200FFE0A8 /* ChatViewController.h */,
+				9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */,
+				9ECE675A274F8343007CF85F /* AgoraLoginViewController.h */,
+				9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */,
+				9ECE675D274F8375007CF85F /* UIViewController+ComponentSize.h */,
+				9ECE675C274F8375007CF85F /* UIViewController+ComponentSize.m */,
+				9ECE6771274F87E6007CF85F /* UIColor+EaseUI.h */,
+				9ECE6772274F87E7007CF85F /* UIColor+EaseUI.m */,
+				9ECE6756274F8164007CF85F /* AgoraChatHttpRequest.h */,
+				9ECE6757274F8165007CF85F /* AgoraChatHttpRequest.m */,
+				9E69E580272696D1008DDEF5 /* Main.storyboard */,
+				9E69E583272696D3008DDEF5 /* Assets.xcassets */,
+				9E69E585272696D3008DDEF5 /* LaunchScreen.storyboard */,
+				9E69E588272696D3008DDEF5 /* Info.plist */,
+				9E69E589272696D3008DDEF5 /* main.m */,
+			);
+			path = ChatKitExample;
+			sourceTree = "<group>";
+		};
+		9E69E590272696F8008DDEF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9ECE6760274F84D5007CF85F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE6774274F9747007CF85F /* black_goBack@2x.png */,
+				9ECE6775274F9747007CF85F /* black_goBack@3x.png */,
+				9ECE6764274F874E007CF85F /* loading@2x.png */,
+				9ECE6765274F874E007CF85F /* loading@3x.png */,
+				9ECE6761274F874D007CF85F /* login_agoraChat@2x.png */,
+				9ECE6762274F874D007CF85F /* login_agoraChat@3x.png */,
+				9ECE6766274F874E007CF85F /* login_logo@2x.png */,
+				9ECE6768274F874F007CF85F /* login_logo@3x.png */,
+				9ECE6767274F874F007CF85F /* loginFail@2x.png */,
+				9ECE6763274F874E007CF85F /* loginFail@3x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E69E573272696D1008DDEF5 /* ChatKitExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "ChatKitExample" */;
+			buildPhases = (
+				59F18212286F459E98144C0D /* [CP] Check Pods Manifest.lock */,
+				9E69E570272696D1008DDEF5 /* Sources */,
+				9E69E571272696D1008DDEF5 /* Frameworks */,
+				9E69E572272696D1008DDEF5 /* Resources */,
+				609DC5A08630DD8E853A88E0 /* [CP] Embed Pods Frameworks */,
+				E0B618B9101AA97181E6510E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChatKitExample;
+			productName = ChatKitTest;
+			productReference = 9E69E574272696D1008DDEF5 /* ChatKitExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9E69E56C272696D1008DDEF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					9E69E573272696D1008DDEF5 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = 9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "ChatKitExample" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9E69E56B272696D1008DDEF5;
+			productRefGroup = 9E69E575272696D1008DDEF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E69E573272696D1008DDEF5 /* ChatKitExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9E69E572272696D1008DDEF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ECE676F274F874F007CF85F /* loginFail@2x.png in Resources */,
+				9E69E587272696D3008DDEF5 /* LaunchScreen.storyboard in Resources */,
+				9ECE6769274F874F007CF85F /* login_agoraChat@2x.png in Resources */,
+				9ECE676E274F874F007CF85F /* login_logo@2x.png in Resources */,
+				9ECE676D274F874F007CF85F /* loading@3x.png in Resources */,
+				9ECE676A274F874F007CF85F /* login_agoraChat@3x.png in Resources */,
+				9ECE6770274F874F007CF85F /* login_logo@3x.png in Resources */,
+				9ECE6777274F9747007CF85F /* black_goBack@3x.png in Resources */,
+				9ECE6776274F9747007CF85F /* black_goBack@2x.png in Resources */,
+				9E69E584272696D3008DDEF5 /* Assets.xcassets in Resources */,
+				9E69E582272696D1008DDEF5 /* Main.storyboard in Resources */,
+				9ECE676C274F874F007CF85F /* loading@2x.png in Resources */,
+				9ECE676B274F874F007CF85F /* loginFail@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59F18212286F459E98144C0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatKitExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		609DC5A08630DD8E853A88E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0B618B9101AA97181E6510E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E69E570272696D1008DDEF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E69E579272696D1008DDEF5 /* AppDelegate.m in Sources */,
+				9EC883B5272BD4F200FFE0A8 /* ChatViewController.m in Sources */,
+				9ECE675E274F8375007CF85F /* UIViewController+ComponentSize.m in Sources */,
+				9ECE675B274F8343007CF85F /* AgoraLoginViewController.m in Sources */,
+				9E69E58A272696D3008DDEF5 /* main.m in Sources */,
+				9ECE6758274F8165007CF85F /* AgoraChatHttpRequest.m in Sources */,
+				9E69E57C272696D1008DDEF5 /* SceneDelegate.m in Sources */,
+				9ECE6773274F87E7007CF85F /* UIColor+EaseUI.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9E69E580272696D1008DDEF5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E69E581272696D1008DDEF5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9E69E585272696D3008DDEF5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E69E586272696D3008DDEF5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9E69E58B272696D3008DDEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9E69E58C272696D3008DDEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9E69E58E272696D3008DDEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChatKitExample/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easemob.enterprise.easeim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9E69E58F272696D3008DDEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChatKitExample/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easemob.enterprise.easeim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "ChatKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E69E58B272696D3008DDEF5 /* Debug */,
+				9E69E58C272696D3008DDEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "ChatKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E69E58E272696D3008DDEF5 /* Debug */,
+				9E69E58F272696D3008DDEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9E69E56C272696D1008DDEF5 /* Project object */;
+}
