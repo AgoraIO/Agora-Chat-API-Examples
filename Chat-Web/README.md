@@ -22,6 +22,7 @@ Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息�
 - 有效的 Agora Chat 开发者账号。
 - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
 - [npm](https://www.npmjs.com/get-npm)
+- SDK 支持 IE9+、FireFox10+、Chrome54+、Safari6+ 之间文本、表情、图片、音频、地址消息相互发送。
 - SDK 本身已支持 IE9+、FireFox10+、Chrome54+、Safari6+。
 
 
