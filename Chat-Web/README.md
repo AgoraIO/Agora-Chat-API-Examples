@@ -22,6 +22,7 @@ Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息�
 - 有效的 Agora Chat 开发者账号。
 - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
 - [npm](https://www.npmjs.com/get-npm)
+- SDK 支持 IE9+、FireFox10+、Chrome54+、Safari6+ 之间文本、表情、图片、音频、地址消息相互发送。
 - SDK 本身已支持 IE9+、FireFox10+、Chrome54+、Safari6+。
 
 
@@ -139,34 +140,36 @@ let username, password
 // 初始化客户端
 WebIM.conn = new WebIM.connection({
     appKey: appKey,
-    isHttpDNS: true
 })
 
 // 添加回调函数
-WebIM.conn.listen({
-    onOpened: function (message) {
+WebIM.conn.addEventHandler('connection&message', {
+    onConnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Connect success !")
-    }, // 连接成功回调 
-    onClosed: function (message) {
+    },
+    onDisconnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Logout success !")
-    }, // 连接关闭回调
-    onTextMessage: function (message) {
+    },
+    onTextMessage: (message) => {
         console.log(message)
-        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
-    }, // 收到文本消息
-    onTokenWillexpire: function (params) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.msg)
+    },
+    onTokenWillExpire: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
         refreshToken(username, password)
-    }, // token 将要过期
-    onTokenExpired: function (params) {
+    },
+    onTokenExpired: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired")
         refreshToken(username, password)
-    }, // token 已经过期
+    },
+    onError: (error) => {
+        console.log('on error', error)
+    }
 })
 
 // 从 app server 获取token
 function refreshToken(username, password) {
-    postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+    postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             WebIM.conn.resetToken(agoraToken)
@@ -195,7 +198,7 @@ window.onload = function () {
     document.getElementById("register").onclick = function(){
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        postData('http://a1-hsb.easemob.com/app/user/register', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
             .then((res) => {
                 if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
                     document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
@@ -208,14 +211,13 @@ window.onload = function () {
     document.getElementById("login").onclick = function () {
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
             .then((res) => {
                 let agoraToken = res.accessToken
                 let easemobUserName = res.easemobUserName
                 WebIM.conn.open({
                     user: easemobUserName,
-                    agoraToken: agoraToken,
-                    appKey: "easemob-demo#chatdemoui"
+                    agoraToken: agoraToken
                 });
             })
     }
@@ -291,7 +293,8 @@ module.exports = {
     },
     devServer: {
         compress: true,
-        port: 9000
+        port: 9000,
+        https: true
     }
 };
 ```

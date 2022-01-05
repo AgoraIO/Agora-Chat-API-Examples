@@ -1,30 +1,29 @@
 import WebIM from 'agora-chat-sdk'
 var username, password
-// 初始化客户端
 WebIM.conn = new WebIM.connection({
     appKey: "41117440#383391",
 })
 // 添加回调函数
-WebIM.conn.listen({
-    onOpened: function (message) {
+WebIM.conn.addEventHandler('connection&message', {
+    onConnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Connect success !")
-    }, // 连接成功回调 
-    onClosed: function (message) {
+    },
+    onDisconnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Logout success !")
-    }, // 连接关闭回调
-    onTextMessage: function (message) {
+    },
+    onTextMessage: (message) => {
         console.log(message)
-        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
-    }, // 收到文本消息
-    onTokenWillExpire: function (params) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.msg)
+    },
+    onTokenWillExpire: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
         refreshToken(username, password)
     },
-    onTokenExpired: function (params) {
+    onTokenExpired: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired")
         refreshToken(username, password)
     },
-    onError: function (error) {
+    onError: (error) => {
         console.log('on error', error)
     }
 })
@@ -90,6 +89,7 @@ window.onload = function () {
             .catch((res)=> {
                 document.getElementById("log").appendChild(document.createElement('div')).append(`Login failed`)
             })
+
         // 2.使用用户名密码的方式
         // WebIM.conn.open({
         //     user: username,
