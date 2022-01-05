@@ -140,34 +140,36 @@ let username, password
 // 初始化客户端
 WebIM.conn = new WebIM.connection({
     appKey: appKey,
-    isHttpDNS: true
 })
 
 // 添加回调函数
-WebIM.conn.listen({
-    onOpened: function (message) {
+WebIM.conn.addEventHandler('connection&message', {
+    onConnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Connect success !")
-    }, // 连接成功回调 
-    onClosed: function (message) {
+    },
+    onDisconnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Logout success !")
-    }, // 连接关闭回调
-    onTextMessage: function (message) {
+    },
+    onTextMessage: (message) => {
         console.log(message)
-        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.data)
-    }, // 收到文本消息
-    onTokenWillexpire: function (params) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.msg)
+    },
+    onTokenWillExpire: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
         refreshToken(username, password)
-    }, // token 将要过期
-    onTokenExpired: function (params) {
+    },
+    onTokenExpired: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired")
         refreshToken(username, password)
-    }, // token 已经过期
+    },
+    onError: (error) => {
+        console.log('on error', error)
+    }
 })
 
 // 从 app server 获取token
 function refreshToken(username, password) {
-    postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+    postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             WebIM.conn.resetToken(agoraToken)
@@ -196,7 +198,7 @@ window.onload = function () {
     document.getElementById("register").onclick = function(){
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        postData('http://a1-hsb.easemob.com/app/user/register', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
             .then((res) => {
                 if (res.errorInfo && res.errorInfo.indexOf('already exists') !== -1) {
                     document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
@@ -209,14 +211,13 @@ window.onload = function () {
     document.getElementById("login").onclick = function () {
         username = document.getElementById("userID").value.toString()
         password = document.getElementById("password").value.toString()
-        postData('http://a1-hsb.easemob.com/app/user/login', { "userAccount": username, "userPassword": password })
+        postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
             .then((res) => {
                 let agoraToken = res.accessToken
                 let easemobUserName = res.easemobUserName
                 WebIM.conn.open({
                     user: easemobUserName,
-                    agoraToken: agoraToken,
-                    appKey: "easemob-demo#chatdemoui"
+                    agoraToken: agoraToken
                 });
             })
     }
@@ -292,7 +293,8 @@ module.exports = {
     },
     devServer: {
         compress: true,
-        port: 9000
+        port: 9000,
+        https: true
     }
 };
 ```
