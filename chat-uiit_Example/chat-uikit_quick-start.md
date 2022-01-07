@@ -2,9 +2,9 @@
 
 ---
 
-# 使用 chat-uikit 快速搭建会话列表和会话页面
+# 使用 Agora Chat UIKit 快速搭建会话页面
 
-本文介绍如何将chat-uikit  应用在您的项目中并快速搭建出会话列表和聊天页面。
+本文介绍如何将 Agora Chat UIKit  应用在您的项目中并快速搭建出会话列表和聊天页面。
 
 ## 消息发送与接收流程
 
@@ -106,12 +106,13 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 - 会话页面接收消息并展示;
 - 发送文本消息、图片消息、文件消息、视频消息、语音消息等。
 
-1. 在项目的SceneDelegate.m 文件里添加如下相关代码进行 chat-uikit 初始化相关功能：
+#### 4.1 UIKIT 初始化
+
+在项目的SceneDelegate.m 文件里添加如下相关代码进行 chat-uikit 初始化相关功能：
 
 ```objective-c
 //导入头文件。
 #import <chat-uikit/EaseChatKit.h>
-#import "ChatViewController.h" //项目会话页面。
 #import "AgoraLoginViewController.h" //登录页面。
 ```
 
@@ -139,16 +140,88 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 }
 ```
 
-2. 在加载会话页面之前必须先登录到 AgoraChat SDK，具体的登录页面实现可自行实现或参考 `EaseChatKitExample` -> `AgoraLoginViewController` 登录页面实现。
+#### 4.2 登录 AgoraChat SDK
 
-* 登录页面中注册实现逻辑请参考：https://github.com/easemob/chat-api-examples/blob/d06d34455c360c6dc21cce57c984aafc6dd13da4/iOS%20api-example/README.md?plain=1#L420-L455 
-* 登录页面中登录实现逻辑请参考：https://github.com/easemob/chat-api-examples/blob/d06d34455c360c6dc21cce57c984aafc6dd13da4/iOS%20api-example/README.md?plain=1#L457-L500 
-* 使用 AppServer 进行注册逻辑请参考：https://github.com/easemob/chat-api-examples/blob/d06d34455c360c6dc21cce57c984aafc6dd13da4/iOS%20api-example/README.md?plain=1#L827-L852
-* 登录到 AppServer 时登录逻辑请参考：https://github.com/easemob/chat-api-examples/blob/d06d34455c360c6dc21cce57c984aafc6dd13da4/iOS%20api-example/README.md?plain=1#L854-L879
+在加载会话页面之前必须先登录到 AgoraChat SDK，具体的登录页面实现可自行实现或参考 `EaseChatKitExample`工程 -> `AgoraLoginViewController.m`文件登录页面实现。
 
-3. 登录成功之后跳转到项目的会话页面 ChatViewController.m
+`EaseChatKitExample`工程地址：//TODO::合并之后的地址
 
-以下为头文件和对属性进行定义：
+若是需自行实现登录逻辑请参考如下步骤：
+
+1. 项目中创建名为 `AgoraChatHttpRequest` 的  `Cocoa Touch Class` 文件
+
+2. 在 `AgoraChatHttpRequest.h` 文件中添加方法定义（需复制全部内容）：//TODO::合并之后的地址
+
+3. 在 `AgoraChatHttpRequest.m` 文件中添加方法实现（需复制全部内容）：//TODO::合并之后的地址
+
+4. 项目中创建名为 `AgoraLoginViewController` 的  `Cocoa Touch Class` 文件，并在 `AgoraLoginViewController.m` 文件中导入请求 AppServer 的头文件 
+
+   ```objective-c
+   #import "AgoraChatHttpRequest.h" //请求 Appserver 的工具类
+   ```
+
+5. 在 `AgoraLoginViewController.m` 文件中按需调用如下注册代码逻辑进行注册：
+
+   ```objective-c
+   //注册到 AppServer
+   - (void)doSignUp {
+   [[AgoraChatHttpRequest sharedManager] registerToApperServer:@"Register ID" pwd:@"Register Password" completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+           dispatch_async(dispatch_get_main_queue(),^{
+               if (response != nil) {
+                   NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                   NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                   if (responsedict != nil) {
+                       NSString *result = [responsedict objectForKey:@"code"];
+                       if ([result isEqualToString:@"RES_OK"]) {
+                           //注册成功，可进行登录操作
+                       }
+                   }
+               }
+           });
+       }];
+   }
+   ```
+
+6. 在 `AgoraLoginViewController.m` 文件中按需调用如下登录代码逻辑进行登录，登录成功后可跳转到会话页面 `ViewController`，有关 `ViewController`  会话页面逻辑参见 <a href="#jump">4.3 加载会话页面</a>
+
+   导入会话页面头文件：
+
+   ```objective-c
+   #import "ViewController.h"
+   ```
+
+   登录逻辑：
+
+   ```objective-c
+   - (void)doSignIn {
+       //登录到 AppServer
+   [[AgoraChatHttpRequest sharedManager] loginToApperServer:@"ID" pwd:@"Password" completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+           dispatch_async(dispatch_get_main_queue(), ^{
+               if (response && response.length > 0 && statusCode) {
+                   NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                   NSDictionary *responsedict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                   NSString *token = [responsedict objectForKey:@"accessToken"];
+                   NSString *loginName = [responsedict objectForKey:@"chatUserName"];
+                   if (token && token.length > 0) {
+                       // 登录到 Agora Chat SDK
+                       [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] agoraToken:token completion:^(NSString *aUsername, AgoraChatError *aError) {
+                           if (!aError) {
+                              //登录到 Agora Chat SDK Success，跳转到会话页面 ViewController
+                             ViewController *chatsVC = [[ViewController alloc] init];
+       											chatsVC.modalPresentationStyle = 0;
+       											[self.navigationController pushViewController:chatsVC animated:YES];
+                           }
+                       }];
+                   }
+               } 
+       		});
+       }];
+   }
+   ```
+
+#### <span id="jump"> 4.3 加载会话页面</span>
+
+以下为  `ViewController.m ` 文件的属性定义：
 
 ```objective-c
 #define kIsBangsScreen ({\
@@ -162,12 +235,12 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 #define AgoraChatVIEWTOPMARGIN (kIsBangsScreen ? 34.f : 0.f)
 
-#import "ChatViewController.h"
+#import "ViewController.h"
 #import <Masonry/Masonry.h>
 #import "AgoraChat/AgoraChat.h"
 #import <chat-uikit/EaseChatKit.h>
 
-@interface ChatViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
+@interface ViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) EaseConversationModel *conversationModel;
 @property (nonatomic, strong) AgoraChatConversation *conversation;
 @property (nonatomic, strong) EaseChatViewController *chatController;
@@ -178,7 +251,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 @end
 ```
 
-加载页面元素：
+在 `ViewController.m`   的 `viewDidLoad`  方法里加载页面元素：
 
 ```objective-c
 - (void)viewDidLoad {
@@ -243,7 +316,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 }
 ```
 
-在会话页面输入会话方 ID，点击 Chat 按钮显示 `EaseChatViewController` 会话页面：
+在会话页面  `ViewController.m`  的输入框输入会话方 ID，点击 Chat 按钮显示 `EaseChatViewController` 会话页面：
 
 ```objective-c
 - (void)chatAction
@@ -281,7 +354,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 ```
 
-会话页面可退出到登录页面更换登陆 ID：
+会话页面  `ViewController.m`  的 ==Log out== 按钮可退出到登录页面更换登陆 ID：
 
 ```objective-c
 - (void)logout
@@ -315,7 +388,9 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 
 默认样式的聊天页面示例图：
 
-<img src="/Users/zchong/Desktop/defaultStyle.jpeg" alt="defaultStyle" style="zoom:20%;" />
+// TODO:合并之后确定地址
+
+![]()
 
 * 自定义样式配置示例：
 
@@ -334,6 +409,8 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 
 部分自定义样式配置示例图：
 
-<img src="/Users/zchong/Desktop/customStyle.jpeg" alt="customStyle" style="zoom:20%;" />
+// TODO:合并之后确定地址
+
+![]()
 
 关于更多 API 介绍请参考 EaseChatViewController 提供的 API，以及 EaseChatViewControllerDelegate 协议中的回调方法 API。

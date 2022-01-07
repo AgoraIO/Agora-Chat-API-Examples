@@ -1,5 +1,5 @@
 //
-//  EMHttpRequest.m
+//  AgoraChatHttpRequest.m
 //  TokenSampleCode
 //
 //  Created by zhangchong on 2021/8/23.

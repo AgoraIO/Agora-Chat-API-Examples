@@ -1,5 +1,5 @@
 //
-//  EMChatViewController.h
+//  EMViewController.h
 //  EaseIM
 //
 //  Created by zhangchong on 2020/11/27.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatViewController : UIViewController
+@interface ViewController : UIViewController
 
 @end
 

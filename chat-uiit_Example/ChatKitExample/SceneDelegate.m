@@ -8,7 +8,7 @@
 #import "SceneDelegate.h"
 #import "AgoraLoginViewController.h"
 #import <chat-uikit/EaseChatKit.h>
-#import "ChatViewController.h"
+#import "ViewController.h"
 
 @interface SceneDelegate ()
 
@@ -52,7 +52,7 @@
 }
 
 - (void)loadMainPage {
-    ChatViewController *chatsVC = [[ChatViewController alloc] init];
+    ViewController *chatsVC = [[ViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:chatsVC];
     navigationController.navigationBarHidden = YES;
     self.window.rootViewController = navigationController;

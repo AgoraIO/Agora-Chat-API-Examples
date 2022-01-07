@@ -13,7 +13,7 @@
 		9E69E584272696D3008DDEF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E583272696D3008DDEF5 /* Assets.xcassets */; };
 		9E69E587272696D3008DDEF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E585272696D3008DDEF5 /* LaunchScreen.storyboard */; };
 		9E69E58A272696D3008DDEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E589272696D3008DDEF5 /* main.m */; };
-		9EC883B5272BD4F200FFE0A8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */; };
+		9EC883B5272BD4F200FFE0A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC883B4272BD4F200FFE0A8 /* ViewController.m */; };
 		9ECE6758274F8165007CF85F /* AgoraChatHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE6757274F8165007CF85F /* AgoraChatHttpRequest.m */; };
 		9ECE675B274F8343007CF85F /* AgoraLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */; };
 		9ECE675E274F8375007CF85F /* UIViewController+ComponentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE675C274F8375007CF85F /* UIViewController+ComponentSize.m */; };
@@ -41,8 +41,8 @@
 		9E69E586272696D3008DDEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E69E588272696D3008DDEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E69E589272696D3008DDEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9EC883B3272BD4F200FFE0A8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		9EC883B3272BD4F200FFE0A8 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9EC883B4272BD4F200FFE0A8 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9ECE6756274F8164007CF85F /* AgoraChatHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraChatHttpRequest.h; sourceTree = "<group>"; };
 		9ECE6757274F8165007CF85F /* AgoraChatHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraChatHttpRequest.m; sourceTree = "<group>"; };
 		9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraLoginViewController.m; sourceTree = "<group>"; };
@@ -99,8 +99,8 @@
 				9E69E578272696D1008DDEF5 /* AppDelegate.m */,
 				9E69E57A272696D1008DDEF5 /* SceneDelegate.h */,
 				9E69E57B272696D1008DDEF5 /* SceneDelegate.m */,
-				9EC883B3272BD4F200FFE0A8 /* ChatViewController.h */,
-				9EC883B4272BD4F200FFE0A8 /* ChatViewController.m */,
+				9EC883B3272BD4F200FFE0A8 /* ViewController.h */,
+				9EC883B4272BD4F200FFE0A8 /* ViewController.m */,
 				9ECE675A274F8343007CF85F /* AgoraLoginViewController.h */,
 				9ECE6759274F8342007CF85F /* AgoraLoginViewController.m */,
 				9ECE675D274F8375007CF85F /* UIViewController+ComponentSize.h */,
@@ -285,7 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E69E579272696D1008DDEF5 /* AppDelegate.m in Sources */,
-				9EC883B5272BD4F200FFE0A8 /* ChatViewController.m in Sources */,
+				9EC883B5272BD4F200FFE0A8 /* ViewController.m in Sources */,
 				9ECE675E274F8375007CF85F /* UIViewController+ComponentSize.m in Sources */,
 				9ECE675B274F8343007CF85F /* AgoraLoginViewController.m in Sources */,
 				9E69E58A272696D3008DDEF5 /* main.m in Sources */,

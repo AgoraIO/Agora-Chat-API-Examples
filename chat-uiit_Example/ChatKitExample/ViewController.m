@@ -1,5 +1,5 @@
 //
-//  ChatViewController.m
+//  ViewController.m
 //  EaseIM
 //
 //  Created by zhangchong on 2020/11/27.
@@ -17,12 +17,12 @@
 
 #define AgoraChatVIEWTOPMARGIN (kIsBangsScreen ? 34.f : 0.f)
 
-#import "ChatViewController.h"
+#import "ViewController.h"
 #import <Masonry/Masonry.h>
 #import "AgoraChat/AgoraChat.h"
 #import "chat-uikit/EaseChatKit.h"
 
-@interface ChatViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
+@interface ViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) EaseConversationModel *conversationModel;
 @property (nonatomic, strong) AgoraChatConversation *conversation;
 @property (nonatomic, strong) EaseChatViewController *chatController;
@@ -32,7 +32,7 @@
 
 @end
 
-@implementation ChatViewController
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -135,7 +135,7 @@
 }
 
 - (void)logout
-{
+{ 
     [AgoraChatClient.sharedClient logout:YES completion:^(AgoraChatError *aError) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginStateChange" object:@NO];
     }];
