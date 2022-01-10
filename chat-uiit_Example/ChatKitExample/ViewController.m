@@ -19,7 +19,6 @@
 
 #import "ViewController.h"
 #import <Masonry/Masonry.h>
-#import "AgoraChat/AgoraChat.h"
 #import "chat-uikit/EaseChatKit.h"
 
 @interface ViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>

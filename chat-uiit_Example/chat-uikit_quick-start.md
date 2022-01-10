@@ -114,6 +114,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 //导入头文件。
 #import <chat-uikit/EaseChatKit.h>
 #import "AgoraLoginViewController.h" //登录页面。
+#import <AgoraChat/AgoraChat.h> //Agora Chat SDK
 ```
 
 ```objective-c
@@ -158,6 +159,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
    ```objective-c
    #import "AgoraChatHttpRequest.h" //请求 Appserver 的工具类
+   #import <AgoraChat/AgoraChat.h> //Agora Chat SDK
    ```
 
 5. 在 `AgoraLoginViewController.m` 文件中按需调用如下注册代码逻辑进行注册：
@@ -237,7 +239,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 #import "ViewController.h"
 #import <Masonry/Masonry.h>
-#import "AgoraChat/AgoraChat.h"
+#import <AgoraChat/AgoraChat.h>
 #import <chat-uikit/EaseChatKit.h>
 
 @interface ViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
