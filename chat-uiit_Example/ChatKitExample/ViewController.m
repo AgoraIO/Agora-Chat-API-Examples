@@ -19,7 +19,6 @@
 
 #import "ViewController.h"
 #import <Masonry/Masonry.h>
-#import "chat-uikit/EaseChatKit.h"
 
 @interface ViewController ()<EaseChatViewControllerDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) EaseConversationModel *conversationModel;

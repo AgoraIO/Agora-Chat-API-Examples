@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AgoraChat/AgoraChat.h> 
-#import "chat-uikit/EaseChatKit.h"
+#import <chat-uikit/EaseChatKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

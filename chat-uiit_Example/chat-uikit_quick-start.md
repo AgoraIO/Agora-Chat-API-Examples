@@ -124,7 +124,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"61117440#460199"];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
     options.enableConsoleLog = YES;
     options.usingHttpsOnly = YES;
     options.enableDeliveryAck = YES;
