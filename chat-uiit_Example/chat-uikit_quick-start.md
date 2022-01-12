@@ -55,6 +55,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'EaseChatKitExample' do
     pod 'chat-uikit'
   	pod 'Masonry'
+    pod 'AgoraChat'
 end
 ```
 
@@ -76,6 +77,7 @@ pod install
 
    ```objective-c
    pod 'chat-uikit',  :path => "../AgoraChat-UIKit-ios"
+   pod 'AgoraChat'
    ```
 
 
@@ -86,6 +88,8 @@ path 指向本地 `chat-uikit.podspec` 文件所在目录。
    ```objective-c
    pod install
    ```
+
+4. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
 
 ### 3.添加权限
 
@@ -375,7 +379,23 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 - 会话页面接收消息并展示；
 - 会话页面发送消息，包含文本，图片，视频，附件，相机，语音，表情等消息。
 
-### 6.自定义UI配置
+### 6.运行 chat-uikit Example 项目
+
+Chat-uikit Example 是对 UIKIT 的简单集成示例，只包含了 UIKIT 的会话页面。
+
+Example 示例代码下载地址：https://github.com/MThrone/chat-api-examples/tree/main/chat-uiit_Example 
+
+运行 chat-uikit Example：
+
+1. 在终端 Terminal cd 到 Example 项目的 podfile 文件所在目录，执行如下命令集成 SDK。
+
+   ```objective-c
+   pod install
+   ```
+
+2. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件即可运行 chat-uikit Example 项目。
+
+### 7.自定义UI配置
 
 chat-uikit 显示的是默认的UI样式，以下是对 chat-uikit 的样式进行自定义配置示例：
 

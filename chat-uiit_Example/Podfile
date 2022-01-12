@@ -9,6 +9,7 @@ target 'ChatKitExample' do
 
     pod 'Masonry'
     pod 'chat-uikit',  :path => "../../../EaseChatGroup/AgoraChatKit"
+    pod 'AgoraChat'
   
 end
 
