@@ -8,7 +8,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'ChatKitExample' do
 
     pod 'Masonry'
-    pod 'chat-uikit',  :path => "../../../EaseChatGroup/AgoraChatKit"
+    pod 'chat-uikit'
     pod 'AgoraChat'
   
 end
