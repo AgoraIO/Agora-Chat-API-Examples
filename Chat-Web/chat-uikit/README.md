@@ -1,4 +1,4 @@
-​# 发送和接收点对点消息
+​# 使用 Agora Chat UIkit 发送和接收点对点消息
 
 本页面介绍了如何快速集成 Agora Chat Uikit  来实现单聊。
 
