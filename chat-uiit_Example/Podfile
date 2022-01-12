@@ -9,7 +9,6 @@ target 'ChatKitExample' do
 
     pod 'Masonry'
     pod 'chat-uikit'
-    pod 'AgoraChat'
   
 end
 

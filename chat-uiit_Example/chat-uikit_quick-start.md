@@ -55,7 +55,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'EaseChatKitExample' do
     pod 'chat-uikit'
   	pod 'Masonry'
-    pod 'AgoraChat'
 end
 ```
 
@@ -77,7 +76,6 @@ pod install
 
    ```objective-c
    pod 'chat-uikit',  :path => "../AgoraChat-UIKit-ios"
-   pod 'AgoraChat'
    ```
 
 
