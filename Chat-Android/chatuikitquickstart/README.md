@@ -56,8 +56,8 @@ allprojects {
     }
 }
 ```
-// todo: 将下面的xxxxxx修改为AgoraChatUIKit的远程依赖格式
-在项目的 /app/build.gradle 文件添加 xxxxxx 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
+
+在项目的 /app/build.gradle 文件添加 io.agora.rtc:chat-uikit 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
 
 ```java
 android {
@@ -67,10 +67,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-// todo: 将下面的xxxxxx修改为AgoraChatUIKit的远程依赖格式
+
 dependencies {
     ...
-    implementation 'xxx:xxx:X.Y.Z'
+        implementation 'io.agora.rtc:chat-uikit:X.Y.Z'
 }
 ```
 ### 3.防止代码混淆
@@ -791,8 +791,7 @@ public class PermissionsManager {
 
 运行效果如下图所示：
 
-// 替换为基于UIKit的图片
-![avatar](./image/android-api-example.jpg)
+![avatar](../image/android-uikit-example.jpg)
 
 ## 相关信息
 
@@ -800,7 +799,7 @@ public class PermissionsManager {
 选择以下任意一种方式将 AgoraChatUIKit 集成到你的项目中。本文使用方法 1 进行集成。
 
 **方法 1：使用 MavenCentral 自动集成**
-// todo: 将下面的xxxxxx修改为AgoraChatUIKit的远程依赖格式
+
 在项目根目录的 build.gradle 文件中添加 MavenCentral 远程仓库。
 
 ```java
@@ -817,7 +816,7 @@ allprojects {
     }
 }
 ```
-在项目的 /app/build.gradle 文件添加 io.hyphenate:chat-sdk 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
+在项目的 /app/build.gradle 文件添加 io.agora.rtc:chat-uikit 依赖项（X.Y.Z 为当前版本号）。你可以在 [Sonatype](https://search.maven.org/) 官网查询最新版本号。
 
 ```java
 android {
@@ -832,14 +831,13 @@ android {
 }
 dependencies {
     ...
-    implementation 'io.hyphenate:chat-sdk:X.Y.Z'
+        implementation 'io.agora.rtc:chat-uikit:X.Y.Z'
 }
 ```
 
 **方法 2：手动下载 SDK 包**
 
-// todo 需要添加下载链接
-1. 从 github 下载 [AgoraChatUIKit for Android]() 。
+1. 从 github 下载 [AgoraChatUIKit for Android](https://github.com/AgoraIO-Usecase/AgoraChat-UIKit-android) 。
 2. 将 AgoraChatUIKit 作为 library 导入到项目中，并添加其到 app 中，如下：
 ```java
 // Required: AgoraChatUIKit
