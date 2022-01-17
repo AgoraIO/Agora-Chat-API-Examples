@@ -1,5 +1,3 @@
 include ':app'
 rootProject.name = "Chat-Android"
 include ':chatuikitquickstart'
-include ':uikit'
-project(':uikit').projectDir = new File('../../AgoraChatUIKit/uikit')
