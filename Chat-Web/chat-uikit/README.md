@@ -1,7 +1,6 @@
 
 # 使用 Agora Chat UIkit Web 发送和接收点对点消息
 
-
 本页面介绍了如何快速集成 Agora Chat UIkit  来实现单聊。
 
 ### 前提条件
@@ -165,7 +164,6 @@ function App() {
 				userPassword: password,
 			})
 				.then((res) => {
-					console.log("res>>>11", res);
 					const { accessToken } = res;
 					setAuthToken(accessToken);
 				})
