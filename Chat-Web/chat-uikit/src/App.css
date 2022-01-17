@@ -5,15 +5,13 @@
   width: 100%;
 }
 
-.container {
-  height: calc(100% - 107px);
-  width: 100%;
-  position: absolute;
+.App-to {
+  margin-left: 60px;
 }
 
 .App-input {
-  width: 200px !important;
-  height: 30px !important;
+  width: 160px !important;
+  height: 20px !important;
   margin: 5px 0 0 5px !important;
 }
 
@@ -23,4 +21,11 @@
 
 .App-btn {
   margin: 5px 0 0 5px !important;
+}
+
+.container {
+  height: calc(100% - 135px);
+  margin-top: 5px;
+  width: 100%;
+  position: absolute;
 }

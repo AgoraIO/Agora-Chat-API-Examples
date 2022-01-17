@@ -1,6 +1,6 @@
-​# 发送和接收点对点消息
+# 使用 Agora Chat UIkit 发送和接收点对点消息
 
-本页面介绍了如何快速集成 Agora Chat Uikit  来实现单聊。
+本页面介绍了如何快速集成 Agora Chat UIkit  来实现单聊。
 
 ### 前提条件
 
@@ -21,22 +21,22 @@
 # 安装 react/cli 工具
 npm install create-react-app
 # 构建一个 react 项目
-npx create-react-app my-uikit-app
+npx create-react-app agora-chat-uikit
 # 启动项目
-cd my-uikit-app
+cd agora-chat-uikit
 HTTPS=true yarn start
 ```
 
 目录如下：
 ```josn
 ├── package.json
-├── public                  # 这个是webpack的配置的静态目录。
+├── public                  # 这个是 webpack 的配置的静态目录。
 │   ├── favicon.ico
-│   ├── index.html          # 默认是单页面应用，这个是最终的html的基础模板。
+│   ├── index.html          # 默认是单页面应用，这个是最终的 html 的基础模板。
 │   └── manifest.json
 ├── src
-│   ├── App.css             # App根组件的 css。
-│   ├── App.js              # App组件代码。
+│   ├── App.css             # App 根组件的 css。
+│   ├── App.js              # App 组件代码。
 │   ├── App.test.js
 │   ├── index.css           # 启动文件样式。
 │   ├── index.js            # 启动的文件。
@@ -47,24 +47,24 @@ HTTPS=true yarn start
 
 ### 2、集成 Uikit
 
-- 安装 `chat-uikit`
+- 安装 `agora-chat-uikit` 。可以使用 `npm` 安装或者使用 `yarn` 安装，具体如下：
 
-  使用 `npm` 安装
+  使用 `npm` 安装：
 
   ```bash
-  npm install chat-uikit --save
+  npm install agora-chat-uikit --save
   ```
 
-  或 使用 `yarn` 安装
+  使用 `yarn` 安装：
 
   ```bash
-  yarn add chat-uikit
+  yarn add agora-chat-uikit
   ```
 
-- 在 JS 文件中导入 `chat-uikit` 包中的 `EaseApp` 组件
+- 在 JS 文件中导入 `agora-chat-uikit` 包中的 `EaseApp` 组件：
 
   ```bash
-  import { EaseApp } from 'chat-uikit'
+  import { EaseApp } from 'agora-chat-uikit'
   ```
 
 ### 3、登录
@@ -106,9 +106,9 @@ const onLogin = useCallback(() => {
 
 
 
-### 3、创建一个会话
+### 4、创建一个会话
 
-使用 `EaseApp` 组件中 `addConversationItem` 方法创建一个会话，然后即可实现收发消息
+使用 `EaseApp` 组件中 `addConversationItem` 方法创建一个会话，即可收发消息。
 
 ```javascript
 let conversationItem = {
@@ -118,15 +118,14 @@ let conversationItem = {
 EaseApp.addConversationItem(conversationItem);
 ```
 
-### 4、导入 `chat-uikit`  并实现用户界面，完整示例
+### 5、导入 `agora-chat-uikit`  并实现用户界面
 
+完整示例如下：
 ```javascript
 // App.js
 import React, { useState, useCallback } from "react";
-import { Input, Button, message } from "antd";
-import { EaseApp } from "chat-uikit";
+import { EaseApp } from "agora-chat-uikit";
 import "./App.css";
-import "antd/dist/antd.css";
 
 function App() {
 	const [values, setValues] = useState({
@@ -153,21 +152,24 @@ function App() {
 
 	const onLogin = useCallback(() => {
 		if (!values.username) {
-			return message.error("username is required");
+			return alert("username is required");
 		} else if (!values.password) {
-			return message.error("password is required");
+			return alert("password is required");
 		}
-		// 从 app server 获取token
+
 		const getToken = (username, password) => {
 			postData("https://a41.easemob.com/app/chat/user/login", {
 				userAccount: username,
 				userPassword: password,
-			}).then((res)=> {
-				const { accessToken } = res;
-				setAuthToken(accessToken);
-			}).catch((err) => {
-				message.error("登陆失败，用户名或密码无效！")
-			});
+			})
+				.then((res) => {
+					console.log("res>>>11", res);
+					const { accessToken } = res;
+					setAuthToken(accessToken);
+				})
+				.catch((err) => {
+					alert("登陆失败，用户名或密码无效！");
+				});
 		};
 
 		function postData(url, data) {
@@ -211,42 +213,52 @@ function App() {
 		<div className="App">
 			<h2> Agora Chat UIkit Examples </h2>
 			<div>
-				<label className="App-lable"> Username </label>
-				<Input
-					placeholder="Username"
-					className="App-input"
-					onChange={handleChange("username")}
-					value={values.username}
-				></Input>
-				<label className="App-lable"> Password </label>
-				<Input
-					placeholder="Password"
-					className="App-input"
-					onChange={handleChange("password")}
-					value={values.password}
-				></Input>
-				<Button type="primary" className="App-btn" onClick={onLogin}>
-					Login
-				</Button>
-				<Button type="primary" className="App-btn" onClick={onClose}>
-					Logout
-				</Button>
-			</div>
-			<div>
-				<label className="App-lable">To</label>
-				<Input
-					placeholder="UserID"
-					className="App-input"
-					onChange={handleChangeToValue}
-					value={to}
-				></Input>
-				<Button
-					type="primary"
-					className="App-btn"
-					onClick={createConversation}
-				>
-					CreateConversation
-				</Button>
+				<div>
+					<label className="App-lable"> Username </label>
+					<input
+						placeholder="Username"
+						className="App-input"
+						onChange={handleChange("username")}
+						value={values.username}
+					></input>
+					<label className="App-lable"> Password </label>
+					<input
+						placeholder="Password"
+						className="App-input"
+						onChange={handleChange("password")}
+						value={values.password}
+					></input>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={onLogin}
+					>
+						Login
+					</button>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={onClose}
+					>
+						Logout
+					</button>
+				</div>
+				<div className="App-to">
+					<label className="App-lable">To</label>
+					<input
+						placeholder="UserID"
+						className="App-input"
+						onChange={handleChangeToValue}
+						value={to}
+					></input>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={createConversation}
+					>
+						CreateConversation
+					</button>
+				</div>
 			</div>
 			<div className="container">
 				{authToken && (
@@ -266,7 +278,7 @@ export default App;
 ```
 
 ```css
-// App.css
+/* App.css */
 .App {
   text-align: left;
   margin-left: 20px;
@@ -274,15 +286,13 @@ export default App;
   width: 100%;
 }
 
-.container {
-  height: calc(100% - 107px);
-  width: 100%;
-  position: absolute;
+.App-to {
+  margin-left: 60px;
 }
 
 .App-input {
-  width: 200px !important;
-  height: 30px !important;
+  width: 160px !important;
+  height: 20px !important;
   margin: 5px 0 0 5px !important;
 }
 
@@ -292,6 +302,13 @@ export default App;
 
 .App-btn {
   margin: 5px 0 0 5px !important;
+}
+
+.container {
+  height: calc(100% - 135px);
+  margin-top: 5px;
+  width: 100%;
+  position: absolute;
 }
 ```
 

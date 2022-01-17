@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react";
-import { Input, Button, message } from "antd";
-import { EaseApp } from "chat-uikit";
+import { EaseApp } from "agora-chat-uikit";
 import "./App.css";
-import "antd/dist/antd.css";
 
 function App() {
 	const [values, setValues] = useState({
@@ -29,9 +27,9 @@ function App() {
 
 	const onLogin = useCallback(() => {
 		if (!values.username) {
-			return message.error("username is required");
+			return alert("username is required");
 		} else if (!values.password) {
-			return message.error("password is required");
+			return alert("password is required");
 		}
 
 		const getToken = (username, password) => {
@@ -45,7 +43,7 @@ function App() {
 					setAuthToken(accessToken);
 				})
 				.catch((err) => {
-					message.error("登陆失败，用户名或密码无效！")
+					alert("登陆失败，用户名或密码无效！");
 				});
 		};
 
@@ -90,42 +88,52 @@ function App() {
 		<div className="App">
 			<h2> Agora Chat UIkit Examples </h2>
 			<div>
-				<label className="App-lable"> Username </label>
-				<Input
-					placeholder="Username"
-					className="App-input"
-					onChange={handleChange("username")}
-					value={values.username}
-				></Input>
-				<label className="App-lable"> Password </label>
-				<Input
-					placeholder="Password"
-					className="App-input"
-					onChange={handleChange("password")}
-					value={values.password}
-				></Input>
-				<Button type="primary" className="App-btn" onClick={onLogin}>
-					Login
-				</Button>
-				<Button type="primary" className="App-btn" onClick={onClose}>
-					Logout
-				</Button>
-			</div>
-			<div>
-				<label className="App-lable">To</label>
-				<Input
-					placeholder="UserID"
-					className="App-input"
-					onChange={handleChangeToValue}
-					value={to}
-				></Input>
-				<Button
-					type="primary"
-					className="App-btn"
-					onClick={createConversation}
-				>
-					CreateConversation
-				</Button>
+				<div>
+					<label className="App-lable"> Username </label>
+					<input
+						placeholder="Username"
+						className="App-input"
+						onChange={handleChange("username")}
+						value={values.username}
+					></input>
+					<label className="App-lable"> Password </label>
+					<input
+						placeholder="Password"
+						className="App-input"
+						onChange={handleChange("password")}
+						value={values.password}
+					></input>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={onLogin}
+					>
+						Login
+					</button>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={onClose}
+					>
+						Logout
+					</button>
+				</div>
+				<div className="App-to">
+					<label className="App-lable">To</label>
+					<input
+						placeholder="UserID"
+						className="App-input"
+						onChange={handleChangeToValue}
+						value={to}
+					></input>
+					<button
+						type="primary"
+						className="App-btn"
+						onClick={createConversation}
+					>
+						CreateConversation
+					</button>
+				</div>
 			</div>
 			<div className="container">
 				{authToken && (
