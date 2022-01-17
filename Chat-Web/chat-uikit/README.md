@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 使用 Agora Chat UIkit 发送和接收点对点消息
+=======
+​# 使用 Agora Chat UIkit 发送和接收点对点消息
+>>>>>>> 1909441517fc21ec7ae0dc0f55f81f3500a6a44b
 
 本页面介绍了如何快速集成 Agora Chat UIkit  来实现单聊。
 
