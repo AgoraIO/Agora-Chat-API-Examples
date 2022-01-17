@@ -1,7 +1,7 @@
 
 # 使用 Agora Chat UIkit Web 发送和接收点对点消息
 
-本页面介绍了如何快速集成 Agora Chat UIkit  来实现单聊。
+本页面介绍了如何快速集成 Agora Chat UIkit 来实现单聊。
 
 ### 前提条件
 
@@ -73,9 +73,9 @@ HTTPS=true yarn start
 ```javascript
 const onLogin = useCallback(() => {
 	if (!values.username) {
-		return message.error("username is required");
+		return alert("username is required");
 	} else if (!values.password) {
-		return message.error("password is required");
+		return alert("password is required");
 	}
 	// 从 app server 获取token
 	const getToken = (username, password) => {
