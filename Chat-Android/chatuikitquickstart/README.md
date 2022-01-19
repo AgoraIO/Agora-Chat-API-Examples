@@ -1,6 +1,6 @@
 # 快速发送 Agora Chat 消息
 
-本文详细介绍基于AgoraChatUIKit如何快速实现消息的发送。
+本文详细介绍基于 Agora Chat Android UIKit 如何快速实现消息的发送。
 
 ## 消息发送与接收流程
 // todo 需要增加一张流程图
@@ -22,11 +22,11 @@
  - Android SDK (版本取决于目标平台)。
  - Java Development Kit (JDK)，版本选择参考 Android 官方文档。
  - 有效的 Agora Chat 开发者账号。
- - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
+ - 在控制台创建 Agora Chat 项目并获取 App Key 。//todo 增加跳转链接
 
  ## 建立项目
 
-按照如下步骤配置使用 AgoraChatUIKit 的项目环境。
+按照如下步骤配置使用 Agora Chat Android UIKit 的项目环境。
  ### 1.创建 Android 项目
 
  使用 Android Studio 创建一个 [Android 项目](https://developer.android.google.cn/studio/projects/create-project)。
@@ -97,13 +97,13 @@ dependencies {
 以上权限为保证项目运行的最基本要求，随着功能的增加，你需要根据项目情况增加必要的权限。
 ## 项目实现
 
-这部分向你展示了如何基于 AgoraChatUIKit 一步一步实现消息发送的。
+下文主要描述如何基于 AgoraChatUIKit 实现消息发送。
 ### 1.创建用户界面
 
 为了帮助你快速实现并理解相关功能，本文通过最简方式，在一个 Activity 里实现以下操作：
 
-- 注册，登录和退出
-- 发送消息
+- 注册，登录和退出；
+- 发送消息。
 
 1. 打开 app/res/layout/activity_main.xml 并将文件内容替换为以下 XML 代码：
 ```xml
@@ -414,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
 //=================== click event start ========================
 
     /**
-     * Sign up with username and password
+     * Sign up with username and password.
      */
     public void signUp(View view) {
         String username = et_username.getText().toString().trim();
@@ -460,14 +460,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Login with token
+     * Log in with token.
      */
     public void signInWithToken(View view) {
         getTokenFromAppServer(NEW_LOGIN);
     }
 
     /**
-     * Sign out
+     * Sign out.
      */
     public void signOut(View view) {
         if(ChatClient.getInstance().isLoggedInBefore()) {
@@ -634,7 +634,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
-2. 此外 MainActivity 中用到 LogUtils 和 PermissionsManager 工具类，将它们拷贝到项目的utils文件夹中，如下：
+2. 此外 MainActivity 中用到 LogUtils 和 PermissionsManager 工具类，将它们拷贝到项目的 utils 文件夹中，如下：
 
 - LogUtils
 ```java
@@ -759,7 +759,7 @@ public class PermissionsManager {
 ```
 3. 为了能够顺利的发送图片和文件消息，你需要进行如下配置：
 
-- 在 res 文件下建立 xml 文件夹，并新建命令为file_paths.xml的文件，添加如下内容
+- 在 res 文件下建立 xml 文件夹，并新建命令为 file_paths.xml 的文件，添加如下内容
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
@@ -786,8 +786,8 @@ public class PermissionsManager {
 
 使用 Android Studio 在模拟器或真机上编译并运行项目。运行成功之后，你可以进行以下操作：
 
-- 注册，登录和退出
-- 输入 toChatUsername 后，开启会话，发送消息
+- 注册，登录和退出；
+- 输入 toChatUsername 后，开启会话，发送消息。
 
 运行效果如下图所示：
 
