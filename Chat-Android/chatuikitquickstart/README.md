@@ -264,8 +264,8 @@ dependencies {
 
 你需要编辑以下字段：
 
-- 将 Your App Key 替换为你的 App Key 。
-- 在本示例中，你可以使用 41117440#383391 替换 Your App Key 。
+- 将 "Your App Key" 替换为你的 [App Key](//todo 跳转到声网控制台)) 。
+- 在本示例中，你可以使用默认 App Key（41117440#383391）进行体验，正式开发环境需注册和使用你的 [App Key](https://docs.agora.io/cn/AgoraPlatform/sign_in_and_sign_up)。
 
 **注意**
 >如果你已经搭建了获取鉴权 Token 的 App Server，你需要将 Your App Key 替换为你的  App Key 。
