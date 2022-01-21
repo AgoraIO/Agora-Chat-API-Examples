@@ -19,14 +19,14 @@
 ## 前提条件
  - 安装 Android 4.4+ 及以上版本操作系统的 Android 模拟器或真实设备。
  - Android Studio 3.2或更高版本。
- - Android SDK (版本取决于目标平台)。
- - Java Development Kit (JDK)，版本选择参考 Android 官方文档。
+ - Android SDK （版本取决于目标平台）。
+ - Java Development Kit （JDK），版本选择参考 Android 官方文档。
  - 有效的 Agora Chat 开发者账号。
- - 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
+ - 创建 Agora Chat 项目并获取 App Key 。//todo 增加跳转链接
 
  ## 建立项目
 
-按照如下步骤配置使用 Agora Chat SDK 的项目环境。
+按照如下步骤配置使用 Agora Chat Android SDK 的项目环境。
  ### 1.创建 Android 项目
 
  使用 Android Studio 创建一个 [Android 项目](https://developer.android.google.cn/studio/projects/create-project)。
@@ -542,14 +542,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Login with token
+     * Log in with token.
      */
     public void signInWithToken(View view) {
         getTokenFromAppServer(NEW_LOGIN);
     }
 
     /**
-     * Sign out
+     * Sign out.
      */
     public void signOut(View view) {
         if(ChatClient.getInstance().isLoggedInBefore()) {
@@ -573,7 +573,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Send your first message
+     * Send your first message.
      */
     public void sendFirstMessage(View view) {
         if(!ChatClient.getInstance().isLoggedInBefore()) {
@@ -588,19 +588,19 @@ public class MainActivity extends AppCompatActivity {
         EditText et_msg_content = findViewById(R.id.et_msg_content);
         String content = et_msg_content.getText().toString().trim();
 
-        // Create a text message
+        // Create a text message.
         ChatMessage message = ChatMessage.createTxtSendMessage(content, toSendName);
         sendMessage(message);
     }
 
     /**
-     * Join your first chat group
+     * Join your first chat group.
      */
     public void joinChatGroup(View view) {
         String groupId = et_group_id.getText().toString().trim();
         if(TextUtils.isEmpty(groupId)) {
             // If you not enter the id of the group you want to join, the default value will be used
-            // todo add the public group id
+            // todo add the public group ID.
             groupId = "";
         }
         ChatClient.getInstance().groupManager().asyncJoinGroup(groupId, new CallBack() {
@@ -622,7 +622,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Exit your joined chat group
+     * Exit your joined chat group.
      */
     public void leaveChatGroup(View view) {
         String groupId = et_group_id.getText().toString().trim();
@@ -717,12 +717,12 @@ public class MainActivity extends AppCompatActivity {
 //=================== get token from server end ========================
 
     private void sendMessage(ChatMessage message) {
-        // Check if the message is null
+        // Check whether the message is null.
         if(message == null) {
             LogUtils.showErrorToast(this, tv_log, getString(R.string.message_is_null));
             return;
         }
-        // Set the message callback before sending the message
+        // Set the message callback before sending the message.
         message.setMessageStatusCallback(new CallBack() {
             @Override
             public void onSuccess() {
@@ -739,12 +739,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        // Send the message
+        // Send the message.
         ChatClient.getInstance().chatManager().sendMessage(message);
     }
 
     /**
-     * user met some exception: conflict, removed or forbidden， goto login activity
+     * Occurs when there are some exceptions: conflict, removed or forbidden， go to login activity.
      */
     protected void onUserException(String exception) {
         EMLog.e(TAG, "onUserException: " + exception);
@@ -756,7 +756,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
-2. 此外 MainActivity 中用到LogUtils工具类，将这个工具类拷贝到项目的utils文件夹中，如下：
+2. 此外 MainActivity 中用到 LogUtils 工具类，将这个工具类拷贝到项目的 utils 文件夹中，如下：
 
 - LogUtils
 ```java
