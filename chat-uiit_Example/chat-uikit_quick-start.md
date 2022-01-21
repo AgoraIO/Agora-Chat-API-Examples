@@ -4,17 +4,17 @@
 
 # 使用 Agora Chat UIKit 快速搭建会话页面
 
-本文介绍如何将 Agora Chat UIKit  应用在您的项目中并快速搭建出会话列表和聊天页面。
+本文介绍如何将 Agora Chat UIKit  应用在您的项目中并快速搭建出会话页面。
 
 ## 消息发送与接收流程
 
-登录 Agora Chat 系统包括以下流程：
+登录 Agora Chat 系统的流程如下：
 
 1. 客户端使用帐号和密码进行注册/登录；
-2. AppServer 将客户端用户账号注册到 Chat 服务，返回给客户端账号、登录 token；
-3. 客户端使用 AppServer 返回的 【登录 token】 和 【用户账号】 登录到 Chat 服务器。
+2. AppServer 将客户端用户账号注册到 Chat 服务，返回给客户端账号和登录 token；
+3. 客户端使用 AppServer 返回的 登录 token 和 用户账号 登录到 Chat 服务器。
 
-发送和接收点对点消息包括以下流程：
+发送和接收点对点消息的流程如下：
 
 1. 客户端 A 发送点对点消息到 Chat 服务器。
 2. Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息。
@@ -43,8 +43,8 @@
 #### 方式 1：使用 pod 方式集成 chat-uikit
 
 1. 开始前确保你已安装 Cocoapods。参考 [Getting Started with CocoaPods](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装说明。
-2. 在终端里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 `Podfile` 文本文件。
-3. 打开 `Podfile` 文件，在podfile文件里添加相关SDK。注意将 `AgoraChatAPIExample` 替换为你的 Target 名称。
+2. 在终端里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成 `Podfile` 文本文件。
+3. 打开 `Podfile` 文件，在 podfile 文件里添加相关 SDK。注意将 `AgoraChatAPIExample` 替换为你的 Target 名称。
 
 ```objective-c
 platform :ios, '11.0'
@@ -64,7 +64,7 @@ end
 pod install
 ```
 
-5. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
+5. 成功安装后，终端 中会显示 `Pod installation complete!`，此时项目文件夹下会生成 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
 
 #### 方式 2：源码集成chat-uikit
 
@@ -72,7 +72,7 @@ pod install
 
 1. 下载最新版的 chat-uikit 源码；
 
-2. 在项目的  `Podfile` 文件中添加 chat-uikit 依赖，路径指向 chat-uikit.podspec 文件所在目录；
+2. 在项目的   `Podfile`  文件中添加 chat-uikit 依赖，路径指向 chat-uikit.podspec 文件所在目录；
 
    ```objective-c
    pod 'chat-uikit',  :path => "../AgoraChat-UIKit-ios"
@@ -87,17 +87,17 @@ path 指向本地 `chat-uikit.podspec` 文件所在目录。
    pod install
    ```
 
-4. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
+4. 成功安装后，终端 中会显示 `Pod installation complete!`，此时项目文件夹下会生成 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
 
 ### 3.添加权限
 
 在项目 info.plist 中添加相关权限：
 
 ```xml
-Privacy - Photo Library Usage Description //相册权限
-Privacy - Microphone Usage Description //麦克风权限
-Privacy - Camera Usage Description //相机权限
-App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
+Privacy - Photo Library Usage Description //相册权限。
+Privacy - Microphone Usage Description //麦克风权限。
+Privacy - Camera Usage Description //相机权限。
+App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 ```
 
 ### 4.实现聊天界面
@@ -106,18 +106,20 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - 自动加载并展示历史消息;
 - 会话页面接收消息并展示;
-- 发送文本消息、图片消息、文件消息、视频消息、语音消息等。
+- 发送文本消息、图片消息、文件消息、视频消息和语音消息等。
 
 #### 4.1 UIKIT 初始化
 
-在项目的SceneDelegate.m 文件里添加如下相关代码进行 chat-uikit 初始化相关功能：
+在项目的 SceneDelegate.m 文件里添加如下相关代码初始化 chat-uikit 的相关功能：
 
 ```objective-c
 //导入头文件。
 #import <chat-uikit/EaseChatKit.h>
 #import "AgoraLoginViewController.h" //登录页面。
-#import <AgoraChat/AgoraChat.h> //Agora Chat SDK
+#import <AgoraChat/AgoraChat.h> //Agora Chat SDK。
 ```
+
+在本示例中，你可以使用默认 AppKey（41117440#383391）进行体验，正式开发环境需注册和使用你的 App Key：[](注册 AppKey)。
 
 ```objective-c
 //chat-uikit 初始化。
@@ -131,13 +133,13 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     options.usingHttpsOnly = YES;
     options.enableDeliveryAck = YES;
     options.isAutoLogin = NO;
-  	//初始化 chat-uikit
+  	//初始化 chat-uikit。
     [EaseChatKitManager initWithAgoraChatOptions:options];
     
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
     self.window.frame = windowScene.coordinateSpace.bounds;
-    //登录页面
+    //登录页面。
     self.window.rootViewController = [[AgoraLoginViewController alloc]init];
     [self.window makeKeyAndVisible];
 }
@@ -145,11 +147,11 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 #### 4.2 登录 AgoraChat SDK
 
-在加载会话页面之前必须先登录到 AgoraChat SDK，具体的登录页面实现可自行实现或参考 `EaseChatKitExample`工程 -> `AgoraLoginViewController.m`文件登录页面实现。
+加载会话页面之前须先登录到 AgoraChat SDK。登录页面实现可自行实现或参考 `EaseChatKitExample`工程 -> `AgoraLoginViewController.m`文件登录页面实现。
 
 `EaseChatKitExample`工程地址：//TODO::合并之后的地址
 
-若是需自行实现登录逻辑请参考如下步骤：
+若自行实现登录逻辑，请参考如下步骤：
 
 1. 项目中创建名为 `AgoraChatHttpRequest` 的  `Cocoa Touch Class` 文件
 
@@ -157,17 +159,17 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 3. 在 `AgoraChatHttpRequest.m` 文件中添加方法实现（需复制全部内容）：//TODO::合并之后的地址
 
-4. 项目中创建名为 `AgoraLoginViewController` 的  `Cocoa Touch Class` 文件，并在 `AgoraLoginViewController.m` 文件中导入请求 AppServer 的头文件 
+4. 项目中创建名为 `AgoraLoginViewController` 的  `Cocoa Touch Class` 文件，然后在 `AgoraLoginViewController.m` 文件中导入请求 AppServer 的头文件 ：
 
    ```objective-c
-   #import "AgoraChatHttpRequest.h" //请求 Appserver 的工具类
-   #import <AgoraChat/AgoraChat.h> //Agora Chat SDK
+   #import "AgoraChatHttpRequest.h" //请求 Appserver 的工具类。
+   #import <AgoraChat/AgoraChat.h> //Agora Chat SDK。
    ```
 
 5. 在 `AgoraLoginViewController.m` 文件中按需调用如下注册代码逻辑进行注册：
 
    ```objective-c
-   //注册到 AppServer
+   //注册到 AppServer。
    - (void)doSignUp {
    [[AgoraChatHttpRequest sharedManager] registerToApperServer:@"Register ID" pwd:@"Register Password" completion:^(NSInteger statusCode, NSString * _Nonnull response) {
            dispatch_async(dispatch_get_main_queue(),^{
@@ -177,7 +179,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
                    if (responsedict != nil) {
                        NSString *result = [responsedict objectForKey:@"code"];
                        if ([result isEqualToString:@"RES_OK"]) {
-                           //注册成功，可进行登录操作
+                           //注册成功，可进行登录。
                        }
                    }
                }
@@ -186,7 +188,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
    }
    ```
 
-6. 在 `AgoraLoginViewController.m` 文件中按需调用如下登录代码逻辑进行登录，登录成功后可跳转到会话页面 `ViewController`，有关 `ViewController`  会话页面逻辑参见 <a href="#jump">4.3 加载会话页面</a>
+6. 在 `AgoraLoginViewController.m` 文件中按需调用如下登录代码逻辑进行登录，登录成功后可跳转到会话页面 `ViewController`，关于  `ViewController`   会话页面逻辑，请参见 <a href="#jump">4.3 加载会话页面</a>
 
    导入会话页面头文件：
 
@@ -198,7 +200,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
    ```objective-c
    - (void)doSignIn {
-       //登录到 AppServer
+       //登录 AppServer。
    [[AgoraChatHttpRequest sharedManager] loginToApperServer:@"ID" pwd:@"Password" completion:^(NSInteger statusCode, NSString * _Nonnull response) {
            dispatch_async(dispatch_get_main_queue(), ^{
                if (response && response.length > 0 && statusCode) {
@@ -207,10 +209,10 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
                    NSString *token = [responsedict objectForKey:@"accessToken"];
                    NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                    if (token && token.length > 0) {
-                       // 登录到 Agora Chat SDK
+                       // 登录 Agora Chat SDK。
                        [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] agoraToken:token completion:^(NSString *aUsername, AgoraChatError *aError) {
                            if (!aError) {
-                              //登录到 Agora Chat SDK Success，跳转到会话页面 ViewController
+                             //登录 Agora Chat SDK Success，跳转到会话页面 ViewController。
                              ViewController *chatsVC = [[ViewController alloc] init];
        											chatsVC.modalPresentationStyle = 0;
        											[self.navigationController pushViewController:chatsVC animated:YES];
@@ -320,7 +322,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 }
 ```
 
-在会话页面  `ViewController.m`  的输入框输入会话方 ID，点击 Chat 按钮显示 `EaseChatViewController` 会话页面：
+在会话页面  `ViewController.m`  的输入框输入会话 ID，点击 Chat 按钮显示 `EaseChatViewController` 会话页面：
 
 ```objective-c
 - (void)chatAction
@@ -358,7 +360,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 ```
 
-会话页面  `ViewController.m`  的 ==Log out== 按钮可退出到登录页面更换登陆 ID：
+会话页面  `ViewController.m`  的 ==Log out== 按钮可退出到登录页面更换登录 ID：
 
 ```objective-c
 - (void)logout
@@ -375,11 +377,11 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 - 会话页面展示历史消息；
 - 会话页面接收消息并展示；
-- 会话页面发送消息，包含文本，图片，视频，附件，相机，语音，表情等消息。
+- 会话页面发送消息，包含文本，图片，视频，附件，相机，语音和表情等消息。
 
 ### 6.运行 chat-uikit Example 项目
 
-Chat-uikit Example 是对 UIKIT 的简单集成示例，只包含了 UIKIT 的会话页面。
+Chat-uikit Example 是对 UIKIT 的简单集成示例，只包含 UIKIT 的会话页面。
 
 Example 示例代码下载地址：https://github.com/MThrone/chat-api-examples/tree/main/chat-uiit_Example 
 
@@ -391,18 +393,18 @@ Example 示例代码下载地址：https://github.com/MThrone/chat-api-examples/
    pod install
    ```
 
-2. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件即可运行 chat-uikit Example 项目。
+2. 成功安装后，终端 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件即可运行 chat-uikit Example 项目。
 
-### 7.自定义UI配置
+### 7.自定义 UI 配置
 
-chat-uikit 显示的是默认的UI样式，以下是对 chat-uikit 的样式进行自定义配置示例：
+chat-uikit 使用默认 UI 样式，以下是对 chat-uikit 的样式进行自定义配置示例：
 
 * 默认样式示例：
 
 只需创建 EaseChatViewModel 实例，并作为参数传入聊天页面 EaseChatViewController 的构造方法。
 
 ```objective-c
-EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init]; //默认样式
+EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init]; //默认样式。
 EaseChatViewController *chatController = [EaseChatViewController initWithConversationId:@"会话 ID" conversationType:AgoraChatConversationTypeChat chatViewModel:viewModel];
 ```
 
@@ -418,12 +420,12 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 
 ```objective-c
 EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init];
-viewModel.chatViewBgColor = [UIColor systemGrayColor];  //聊天页背景色
-viewModel.inputMenuBgColor = [UIColor systemPinkColor]; //输入区背景色
-viewModel.sentFontColor = [UIColor redColor];           //发送方文本颜色
-viewModel.inputMenuStyle = EaseInputMenuStyleNoAudio;   //输入区菜单样式
-viewModel.msgTimeItemFontColor = [UIColor blackColor];  //消息时间字体颜色
-viewModel.msgTimeItemBgColor = [UIColor greenColor];    //消息时间区域背景色
+viewModel.chatViewBgColor = [UIColor systemGrayColor];  //聊天页面的背景颜色。
+viewModel.inputMenuBgColor = [UIColor systemPinkColor]; //输入区的背景色。
+viewModel.sentFontColor = [UIColor redColor];           //发送方的文本颜色。
+viewModel.inputMenuStyle = EaseInputMenuStyleNoAudio;   //输入区的菜单样式。
+viewModel.msgTimeItemFontColor = [UIColor blackColor];  //消息时间的字体颜色。
+viewModel.msgTimeItemBgColor = [UIColor greenColor];    //消息时间区域的背景色。
 EaseChatViewController *chatController = [EaseChatViewController initWithConversationId:@"会话 ID" conversationType:AgoraChatConversationTypeChat chatViewModel:viewModel];
 ```
 
