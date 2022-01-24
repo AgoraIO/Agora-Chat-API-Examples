@@ -119,7 +119,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 #import <AgoraChat/AgoraChat.h> //Agora Chat SDK。
 ```
 
-在本示例中，你可以使用默认 AppKey（41117440#383391）进行体验，正式开发环境需注册和使用你的 App Key：[](注册 AppKey)。
+在本示例中，你可以使用默认 App Key（41117440#383391）进行体验，正式开发环境需注册和使用你的 [App Key](https://docs.agora.io/cn/AgoraPlatform/sign_in_and_sign_up)。
 
 ```objective-c
 //chat-uikit 初始化。
