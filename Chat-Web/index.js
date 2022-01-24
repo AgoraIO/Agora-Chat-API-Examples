@@ -90,7 +90,7 @@ window.onload = function () {
                 document.getElementById("log").appendChild(document.createElement('div')).append(`Login failed`)
             })
 
-        //2.使用用户名密码的方式
+        // 2.使用用户名密码的方式
         // WebIM.conn.open({
         //     user: username,
         //     pwd: password,
