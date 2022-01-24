@@ -3,16 +3,15 @@
 本文详细介绍如何建立一个简单的项目并使用 Agora Chat SDK 实现消息的发送和加入群组。
 
 ## 消息发送与接收流程
-// todo 需要增加一张流程图
-
 登录 Agora Chat 系统包括以下流程：
 1. 客户端使用帐号和密码在 App Server 上注册。
 2. 客户端注册成功后，使用账号和密码从  App Server 中获取 Token 。
 3. 客户端使用账号和 Token 登录到 Chat 服务器。
 
-// todo 需要增加一张流程图
+![登录流程](https://web-cdn.agora.io/docs-files/1636443945728)
 
 发送和接收点对点消息包括以下流程：
+
 1. 客户端 A 发送点对点消息到 Chat 服务器。
 2. Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息。
 
@@ -22,7 +21,7 @@
  - Android SDK （版本取决于目标平台）。
  - Java Development Kit （JDK），版本选择参考 Android 官方文档。
  - 有效的 Agora Chat 开发者账号。
- - 创建 Agora Chat 项目并获取 App Key 。//todo 增加跳转链接
+ - [创建 Agora Chat 项目并获取 AppKey](https://docs-preprod.agora.io/en/test/enable_agora_chat) 
 
  ## 建立项目
 
@@ -308,10 +307,11 @@ dependencies {
 
 你需要编辑以下字段：
 
-- 将 "Your App Key" 替换为你的 [App Key](//todo 跳转到声网控制台)) 。
+- 将 "Your App Key" 替换为你的 [App Key](https://docs-preprod.agora.io/en/test/enable_agora_chat ) 。
 - 在本示例中，你可以使用默认 App Key（41117440#383391）进行体验，正式开发环境需注册和使用你的 [App Key](https://docs.agora.io/cn/AgoraPlatform/sign_in_and_sign_up)。
 
 **注意**
+
 >如果你已经搭建了获取鉴权 Token 的 App Server，你需要将 Your App Key 替换为你的  App Key 。
 ### 2.实现消息发送与接收
 
@@ -889,8 +889,7 @@ dependencies {
 
 **方法 2：手动下载 SDK 包**
 
-// todo 需要添加下载链接
-1. 下载最新版的 [Agora Chat SDK for Android]() 并解压。
+1. 下载最新版的 [Agora Chat SDK for Android]([https://download.agora.io/sdk/release/Agora_Chat_SDK_for_Android_v1.0.1.zip](https://download.agora.io/sdk/release/Agora_Chat_SDK_for_Android_v1.0.0.zip)) 并解压。
 2. 将 SDK 包内 libs 路径下的以下文件，拷贝到你的项目路径下：
 
 | 文件                                           | 对应项目文件                                     |

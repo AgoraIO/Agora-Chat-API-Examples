@@ -3,14 +3,13 @@
 本页面介绍了如何快速集成 Agora Chat SDK 来实现单聊。
 
 ## 消息发送与接收流程
-// todo 需要增加一张流程图
-
 登录 Agora Chat 流程如下：
 
 使用帐号和密码在 App Server 上注册。
 注册成功后，使用账号和密码从 App Server 中获取 Token 。
 使用账号和 Token 登录到 Chat 服务器。
-// todo 需要增加一张流程图
+
+![登录流程](https://web-cdn.agora.io/docs-files/1636443945728)
 
 发送和接收点对点消息包括以下流程：
 
@@ -20,7 +19,7 @@ Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息�
 ## 前提条件
 
 - 有效的 Agora Chat 开发者账号。
-- 创建 Agora Chat 项目并获取 AppKey 。//todo 增加跳转链接
+- [创建 Agora Chat 项目并获取 AppKey](https://docs-preprod.agora.io/en/test/enable_agora_chat) 。
 - [npm](https://www.npmjs.com/get-npm)
 - SDK 支持 IE9+、FireFox10+、Chrome54+、Safari6+ 之间文本、表情、图片、音频、地址消息相互发送。
 - SDK 本身已支持 IE9+、FireFox10+、Chrome54+、Safari6+。
