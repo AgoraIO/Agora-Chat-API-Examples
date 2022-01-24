@@ -1,4 +1,4 @@
-import WebIM from 'agora-chat-sdk'
+import WebIM from 'agora-chat'
 var username, password
 WebIM.conn = new WebIM.connection({
     appKey: "41117440#383391",
@@ -107,22 +107,19 @@ window.onload = function () {
     document.getElementById("send_peer_message").onclick = function () {
         let peerId = document.getElementById("peerId").value.toString()
         let peerMessage = document.getElementById("peerMessage").value.toString()
-
-        let id = WebIM.conn.getUniqueId()
-        let msg = new WebIM.message('txt', id);
-        msg.set({
-            msg: peerMessage,
-            to: peerId,
-            chatType: 'singleChat',
-            success: function () {
-                console.log('send private text success');
-                document.getElementById("log").appendChild(document.createElement('div')).append("Message send to: " + peerId + " Message: " + peerMessage)
-            },
-            fail: function (e) {
-                console.log('send private text fail');
-            }
-        });
-        WebIM.conn.send(msg.body);
+        let option = {
+            chatType: 'singleChat',    // 设置为单聊
+            type: 'txt',               // 消息类型
+            to: 'userID',              // 接收消息对象（用户 ID)
+            msg: 'message content'     // 消息
+        }
+        let msg = WebIM.message.create(option); 
+        WebIM.conn.send(msg).then((res) => {
+            console.log('send private text success');
+            document.getElementById("log").appendChild(document.createElement('div')).append("Message send to: " + peerId + " Message: " + peerMessage)
+        }).catch((err) => {
+            console.log('send private text fail', err);
+        })
     }
 }
 
