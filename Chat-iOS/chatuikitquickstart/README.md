@@ -379,7 +379,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 - 会话页面接收消息并展示；
 - 会话页面发送消息，包含文本，图片，视频，附件，相机，语音和表情等消息。
 
-### 6.运行 chat-uikit Example 项目
+### 6.运行 chatuikitquickstart 项目
 
 chatuikitquickstart 是对 UIKIT 的简单集成示例，只包含 UIKIT 的会话页面。
 
@@ -393,7 +393,7 @@ chatuikitquickstart 代码下载地址：https://github.com/easemob/chat-api-exa
    pod install
    ```
 
-2. 成功安装后，终端 中会显示 `Pod installation complete!`，打开新生成的 `Chat-iOS.xcworkspace` 文件即可选择运行 chatuikitquickstart 项目。
+2. 成功安装后，终端 中会显示 `Pod installation complete!`，打开 `Chat-iOS.xcworkspace` 文件即可选择运行 chatuikitquickstart 项目。
 
 ### 7.自定义 UI 配置
 
