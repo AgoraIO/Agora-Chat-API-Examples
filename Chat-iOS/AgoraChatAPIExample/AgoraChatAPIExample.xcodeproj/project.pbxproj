@@ -15,7 +15,6 @@
 		9E429FC726F2EB4A00F0B94D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E429FC526F2EB4A00F0B94D /* LaunchScreen.storyboard */; };
 		9E429FCA26F2EB4A00F0B94D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FC926F2EB4A00F0B94D /* main.m */; };
 		9E429FD226F341A700F0B94D /* EMHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FD026F341A700F0B94D /* EMHttpRequest.m */; };
-		B394D26AD612B98CBC739073 /* libPods-AgoraChatAPIExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D14EBAA2D9A62F4206395B /* libPods-AgoraChatAPIExample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,8 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		27AF9B55A96049BCB13861CD /* Pods-AgoraChatAPIExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraChatAPIExample.release.xcconfig"; path = "Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample.release.xcconfig"; sourceTree = "<group>"; };
-		67D14EBAA2D9A62F4206395B /* libPods-AgoraChatAPIExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AgoraChatAPIExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E429FB426F2EB4800F0B94D /* AgoraChatAPIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgoraChatAPIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E429FB726F2EB4800F0B94D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E429FB826F2EB4800F0B94D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -48,7 +45,6 @@
 		9E429FC926F2EB4A00F0B94D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9E429FD026F341A700F0B94D /* EMHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHttpRequest.m; sourceTree = "<group>"; };
 		9E429FD126F341A700F0B94D /* EMHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHttpRequest.h; sourceTree = "<group>"; };
-		AC7BDE93DF3E7FC0D5BED3C6 /* Pods-AgoraChatAPIExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraChatAPIExample.debug.xcconfig"; path = "Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,30 +52,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B394D26AD612B98CBC739073 /* libPods-AgoraChatAPIExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C2CEB816802EE528C6A7C20 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AC7BDE93DF3E7FC0D5BED3C6 /* Pods-AgoraChatAPIExample.debug.xcconfig */,
-				27AF9B55A96049BCB13861CD /* Pods-AgoraChatAPIExample.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
-			sourceTree = "<group>";
-		};
 		9E429FAB26F2EB4800F0B94D = {
 			isa = PBXGroup;
 			children = (
 				9E429FB626F2EB4800F0B94D /* AgoraChatAPIExample */,
 				9E429FB526F2EB4800F0B94D /* Products */,
 				B4F21F08BFCDFDB537D17206 /* Frameworks */,
-				1C2CEB816802EE528C6A7C20 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,7 +98,6 @@
 		B4F21F08BFCDFDB537D17206 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				67D14EBAA2D9A62F4206395B /* libPods-AgoraChatAPIExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -377,7 +360,6 @@
 		};
 		9E429FCE26F2EB4A00F0B94D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC7BDE93DF3E7FC0D5BED3C6 /* Pods-AgoraChatAPIExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -397,7 +379,6 @@
 		};
 		9E429FCF26F2EB4A00F0B94D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27AF9B55A96049BCB13861CD /* Pods-AgoraChatAPIExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
