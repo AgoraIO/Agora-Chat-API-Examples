@@ -112,12 +112,12 @@
     _conversationModel = [[EaseConversationModel alloc]initWithConversation:_conversation];
     
     EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init];
-    viewModel.chatViewBgColor = [UIColor systemGrayColor];  //聊天页背景色
-    viewModel.inputMenuBgColor = [UIColor systemPinkColor]; //输入区背景色
-    viewModel.sentFontColor = [UIColor redColor];           //发送方文本颜色
-    viewModel.inputMenuStyle = EaseInputMenuStyleNoAudio;   //输入区菜单样式
-    viewModel.msgTimeItemFontColor = [UIColor blackColor];  //消息时间字体颜色
-    viewModel.msgTimeItemBgColor = [UIColor greenColor];    //消息时间区域背景色
+//    viewModel.chatViewBgColor = [UIColor systemGrayColor];  //聊天页背景色
+//    viewModel.inputMenuBgColor = [UIColor systemPinkColor]; //输入区背景色
+//    viewModel.sentFontColor = [UIColor redColor];           //发送方文本颜色
+//    viewModel.inputMenuStyle = EaseInputMenuStyleNoAudio;   //输入区菜单样式
+//    viewModel.msgTimeItemFontColor = [UIColor blackColor];  //消息时间字体颜色
+//    viewModel.msgTimeItemBgColor = [UIColor greenColor];    //消息时间区域背景色
     _chatController = [EaseChatViewController initWithConversationId:self.conversationIdField.text
                                                 conversationType:AgoraChatConversationTypeChat
                                                     chatViewModel:viewModel];

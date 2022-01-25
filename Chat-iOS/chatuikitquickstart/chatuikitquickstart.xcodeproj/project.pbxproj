@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		546A5032BE9BDC195BB1065D /* libPods-ChatKitExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E60F02AD6CB042B468CF70 /* libPods-ChatKitExample.a */; };
 		9E69E579272696D1008DDEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E578272696D1008DDEF5 /* AppDelegate.m */; };
 		9E69E57C272696D1008DDEF5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E57B272696D1008DDEF5 /* SceneDelegate.m */; };
 		9E69E582272696D1008DDEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E580272696D1008DDEF5 /* Main.storyboard */; };
@@ -32,8 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C1ACE8B020C422BC0DB9440 /* Pods-ChatKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatKitExample.release.xcconfig"; path = "Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample.release.xcconfig"; sourceTree = "<group>"; };
-		9E69E574272696D1008DDEF5 /* ChatKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E69E574272696D1008DDEF5 /* chatuikitquickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatuikitquickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E69E577272696D1008DDEF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E69E578272696D1008DDEF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E69E57A272696D1008DDEF5 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -63,8 +61,6 @@
 		9ECE6772274F87E7007CF85F /* UIColor+EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EaseUI.m"; sourceTree = "<group>"; };
 		9ECE6774274F9747007CF85F /* black_goBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@2x.png"; sourceTree = "<group>"; };
 		9ECE6775274F9747007CF85F /* black_goBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@3x.png"; sourceTree = "<group>"; };
-		E8E60F02AD6CB042B468CF70 /* libPods-ChatKitExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatKitExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F111222ABDA656D7D12A5253 /* Pods-ChatKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatKitExample.debug.xcconfig"; path = "Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,42 +68,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				546A5032BE9BDC195BB1065D /* libPods-ChatKitExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A9387052708086B9052BECF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F111222ABDA656D7D12A5253 /* Pods-ChatKitExample.debug.xcconfig */,
-				9C1ACE8B020C422BC0DB9440 /* Pods-ChatKitExample.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		9E69E56B272696D1008DDEF5 = {
 			isa = PBXGroup;
 			children = (
-				9E69E576272696D1008DDEF5 /* ChatKitExample */,
+				9E69E576272696D1008DDEF5 /* chatuikitquickstart */,
 				9E69E575272696D1008DDEF5 /* Products */,
 				9E69E590272696F8008DDEF5 /* Frameworks */,
-				5A9387052708086B9052BECF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		9E69E575272696D1008DDEF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E69E574272696D1008DDEF5 /* ChatKitExample.app */,
+				9E69E574272696D1008DDEF5 /* chatuikitquickstart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9E69E576272696D1008DDEF5 /* ChatKitExample */ = {
+		9E69E576272696D1008DDEF5 /* chatuikitquickstart */ = {
 			isa = PBXGroup;
 			children = (
 				9ECE6760274F84D5007CF85F /* Resources */,
@@ -131,13 +115,12 @@
 				9E69E588272696D3008DDEF5 /* Info.plist */,
 				9E69E589272696D3008DDEF5 /* main.m */,
 			);
-			path = ChatKitExample;
+			path = chatuikitquickstart;
 			sourceTree = "<group>";
 		};
 		9E69E590272696F8008DDEF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E8E60F02AD6CB042B468CF70 /* libPods-ChatKitExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -162,9 +145,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9E69E573272696D1008DDEF5 /* ChatKitExample */ = {
+		9E69E573272696D1008DDEF5 /* chatuikitquickstart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "ChatKitExample" */;
+			buildConfigurationList = 9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "chatuikitquickstart" */;
 			buildPhases = (
 				59F18212286F459E98144C0D /* [CP] Check Pods Manifest.lock */,
 				9E69E570272696D1008DDEF5 /* Sources */,
@@ -177,9 +160,9 @@
 			);
 			dependencies = (
 			);
-			name = ChatKitExample;
+			name = chatuikitquickstart;
 			productName = ChatKitTest;
-			productReference = 9E69E574272696D1008DDEF5 /* ChatKitExample.app */;
+			productReference = 9E69E574272696D1008DDEF5 /* chatuikitquickstart.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "ChatKitExample" */;
+			buildConfigurationList = 9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "chatuikitquickstart" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -209,7 +192,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9E69E573272696D1008DDEF5 /* ChatKitExample */,
+				9E69E573272696D1008DDEF5 /* chatuikitquickstart */,
 			);
 		};
 /* End PBXProject section */
@@ -253,7 +236,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChatKitExample-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-chatuikitquickstart-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -266,15 +249,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E0B618B9101AA97181E6510E /* [CP] Copy Pods Resources */ = {
@@ -283,15 +266,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatKitExample/Pods-ChatKitExample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -448,7 +431,6 @@
 		};
 		9E69E58E272696D3008DDEF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F111222ABDA656D7D12A5253 /* Pods-ChatKitExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,7 +438,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatKitExample/Info.plist;
+				INFOPLIST_FILE = chatuikitquickstart/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -477,7 +459,6 @@
 		};
 		9E69E58F272696D3008DDEF5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C1ACE8B020C422BC0DB9440 /* Pods-ChatKitExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -485,7 +466,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatKitExample/Info.plist;
+				INFOPLIST_FILE = chatuikitquickstart/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -507,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "ChatKitExample" */ = {
+		9E69E56F272696D1008DDEF5 /* Build configuration list for PBXProject "chatuikitquickstart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E69E58B272696D3008DDEF5 /* Debug */,
@@ -516,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "ChatKitExample" */ = {
+		9E69E58D272696D3008DDEF5 /* Build configuration list for PBXNativeTarget "chatuikitquickstart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E69E58E272696D3008DDEF5 /* Debug */,

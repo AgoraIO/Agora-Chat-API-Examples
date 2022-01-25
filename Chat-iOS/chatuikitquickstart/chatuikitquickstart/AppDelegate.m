@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  ChatKitExample
+//  chatuikitquickstart
 //
 //  Created by zhangchong on 2021/10/25.
 //
