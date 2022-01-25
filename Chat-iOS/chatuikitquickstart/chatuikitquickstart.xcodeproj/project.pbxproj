@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B286473A38F1E525BB21B87 /* libPods-chatuikitquickstart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C29FEF8DC73297FBDE1B627E /* libPods-chatuikitquickstart.a */; };
 		9E69E579272696D1008DDEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E578272696D1008DDEF5 /* AppDelegate.m */; };
 		9E69E57C272696D1008DDEF5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E69E57B272696D1008DDEF5 /* SceneDelegate.m */; };
 		9E69E582272696D1008DDEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E69E580272696D1008DDEF5 /* Main.storyboard */; };
@@ -32,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F9BD526E505AB1FD2CF13E7 /* Pods-chatuikitquickstart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatuikitquickstart.release.xcconfig"; path = "Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart.release.xcconfig"; sourceTree = "<group>"; };
 		9E69E574272696D1008DDEF5 /* chatuikitquickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatuikitquickstart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E69E577272696D1008DDEF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E69E578272696D1008DDEF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,8 +61,6 @@
 		9ECE6772274F87E7007CF85F /* UIColor+EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EaseUI.m"; sourceTree = "<group>"; };
 		9ECE6774274F9747007CF85F /* black_goBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@2x.png"; sourceTree = "<group>"; };
 		9ECE6775274F9747007CF85F /* black_goBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_goBack@3x.png"; sourceTree = "<group>"; };
-		C29FEF8DC73297FBDE1B627E /* libPods-chatuikitquickstart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chatuikitquickstart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA523BFCCF34E1D045C6F13 /* Pods-chatuikitquickstart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatuikitquickstart.debug.xcconfig"; path = "Target Support Files/Pods-chatuikitquickstart/Pods-chatuikitquickstart.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B286473A38F1E525BB21B87 /* libPods-chatuikitquickstart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +80,6 @@
 				9E69E576272696D1008DDEF5 /* chatuikitquickstart */,
 				9E69E575272696D1008DDEF5 /* Products */,
 				9E69E590272696F8008DDEF5 /* Frameworks */,
-				FEA08FD31BC5EA81C66D786A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +121,6 @@
 		9E69E590272696F8008DDEF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C29FEF8DC73297FBDE1B627E /* libPods-chatuikitquickstart.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -147,16 +140,6 @@
 				9ECE6763274F874E007CF85F /* loginFail@3x.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		FEA08FD31BC5EA81C66D786A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FCA523BFCCF34E1D045C6F13 /* Pods-chatuikitquickstart.debug.xcconfig */,
-				2F9BD526E505AB1FD2CF13E7 /* Pods-chatuikitquickstart.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,7 +431,6 @@
 		};
 		9E69E58E272696D3008DDEF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCA523BFCCF34E1D045C6F13 /* Pods-chatuikitquickstart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -477,7 +459,6 @@
 		};
 		9E69E58F272696D3008DDEF5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F9BD526E505AB1FD2CF13E7 /* Pods-chatuikitquickstart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
