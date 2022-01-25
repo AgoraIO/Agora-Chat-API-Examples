@@ -1,0 +1,21 @@
+platform :ios, '11.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+workspace 'Chat-iOS.xcworkspace' 
+
+target 'AgoraChatAPIExample' do
+  project './AgoraChatAPIExample/AgoraChatAPIExample.xcodeproj'
+  pod 'Agora_Chat_iOS'
+  pod 'Masonry'
+end
+
+target 'chatuikitquickstart' do
+  project './chatuikitquickstart/chatuikitquickstart.xcodeproj'
+  pod 'chat-uikit'
+  pod 'Masonry'
+end
+
+
+
+
