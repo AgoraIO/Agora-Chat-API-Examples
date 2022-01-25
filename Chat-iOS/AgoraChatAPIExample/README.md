@@ -3,13 +3,11 @@
 本文详细介绍如何建立一个简单的项目并使用 Agora Chat SDK 实现消息的发送和加入群组。
 
 ## 消息发送与接收流程
-// todo 需要增加一张流程图
-
 登录 Agora Chat 系统包括以下流程：
 1. 客户端使用帐号和密码进行注册。
 2. 客户端注册成功后，登录到 Chat 服务器。
 
-// todo 需要增加一张流程图
+![登录流程](https://web-cdn.agora.io/docs-files/1636443945728)
 
 发送和接收点对点消息包括以下流程：
 1. 客户端 A 发送点对点消息到 Chat 服务器。
@@ -62,8 +60,7 @@ pod install
 
 **方法 2：手动集成 SDK framework 包**
 
-// todo 需要添加下载链接
-1. 下载最新版的 [Agora Chat SDK for iOS]() 并解压。
+1. 下载最新版的 [Agora Chat SDK for iOS]([https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.1.zip](https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.0.zip)) 并解压。
 2. 将 SDK 包内的 AgoraChat.framework 加入到项目中，AgoraChat.framework 包含 arm64，armv7，x86_64 指令集。
 3. 选中项目的 Target，并在 General -> Frameworks,libraries,and... -> 将AgoraChat.framework 的 “Embed”选项设置为 “Embed & sign”。
 
