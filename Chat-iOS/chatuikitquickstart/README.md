@@ -147,7 +147,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 
 #### 4.2 登录 AgoraChat SDK
 
-加载会话页面之前须先登录到 AgoraChat SDK。登录页面实现可自行实现或参考 `chatuikitquickstart`工程 -> `AgoraLoginViewController.m`文件登录页面实现。
+加载会话页面之前须先登录到 Agora Chat SDK。登录页面实现可自行实现或参考 `chatuikitquickstart` 工程 -> `AgoraLoginViewController.m` 文件登录页面实现。
 
 `chatuikitquickstart`工程地址：[quickStart](https://github.com/easemob/chat-api-examples/tree/main/Chat-iOS)
 
