@@ -393,7 +393,7 @@ chatuikitquickstart 代码下载地址：https://github.com/easemob/chat-api-exa
    pod install
    ```
 
-2. 成功安装后，终端 中会显示 `Pod installation complete!`，打开 `Chat-iOS.xcworkspace` 文件即可选择运行 chatuikitquickstart 项目。
+2. 成功安装后，终端中会显示 `Pod installation complete!`，打开 `Chat-iOS.xcworkspace` 文件即可选择运行 chatuikitquickstart 项目。
 
 ### 7.自定义 UI 配置
 
