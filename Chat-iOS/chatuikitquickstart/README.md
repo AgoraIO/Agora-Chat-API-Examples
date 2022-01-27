@@ -30,7 +30,7 @@
 
 参考以下步骤在 Xcode 中创建一个 iOS 平台下的 Single View App，项目设置如下：
 
-1. Product Name 设为 `EaseChatKitExample`。
+1. Product Name 设为 `chatuikitquickstart`。
 
 2. Organization Identifier 设为 `agorachat`。
 3. User Interface 选择 Storyboard。
@@ -44,7 +44,7 @@
 
 1. 开始前确保你已安装 Cocoapods。参考 [Getting Started with CocoaPods](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装说明。
 2. 在终端里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成 `Podfile` 文本文件。
-3. 打开 `Podfile` 文件，在 podfile 文件里添加相关 SDK。注意将 `AgoraChatAPIExample` 替换为你的 Target 名称。
+3. 打开 `Podfile` 文件，在 podfile 文件里添加相关 SDK。注意将 `chatuikitquickstart` 替换为你的 Target 名称。
 
 ```objective-c
 platform :ios, '11.0'
@@ -52,7 +52,7 @@ platform :ios, '11.0'
 # Import CocoaPods sources
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'EaseChatKitExample' do
+target 'chatuikitquickstart' do
     pod 'chat-uikit'
   	pod 'Masonry'
 end
@@ -147,17 +147,17 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 
 #### 4.2 登录 AgoraChat SDK
 
-加载会话页面之前须先登录到 AgoraChat SDK。登录页面实现可自行实现或参考 `EaseChatKitExample`工程 -> `AgoraLoginViewController.m`文件登录页面实现。
+加载会话页面之前须先登录到 Agora Chat SDK。登录页面实现可自行实现或参考 `chatuikitquickstart` 工程 -> `AgoraLoginViewController.m` 文件登录页面实现。
 
-`EaseChatKitExample`工程地址：//TODO::合并之后的地址
+`chatuikitquickstart`工程地址：[quickStart](https://github.com/easemob/chat-api-examples/tree/main/Chat-iOS)
 
 若自行实现登录逻辑，请参考如下步骤：
 
 1. 项目中创建名为 `AgoraChatHttpRequest` 的  `Cocoa Touch Class` 文件
 
-2. 在 `AgoraChatHttpRequest.h` 文件中添加方法定义（需复制全部内容）：//TODO::合并之后的地址
+2. 在 `AgoraChatHttpRequest.h` 文件中添加方法定义（需复制全部内容）：[AgoraChatHttpRequest.h](https://github.com/easemob/chat-api-examples/blob/main/Chat-iOS/chatuikitquickstart/chatuikitquickstart/AgoraChatHttpRequest.h)
 
-3. 在 `AgoraChatHttpRequest.m` 文件中添加方法实现（需复制全部内容）：//TODO::合并之后的地址
+3. 在 `AgoraChatHttpRequest.m` 文件中添加方法实现（需复制全部内容）：[AgoraChatHttpRequest.m](https://github.com/easemob/chat-api-examples/blob/main/Chat-iOS/chatuikitquickstart/chatuikitquickstart/AgoraChatHttpRequest.m)
 
 4. 项目中创建名为 `AgoraLoginViewController` 的  `Cocoa Touch Class` 文件，然后在 `AgoraLoginViewController.m` 文件中导入请求 AppServer 的头文件 ：
 
@@ -379,21 +379,21 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务。
 - 会话页面接收消息并展示；
 - 会话页面发送消息，包含文本，图片，视频，附件，相机，语音和表情等消息。
 
-### 6.运行 chat-uikit Example 项目
+### 6.运行 chatuikitquickstart 项目
 
-Chat-uikit Example 是对 UIKIT 的简单集成示例，只包含 UIKIT 的会话页面。
+chatuikitquickstart 是对 UIKIT 的简单集成示例，只包含 UIKIT 的会话页面。
 
-Example 示例代码下载地址：https://github.com/MThrone/chat-api-examples/tree/main/chat-uiit_Example 
+chatuikitquickstart 代码下载地址：https://github.com/easemob/chat-api-examples/tree/main/Chat-iOS
 
-运行 chat-uikit Example：
+运行 chatuikitquickstart：
 
-1. 在终端 Terminal cd 到 Example 项目的 podfile 文件所在目录，执行如下命令集成 SDK。
+1. 在终端 Terminal cd 到 Chat-iOS 目录，执行如下命令集成 SDK。
 
    ```objective-c
    pod install
    ```
 
-2. 成功安装后，终端 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件即可运行 chat-uikit Example 项目。
+2. 成功安装后，终端中会显示 `Pod installation complete!`，打开 `Chat-iOS.xcworkspace` 文件即可选择运行 chatuikitquickstart 项目。
 
 ### 7.自定义 UI 配置
 
@@ -410,9 +410,7 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 
 默认样式的聊天页面示例图：
 
-// TODO:合并之后确定地址
-
-![]()
+![defaultStyle](https://github.com/easemob/chat-api-examples/blob/main/Chat-iOS/chatuikitquickstart/defaultStyle.jpeg)
 
 * 自定义样式配置示例：
 
@@ -431,8 +429,6 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 
 部分自定义样式配置示例图：
 
-// TODO:合并之后确定地址
-
-![]()
+![customStyle](https://github.com/easemob/chat-api-examples/blob/main/Chat-iOS/chatuikitquickstart/customStyle.jpeg)
 
 关于更多 API 介绍请参考 EaseChatViewController 提供的 API，以及 EaseChatViewControllerDelegate 协议中的回调方法 API。
