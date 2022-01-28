@@ -46,7 +46,7 @@ Agora_quickstart
 
 ### 2. 集成 SDK
 
-- 在 `package.json` 中的 `dependencies` 字段中加入 `agora-chat-sdk` 及对应版本：
+- 在 `package.json` 中的 `dependencies` 字段中加入 `agora-chat` 及对应版本：
 
     ```json
    {
@@ -58,17 +58,17 @@ Agora_quickstart
        "test": "echo \"Error: no test specified\" && exit 1"
      },
      "dependencies": {
-       "agora-chat-sdk": "latest"
+       "agora-chat": "latest"
      },
      "author": "",
      "license": "ISC"
    }
    ```
 
-- 在你的 JS 文件中导入 `agora-chat-sdk` 模块：
+- 在你的 JS 文件中导入 `agora-chat` 模块：
 
 ```JavaScript
-import WebIM from 'agora-chat-sdk'
+import WebIM from 'agora-chat'
 ```
 
 ### 3. 实现用户界面
@@ -131,7 +131,7 @@ index.html 的内容如下。<script src="./dist/bundle.js"></script> 用来引�
 index.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 webpack 对 JS 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 "<Your app key>" 替换为你之前获取的 AppKey。
 
 ```Javascript
-import WebIM from 'agora-chat-sdk'
+import WebIM from 'agora-chat'
 const appKey = "<Your app key>"
 
 let username, password
@@ -233,8 +233,8 @@ window.onload = function () {
         let option = {
             chatType: 'singleChat',    // 设置为单聊
             type: 'txt',               // 消息类型
-            to: 'userID',              // 接收消息对象（用户 ID)
-            msg: 'message content'     // 消息
+            to: peerId,                // 接收消息对象（用户 ID)
+            msg: peerMessage           // 消息
         }
         let msg = WebIM.message.create(option); 
         WebIM.conn.send(msg).then((res) => {
@@ -265,7 +265,7 @@ window.onload = function () {
         "start:dev": "webpack serve --open --config webpack.config.js"
     },
     "dependencies": {
-        "agora-chat-sdk": "latest",
+        "agora-chat": "latest",
         "webpack": "^5.50.0",
         "webpack-dev-server": "^3.11.2",
         "webpack-cli": "^4.8.0"
@@ -327,7 +327,7 @@ $ npm run start:dev
 
 #### 方法一：通过 npm 安装并导入 SDK
 
-1. 在 `package.json` 中的 `dependencies` 字段中加入 `agora-chat-sdk` 及对应版本：
+1. 在 `package.json` 中的 `dependencies` 字段中加入 `agora-chat` 及对应版本：
 
     ```json
    {
@@ -339,17 +339,17 @@ $ npm run start:dev
        "test": "echo \"Error: no test specified\" && exit 1"
      },
      "dependencies": {
-       "agora-chat-sdk": "latest"
+       "agora-chat": "latest"
      },
      "author": "",
      "license": "ISC"
    }
    ```
 
-2. 在你的 JS 文件中导入 `agora-chat-sdk` 模块：
+2. 在你的 JS 文件中导入 `agora-chat` 模块：
 
 ```JavaScript
-import WebIM from 'agora-chat-sdk'
+import WebIM from 'agora-chat'
 ```
 
 #### 方法二：从官网获取并导入 SDK
