@@ -71,6 +71,12 @@ Agora_quickstart
 import WebIM from 'agora-chat'
 ```
 
+- 如果是 Typescript 这样引入类型声明：
+
+```JavaScript
+import WebIM, { AgoraChat } from 'agora-chat'
+```
+
 ### 3. 实现用户界面
 
 index.html 的内容如下。<script src="./dist/bundle.js"></script> 用来引用 webpack 打包之后的bundle.js 文件。webpack 的配置会在后续步骤提及。
