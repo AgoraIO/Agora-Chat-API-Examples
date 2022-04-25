@@ -1,0 +1,95 @@
+[
+  {
+    "channelName" : "mx's groupchannel",
+    "channelUrl" : "sendbird_group_channel_169529786_8402085245304af475c7ab9893cc14c8e94b6878",
+    "messages" : [
+      {
+        "messageId" : "1802481261",
+        "message" : "mengxin",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281524431
+      },
+      {
+        "messageId" : "1802481316",
+        "message" : "zmx",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281527529
+      },
+      {
+        "sender" : "chong",
+        "messageId" : "1802481525",
+        "remoteUrl" : "https:\/\/file-us-1.sendbird.com\/820572c59bd544a4b11e09d58f8cbefe.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "fileName" : "img3.jpg",
+        "localUrl" : "https:\/\/file-us-1.sendbird.com\/820572c59bd544a4b11e09d58f8cbefe.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "size" : 2162951,
+        "type" : "MessageTypeFile",
+        "sendingStatus" : 2,
+        "createdAt" : 1650281535503
+      },
+      {
+        "sender" : "chong",
+        "messageId" : "1802481637",
+        "remoteUrl" : "https:\/\/file-us-1.sendbird.com\/e76295fc22e14e36b433cfab27eceb76.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "fileName" : "img2.jpg",
+        "localUrl" : "https:\/\/file-us-1.sendbird.com\/e76295fc22e14e36b433cfab27eceb76.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "size" : 1620700,
+        "type" : "MessageTypeFile",
+        "sendingStatus" : 2,
+        "createdAt" : 1650281540820
+      },
+      {
+        "messageId" : "1802481866",
+        "message" : "zc",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281551851
+      },
+      {
+        "messageId" : "1802482093",
+        "message" : "mine",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281561871
+      }
+    ]
+  },
+  {
+    "channelName" : "chong's group channel",
+    "channelUrl" : "sendbird_group_channel_101981_b3ef6b93e723c960b2ba5f2e44d221c65466cbad",
+    "messages" : [
+      {
+        "messageId" : "1802474061",
+        "message" : "haha",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281144532
+      },
+      {
+        "messageId" : "1802474147",
+        "message" : "nat",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281148515
+      },
+      {
+        "sender" : "chong",
+        "messageId" : "1802474290",
+        "remoteUrl" : "https:\/\/file-us-1.sendbird.com\/6af4aeb52a6e48cb8bac59b496e92b7a.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "fileName" : "img1.jpg",
+        "localUrl" : "https:\/\/file-us-1.sendbird.com\/6af4aeb52a6e48cb8bac59b496e92b7a.jpg?auth=I-ERTKP5PDyUnbM_nlZQq7DfFYsYf0Ha9Nn6QfB3vmqJr7vtz58vChx28UowpDS9oJx_dvZcRxGifiNzadJHyA",
+        "size" : 771877,
+        "type" : "MessageTypeFile",
+        "sendingStatus" : 2,
+        "createdAt" : 1650281157236
+      }
+    ]
+  }
+]

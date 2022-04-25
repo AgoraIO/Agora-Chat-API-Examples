@@ -1,11 +1,11 @@
 //
-//  ViewController.m
+//  AgoraChatApiExampleViewController.m
 //  AgoraChatAPIExample
 //
 //  Created by zhangchong on 2021/9/16.
 //
 
-#import "ViewController.h"
+#import "AgoraChatApiExampleViewController.h"
 #import <Masonry/Masonry.h>
 #import "EMHttpRequest.h"
 #import <AgoraChat/AgoraChat.h>
@@ -14,7 +14,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, AgoraChatClientDelegate, AgoraChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AgoraChatApiExampleViewController ()<UITextFieldDelegate, UIScrollViewDelegate, AgoraChatClientDelegate, AgoraChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *pswdField;
@@ -44,7 +44,7 @@
 
 @end
 
-@implementation ViewController
+@implementation AgoraChatApiExampleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +54,10 @@
     [self initSdk];
     [self _setupSubviews];
     // Do any additional setup after loading the view.
+}
+
+- (void)dealloc {
+    [[AgoraChatClient sharedClient] logout:YES];
 }
 
 - (void)initSdk
@@ -138,7 +142,7 @@
     [self.scrollView addSubview:self.nameField];
     [self.nameField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.scrollView).offset(30);
-        make.top.equalTo(self.scrollView).offset(50);
+        make.top.equalTo(self.scrollView).offset(20);
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(@150);
     }];

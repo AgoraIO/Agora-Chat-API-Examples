@@ -8,6 +8,7 @@ target 'AgoraChatAPIExample' do
   project './AgoraChatAPIExample/AgoraChatAPIExample.xcodeproj'
   pod 'Agora_Chat_iOS'
   pod 'Masonry'
+  pod 'EMVoiceConvert', '0.1.0'
 end
 
 target 'chatuikitquickstart' do

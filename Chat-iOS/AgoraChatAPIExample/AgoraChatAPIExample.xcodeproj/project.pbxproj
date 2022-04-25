@@ -9,12 +9,20 @@
 /* Begin PBXBuildFile section */
 		9E429FB926F2EB4800F0B94D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FB826F2EB4800F0B94D /* AppDelegate.m */; };
 		9E429FBC26F2EB4800F0B94D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FBB26F2EB4800F0B94D /* SceneDelegate.m */; };
-		9E429FBF26F2EB4800F0B94D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FBE26F2EB4800F0B94D /* ViewController.m */; };
 		9E429FC226F2EB4800F0B94D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E429FC026F2EB4800F0B94D /* Main.storyboard */; };
 		9E429FC426F2EB4A00F0B94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E429FC326F2EB4A00F0B94D /* Assets.xcassets */; };
 		9E429FC726F2EB4A00F0B94D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E429FC526F2EB4A00F0B94D /* LaunchScreen.storyboard */; };
 		9E429FCA26F2EB4A00F0B94D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FC926F2EB4A00F0B94D /* main.m */; };
-		9E429FD226F341A700F0B94D /* EMHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FD026F341A700F0B94D /* EMHttpRequest.m */; };
+		9ECC4D3A2812905E001CEDCB /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D392812905E001CEDCB /* NavigationViewController.m */; };
+		9ECC4D6C2812AE00001CEDCB /* AgoraChatApiExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D592812AE00001CEDCB /* AgoraChatApiExampleViewController.m */; };
+		9ECC4D6D2812AE00001CEDCB /* EMHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */; };
+		9ECC4D6E2812AE00001CEDCB /* ImportMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5C2812AE00001CEDCB /* ImportMessageViewController.m */; };
+		9ECC4D6F2812AE00001CEDCB /* SBDChannelMessage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5D2812AE00001CEDCB /* SBDChannelMessage.txt */; };
+		9ECC4D702812AE00001CEDCB /* FetchServerMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D602812AE00001CEDCB /* FetchServerMessageViewController.m */; };
+		9ECC4D712812AE00001CEDCB /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D652812AE00001CEDCB /* wav.mm */; };
+		9ECC4D722812AE00001CEDCB /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D662812AE00001CEDCB /* amrFileCodec.mm */; };
+		9ECC4D732812AE00001CEDCB /* AudioMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D692812AE00001CEDCB /* AudioMessageViewController.m */; };
+		9ECC4D742812AE00001CEDCB /* AgoraAudioRecordUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D6A2812AE00001CEDCB /* AgoraAudioRecordUtil.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,15 +44,30 @@
 		9E429FB826F2EB4800F0B94D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E429FBA26F2EB4800F0B94D /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		9E429FBB26F2EB4800F0B94D /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		9E429FBD26F2EB4800F0B94D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9E429FBE26F2EB4800F0B94D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9E429FC126F2EB4800F0B94D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E429FC326F2EB4A00F0B94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E429FC626F2EB4A00F0B94D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E429FC826F2EB4A00F0B94D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E429FC926F2EB4A00F0B94D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9E429FD026F341A700F0B94D /* EMHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHttpRequest.m; sourceTree = "<group>"; };
-		9E429FD126F341A700F0B94D /* EMHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHttpRequest.h; sourceTree = "<group>"; };
+		9ECC4D382812905E001CEDCB /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		9ECC4D392812905E001CEDCB /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		9ECC4D572812AE00001CEDCB /* EMHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHttpRequest.h; sourceTree = "<group>"; };
+		9ECC4D582812AE00001CEDCB /* AgoraChatApiExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraChatApiExampleViewController.h; sourceTree = "<group>"; };
+		9ECC4D592812AE00001CEDCB /* AgoraChatApiExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraChatApiExampleViewController.m; sourceTree = "<group>"; };
+		9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHttpRequest.m; sourceTree = "<group>"; };
+		9ECC4D5C2812AE00001CEDCB /* ImportMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportMessageViewController.m; sourceTree = "<group>"; };
+		9ECC4D5D2812AE00001CEDCB /* SBDChannelMessage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SBDChannelMessage.txt; sourceTree = "<group>"; };
+		9ECC4D5E2812AE00001CEDCB /* ImportMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportMessageViewController.h; sourceTree = "<group>"; };
+		9ECC4D602812AE00001CEDCB /* FetchServerMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchServerMessageViewController.m; sourceTree = "<group>"; };
+		9ECC4D612812AE00001CEDCB /* FetchServerMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchServerMessageViewController.h; sourceTree = "<group>"; };
+		9ECC4D632812AE00001CEDCB /* AudioMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioMessageViewController.h; sourceTree = "<group>"; };
+		9ECC4D652812AE00001CEDCB /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		9ECC4D662812AE00001CEDCB /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		9ECC4D672812AE00001CEDCB /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		9ECC4D682812AE00001CEDCB /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		9ECC4D692812AE00001CEDCB /* AudioMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioMessageViewController.m; sourceTree = "<group>"; };
+		9ECC4D6A2812AE00001CEDCB /* AgoraAudioRecordUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AgoraAudioRecordUtil.mm; sourceTree = "<group>"; };
+		9ECC4D6B2812AE00001CEDCB /* AgoraAudioRecordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraAudioRecordUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,14 +101,18 @@
 		9E429FB626F2EB4800F0B94D /* AgoraChatAPIExample */ = {
 			isa = PBXGroup;
 			children = (
+				9ECC4D572812AE00001CEDCB /* EMHttpRequest.h */,
+				9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */,
+				9ECC4D562812AE00001CEDCB /* ApiExample */,
+				9ECC4D5F2812AE00001CEDCB /* FetchServerMessage */,
+				9ECC4D5B2812AE00001CEDCB /* ImportMessage */,
+				9ECC4D622812AE00001CEDCB /* SendAudioMessage */,
 				9E429FB726F2EB4800F0B94D /* AppDelegate.h */,
 				9E429FB826F2EB4800F0B94D /* AppDelegate.m */,
 				9E429FBA26F2EB4800F0B94D /* SceneDelegate.h */,
 				9E429FBB26F2EB4800F0B94D /* SceneDelegate.m */,
-				9E429FBD26F2EB4800F0B94D /* ViewController.h */,
-				9E429FBE26F2EB4800F0B94D /* ViewController.m */,
-				9E429FD126F341A700F0B94D /* EMHttpRequest.h */,
-				9E429FD026F341A700F0B94D /* EMHttpRequest.m */,
+				9ECC4D382812905E001CEDCB /* NavigationViewController.h */,
+				9ECC4D392812905E001CEDCB /* NavigationViewController.m */,
 				9E429FC026F2EB4800F0B94D /* Main.storyboard */,
 				9E429FC326F2EB4A00F0B94D /* Assets.xcassets */,
 				9E429FC526F2EB4A00F0B94D /* LaunchScreen.storyboard */,
@@ -93,6 +120,57 @@
 				9E429FC926F2EB4A00F0B94D /* main.m */,
 			);
 			path = AgoraChatAPIExample;
+			sourceTree = "<group>";
+		};
+		9ECC4D562812AE00001CEDCB /* ApiExample */ = {
+			isa = PBXGroup;
+			children = (
+				9ECC4D582812AE00001CEDCB /* AgoraChatApiExampleViewController.h */,
+				9ECC4D592812AE00001CEDCB /* AgoraChatApiExampleViewController.m */,
+			);
+			path = ApiExample;
+			sourceTree = "<group>";
+		};
+		9ECC4D5B2812AE00001CEDCB /* ImportMessage */ = {
+			isa = PBXGroup;
+			children = (
+				9ECC4D5C2812AE00001CEDCB /* ImportMessageViewController.m */,
+				9ECC4D5D2812AE00001CEDCB /* SBDChannelMessage.txt */,
+				9ECC4D5E2812AE00001CEDCB /* ImportMessageViewController.h */,
+			);
+			path = ImportMessage;
+			sourceTree = "<group>";
+		};
+		9ECC4D5F2812AE00001CEDCB /* FetchServerMessage */ = {
+			isa = PBXGroup;
+			children = (
+				9ECC4D602812AE00001CEDCB /* FetchServerMessageViewController.m */,
+				9ECC4D612812AE00001CEDCB /* FetchServerMessageViewController.h */,
+			);
+			path = FetchServerMessage;
+			sourceTree = "<group>";
+		};
+		9ECC4D622812AE00001CEDCB /* SendAudioMessage */ = {
+			isa = PBXGroup;
+			children = (
+				9ECC4D632812AE00001CEDCB /* AudioMessageViewController.h */,
+				9ECC4D642812AE00001CEDCB /* VoiceConverter */,
+				9ECC4D692812AE00001CEDCB /* AudioMessageViewController.m */,
+				9ECC4D6A2812AE00001CEDCB /* AgoraAudioRecordUtil.mm */,
+				9ECC4D6B2812AE00001CEDCB /* AgoraAudioRecordUtil.h */,
+			);
+			path = SendAudioMessage;
+			sourceTree = "<group>";
+		};
+		9ECC4D642812AE00001CEDCB /* VoiceConverter */ = {
+			isa = PBXGroup;
+			children = (
+				9ECC4D652812AE00001CEDCB /* wav.mm */,
+				9ECC4D662812AE00001CEDCB /* amrFileCodec.mm */,
+				9ECC4D672812AE00001CEDCB /* amrFileCodec.h */,
+				9ECC4D682812AE00001CEDCB /* wav.h */,
+			);
+			path = VoiceConverter;
 			sourceTree = "<group>";
 		};
 		B4F21F08BFCDFDB537D17206 /* Frameworks */ = {
@@ -114,7 +192,7 @@
 				9E429FB126F2EB4800F0B94D /* Frameworks */,
 				9E429FB226F2EB4800F0B94D /* Resources */,
 				9ED854DB270453F30092884C /* Embed Frameworks */,
-				717E17D0C42B029D805AFCE8 /* [CP] Embed Pods Frameworks */,
+				F2D27627C70CC0436FC1DD3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +241,7 @@
 			files = (
 				9E429FC726F2EB4A00F0B94D /* LaunchScreen.storyboard in Resources */,
 				9E429FC426F2EB4A00F0B94D /* Assets.xcassets in Resources */,
+				9ECC4D6F2812AE00001CEDCB /* SBDChannelMessage.txt in Resources */,
 				9E429FC226F2EB4800F0B94D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,23 +249,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		717E17D0C42B029D805AFCE8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8AF5C4D9C97B40E8F03428CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +271,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F2D27627C70CC0436FC1DD3D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample/Pods-AgoraChatAPIExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -216,11 +295,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E429FBF26F2EB4800F0B94D /* ViewController.m in Sources */,
 				9E429FB926F2EB4800F0B94D /* AppDelegate.m in Sources */,
+				9ECC4D3A2812905E001CEDCB /* NavigationViewController.m in Sources */,
+				9ECC4D702812AE00001CEDCB /* FetchServerMessageViewController.m in Sources */,
+				9ECC4D6C2812AE00001CEDCB /* AgoraChatApiExampleViewController.m in Sources */,
+				9ECC4D742812AE00001CEDCB /* AgoraAudioRecordUtil.mm in Sources */,
+				9ECC4D6D2812AE00001CEDCB /* EMHttpRequest.m in Sources */,
+				9ECC4D732812AE00001CEDCB /* AudioMessageViewController.m in Sources */,
 				9E429FCA26F2EB4A00F0B94D /* main.m in Sources */,
-				9E429FD226F341A700F0B94D /* EMHttpRequest.m in Sources */,
+				9ECC4D6E2812AE00001CEDCB /* ImportMessageViewController.m in Sources */,
+				9ECC4D712812AE00001CEDCB /* wav.mm in Sources */,
 				9E429FBC26F2EB4800F0B94D /* SceneDelegate.m in Sources */,
+				9ECC4D722812AE00001CEDCB /* amrFileCodec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +451,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = AgoraChatAPIExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -384,6 +474,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = AgoraChatAPIExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
