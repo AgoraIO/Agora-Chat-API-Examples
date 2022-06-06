@@ -57,7 +57,7 @@
         <Button x:Name="SignInBtn" Content="Sign in" HorizontalAlignment="Left" Margin="300,43,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="SignIn_Click"/>
         <Button x:Name="SignOutBtn" Content="Sign out" HorizontalAlignment="Left" Margin="488,43,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="SignOut_Click"/>
 
-        <TextBox x:Name="SingleChatIdTextBox" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Margin="23,92,0,0" Text="" VerticalContentAlignment="Center" Width="120" TextChanged="SingleChatIdTextBox_TextChanged" >
+        <TextBox x:Name="SingleChatIdTextBox" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="25" Margin="23,92,0,0" Text="" VerticalContentAlignment="Center" Width="120" >
             <TextBox.Resources>
                 <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.3" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
