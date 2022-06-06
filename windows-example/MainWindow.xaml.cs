@@ -163,6 +163,5 @@ namespace windows_example
                 return false;
             }
         }
-
     }
 }

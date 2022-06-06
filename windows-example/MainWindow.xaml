@@ -61,7 +61,7 @@
             <TextBox.Resources>
                 <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.3" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Normal" Text="signle chat id"/>
+                        <TextBlock FontStyle="Normal" Text="single chat id"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
