@@ -1,6 +1,6 @@
 import WebIM from 'agora-chat'
 import recorder from '../utils/recordAudio'
-var _startTime, _endTime, recorderObj, time = 60, timer = null;
+var _startTime, _endTime, recorderObj, time = 60, timer = null, MediaStream;
 
 // 添加回调函数
 WebIM.conn.addEventHandler('audioMessage', {

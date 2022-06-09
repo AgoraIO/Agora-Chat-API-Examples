@@ -126,7 +126,7 @@ index.html 的内容如下。<script src="./dist/bundle.js"></script> 用来引�
                         </div>
                         <div class="row">
                             <div>
-                                <button type="button" id="sessionList">SessionList</button>
+                                <button type="button" id="conversationList">ConversationList</button>
                             </div>
                         </div>
                         <div class="row">
@@ -299,7 +299,7 @@ function postData(url, data) {
 const path = require('path');
 
 module.exports = {
-    entry: ['./src/index.js','./src/sessionList.js','./src/sendAudioMessage.js'],
+    entry: ['./src/index.js','./src/conversationList.js','./src/sendAudioMessage.js'],
     mode: 'production',
     output: {
         filename: 'bundle.js',
@@ -321,7 +321,7 @@ Agora_quickstart
 ├── src
 │   ├── index.js
 │   ├── sendAudioMessage.js
-│   └── sessionList.js
+│   └── conversationList.js
 ├── utils
 │   └── recordAudio.js
 └── webpack.config.js
@@ -394,7 +394,7 @@ sendAudioMessage.js 的内容如下。本文使用 import 的方法导入 SDK，
 import WebIM from 'agora-chat'
 //录制音频所需文件
 import recorder from '../utils/recordAudio'
-var _startTime, _endTime, recorderObj, time = 60, timer = null;
+var _startTime, _endTime, recorderObj, time = 60, timer = null, MediaStream;
 
 // 添加回调函数
 WebIM.conn.addEventHandler('audioMessage', {
@@ -493,18 +493,18 @@ document.getElementById("recordBox").onclick = function () {
 
 ### 8. 实现获取会话列表和漫游消息
 
-sessionList.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 webpack 对 JS 文件进行打包，以避免浏览器兼容性问题。
+conversationList.js 的内容如下。本文使用 import 的方法导入 SDK，并使用 webpack 对 JS 文件进行打包，以避免浏览器兼容性问题。
 
 ```Javascript
 import WebIM from 'agora-chat'
 
 // 按钮行为定义
 //获取会话列表
-document.getElementById("sessionList").onclick = function () {
-    document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList...")
-    WebIM.conn.getSessionList().then((res) => {
-        console.log('getSessionList success')
-        document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList success")
+document.getElementById("conversationList").onclick = function () {
+    document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList...")
+    WebIM.conn.getConversationList().then((res) => {
+        console.log('getConversationList success')
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList success")
         let str='';
         res.data.channel_infos.map((item) => {
             const chanelId = item.channel_id;
@@ -517,9 +517,9 @@ document.getElementById("sessionList").onclick = function () {
         })
         var odIV = document.createElement("div");
         odIV.style.whiteSpace = "pre";
-        document.getElementById("log").appendChild(odIV).append('sessionList:', str)
+        document.getElementById("log").appendChild(odIV).append('getConversationList:', str)
     }).catch(() => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList failed")
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList failed")
     })
 }
 
