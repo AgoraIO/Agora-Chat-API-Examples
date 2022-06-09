@@ -2,11 +2,11 @@ import WebIM from 'agora-chat'
 
 // 按钮行为定义
 //获取会话列表
-document.getElementById("sessionList").onclick = function () {
-    document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList...")
-    WebIM.conn.getSessionList().then((res) => {
-        console.log('getSessionList success')
-        document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList success")
+document.getElementById("conversationList").onclick = function () {
+    document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList...")
+    WebIM.conn.getConversationList().then((res) => {
+        console.log('getConversationList success',res)
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList success")
         let str='';
         res.data.channel_infos.map((item) => {
             const chanelId = item.channel_id;
@@ -19,9 +19,9 @@ document.getElementById("sessionList").onclick = function () {
         })
         var odIV = document.createElement("div");
         odIV.style.whiteSpace = "pre";
-        document.getElementById("log").appendChild(odIV).append('sessionList:', str)
+        document.getElementById("log").appendChild(odIV).append('getConversationList:', str)
     }).catch(() => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("getSessionList failed")
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList failed")
     })
 }
 

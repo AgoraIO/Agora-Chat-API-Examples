@@ -184,9 +184,6 @@ const HZRecorder = function(stream, config){
     // 音频采集
     recorder.onaudioprocess = (e) => {
         audioData.input(e.inputBuffer.getChannelData(0))
-
-        // console.log(this.isEmptyData(e.inputBuffer.getChannelData(0)))
-        // record(e.inputBuffer.getChannelData(0));
     }
 }
 HZRecorder.setErrorInfoText = (errorMessage) => {
@@ -205,21 +202,17 @@ HZRecorder.get = function(callback, config){
                     switch(error.code || error.name){
                         case 'PERMISSION_DENIED':
                         case 'PermissionDeniedError':
-                            // message.error('用户拒绝提供信息。')
                             console.log('用户拒绝提供信息。')
                             break
                         case 'NOT_SUPPORTED_ERROR':
                         case 'NotSupportedError':
-                            // message.error('浏览器不支持硬件设备。')
                             console.log('浏览器不支持硬件设备。')
                             break
                         case 'MANDATORY_UNSATISFIED_ERROR':
                         case 'MandatoryUnsatisfiedError':
-                            // message.error('无法发现指定的硬件设备。')
                             console.log('无法发现指定的硬件设备。')
                             break
                         default:
-                            // message.error('当前浏览器不支持录音功能。(建议使用Chrome)')
                             console.log('当前浏览器不支持录音功能。(建议使用Chrome)')
                             break
                         }
