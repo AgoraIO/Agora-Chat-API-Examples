@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "agora-chat": "^1.0.2",
+    "agora-chat": "^1.0.4",
     "agora-rtc-sdk-ng": "^4.6.3"
   },
   "devDependencies": {

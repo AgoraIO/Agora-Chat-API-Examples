@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './index.js',
+    entry: ['./src/index.js','./src/conversationList.js','./src/sendAudioMessage.js'],
     mode: 'production',
     output: {
         filename: 'bundle.js',
