@@ -81,12 +81,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3804916D254EC51B0A7A520A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9E429FAB26F2EB4800F0B94D = {
 			isa = PBXGroup;
 			children = (
 				9E429FB626F2EB4800F0B94D /* AgoraChatAPIExample */,
 				9E429FB526F2EB4800F0B94D /* Products */,
-				B4F21F08BFCDFDB537D17206 /* Frameworks */,
+				3804916D254EC51B0A7A520A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,13 +180,6 @@
 			path = VoiceConverter;
 			sourceTree = "<group>";
 		};
-		B4F21F08BFCDFDB537D17206 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,12 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E429FCD26F2EB4A00F0B94D /* Build configuration list for PBXNativeTarget "AgoraChatAPIExample" */;
 			buildPhases = (
-				8AF5C4D9C97B40E8F03428CE /* [CP] Check Pods Manifest.lock */,
+				222BB568ADDEC8F1C31707E6 /* [CP] Check Pods Manifest.lock */,
 				9E429FB026F2EB4800F0B94D /* Sources */,
 				9E429FB126F2EB4800F0B94D /* Frameworks */,
 				9E429FB226F2EB4800F0B94D /* Resources */,
 				9ED854DB270453F30092884C /* Embed Frameworks */,
-				F2D27627C70CC0436FC1DD3D /* [CP] Embed Pods Frameworks */,
+				63B3E0FE197E578FC20DDA59 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,7 +249,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8AF5C4D9C97B40E8F03428CE /* [CP] Check Pods Manifest.lock */ = {
+		222BB568ADDEC8F1C31707E6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -271,7 +271,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2D27627C70CC0436FC1DD3D /* [CP] Embed Pods Frameworks */ = {
+		63B3E0FE197E578FC20DDA59 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -463,6 +463,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.easemob.enterprise.demo.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -486,6 +487,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.easemob.enterprise.demo.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

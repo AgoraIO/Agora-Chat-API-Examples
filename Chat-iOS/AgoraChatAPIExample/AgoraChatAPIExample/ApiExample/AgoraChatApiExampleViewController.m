@@ -73,6 +73,9 @@
 
     [[AgoraChatClient sharedClient] addDelegate:self delegateQueue:nil];
     [[AgoraChatClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    
+    NSString *version = [AgoraChatClient sharedClient].version;
+    NSLog(version);
 }
 
 - (void)handleTapTableViewAction:(UITapGestureRecognizer *)aTap
@@ -468,7 +471,6 @@
     
     AgoraChatMessage *message = [[AgoraChatMessage alloc] initWithConversationID:to from:from to:to body:body ext:nil];
     message.chatType = AgoraChatTypeChat;
-    
     __weak typeof(self) weakself = self;
     [[AgoraChatClient sharedClient].chatManager sendMessage:message progress:nil completion:^(AgoraChatMessage *message, AgoraChatError *error) {
         if (!error) {
