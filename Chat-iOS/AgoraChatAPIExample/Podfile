@@ -6,7 +6,8 @@ platform :ios, '11.0'
 
 target 'AgoraChatAPIExample' do
 
-    pod 'AgoraChat'
+    pod 'Agora_Chat_iOS'
     pod 'Masonry'
+    pod 'EMVoiceConvert', '0.1.0'
 end
 

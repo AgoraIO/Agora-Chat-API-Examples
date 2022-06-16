@@ -6,7 +6,7 @@
 //
 
 #import "SceneDelegate.h"
-#import "ViewController.h"
+#import "NavigationViewController.h"
 
 @interface SceneDelegate ()
 
@@ -20,7 +20,8 @@
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
     self.window.frame = windowScene.coordinateSpace.bounds;
-    self.window.rootViewController = [ViewController new];
+    NavigationViewController *navVc = [[NavigationViewController alloc]init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:navVc];
     [self.window makeKeyAndVisible];
     
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
