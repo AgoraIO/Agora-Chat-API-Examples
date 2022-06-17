@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_send_audio_message">
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_username"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_username"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pwd"
+        app:layout_constraintEnd_toStartOf="@id/btn_sign_up"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:onClick="signUp"
+        app:layout_constraintStart_toEndOf="@id/btn_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pwd"
+        app:layout_constraintTop_toTopOf="@id/btn_sign_in"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"/>
+
+</merge>

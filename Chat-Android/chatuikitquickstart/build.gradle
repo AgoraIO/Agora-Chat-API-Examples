@@ -36,5 +36,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     // Required: Agora Chat UIKit
-    implementation 'io.agora.rtc:chat-uikit:1.0.1.1'
+    implementation 'io.agora.rtc:chat-uikit:1.0.3'
 }

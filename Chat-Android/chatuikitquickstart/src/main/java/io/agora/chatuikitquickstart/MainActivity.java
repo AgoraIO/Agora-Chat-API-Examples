@@ -1,5 +1,7 @@
 package io.agora.chatuikitquickstart;
 
+import static io.agora.cloud.HttpClientManager.Method_POST;
+
 import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import org.json.JSONObject;
 
@@ -27,16 +28,12 @@ import io.agora.chat.ChatOptions;
 import io.agora.chat.uikit.EaseUIKit;
 import io.agora.chat.uikit.chat.EaseChatFragment;
 import io.agora.chat.uikit.chat.interfaces.OnChatExtendMenuItemClickListener;
-import io.agora.chat.uikit.chat.interfaces.OnChatInputChangeListener;
 import io.agora.chat.uikit.chat.interfaces.OnChatRecordTouchListener;
 import io.agora.chat.uikit.chat.interfaces.OnMessageSendCallBack;
 import io.agora.chatuikitquickstart.utils.LogUtils;
 import io.agora.chatuikitquickstart.utils.PermissionsManager;
 import io.agora.cloud.HttpClientManager;
 import io.agora.cloud.HttpResponse;
-import io.agora.util.EMLog;
-
-import static io.agora.cloud.HttpClientManager.Method_POST;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -270,54 +267,69 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.showErrorToast(MainActivity.this, tv_log, getString(R.string.username_or_pwd_miss));
             return;
         }
+        getAndParseToken(username,pwd,requestType);
+    }
+
+    private void getAndParseToken(String username,String pwd,String requestType){
         execute(()-> {
             try {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-
-                JSONObject request = new JSONObject();
-                request.putOpt("userAccount", username);
-                request.putOpt("userPassword", pwd);
-
-                LogUtils.showErrorLog(tv_log,"begin to getTokenFromAppServer ...");
-
-                HttpResponse response = HttpClientManager.httpExecute(LOGIN_URL, headers, request.toString(), Method_POST);
-                int code = response.code;
-                String responseInfo = response.content;
-                if (code == 200) {
-                    if (responseInfo != null && responseInfo.length() > 0) {
-                        JSONObject object = new JSONObject(responseInfo);
-                        String token = object.getString("accessToken");
-                        if(TextUtils.equals(requestType, NEW_LOGIN)) {
-                            ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
-                                @Override
-                                public void onSuccess() {
-                                    LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
-                                }
-
-                                @Override
-                                public void onError(int code, String error) {
-                                    LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: " + code + " error: " + error);
-                                }
-
-                                @Override
-                                public void onProgress(int progress, String status) {
-
-                                }
-                            });
-                        }else if(TextUtils.equals(requestType, RENEW_TOKEN)) {
-                            ChatClient.getInstance().renewToken(token);
-                        }
-
-                    } else {
-                        LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
-                    }
-                } else {
-                    LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
-                }
+                HttpResponse response=getToken(username,pwd);
+                parseResponse(response,username,requestType);
             } catch (Exception e) {
                 e.printStackTrace();
                 LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.getMessage());
+            }
+        });
+    }
+
+    private HttpResponse getToken(String username,String pwd) throws Exception{
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+        JSONObject request = new JSONObject();
+        request.putOpt("userAccount", username);
+        request.putOpt("userPassword", pwd);
+
+        LogUtils.showErrorLog(tv_log,"begin to getTokenFromAppServer ...");
+
+        HttpResponse response = HttpClientManager.httpExecute(LOGIN_URL, headers, request.toString(), Method_POST);
+        return response;
+    }
+
+    private void parseResponse(HttpResponse response,String username ,String requestType) throws Exception{
+        int code = response.code;
+        String responseInfo = response.content;
+        if (code == 200) {
+            if (responseInfo != null && responseInfo.length() > 0) {
+                JSONObject object = new JSONObject(responseInfo);
+                String token = object.getString("accessToken");
+                if(TextUtils.equals(requestType, NEW_LOGIN)) {
+                    login(username,token);
+                }else if(TextUtils.equals(requestType, RENEW_TOKEN)) {
+                    ChatClient.getInstance().renewToken(token);
+                }
+            } else {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+            }
+        } else {
+            LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+        }
+    }
+
+    private void login(String username, String token) {
+        ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: " + code + " error: " + error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
 
             }
         });

@@ -1,18 +1,14 @@
-package io.agora.chat.utils;
+package io.agora.agorachatquickstart.utils;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public class LogUtils {
     private static final String TAG = LogUtils.class.getSimpleName();
@@ -29,14 +25,14 @@ public class LogUtils {
         if(TextUtils.isEmpty(content) || tvLog == null) {
             return;
         }
-        String preContent = tvLog.getText().toString().trim();
-        StringBuilder builder = new StringBuilder();
-        builder.append(formatCurrentTime())
-                .append(" ")
-                .append(content)
-                .append("\n")
-                .append(preContent);
         tvLog.post(()-> {
+            String preContent = tvLog.getText().toString().trim();
+            StringBuilder builder = new StringBuilder();
+            builder.append(formatCurrentTime())
+                    .append(" ")
+                    .append(content)
+                    .append("\n")
+                    .append(preContent);
             tvLog.setText(builder);
         });
     }
