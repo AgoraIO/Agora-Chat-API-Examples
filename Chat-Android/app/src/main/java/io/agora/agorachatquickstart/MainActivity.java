@@ -94,32 +94,6 @@ public class MainActivity extends AppCompatActivity {
             public void onMessageReceived(List<ChatMessage> messages) {
                 parseMessage(messages);
             }
-
-            @Override
-            public void onCmdMessageReceived(List<ChatMessage> messages) {
-                LogUtils.showLog(tv_log, "onCmdMessageReceived");
-            }
-
-            @Override
-            public void onMessageRead(List<ChatMessage> messages) {
-                LogUtils.showLog(tv_log, "onMessageRead");
-            }
-
-            @Override
-            public void onMessageDelivered(List<ChatMessage> messages) {
-                LogUtils.showLog(tv_log, "onMessageDelivered");
-            }
-
-            @Override
-            public void onMessageRecalled(List<ChatMessage> messages) {
-                LogUtils.showLog(tv_log, "onMessageRecalled");
-            }
-
-            @Deprecated
-            @Override
-            public void onMessageChanged(ChatMessage message, Object change) {
-                LogUtils.showLog(tv_log, "onMessageChanged");
-            }
         });
     }
 
