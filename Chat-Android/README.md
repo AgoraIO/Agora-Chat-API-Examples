@@ -57,8 +57,8 @@ Follow the steps to create the environment necessary to add video call into your
    ```java
    android {
        defaultConfig {
-               // The Android OS version should be 19 or higher.
-               minSdkVersion 19
+               // The Android OS version should be 21 or higher.
+               minSdkVersion 21
        }
        compileOptions {
            sourceCompatibility JavaVersion.VERSION_1_8
@@ -71,7 +71,7 @@ Follow the steps to create the environment necessary to add video call into your
    }
    ```
 
-   <div class="alert note"><ul><li><code>minSdkVersion</code> must be 19 or higher for the build process to succeed.</li><li>For the latest SDK version, go to <a href="https://search.maven.org/search?q=a:chat-sdk">Sonatype</a></li></ul>.</div>
+   <div class="alert note"><ul><li><code>minSdkVersion</code> must be 21 or higher for the build process to succeed.</li><li>For the latest SDK version, go to <a href="https://search.maven.org/search?q=a:chat-sdk">Sonatype</a></li></ul>.</div>
 
 3. Add permissions for network and device access.
 
