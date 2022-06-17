@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="start_recording">Press record</string>
+    <string name="recording_without_permission">No Recording permission</string>
+    <string name="recording_time_is_too_short">Speech too short</string>
+    <string name="send_failure_please">Failed to send message, please check the server connection.</string>
+    <string name="send_voice_need_sdcard_support">You need an SD card to send voice messages</string>
+    <string name="recoding_fail">Recording failed, please try again!</string>
+    <string name="send_audio_message_success">Audio message sent successfully!</string>
+    <string name="not_find_send_audio_name">Please enter the username who you want to send first!</string>
+    <string name="start_record">Start to record audio</string>
+    <string name="stop_record">Stop recording audio</string>
+    <string name="start_to_send_audio">Start to send audio message…</string>
+
+</resources>

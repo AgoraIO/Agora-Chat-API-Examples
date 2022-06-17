@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_messages">Show local messages</string>
+    <string name="start_to_import">Start to import messages…</string>
+    <string name="no_local_data">Local json data is null</string>
+    <string name="get_conversations_from_db">Start to get conversations from local db…</string>
+    <string name="no_local_conversation">No local conversations</string>
+    <string name="show_conversation">conversation id: %1$s conversation type: %2$s</string>
+    <string name="show_message">index: %1$d conversation id: %2$s message id: %3$s message type: %4$s from: %5$s to: %6$s</string>
+    <string name="local_data_is_substandard">Local json data is substandard</string>
+    <string name="import_message_successful">Import message successful!</string>
+</resources>

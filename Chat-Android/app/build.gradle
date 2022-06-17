@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "io.agora.chat"
+        applicationId "io.agora.agorachatquickstart"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Required: Agora Chat SDK
-    implementation 'io.agora.rtc:chat-sdk:1.0.1'
+    implementation 'io.agora.rtc:chat-sdk:1.0.3'
     // You can add documentfile library when you encounter the error of
     // "java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/documentfile/provider/DocumentFile;"
     implementation "androidx.documentfile:documentfile:1.0.1"
