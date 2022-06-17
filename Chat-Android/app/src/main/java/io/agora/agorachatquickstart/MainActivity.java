@@ -26,6 +26,7 @@ import io.agora.CallBack;
 import io.agora.ConnectionListener;
 import io.agora.Error;
 import io.agora.MessageListener;
+import io.agora.ValueCallBack;
 import io.agora.agorachatquickstart.utils.ImageUtils;
 import io.agora.agorachatquickstart.utils.PermissionsManager;
 import io.agora.chat.ChatClient;
@@ -351,54 +352,61 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.showErrorToast(MainActivity.this, tv_log, getString(R.string.username_or_pwd_miss));
             return;
         }
-        getAndParseToken(username,pwd,requestType);
-    }
-
-    private void getAndParseToken(String username,String pwd,String requestType){
-        execute(()-> {
-            try {
-                HttpResponse response=getToken(username,pwd);
-                parseResponse(response,username,requestType);
-            } catch (Exception e) {
-                e.printStackTrace();
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.getMessage());
-            }
-        });
-    }
-
-    private HttpResponse getToken(String username,String pwd) throws Exception{
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        JSONObject request = new JSONObject();
-        request.putOpt("userAccount", username);
-        request.putOpt("userPassword", pwd);
-
-        LogUtils.showErrorLog(tv_log,"begin to getTokenFromAppServer ...");
-
-        HttpResponse response = HttpClientManager.httpExecute(LOGIN_URL, headers, request.toString(), Method_POST);
-
-        return response;
-    }
-
-    private void parseResponse(HttpResponse response,String username ,String requestType) throws Exception{
-        int code = response.code;
-        String responseInfo = response.content;
-        if (code == 200) {
-            if (responseInfo != null && responseInfo.length() > 0) {
-                JSONObject object = new JSONObject(responseInfo);
-                String token = object.getString("accessToken");
+        getAgoraTokenFromAppServer(username, pwd, new ValueCallBack<String>() {
+            @Override
+            public void onSuccess(String token) {
                 if(TextUtils.equals(requestType, NEW_LOGIN)) {
                     login(username,token);
                 }else if(TextUtils.equals(requestType, RENEW_TOKEN)) {
                     ChatClient.getInstance().renewToken(token);
                 }
-            } else {
-                LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
             }
-        } else {
-            LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
-        }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + error + " error: " + errorMsg);
+            }
+        });
+    }
+
+    private void getAgoraTokenFromAppServer(String username, String pwd, ValueCallBack<String> callBack) {
+        execute(()-> {
+            try {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+
+                JSONObject request = new JSONObject();
+                request.putOpt("userAccount", username);
+                request.putOpt("userPassword", pwd);
+
+                LogUtils.showErrorLog(tv_log,"begin to getTokenFromAppServer ...");
+
+                HttpResponse response = HttpClientManager.httpExecute(LOGIN_URL, headers, request.toString(), Method_POST);
+                int code = response.code;
+                String responseInfo = response.content;
+                if (code == 200) {
+                    if (responseInfo != null && responseInfo.length() > 0) {
+                        JSONObject object = new JSONObject(responseInfo);
+                        String token = object.getString("accessToken");
+                        if(callBack != null) {
+                            callBack.onSuccess(token);
+                        }
+                    } else {
+                        if(callBack != null) {
+                            callBack.onError(Error.SERVER_UNKNOWN_ERROR, responseInfo);
+                        }
+                    }
+                } else {
+                    if(callBack != null) {
+                        callBack.onError(code, responseInfo);
+                    }
+                }
+            } catch (Exception e) {
+                if(callBack != null) {
+                    callBack.onError(Error.GENERAL_ERROR, e.getMessage());
+                }
+            }
+        });
     }
 
 //=================== get token from server end ========================
