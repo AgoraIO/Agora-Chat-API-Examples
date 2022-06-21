@@ -6,10 +6,7 @@
 //
 
 import UIKit
-import ZSwiftBaseLib
-import AgoraChat
 import Photos
-import ProgressHUD
 
 final class AgoraChatSendImageVideoController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate, AgoraChatManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
