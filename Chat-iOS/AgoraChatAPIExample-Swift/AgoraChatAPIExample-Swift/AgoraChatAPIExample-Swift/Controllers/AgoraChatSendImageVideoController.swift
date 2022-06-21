@@ -10,7 +10,6 @@ import ZSwiftBaseLib
 import AgoraChat
 import Photos
 import ProgressHUD
-import Kingfisher
 
 final class AgoraChatSendImageVideoController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate, AgoraChatManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
