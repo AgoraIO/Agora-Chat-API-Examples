@@ -7,13 +7,12 @@
 
 import UIKit
 import Photos
+import ZSwiftBaseLib
 
 final class AgoraChatSendImageVideoController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate, AgoraChatManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     private var filePath = ""
-    
-    private var heightMap = Dictionary<String,CGFloat>()
-    
+        
     private var messages: [AgoraChatMessage] = [AgoraChatMessage]()
     
     private var conversation: AgoraChatConversation?
@@ -37,10 +36,9 @@ final class AgoraChatSendImageVideoController: UIViewController,UITableViewDeleg
         self.init()
         self.conversation = AgoraChatClient.shared().chatManager.getConversationWithConvId(conversationId)
         let messages = self.conversation?.loadMessagesStart(fromId: "", count: 50, searchDirection: AgoraChatMessageSearchDirection.init(rawValue: 0)!) ?? []
-        self.messages.append(contentsOf: messages)
         for message in messages {
-            if self.heightMap[message.messageId] ?? 0 <= 0 {
-                self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52
+            if message.body.type == .image {
+                self.messages.append(message)
             }
         }
     }
@@ -102,14 +100,18 @@ extension AgoraChatSendImageVideoController {
                 picker.dismiss(animated: true)
                 return
             }
-            let data = image.jpegData(compressionQuality: 0.1)
+            let data = image.jpegData(compressionQuality: 0.01)
             let body = AgoraChatImageMessageBody(data: data, displayName: "\(Date().z.dateString)")
             let to = self.conversation?.conversationId ?? ""
             let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: body, ext: nil)
+            ProgressHUD.show("sending image...")
             AgoraChatClient.shared().chatManager.send(message, progress: nil) { msg, error in
-                if error == nil,let body = msg?.body as? AgoraChatImageMessageBody {
+                ProgressHUD.dismiss()
+                if error == nil {
                     self.messages.append(msg!)
                     self.messagesList.reloadData()
+                } else {
+                    ProgressHUD.showError("\(error?.errorDescription ?? "")")
                 }
             }
         }

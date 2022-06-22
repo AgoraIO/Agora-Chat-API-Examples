@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ZSwiftBaseLib
 
 final class AgoraChatSendTextViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, AgoraChatClientDelegate, AgoraChatManagerDelegate, UITextFieldDelegate {
     
@@ -28,11 +29,13 @@ final class AgoraChatSendTextViewController: UIViewController,UITableViewDelegat
     convenience init(_ conversationId: String) {
         self.init()
         self.conversation = AgoraChatClient.shared().chatManager.getConversationWithConvId(conversationId)
-        let messages = self.conversation?.loadMessagesStart(fromId: "", count: 50, searchDirection: AgoraChatMessageSearchDirection.init(rawValue: 0)!) ?? []
-        self.messages.append(contentsOf: messages)
+        let messages = self.conversation?.loadMessagesStart(fromId: "", count: 50, searchDirection: .up) ?? []
         for message in messages {
-            if self.heightMap[message.messageId] ?? 0 <= 0 {
-                self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52
+            if message.body.type == .text {
+                self.messages.append(message)
+                if self.heightMap[message.messageId] ?? 0 <= 0 {
+                    self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52
+                }
             }
         }
     }
@@ -90,13 +93,18 @@ extension AgoraChatSendTextViewController {
     }
     
     private func sendTextMessage(_ text: String) {
-        let message = AgoraChatMessage(conversationID: self.title!, from: AgoraChatClient.shared().currentUsername!, to: self.title!, body: AgoraChatTextMessageBody(text: text), ext: [:])
+        let to = self.conversation?.conversationId ?? ""
+        let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: AgoraChatTextMessageBody(text: text), ext: [:])
         AgoraChatClient.shared().chatManager.send(message, progress: nil) { sendMessage, error in
-            if self.heightMap[message.messageId] ?? 0 <= 0 {
-                self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52
+            if error == nil {
+                if self.heightMap[message.messageId] ?? 0 <= 0 {
+                    self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52
+                }
+                self.messages.append(message)
+                self.messagesList.reloadData()
+            } else {
+                ProgressHUD.showError("\(error?.errorDescription ?? "")")
             }
-            self.messages.append(message)
-            self.messagesList.reloadData()
         }
     }
     

@@ -6,15 +6,19 @@
 //
 
 import UIKit
+import ZSwiftBaseLib
 
-final class AgoraChatConversationsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,AgoraChatClientDelegate, AgoraChatManagerDelegate {
+final class AgoraChatConversationsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, AgoraChatManagerDelegate {
     
     private var toChatId = ""
     
     private var conversations = [AgoraChatConversation]()
     
     private lazy var conversationList: UITableView = {
-        UITableView(frame: CGRect(x: 0, y: ZNavgationHeight, width: ScreenWidth, height: ScreenHeight-ZNavgationHeight), style: .plain).delegate(self).dataSource(self).tableFooterView(UIView()).rowHeight(60).separatorStyle(.none)
+        UITableView(frame: CGRect(x: 0, y: ZNavgationHeight, width: ScreenWidth, height: ScreenHeight-ZNavgationHeight), style: .plain)
+            .delegate(self)
+            .dataSource(self)
+            .tableFooterView(UIView()).rowHeight(60).separatorStyle(.none)
     }()
     
     override func viewDidLoad() {
@@ -28,7 +32,6 @@ final class AgoraChatConversationsViewController: UIViewController,UITableViewDe
         // Do any additional setup after loading the view.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChat))
         self.view.addSubview(self.conversationList)
-        AgoraChatClient.shared().add(self, delegateQueue: .main)
         AgoraChatClient.shared().chatManager.add(self, delegateQueue: .main)
     }
     
@@ -101,25 +104,28 @@ extension AgoraChatConversationsViewController {
         if self.title == "Join a group" {
             AgoraChatClient.shared().groupManager.joinPublicGroup(self.toChatId) { group, error in
                 if error == nil {
-                    self.createConversation()
+                    self.createConversation(.groupChat)
                 } else {
                     ProgressHUD.showError(error?.errorDescription ?? "")
                 }
             }
         } else {
-            self.createConversation()
+            self.createConversation(.chat)
         }
         
     }
     
-    private func createConversation() {
-        let item: AgoraChatConversation = AgoraChatClient.shared().chatManager.getConversation(self.toChatId, type: AgoraChatConversationType.init(rawValue: 0)!, createIfNotExist: true)!
+    private func createConversation(_ type: AgoraChatConversationType) {
+        let item: AgoraChatConversation = AgoraChatClient.shared().chatManager.getConversation(self.toChatId, type: type, createIfNotExist: true)!
         let temp = self.conversations.filter { $0.conversationId == item.conversationId
         }
         if temp.count <= 0 {
             self.conversations.append(item)
             self.conversationList.reloadData()
         }
+        let to = self.toChatId
+        let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: AgoraChatTextMessageBody(text: "Hello!"), ext: [:])
+        AgoraChatClient.shared().chatManager.send(message, progress: nil)
     }
     
     //MARK: - UITextFieldDelegate
@@ -127,18 +133,6 @@ extension AgoraChatConversationsViewController {
         self.toChatId = textField.text ?? ""
     }
     
-    //MARK: - AgoraChatClientDelegate
-    func tokenWillExpire(_ aErrorCode: Int32) {
-        //Re-login required
-        if aErrorCode == 110 {
-            //Call the login related api to log in again than create e3
-        }
-    }
-
-    func tokenDidExpire(_ aErrorCode: Int32) {
-        //Re-login required
-        //Call the login related api to log in again than create e3
-    }
     //MARK: - AgoraChatManagerDelegate
     func messagesDidReceive(_ aMessages: [AgoraChatMessage]) {
         for message in aMessages {

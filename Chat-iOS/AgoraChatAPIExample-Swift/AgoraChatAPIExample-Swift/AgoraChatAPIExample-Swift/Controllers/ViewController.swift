@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import ZSwiftBaseLib
 
-final class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+final class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate {
+    
+    @UserDefault("AgoraChatUserName", defaultValue: "") var userName
+    
+    @UserDefault("AgoraChatPassword", defaultValue: "") var passWord
     
     private var data = ["Send text message","Send image message","Join a group","Log out"]
     
@@ -21,11 +26,16 @@ final class ViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.view.addSubViews([self.functionList])
         self.view.backgroundColor = .white
         self.refreshHeader()
+        AgoraChatClient.shared().add(self, delegateQueue: .main)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.refreshHeader()
+    }
+    
+    deinit {
+        AgoraChatClient.shared().removeDelegate(self)
     }
 
 }
@@ -88,6 +98,29 @@ extension ViewController {
             self.functionList.tableHeaderView = nil;
             let vc = AgoraChatLoginViewController.init()
             del.window?.rootViewController = vc
+        }
+    }
+    
+    //MARK: - AgoraChatClientDelegate
+    func tokenWillExpire(_ aErrorCode: Int32) {
+        //Re-login required
+        if aErrorCode == AgoraChatErrorCode.tokeWillExpire.rawValue {
+            AgoraChatRequest.shared.loginToAppSever(userName: self.userName, passWord: self.passWord) { dic, code in
+                if let token = dic["accessToken"] as? String,token.count > 0 {
+                    if let error =  AgoraChatClient.shared().renewToken(token) {
+                        ProgressHUD.showError(error.errorDescription ?? "")
+                    }
+                } else {
+                    ProgressHUD.showError("renew token failed!")
+                }
+            }
+        }
+    }
+
+    func tokenDidExpire(_ aErrorCode: Int32) {
+        //Re-login required
+        if aErrorCode == AgoraChatErrorCode.tokeWillExpire.rawValue || aErrorCode == AgoraChatErrorCode.fileInvalid.rawValue {
+            ProgressHUD.showError("Please log out then relogin!")
         }
     }
 
