@@ -48,8 +48,8 @@ Follow the steps to create the environment necessary to add video call into your
    ```java
    android {
        defaultConfig {
-               // The Android OS version should be 19 or higher.
-               minSdkVersion 19
+               // The Android OS version should be 21 or higher.
+               minSdkVersion 21
        }
        compileOptions {
            sourceCompatibility JavaVersion.VERSION_1_8
@@ -364,22 +364,31 @@ To enable your app to send and receive messages between individual users, do the
 
                 @Override
                 public void onDisconnected(int error) {
-                    if (error == Error.USER_REMOVED) {
-                        onUserException("account_removed");
-                    } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
-                        onUserException("account_conflict");
-                    } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
-                        onUserException("account_forbidden");
-                    } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
-                        onUserException("account_kicked_by_change_password");
-                    } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
-                        onUserException("account_kicked_by_other_device");
-                    } else if(error == Error.USER_BIND_ANOTHER_DEVICE) {
-                        onUserException("user_bind_another_device");
-                    } else if(error == Error.USER_DEVICE_CHANGED) {
-                        onUserException("user_device_changed");
-                    } else if(error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
-                        onUserException("user_login_too_many_devices");
+                    switch (error) {
+                        case Error.USER_REMOVED:
+                            onUserException("account_removed");
+                            break;
+                        case Error.USER_LOGIN_ANOTHER_DEVICE:
+                            onUserException("account_conflict");
+                            break;
+                        case Error.SERVER_SERVICE_RESTRICTED:
+                            onUserException("account_forbidden");
+                            break;
+                        case Error.USER_KICKED_BY_CHANGE_PASSWORD:
+                            onUserException("account_kicked_by_change_password");
+                            break;
+                        case Error.USER_KICKED_BY_OTHER_DEVICE:
+                            onUserException("account_kicked_by_other_device");
+                            break;
+                        case Error.USER_BIND_ANOTHER_DEVICE:
+                            onUserException("user_bind_another_device");
+                            break;
+                        case Error.USER_DEVICE_CHANGED:
+                            onUserException("user_device_changed");
+                            break;
+                        case Error.USER_LOGIN_TOO_MANY_DEVICES:
+                            onUserException("user_login_too_many_devices");
+                            break;
                     }
                 }
 
@@ -413,38 +422,15 @@ To enable your app to send and receive messages between individual users, do the
                 LogUtils.showErrorToast(this, tv_log, getString(R.string.username_or_pwd_miss));
                 return;
             }
-            execute(()-> {
-                try {
-                    Map<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json");
-                    JSONObject request = new JSONObject();
-                    request.putOpt("userAccount", username);
-                    request.putOpt("userPassword", pwd);
+            register(REGISTER_URL, username, pwd, new CallBack() {
+                @Override
+                public void onSuccess() {
+                    LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_up_success));
+                }
 
-                    LogUtils.showErrorLog(tv_log,"begin to signUp...");
-
-                    HttpResponse response = HttpClientManager.httpExecute(REGISTER_URL, headers, request.toString(), Method_POST);
-                    int code=  response.code;
-                    String responseInfo = response.content;
-                    if (code == 200) {
-                        if (responseInfo != null && responseInfo.length() > 0) {
-                            JSONObject object = new JSONObject(responseInfo);
-                            String resultCode = object.getString("code");
-                            if(resultCode.equals("RES_OK")) {
-                                LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_up_success));
-                            }else{
-                                String errorInfo = object.getString("errorInfo");
-                                LogUtils.showErrorLog(tv_log,errorInfo);
-                            }
-                        } else {
-                            LogUtils.showErrorLog(tv_log,responseInfo);
-                        }
-                    } else {
-                        LogUtils.showErrorLog(tv_log,responseInfo);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtils.showErrorLog(tv_log, e.getMessage());
+                @Override
+                public void onError(int code, String error) {
+                    LogUtils.showErrorLog(tv_log, error);
                 }
             });
         }
@@ -488,8 +474,8 @@ To enable your app to send and receive messages between individual users, do the
                 LogUtils.showErrorToast(this, tv_log, getString(R.string.not_find_send_name));
                 return;
             }
-            // 1: single chat; 2: group chat; 3: chat room
-            EaseChatFragment fragment = new EaseChatFragment.Builder(toChatUsername, 1)
+            
+            EaseChatFragment fragment = new EaseChatFragment.Builder(toChatUsername, EaseChatType.SINGLE_CHAT)
                     .useHeader(false)
                     .setOnChatExtendMenuItemClickListener(new OnChatExtendMenuItemClickListener() {
                         @Override
@@ -536,6 +522,23 @@ To enable your app to send and receive messages between individual users, do the
                 LogUtils.showErrorToast(MainActivity.this, tv_log, getString(R.string.username_or_pwd_miss));
                 return;
             }
+            getAgoraTokenFromAppServer(username, pwd, new ValueCallBack<String>() {
+                @Override
+                public void onSuccess(String token) {
+                    if(TextUtils.equals(requestType, NEW_LOGIN)) {
+                        login(username,token);
+                    }else if(TextUtils.equals(requestType, RENEW_TOKEN)) {
+                        ChatClient.getInstance().renewToken(token);
+                    }
+                }
+
+                @Override
+                public void onError(int error, String errorMsg) {
+                    LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + error + " error: " + errorMsg);
+                }
+            });
+        }
+        private void getAgoraTokenFromAppServer(String username, String pwd, ValueCallBack<String> callBack) {
             execute(()-> {
                 try {
                     Map<String, String> headers = new HashMap<>();
@@ -554,42 +557,92 @@ To enable your app to send and receive messages between individual users, do the
                         if (responseInfo != null && responseInfo.length() > 0) {
                             JSONObject object = new JSONObject(responseInfo);
                             String token = object.getString("accessToken");
-                            if(TextUtils.equals(requestType, NEW_LOGIN)) {
-                                ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
-                                    @Override
-                                    public void onSuccess() {
-                                        LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
-                                    }
-
-                                    @Override
-                                    public void onError(int code, String error) {
-                                        LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: " + code + " error: " + error);
-                                    }
-
-                                    @Override
-                                    public void onProgress(int progress, String status) {
-
-                                    }
-                                });
-                            }else if(TextUtils.equals(requestType, RENEW_TOKEN)) {
-                                ChatClient.getInstance().renewToken(token);
+                            if(callBack != null) {
+                                callBack.onSuccess(token);
                             }
-
                         } else {
-                            LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+                            if(callBack != null) {
+                                callBack.onError(Error.SERVER_UNKNOWN_ERROR, responseInfo);
+                            }
                         }
                     } else {
-                        LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + code + " error: " + responseInfo);
+                        if(callBack != null) {
+                            callBack.onError(code, responseInfo);
+                        }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtils.showErrorToast(MainActivity.this, tv_log, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.getMessage());
-
+                    if(callBack != null) {
+                        callBack.onError(Error.GENERAL_ERROR, e.getMessage());
+                    }
                 }
             });
         }
     //=================== get token from server end ========================
+    //=================== login and register start ========================
+        private void login(String username, String token) {
+            ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+                @Override
+                public void onSuccess() {
+                    LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));
+                }
 
+                @Override
+                public void onError(int code, String error) {
+                    LogUtils.showErrorToast(MainActivity.this, tv_log, "Login failed! code: " + code + " error: " + error);
+                }
+
+                @Override
+                public void onProgress(int progress, String status) {
+
+                }
+            });
+        }
+
+        private void register(String url, String username, String pwd, CallBack callBack) {
+            execute(()-> {
+                try {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json");
+                    JSONObject request = new JSONObject();
+                    request.putOpt("userAccount", username);
+                    request.putOpt("userPassword", pwd);
+
+                    LogUtils.showErrorLog(tv_log,"begin to signUp...");
+
+                    HttpResponse response = HttpClientManager.httpExecute(url, headers, request.toString(), Method_POST);
+                    int code=  response.code;
+                    String responseInfo = response.content;
+                    if (code == 200) {
+                        if (responseInfo != null && responseInfo.length() > 0) {
+                            JSONObject object = new JSONObject(responseInfo);
+                            String resultCode = object.getString("code");
+                            if(resultCode.equals("RES_OK")) {
+                                if(callBack != null) {
+                                    callBack.onSuccess();
+                                }
+                            }else{
+                                if(callBack != null) {
+                                    callBack.onError(Error.GENERAL_ERROR, object.getString("errorInfo"));
+                                }
+                            }
+                        } else {
+                            if(callBack != null) {
+                                callBack.onError(code, responseInfo);
+                            }
+                        }
+                    } else {
+                        if(callBack != null) {
+                            callBack.onError(code, responseInfo);
+                        }
+                    }
+                } catch (Exception e) {
+                    if(callBack != null) {
+                        callBack.onError(Error.GENERAL_ERROR, e.getMessage());
+                    }
+                }
+            });
+        }
+    //=================== login and register end ========================
         /**
         * Check and request permission
         * @param permission
