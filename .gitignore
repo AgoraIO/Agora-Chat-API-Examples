@@ -103,3 +103,8 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+Chat-Unity/chat_unity_quickstart/ProjectSettings/
+*.settings
+Chat-Unity/chat_unity_quickstart/UserSettings/EditorUserSettings.asset
+Chat-Unity/chat_unity_quickstart/UserSettings/
+Chat-Unity/chat_unity_quickstart/Packages/
