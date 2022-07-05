@@ -1,0 +1,27 @@
+[
+  {
+    "channelName" : "mx's groupchannel",
+    "channelUrl" : "group_channel_169529786_8402085245304af475c7ab9893cc14c8e94b6878",
+    "messages" : [
+      {
+        "messageId" : "1802481261",
+        "message" : "mengxin",
+        "sender" : "chong",
+        "sendingStatus" : 2,
+        "type" : "MessageTypeText",
+        "createdAt" : 1650281524431
+      },
+      {
+        "sender" : "chong",
+        "messageId" : "1802481525",
+        "remoteUrl" : "https:\/\/file-us-1.xxxx.com\/820572c59bd544a4b11e09d58f8cbefe.jpg",
+        "fileName" : "img3.jpg",
+        "localUrl" : "https:\/\/file-us-1.xxxx.com\/820572c59bd544a4b11e09d58f8cbefe.jpg",
+        "size" : 2162951,
+        "type" : "MessageTypeFile",
+        "sendingStatus" : 2,
+        "createdAt" : 1650281535503
+      }
+    ]
+  }
+]

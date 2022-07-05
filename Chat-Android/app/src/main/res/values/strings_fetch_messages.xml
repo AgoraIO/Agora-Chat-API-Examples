@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fetch_conversations">Fetch conversations</string>
+    <string name="fetch_messages">Randomly fetch messages</string>
+    <string name="fetch_conversations_success">Fetch conversations from server successfully</string>
+    <string name="fetch_messages_success">Fetch messages from server successfully</string>
+    <string name="fetch_conversation_failed">Fetch conversations from server failed! code: %1$d error: %2$s</string>
+    <string name="fetch_message_failed">Fetch messages from server failed! code: %1$d error: %2$s</string>
+    <string name="print_only_first_10_data">Only print the first 10 data…</string>
+</resources>

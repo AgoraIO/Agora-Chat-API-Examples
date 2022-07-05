@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		662FBDBA28615AEC0089A3CF /* AgoraChatImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662FBDB928615AEC0089A3CF /* AgoraChatImageCell.swift */; };
+		66DEBE42286040AF00AB9465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE41286040AF00AB9465 /* AppDelegate.swift */; };
+		66DEBE46286040AF00AB9465 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE45286040AF00AB9465 /* ViewController.swift */; };
+		66DEBE4B286040B100AB9465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66DEBE4A286040B100AB9465 /* Assets.xcassets */; };
+		66DEBE4E286040B100AB9465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DEBE4C286040B100AB9465 /* LaunchScreen.storyboard */; };
+		66DEBE562860436B00AB9465 /* AgoraChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE552860436B00AB9465 /* AgoraChatRequest.swift */; };
+		66DEBE582860489600AB9465 /* AgoraChatLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE572860489600AB9465 /* AgoraChatLoginViewController.swift */; };
+		66DEBE5A2860577600AB9465 /* AgoraChatSendTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE592860577600AB9465 /* AgoraChatSendTextViewController.swift */; };
+		66DEBE5F28605AAA00AB9465 /* AgoraChatTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE5E28605AAA00AB9465 /* AgoraChatTextCell.swift */; };
+		66DEBE6128605CF900AB9465 /* AgoraChatConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE6028605CF900AB9465 /* AgoraChatConversationsViewController.swift */; };
+		66DEBE63286070F800AB9465 /* AgoraChatSendImageVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DEBE62286070F800AB9465 /* AgoraChatSendImageVideoController.swift */; };
+		F9F9666FA1F0D5957A12DB6B /* Pods_AgoraChatAPIExample_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4B62263AADB6A28ED3EC79 /* Pods_AgoraChatAPIExample_Swift.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		13D4326DAA8D17023CED02A4 /* Pods-AgoraChatAPIExample-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraChatAPIExample-Swift.release.xcconfig"; path = "Target Support Files/Pods-AgoraChatAPIExample-Swift/Pods-AgoraChatAPIExample-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		662FBDB928615AEC0089A3CF /* AgoraChatImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatImageCell.swift; sourceTree = "<group>"; };
+		66DEBE3E286040AF00AB9465 /* AgoraChatAPIExample-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AgoraChatAPIExample-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66DEBE41286040AF00AB9465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66DEBE45286040AF00AB9465 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66DEBE4A286040B100AB9465 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66DEBE4D286040B100AB9465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66DEBE4F286040B100AB9465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66DEBE552860436B00AB9465 /* AgoraChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatRequest.swift; sourceTree = "<group>"; };
+		66DEBE572860489600AB9465 /* AgoraChatLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatLoginViewController.swift; sourceTree = "<group>"; };
+		66DEBE592860577600AB9465 /* AgoraChatSendTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatSendTextViewController.swift; sourceTree = "<group>"; };
+		66DEBE5E28605AAA00AB9465 /* AgoraChatTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatTextCell.swift; sourceTree = "<group>"; };
+		66DEBE6028605CF900AB9465 /* AgoraChatConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatConversationsViewController.swift; sourceTree = "<group>"; };
+		66DEBE62286070F800AB9465 /* AgoraChatSendImageVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatSendImageVideoController.swift; sourceTree = "<group>"; };
+		9C4B62263AADB6A28ED3EC79 /* Pods_AgoraChatAPIExample_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AgoraChatAPIExample_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C73A60BA5101D95C00C51B3F /* Pods-AgoraChatAPIExample-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraChatAPIExample-Swift.debug.xcconfig"; path = "Target Support Files/Pods-AgoraChatAPIExample-Swift/Pods-AgoraChatAPIExample-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66DEBE3B286040AF00AB9465 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9F9666FA1F0D5957A12DB6B /* Pods_AgoraChatAPIExample_Swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66DEBE35286040AF00AB9465 = {
+			isa = PBXGroup;
+			children = (
+				66DEBE40286040AF00AB9465 /* AgoraChatAPIExample-Swift */,
+				66DEBE3F286040AF00AB9465 /* Products */,
+				870394D2A7CAB3B2AB996F27 /* Pods */,
+				90BF25D5132F42A01DEF985C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		66DEBE3F286040AF00AB9465 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66DEBE3E286040AF00AB9465 /* AgoraChatAPIExample-Swift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66DEBE40286040AF00AB9465 /* AgoraChatAPIExample-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				66DEBE5D28605A7900AB9465 /* Cells */,
+				66DEBE5C28605A6400AB9465 /* Utils */,
+				66DEBE5B28605A4F00AB9465 /* Controllers */,
+				66DEBE41286040AF00AB9465 /* AppDelegate.swift */,
+				66DEBE4A286040B100AB9465 /* Assets.xcassets */,
+				66DEBE4C286040B100AB9465 /* LaunchScreen.storyboard */,
+				66DEBE4F286040B100AB9465 /* Info.plist */,
+			);
+			path = "AgoraChatAPIExample-Swift";
+			sourceTree = "<group>";
+		};
+		66DEBE5B28605A4F00AB9465 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				66DEBE45286040AF00AB9465 /* ViewController.swift */,
+				66DEBE572860489600AB9465 /* AgoraChatLoginViewController.swift */,
+				66DEBE592860577600AB9465 /* AgoraChatSendTextViewController.swift */,
+				66DEBE62286070F800AB9465 /* AgoraChatSendImageVideoController.swift */,
+				66DEBE6028605CF900AB9465 /* AgoraChatConversationsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		66DEBE5C28605A6400AB9465 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				66DEBE552860436B00AB9465 /* AgoraChatRequest.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		66DEBE5D28605A7900AB9465 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				66DEBE5E28605AAA00AB9465 /* AgoraChatTextCell.swift */,
+				662FBDB928615AEC0089A3CF /* AgoraChatImageCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		870394D2A7CAB3B2AB996F27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C73A60BA5101D95C00C51B3F /* Pods-AgoraChatAPIExample-Swift.debug.xcconfig */,
+				13D4326DAA8D17023CED02A4 /* Pods-AgoraChatAPIExample-Swift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		90BF25D5132F42A01DEF985C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C4B62263AADB6A28ED3EC79 /* Pods_AgoraChatAPIExample_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66DEBE3D286040AF00AB9465 /* AgoraChatAPIExample-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66DEBE52286040B100AB9465 /* Build configuration list for PBXNativeTarget "AgoraChatAPIExample-Swift" */;
+			buildPhases = (
+				3578B6B22A4C034B983AB90D /* [CP] Check Pods Manifest.lock */,
+				66DEBE3A286040AF00AB9465 /* Sources */,
+				66DEBE3B286040AF00AB9465 /* Frameworks */,
+				66DEBE3C286040AF00AB9465 /* Resources */,
+				F2CE35BE8566186CE13CDACB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AgoraChatAPIExample-Swift";
+			productName = "AgoraChatAPIExample-Swift";
+			productReference = 66DEBE3E286040AF00AB9465 /* AgoraChatAPIExample-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66DEBE36286040AF00AB9465 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					66DEBE3D286040AF00AB9465 = {
+						CreatedOnToolsVersion = 13.4;
+					};
+				};
+			};
+			buildConfigurationList = 66DEBE39286040AF00AB9465 /* Build configuration list for PBXProject "AgoraChatAPIExample-Swift" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66DEBE35286040AF00AB9465;
+			productRefGroup = 66DEBE3F286040AF00AB9465 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66DEBE3D286040AF00AB9465 /* AgoraChatAPIExample-Swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66DEBE3C286040AF00AB9465 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DEBE4E286040B100AB9465 /* LaunchScreen.storyboard in Resources */,
+				66DEBE4B286040B100AB9465 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3578B6B22A4C034B983AB90D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AgoraChatAPIExample-Swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2CE35BE8566186CE13CDACB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample-Swift/Pods-AgoraChatAPIExample-Swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample-Swift/Pods-AgoraChatAPIExample-Swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AgoraChatAPIExample-Swift/Pods-AgoraChatAPIExample-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66DEBE3A286040AF00AB9465 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DEBE46286040AF00AB9465 /* ViewController.swift in Sources */,
+				66DEBE5F28605AAA00AB9465 /* AgoraChatTextCell.swift in Sources */,
+				66DEBE5A2860577600AB9465 /* AgoraChatSendTextViewController.swift in Sources */,
+				66DEBE42286040AF00AB9465 /* AppDelegate.swift in Sources */,
+				66DEBE63286070F800AB9465 /* AgoraChatSendImageVideoController.swift in Sources */,
+				662FBDBA28615AEC0089A3CF /* AgoraChatImageCell.swift in Sources */,
+				66DEBE562860436B00AB9465 /* AgoraChatRequest.swift in Sources */,
+				66DEBE582860489600AB9465 /* AgoraChatLoginViewController.swift in Sources */,
+				66DEBE6128605CF900AB9465 /* AgoraChatConversationsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		66DEBE4C286040B100AB9465 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66DEBE4D286040B100AB9465 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66DEBE50286040B100AB9465 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		66DEBE51286040B100AB9465 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66DEBE53286040B100AB9465 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C73A60BA5101D95C00C51B3F /* Pods-AgoraChatAPIExample-Swift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AgoraChatAPIExample-Swift/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "luomobancheng-gmail.com.AgoraChatAPIExample-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		66DEBE54286040B100AB9465 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13D4326DAA8D17023CED02A4 /* Pods-AgoraChatAPIExample-Swift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AgoraChatAPIExample-Swift/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "luomobancheng-gmail.com.AgoraChatAPIExample-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66DEBE39286040AF00AB9465 /* Build configuration list for PBXProject "AgoraChatAPIExample-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DEBE50286040B100AB9465 /* Debug */,
+				66DEBE51286040B100AB9465 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66DEBE52286040B100AB9465 /* Build configuration list for PBXNativeTarget "AgoraChatAPIExample-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DEBE53286040B100AB9465 /* Debug */,
+				66DEBE54286040B100AB9465 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66DEBE36286040AF00AB9465 /* Project object */;
+}

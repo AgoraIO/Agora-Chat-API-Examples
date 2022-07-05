@@ -17,7 +17,7 @@
     <string name="send_image_message">Send image</string>
     <string name="log_hint">Show log area...</string>
     <string name="has_login_before">An account has been signed in, please sign out first and then sign in</string>
-    <string name="sign_in_first">Please sign in first</string>
+    <string name="sign_in_first">Please sign in first!</string>
     <string name="not_find_send_name">Please enter the username who you want to send first!</string>
     <string name="message_is_null">Message is null!</string>
     <string name="enter_group_id">Enter group id</string>
@@ -25,6 +25,7 @@
     <string name="quit_group">Quit group</string>
     <string name="join_group_success">Join group success!</string>
     <string name="leave_group_success">Leave group success!</string>
+    <string name="message_sent_failed">Message sent failed! code: %1$d error: %2$s</string>
 
     <string name="app_key">41117440#383391</string>
 </resources>

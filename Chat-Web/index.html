@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Agora Chat Examples</title>
-    <script src="./dist/bundle.js"></script>
+    <script src="./dist/bundle.js" defer></script>
 </head>
 
 <body>
@@ -35,7 +35,22 @@
                         <div class="input-field">
                             <label>Peer Message</label>
                             <input type="text" placeholder="Peer message" id="peerMessage">
-                            <button type="button" id="send_peer_message">send</button>
+                            <button type="button" id="send_peer_message">sendTextMessage</button>
+                        </div>
+                        <div class="input-field" style="position:relative">
+                            <button type="button" id="send_audio_message">SendAudioMessage</button>
+                            <div id="recordBox" style="display:none;position: absolute;left:0;bottom:0;width: 140px; height: 50px; text-align:center;line-height:50px;background:#ccc;cursor:pointer;font-weight:bold;">start recording</div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <button type="button" id="conversationList">ConversationList</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <input type="text" placeholder="converationId" id="converationId">
+                                <button type="button" id="roamingMessage">RoamingMessage</button>
+                            </div>
                         </div>
                     </div>
                 </div>
