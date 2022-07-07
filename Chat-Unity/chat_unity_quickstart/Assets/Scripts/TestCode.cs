@@ -81,17 +81,9 @@ public class TestCode : MonoBehaviour
             AddLogToLogText("username or password is null");
             return;
         }
-        StartCoroutine(FetchAgoraToken(Username.text, Password.text, 
-            (agornToken) => {
-                AddLogToLogText(agornToken);
-            }, 
-            (error) => {
-                AddLogToLogText(error);
-            }
-        ));
     }
 
-    // Click SignUp button  
+    // Click SignUp button
     private void SignUpAction()
     {
         if (Username.text.Length == 0 || Password.text.Length == 0)
@@ -99,18 +91,6 @@ public class TestCode : MonoBehaviour
             AddLogToLogText("username or password is null");
             return;
         }
-
-        StartCoroutine(RegisterAgoraAccount(Username.text, Password.text, (error) =>
-        {
-            if (error != null)
-            {
-                AddLogToLogText(error);
-            }
-            else
-            {
-                AddLogToLogText("register succeed");
-            }
-        }));
     }
 
     // Click SignOut button
