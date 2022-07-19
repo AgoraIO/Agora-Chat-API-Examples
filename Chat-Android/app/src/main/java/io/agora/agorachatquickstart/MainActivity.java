@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
     private static final String NEW_LOGIN = "NEW_LOGIN";
     private static final String RENEW_TOKEN = "RENEW_TOKEN";
-    private static final String LOGIN_URL = "https://a41.easemob.com/app/chat/user/login";
-    private static final String REGISTER_URL = "https://a41.easemob.com/app/chat/user/register";
+    private final String LOGIN_URL = getString(R.string.login_url);
+    private final String REGISTER_URL = getString(R.string.register_url);
     private EditText et_username;
     private TextView tv_log;
     private EditText et_to_chat_name;
