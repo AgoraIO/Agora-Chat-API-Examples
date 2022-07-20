@@ -27,6 +27,9 @@ import {
 const App = () => {
   // variable defines.
   const title = 'AgoraChatQuickstart';
+  const requestGetTokenUrl = 'https://a41.easemob.com/app/chat/user/login';
+  const requestRegistryAccountUrl =
+    'https://a41.easemob.com/app/chat/user/register';
   const [appKey, setAppKey] = React.useState('81446724#514456');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -75,10 +78,10 @@ const App = () => {
     });
   };
   const requestGetToken = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/login');
+    return requestHttp(requestGetTokenUrl);
   };
   const requestRegistryAccount = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/register');
+    return requestHttp(requestRegistryAccountUrl);
   };
 
   // register listener for message.
