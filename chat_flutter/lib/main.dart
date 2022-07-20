@@ -1,8 +1,16 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:http/http.dart' as http;
+
+const String APP_KEY = "41117440#383391";
+
+const String APP_SERVER_HOST = "a41.easemob.com";
+const String LOGIN_URL = "/app/chat/user/login";
+const String REGISTER_URL = "/app/chat/user/register";
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +43,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     implements ChatManagerListener {
-  final String appKey = "41117440#383391";
+  final String appKey = APP_KEY;
 
   ScrollController scrollController = ScrollController();
   String _username = "";
@@ -341,10 +349,6 @@ class _MyHomePageState extends State<MyHomePage>
 }
 
 class HttpRequestManager {
-  static String host = "a41.easemob.com";
-  static String registerUrl = "/app/chat/user/register";
-  static String loginUrl = "/app/chat/user/login";
-
   static Future<bool> registerToAppServer({
     required String username,
     required String password,
@@ -354,7 +358,7 @@ class HttpRequestManager {
     params["userAccount"] = username;
     params["userPassword"] = password;
 
-    var uri = Uri.https(host, registerUrl);
+    var uri = Uri.https(APP_SERVER_HOST, REGISTER_URL);
 
     var client = http.Client();
 
@@ -387,7 +391,7 @@ class HttpRequestManager {
     params["userAccount"] = username;
     params["userPassword"] = password;
 
-    var uri = Uri.https(host, loginUrl);
+    var uri = Uri.https(APP_SERVER_HOST, LOGIN_URL);
 
     var client = http.Client();
 
