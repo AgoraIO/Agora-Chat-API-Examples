@@ -46,7 +46,7 @@ The project uses a single app to combine a variety of functionalities.Each funct
    <string name="register_url">YOUR REGISTER URL</string>
    ```
 
-   > See [Enable and Configure Agora Chat Service](https://docs.agora.io/cn/agora-chat/enable_agora_chat?platform=Android) to learn how to enable and configure Agora Chat Service.
+   > See [Enable and Configure Agora Chat Service](https://docs.agora.io/en/agora-chat/enable_agora_chat?platform=Android) to learn how to enable and configure Agora Chat Service.
    
    > Refer to the source code [Chat App Server](https://github.com/AgoraIO/Agora-Chat-API-Examples/tree/main/chat-app-server) to learn how to quickly build an App Server.
 
@@ -62,7 +62,7 @@ If you have any problems or suggestions regarding the sample projects, feel free
 
 ## Reference
 
-- [Agora Chat Overview](https://docs.agora.io/cn/agora-chat/agora_chat_overview?platform=Android)
+- [Agora Chat Overview](https://docs.agora.io/en/agora-chat/agora_chat_overview?platform=Android)
 - [API Reference]()
 
 ## Related resources
