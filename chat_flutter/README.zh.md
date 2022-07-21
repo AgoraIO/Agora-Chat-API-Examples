@@ -6,7 +6,7 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat flutter sdk 的示例项目。
 
-![flutter main](/images/flutter_main.png)
+![flutter main](/images/flutter_main.jpeg)
 
 ## 项目结构
 

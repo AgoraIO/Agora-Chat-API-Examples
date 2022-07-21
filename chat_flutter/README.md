@@ -6,7 +6,7 @@ _English | [中文](README.zh.md)_
 
 This repository contains sample projects using the Agora Chat flutter sdk.
 
-![flutter main](/images/flutter_main.png)
+![flutter main](/images/flutter_main.jpeg)
 
 ## Project structure
 
