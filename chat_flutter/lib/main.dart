@@ -1,8 +1,16 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:im_flutter_sdk/im_flutter_sdk.dart';
+import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:http/http.dart' as http;
+
+const String APP_KEY = "41117440#383391";
+
+const String APP_SERVER_HOST = "a41.easemob.com";
+const String LOGIN_URL = "/app/chat/user/login";
+const String REGISTER_URL = "/app/chat/user/register";
 
 void main() {
   runApp(const MyApp());
@@ -34,8 +42,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    implements EMChatManagerListener {
-  final String appKey = "41117440#383391";
+    implements ChatManagerListener {
+  final String appKey = APP_KEY;
 
   ScrollController scrollController = ScrollController();
   String _username = "";
@@ -116,11 +124,11 @@ class _MyHomePageState extends State<MyHomePage>
             const SizedBox(height: 10),
             TextField(
               decoration: const InputDecoration(
-                  hintText: "Enter the username you want to send"),
+                  hintText: "Enter recipient's user name"),
               onChanged: (chatId) => _chatId = chatId,
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Enter content"),
+              decoration: const InputDecoration(hintText: "Enter message"),
               onChanged: (msg) => _messageContent = msg,
             ),
             const SizedBox(height: 10),
@@ -148,20 +156,20 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _initSDK() async {
-    EMOptions options = EMOptions(
+    ChatOptions options = ChatOptions(
       appKey: appKey,
       autoLogin: false,
     );
-    await EMClient.getInstance.init(options);
+    await ChatClient.getInstance.init(options);
   }
 
   void _addChatListener() {
-    EMClient.getInstance.chatManager.addChatManagerListener(this);
+    ChatClient.getInstance.chatManager.addChatManagerListener(this);
   }
 
   @override
   void dispose() {
-    EMClient.getInstance.chatManager.removeChatManagerListener(this);
+    ChatClient.getInstance.chatManager.removeChatManagerListener(this);
     super.dispose();
   }
 
@@ -178,9 +186,9 @@ class _MyHomePageState extends State<MyHomePage>
     if (agoraToken != null) {
       _addLogToConsole("fetch agora token succeed, begin login");
       try {
-        await EMClient.getInstance.loginWithAgoraToken(_username, agoraToken);
+        await ChatClient.getInstance.loginWithAgoraToken(_username, agoraToken);
         _addLogToConsole("login succeed, username: $_username");
-      } on EMError catch (e) {
+      } on ChatError catch (e) {
         _addLogToConsole(
             "login failed, code: ${e.code}, desc: ${e.description}");
       }
@@ -191,9 +199,9 @@ class _MyHomePageState extends State<MyHomePage>
 
   void _signOut() async {
     try {
-      await EMClient.getInstance.logout(true);
+      await ChatClient.getInstance.logout(true);
       _addLogToConsole("sign out succeed");
-    } on EMError catch (e) {
+    } on ChatError catch (e) {
       _addLogToConsole(
           "sign out failed, code: ${e.code}, desc: ${e.description}");
     }
@@ -221,8 +229,8 @@ class _MyHomePageState extends State<MyHomePage>
       return;
     }
 
-    var msg = EMMessage.createTxtSendMessage(
-      username: _chatId,
+    var msg = ChatMessage.createTxtSendMessage(
+      targetId: _chatId,
       content: _messageContent,
     );
     msg.setMessageStatusCallBack(MessageStatusCallBack(
@@ -235,7 +243,7 @@ class _MyHomePageState extends State<MyHomePage>
         );
       },
     ));
-    EMClient.getInstance.chatManager.sendMessage(msg);
+    ChatClient.getInstance.chatManager.sendMessage(msg);
   }
 
   void _addLogToConsole(String log) {
@@ -250,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-  void onCmdMessagesReceived(List<EMMessage> messages) {}
+  void onCmdMessagesReceived(List<ChatMessage> messages) {}
 
   @override
   void onConversationRead(String from, String to) {}
@@ -259,24 +267,24 @@ class _MyHomePageState extends State<MyHomePage>
   void onConversationsUpdate() {}
 
   @override
-  void onGroupMessageRead(List<EMGroupMessageAck> groupMessageAcks) {}
+  void onGroupMessageRead(List<ChatGroupMessageAck> groupMessageAcks) {}
 
   @override
-  void onMessagesDelivered(List<EMMessage> messages) {}
+  void onMessagesDelivered(List<ChatMessage> messages) {}
 
   @override
-  void onMessagesRead(List<EMMessage> messages) {}
+  void onMessagesRead(List<ChatMessage> messages) {}
 
   @override
-  void onMessagesRecalled(List<EMMessage> messages) {}
+  void onMessagesRecalled(List<ChatMessage> messages) {}
 
   @override
-  void onMessagesReceived(List<EMMessage> messages) {
+  void onMessagesReceived(List<ChatMessage> messages) {
     for (var msg in messages) {
       switch (msg.body.type) {
         case MessageType.TXT:
           {
-            EMTextMessageBody body = msg.body as EMTextMessageBody;
+            ChatTextMessageBody body = msg.body as ChatTextMessageBody;
             _addLogToConsole(
               "receive text message: ${body.content}, from: ${msg.from}",
             );
@@ -326,19 +334,21 @@ class _MyHomePageState extends State<MyHomePage>
           break;
         case MessageType.CMD:
           {
-            // 当前回调中不会有cmd类型消息，cmd类型消息通过 EMChatManagerListener#onCmdMessagesReceived 回调接收
+            // Receiving command messages does not trigger the `onMessagesReceived` callback, but triggers the `onCmdMessagesReceived` callback instead.
           }
           break;
       }
     }
   }
+
+  @override
+  void onMessageReactionDidChange(List<ChatMessageReactionChange> list) {}
+
+  @override
+  void onReadAckForGroupMessageUpdated() {}
 }
 
 class HttpRequestManager {
-  static String host = "a41.easemob.com";
-  static String registerUrl = "/app/chat/user/register";
-  static String loginUrl = "/app/chat/user/login";
-
   static Future<bool> registerToAppServer({
     required String username,
     required String password,
@@ -348,7 +358,7 @@ class HttpRequestManager {
     params["userAccount"] = username;
     params["userPassword"] = password;
 
-    var uri = Uri.https(host, registerUrl);
+    var uri = Uri.https(APP_SERVER_HOST, REGISTER_URL);
 
     var client = http.Client();
 
@@ -381,7 +391,7 @@ class HttpRequestManager {
     params["userAccount"] = username;
     params["userPassword"] = password;
 
-    var uri = Uri.https(host, loginUrl);
+    var uri = Uri.https(APP_SERVER_HOST, LOGIN_URL);
 
     var client = http.Client();
 
