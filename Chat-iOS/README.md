@@ -14,7 +14,14 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 ### AgoraChatAPIExample project structure
 
-1.ApiExample,show you how to register and login and send message and join a group.
+1.ApiExample,show you how to initialize SDK and register and login and send message and join a group.
+
+``` initialize SDK
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
+    options.enableConsoleLog = YES;
+    [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
+    
+```
 
 2.FetchServerMessage,show you how to fetch historical messages form sever.
 
@@ -25,7 +32,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 | Function                                                                        | Location                                                                                                                                 |
 | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| ApiExample,how to using normal api                                                                  | [Api Example](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/ApiExample/AgoraChatApiExampleViewController.m)                                  |
+| ApiExample,how to using SDK api                                                                  | [Api Example](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/ApiExample/AgoraChatApiExampleViewController.m)                                  |
 | FetchServerMessage,how to fetch historical messages from sever                                                                  | [FetchServerMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/FetchServerMessage/FetchServerMessageViewController.m)                                  |
 | SendAudioMessage                                                                  | [SendAudioMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/SendAudioMessage/AudioMessageViewController.m)                                  |
 | ImportMessage                                                                  | [ImportMessage](https://github.com/zjc19891106/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/ImportMessage/ImportMessageViewController.m)                                  |
@@ -33,6 +40,15 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 ### AgoraChatAPIExample-Swift project structure
 
 1.AgoraChatLoginViewController,show you how to register and login with SDK.
+
+``` initialize SDK
+        let options = AgoraChatOptions(appkey: AgoraChatRequest.appKey)
+        options.enableConsoleLog = true
+        options.isAutoLogin = true
+        options.pushKitCertName = "com.easemob.enterprise.demo.ui.voip"
+        options.apnsCertName = "ChatDemoDevPush"
+        AgoraChatClient.shared().initializeSDK(with: options)
+```
 
 2.ViewController,show you function list.
 
@@ -63,6 +79,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 - Xcode 13.0+
 - All iOS device supported
+- Platform,iOS11 and above
 
 ### Steps to run
 
@@ -73,7 +90,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
     ```shell
     $ pod install
     ```
-2. Open the generated `foler's name.xcworkspace` file with Xcode.
+2. Open the generated `folder.xcworkspace` file with Xcode.
 
 3. Build and run the project in your iOS device or simulator.
 
