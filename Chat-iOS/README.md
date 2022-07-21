@@ -12,7 +12,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 3.Chatuikitquickstart,will show you how to quickly build a chat project with AgoraChat-UIKit base on AgoraChatSDK.
 
 
-##AgoraChatAPIExample project structure
+### AgoraChatAPIExample project structure
 
 1.ApiExample,show you how to register and login and send message and join a group.
 
@@ -30,7 +30,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 | SendAudioMessage                                                                  | [SendAudioMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/SendAudioMessage/AudioMessageViewController.m)                                  |
 | ImportMessage                                                                  | [ImportMessage](https://github.com/zjc19891106/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/ImportMessage/ImportMessageViewController.m)                                  |
 
-##AgoraChatAPIExample-Swift project structure
+### AgoraChatAPIExample-Swift project structure
 
 1.AgoraChatLoginViewController,show you how to register and login with SDK.
 
@@ -51,7 +51,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 | SendImageMessage swift code                                                                  | [SendImageMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/Controllers/AgoraChatSendImageVideoController.swift)                                  |
 
 
-##chatuikitquickstart project structure
+### chatuikitquickstart project structure
 
 [chatuikitquickstart](https://github.com/zjc19891106/Agora-Chat-API-Examples/tree/main/Chat-iOS/chatuikitquickstart)
 
