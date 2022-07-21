@@ -73,7 +73,7 @@ _[English](README.md) | 中文_
 3. 在终端命令行，输入以下命令添加依赖：
 
    ```sh
-   yarn add agora-react-native-chat
+   yarn add react-native-agora-chat
    ```
 
 4. 在目标平台执行脚本
@@ -106,7 +106,7 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from 'agora-react-native-chat';
+} from 'react-native-agora-chat';
 
 // The App Object.
 const App = () => {

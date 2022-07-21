@@ -69,7 +69,7 @@ For more information, see [RN dev](https://reactnative.dev/).
    A successful execution of this command generates a project named `token_login_demo` in the directory that you run the command.
 3. Run the following command to import the Chat SDK using yarn:
    ```sh
-   yarn add agora-react-native-chat
+   yarn add react-native-agora-chat
    ```
 4. Execute the scripts or tools according to your target platform.
    If your target platform is iOS:
@@ -99,7 +99,7 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from 'agora-react-native-chat';
+} from 'react-native-agora-chat';
 
 // The App Object.
 const App = () => {
