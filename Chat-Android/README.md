@@ -32,8 +32,6 @@ The project uses a single app to combine a variety of functionalities.Each funct
 
 ### Steps to run
 
-*Steps from cloning the code to running the project*
-
 1. Clone this project to local
 2. In Android Studio, open `/Chat-Android/`.
 3. Sync the project with Gradle files.

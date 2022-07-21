@@ -33,8 +33,6 @@ _[English](README.md) | 中文_
 
 ### 运行步骤
 
-*从拉取仓库到成功运行的全部步骤*
-
 1. 克隆本项目到本地
 2. 在 Android Studio 中，打开 /Chat-Android/。
 3. 将项目与 Gradle 文件同步。
