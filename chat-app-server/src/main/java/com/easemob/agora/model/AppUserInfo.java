@@ -25,9 +25,10 @@ public class AppUserInfo {
     @Column(name = "user_password")
     private String userPassword;
 
-    @Column(name = "chat_user_name")
-    private String chatUserName;
+    @Column(name = "agora_chat_user_name")
+    private String agoraChatUserName;
 
-    @Column(name = "agora_uid")
-    private String agoraUid;
+    @Column(name = "agora_chat_user_uuid")
+    private String agoraChatUserUuid;
+
 }
