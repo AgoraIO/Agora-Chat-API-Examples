@@ -6,7 +6,7 @@ _English | [中文](README.zh.md)_
 
 This repository contains sample projects using the Agora Chat Java SDK for Android .
 
-*image_of_a_running_project*
+<img src="image/android_api_example_functions.png" style="zoom:50%;" />
 
 ## Project structure
 

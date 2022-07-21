@@ -6,7 +6,7 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat Java SDK for Android 的示例项目。
 
-*项目运行效果图*
+<img src="image/android_api_example_functions.png" style="zoom:50%;" />
 
 ## 项目结构
 
