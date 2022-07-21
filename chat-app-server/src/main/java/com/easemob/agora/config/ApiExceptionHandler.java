@@ -23,7 +23,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR);
+        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -34,7 +34,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_USER_NOT_FOUND);
+        param.setCode(ResCode.RES_USER_NOT_FOUND.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -45,7 +45,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_UNKNOWN);
+        param.setCode(ResCode.RES_UNKNOWN.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -56,7 +56,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_UNKNOWN);
+        param.setCode(ResCode.RES_UNKNOWN.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -67,7 +67,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_UNKNOWN);
+        param.setCode(ResCode.RES_UNKNOWN.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -78,7 +78,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR);
+        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -89,7 +89,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_REACH_LIMIT);
+        param.setCode(ResCode.RES_REACH_LIMIT.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -100,7 +100,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(ex.getMessage());
-        param.setCode(ResCode.RES_USER_ALREADY_EXISTS);
+        param.setCode(ResCode.RES_USER_ALREADY_EXISTS.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
@@ -111,7 +111,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         FieldError error = result.getFieldError();
         final ResponseParam param = new ResponseParam();
         param.setErrorInfo(error.getDefaultMessage());
-        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR);
+        param.setCode(ResCode.RES_REQUEST_PARAM_ERROR.getCode());
 
         return handleExceptionInternal(ex, param, headers, status, request);
     }
