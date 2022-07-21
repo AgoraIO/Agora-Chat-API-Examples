@@ -16,9 +16,19 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 1.ApiExample,show you how to initialize SDK and register and login and send message and join a group.
 
+#### what if,you want to using own appkey
+
+- Replace `YOUR APP KEY` with your App KEY.
+- Replace `YOUR LOGIN URL` with the address of the App Server you built to get Agora Chat Token.
+- Replace `YOUR REGISTER USER URL` with the address of the registered Agora Chat user on the App Server you built.
+
+> See [Enable and Configure Agora Chat Service](https://docs.agora.io/en/agora-chat/enable_agora_chat?platform=iOS) to learn how to enable and configure Agora Chat Service.
+   
+> Refer to the source code [Chat App Server](https://github.com/AgoraIO/Agora-Chat-API-Examples/tree/main/chat-app-server) to learn how to quickly build an App Server.
+
 ``` 
     //initialize SDK
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"YOUR APP KEY"];
     options.enableConsoleLog = YES;
     [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
     
@@ -41,6 +51,16 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 ### AgoraChatAPIExample-Swift project structure
 
 1.AgoraChatLoginViewController,show you how to register and login with SDK.
+
+#### what if,you want to using own appkey
+
+- Replace `YOUR APP KEY` with your App KEY.
+- Replace `YOUR LOGIN URL` with the address of the App Server you built to get Agora Chat Token.
+- Replace `YOUR REGISTER USER URL` with the address of the registered Agora Chat user on the App Server you built.
+
+> See [Enable and Configure Agora Chat Service](https://docs.agora.io/en/agora-chat/enable_agora_chat?platform=iOS) to learn how to enable and configure Agora Chat Service.
+   
+> Refer to the source code [Chat App Server](https://github.com/AgoraIO/Agora-Chat-API-Examples/tree/main/chat-app-server) to learn how to quickly build an App Server.
 
 ``` 
         //initialize SDK
