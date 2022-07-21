@@ -65,8 +65,8 @@ _[English](README.md) | 中文_
 
 ## 参考文档
 
-- [Agora Chat SDK 产品概述](https://docs.agora.io/cn/agora-chat/agora_chat_overview?platform=flutter)
-- [Agora Chat SDK API 参考]()
+- [Agora Chat SDK 产品概述](https://docs.agora.io/en/agora-chat/agora_chat_get_started_flutter?platform=Flutter)
+- [Agora Chat SDK API 参考](https://docs.agora.io/en/agora-chat/api-ref?platform=Flutter)
 
 ## 相关资源
 

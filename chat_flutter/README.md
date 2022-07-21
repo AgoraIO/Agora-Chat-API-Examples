@@ -63,8 +63,8 @@ If you have any problems or suggestions regarding the sample projects, feel free
 
 ## Reference
 
-- [Agora Chat Overview]((https://docs.agora.io/cn/agora-chat/agora_chat_overview?platform=flutter)
-- [API Reference]()
+- [Agora Chat Overview](https://docs.agora.io/en/agora-chat/agora_chat_get_started_flutter?platform=Flutter)
+- [API Reference](https://docs.agora.io/en/agora-chat/api-ref?platform=Flutter)
 
 ## Related resources
 
