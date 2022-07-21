@@ -50,9 +50,9 @@ This repository contains sample projects using the Agora Chat iOS SDK .
     ```shell
     $ pod install
     ```
-2. Open the generated `Chat-iOS.xcworkspace` file with Xcode.
+2. Open the generated `Chat-iOS.xcworkspace` file with Xcode,then choose apiExample or quickstart project.
 
-3. Build and run the project in your iOS device.
+3. Build and run the selected project in your iOS device.
 
 4. *Keep the list until the project is up and running*
 
