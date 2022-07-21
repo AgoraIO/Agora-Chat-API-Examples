@@ -8,19 +8,19 @@ When you plan to use agora chat service, you may need mapping your user profile 
 
 * workflow for create account
 
-<img width="871" alt="image" src="https://user-images.githubusercontent.com/15087647/174737679-d9e71eb2-d63c-4fbb-a545-33a022466333.png">
+![register](https://user-images.githubusercontent.com/15087647/177251615-e13e8848-10a2-46ea-ba17-46422f6840d8.png)
 
 ---
 
 * workflow for login
 
-![317A9BCA-47B4-42A2-92E4-AEB0663486A4](https://user-images.githubusercontent.com/15087647/174743155-bdcd9478-d055-4350-9aea-9e1a2cefb0a6.png)
+![login](https://user-images.githubusercontent.com/15087647/177251650-bea0ae76-1e6e-4ad5-9e21-6fd93bb1f9a5.png)
 
 ## Features
 
-- App Server support user registration and will create a chat account and map it to the user, will generate an agoraUid at the same time for possible [RTC service](https://docs.agora.io/cn/Voice/landing-page).
-- App Server support user login and generate a token for chat service(via server SDK with aogra appId, appcert, chat account).
-- App Server support store user information with database, which include user ID, user password, chat account(with uuid) and agora Uid.
+- App Server support user registration and will create a chat account and map it to the user.
+- App Server support user login and generate a token for chat service(use aogra appId, appcert, chat user's uuid).
+- App Server support store user information with database, which include account name, acount password, chat username and chat user's uuid.
 
 
 ## Technical
@@ -31,7 +31,7 @@ This project developed based on Spring Boot.
 
 ## Component
 
-* [Server SDK](https://docs-im.easemob.com/ccim/rest/javaserversdk#java_server_sdk)
+* [AgoraTools](https://github.com/AgoraIO/Tools/tree/dev/accesstoken2/DynamicKey/AgoraDynamicKey/java/src/main/java/io/agora)
 * MySQL
 
 ## Prepare
@@ -43,6 +43,22 @@ Before start, you need prepare agora chat appkey, agora AppId and agora AppCert.
 
 * You need setup your auth mechanism for your own user profile.
 
+## Database
+You need to create a database and a table.
+
+```
+CREATE DATABASE app_server CHARACTER SET utf8mb4;
+	
+CREATE TABLE `app_user_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_account` varchar(32) NOT NULL COMMENT 'user account',
+  `user_password` varchar(32) DEFAULT NULL COMMENT 'user password',
+  `agora_chat_user_name` varchar(32) NOT NULL COMMENT 'Agora Chat user name',
+  `agora_chat_user_uuid` varchar(36) DEFAULT NULL COMMENT 'Agora Chat user uuid',
+  PRIMARY KEY (`id`,`user_account`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
 ## Configure
 
 Configure the below file with appkey, AppId and AppCert you get from the above steps.
@@ -52,6 +68,9 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
   ```
       ## configure with your own appkey
       application.appkey=xxx
+      
+      ## configure REST API domain
+      application.base.uri=xxx
       
       ## configure with your own appid
       application.agoraAppId=xxx
@@ -76,8 +95,6 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       spring.jpa.hibernate.ddl-auto=validate
       
   ```
-
-* Update config params in [ApplicationConfig](./src/main/java/com/easemob/agora/config/ApplicationConfig.java) file.
 
 ## Run
 
@@ -114,7 +131,7 @@ This api is used to register a user for your app. User name and password is used
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8080/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -127,7 +144,7 @@ curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/app/user
 
 ```json
 {
-    "code": "RES_OK"
+    "code": 200
 }
 ```
 
@@ -160,7 +177,7 @@ User login on your app server and get a agora token for chat service.
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8080/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -170,16 +187,15 @@ curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/app/user
 | code            | String    | response status code       |
 | accessToken     | String    | token                      |
 | expireTimestamp | Long      | timestamp for token expire |
-| easemobUserName | String    | chat user id               |
-| agoraUid        | Integer   | agora uid                  |
+| chatUserName | String    | chat user id               |
 
 **response example:**
 
 ```json
 {
-    "code": "RES_OK",
+    "code": 200,
     "accessToken": "xxx",
     "expireTimestamp": 1628245967857,
-    "easemobUserName": "em1792190072"
+    "chatUserName": "jack"
 }
 ```
