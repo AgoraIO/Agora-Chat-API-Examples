@@ -14,10 +14,13 @@ _[English](README.md) | 中文_
 
 | 功能                                             | 位置                                                                                                                    |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| 发送和接收一对一文本消息                                    | [MainActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/app/src/main/java/io/agora/agorachatquickstart/MainActivity.java)                  |
+| 基于 Agora Chat 的快速开始                                    | [MainActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/app/src/main/java/io/agora/agorachatquickstart/MainActivity.java)                  |
 | 从服务器拉取历史消息                               | [FetchMessagesFromServerActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/app/src/main/java/io/agora/agorachatquickstart/FetchMessagesFromServerActivity.java)                  |
 | 导入第三方消息                                    | [ImportMessagesActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/app/src/main/java/io/agora/agorachatquickstart/ImportMessagesActivity.java)                  |
 | 发送语音消息                                     | [SendAudioMessageActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/app/src/main/java/io/agora/agorachatquickstart/SendAudioMessageActivity.java)                  |
+| 基于 Agora Chat UIKit 的快速开始                  | [chatuikitquickstart/MainActivity.java](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-Android/chatuikitquickstart/src/main/java/io/agora/chatuikitquickstart/MainActivity.java)                  |
+
+
 
 ## 如何运行示例项目
 
