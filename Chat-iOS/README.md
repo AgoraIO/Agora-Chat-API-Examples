@@ -16,7 +16,8 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 1.ApiExample,show you how to initialize SDK and register and login and send message and join a group.
 
-``` initialize SDK
+``` 
+    initialize SDK
     AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
     options.enableConsoleLog = YES;
     [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
@@ -41,7 +42,8 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 1.AgoraChatLoginViewController,show you how to register and login with SDK.
 
-``` initialize SDK
+``` 
+        //initialize SDK
         let options = AgoraChatOptions(appkey: AgoraChatRequest.appKey)
         options.enableConsoleLog = true
         options.isAutoLogin = true
