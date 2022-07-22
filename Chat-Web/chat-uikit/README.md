@@ -1,5 +1,5 @@
 
-# Agora chat uikit 示例项目
+# Agora Chat UIKIT Example
 
 _English | [中文](README.zh.md)_
 
