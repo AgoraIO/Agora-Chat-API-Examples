@@ -152,10 +152,7 @@ public class TestCode : MonoBehaviour
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
         Demo.SimpleJSON.JSONNode jn = Demo.SimpleJSON.JSON.Parse(www.downloadHandler.text);
-        if (www.result == UnityWebRequest.Result.ConnectionError) {
-            errorCallback?.Invoke(www.error);
-        }
-        else if (www.responseCode == 200)
+        if (www.responseCode == 200)
         {
             string accessToken = jn["accessToken"].Value;
             tokenCallback?.Invoke(accessToken);
