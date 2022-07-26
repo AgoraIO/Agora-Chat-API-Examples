@@ -1,23 +1,23 @@
 //
-//  EMHttpRequest.m
+//  AgoraChatHttpRequest.m
 //  TokenSampleCode
 //
 //  Created by zhangchong on 2021/8/23.
 //
 
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 
-@interface EMHttpRequest() <NSURLSessionDelegate>
+@interface AgoraChatHttpRequest() <NSURLSessionDelegate>
 @property (readonly, nonatomic, strong) NSURLSession *session;
 @end
-@implementation EMHttpRequest
+@implementation AgoraChatHttpRequest
 
 + (instancetype)sharedManager
 {
     static dispatch_once_t onceToken;
-    static EMHttpRequest *sharedInstance;
+    static AgoraChatHttpRequest *sharedInstance;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[EMHttpRequest alloc] init];
+        sharedInstance = [[AgoraChatHttpRequest alloc] init];
     });
     
     return sharedInstance;
@@ -39,7 +39,7 @@
                           pwd:(NSString *)pwd
                    completion:(void (^)(NSInteger statusCode, NSString *aUsername))aCompletionBlock
 {
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/register"];
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/register"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -65,7 +65,7 @@
                        pwd:(NSString *)pwd
                 completion:(void (^)(NSInteger statusCode, NSString *response))aCompletionBlock
 {
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/login"];
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/login"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";

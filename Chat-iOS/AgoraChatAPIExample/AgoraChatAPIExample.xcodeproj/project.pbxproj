@@ -16,7 +16,7 @@
 		9E429FCA26F2EB4A00F0B94D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E429FC926F2EB4A00F0B94D /* main.m */; };
 		9ECC4D3A2812905E001CEDCB /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D392812905E001CEDCB /* NavigationViewController.m */; };
 		9ECC4D6C2812AE00001CEDCB /* AgoraChatApiExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D592812AE00001CEDCB /* AgoraChatApiExampleViewController.m */; };
-		9ECC4D6D2812AE00001CEDCB /* EMHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */; };
+		9ECC4D6D2812AE00001CEDCB /* AgoraChatHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5A2812AE00001CEDCB /* AgoraChatHttpRequest.m */; };
 		9ECC4D6E2812AE00001CEDCB /* ImportMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5C2812AE00001CEDCB /* ImportMessageViewController.m */; };
 		9ECC4D6F2812AE00001CEDCB /* SBDChannelMessage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9ECC4D5D2812AE00001CEDCB /* SBDChannelMessage.txt */; };
 		9ECC4D702812AE00001CEDCB /* FetchServerMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECC4D602812AE00001CEDCB /* FetchServerMessageViewController.m */; };
@@ -53,10 +53,10 @@
 		9E429FC926F2EB4A00F0B94D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9ECC4D382812905E001CEDCB /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		9ECC4D392812905E001CEDCB /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
-		9ECC4D572812AE00001CEDCB /* EMHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHttpRequest.h; sourceTree = "<group>"; };
+		9ECC4D572812AE00001CEDCB /* AgoraChatHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraChatHttpRequest.h; sourceTree = "<group>"; };
 		9ECC4D582812AE00001CEDCB /* AgoraChatApiExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgoraChatApiExampleViewController.h; sourceTree = "<group>"; };
 		9ECC4D592812AE00001CEDCB /* AgoraChatApiExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraChatApiExampleViewController.m; sourceTree = "<group>"; };
-		9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHttpRequest.m; sourceTree = "<group>"; };
+		9ECC4D5A2812AE00001CEDCB /* AgoraChatHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgoraChatHttpRequest.m; sourceTree = "<group>"; };
 		9ECC4D5C2812AE00001CEDCB /* ImportMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportMessageViewController.m; sourceTree = "<group>"; };
 		9ECC4D5D2812AE00001CEDCB /* SBDChannelMessage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SBDChannelMessage.txt; sourceTree = "<group>"; };
 		9ECC4D5E2812AE00001CEDCB /* ImportMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportMessageViewController.h; sourceTree = "<group>"; };
@@ -115,8 +115,8 @@
 		9E429FB626F2EB4800F0B94D /* AgoraChatAPIExample */ = {
 			isa = PBXGroup;
 			children = (
-				9ECC4D572812AE00001CEDCB /* EMHttpRequest.h */,
-				9ECC4D5A2812AE00001CEDCB /* EMHttpRequest.m */,
+				9ECC4D572812AE00001CEDCB /* AgoraChatHttpRequest.h */,
+				9ECC4D5A2812AE00001CEDCB /* AgoraChatHttpRequest.m */,
 				9ECC4D562812AE00001CEDCB /* ApiExample */,
 				9ECC4D5F2812AE00001CEDCB /* FetchServerMessage */,
 				9ECC4D5B2812AE00001CEDCB /* ImportMessage */,
@@ -317,7 +317,7 @@
 				9ECC4D702812AE00001CEDCB /* FetchServerMessageViewController.m in Sources */,
 				9ECC4D6C2812AE00001CEDCB /* AgoraChatApiExampleViewController.m in Sources */,
 				9ECC4D742812AE00001CEDCB /* AgoraAudioRecordUtil.mm in Sources */,
-				9ECC4D6D2812AE00001CEDCB /* EMHttpRequest.m in Sources */,
+				9ECC4D6D2812AE00001CEDCB /* AgoraChatHttpRequest.m in Sources */,
 				9ECC4D732812AE00001CEDCB /* AudioMessageViewController.m in Sources */,
 				9E429FCA26F2EB4A00F0B94D /* main.m in Sources */,
 				9ECC4D6E2812AE00001CEDCB /* ImportMessageViewController.m in Sources */,
@@ -469,6 +469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -494,6 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499WYUV8Q2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

@@ -1,5 +1,5 @@
 //
-//  EMHttpRequest.h
+//  AgoraChatHttpRequest.h
 //  TokenSampleCode
 //
 //  Created by zhangchong on 2021/8/23.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EMHttpRequest : NSObject
+@interface AgoraChatHttpRequest : NSObject
 
 + (instancetype)sharedManager;
 
