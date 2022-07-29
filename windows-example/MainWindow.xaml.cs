@@ -120,7 +120,7 @@ namespace windows_example
             string jsonStr = JsonConvert.SerializeObject(values);
             HttpContent content = new StringContent(jsonStr);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PostAsync("https://a41.easemob.com/app/chat/user/login", content);
+            HttpResponseMessage response = await client.PostAsync("https://a41.chat.agora.io/app/chat/user/login", content);
             try
             {
                 response.EnsureSuccessStatusCode();
@@ -144,7 +144,7 @@ namespace windows_example
             string jsonStr = JsonConvert.SerializeObject(values);
             HttpContent content = new StringContent(jsonStr);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PostAsync("https://a41.easemob.com/app/chat/user/register", content);
+            HttpResponseMessage response = await client.PostAsync("https://a41.chat.agora.io/app/chat/user/register", content);
             try
             {
                 response.EnsureSuccessStatusCode();

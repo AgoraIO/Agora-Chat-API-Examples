@@ -27,9 +27,9 @@ import {
 const App = () => {
   // variable defines.
   const title = 'AgoraChatQuickstart';
-  const requestGetTokenUrl = 'https://a41.easemob.com/app/chat/user/login';
+  const requestGetTokenUrl = 'https://a41.chat.agora.io/app/chat/user/login';
   const requestRegistryAccountUrl =
-    'https://a41.easemob.com/app/chat/user/register';
+    'https://a41.chat.agora.io/app/chat/user/register';
   const [appKey, setAppKey] = React.useState('81446724#514456');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');

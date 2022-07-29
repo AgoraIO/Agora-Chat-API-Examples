@@ -10,8 +10,8 @@ public class TestCode : MonoBehaviour
 {
 
     static string APPKEY = "41117440#383391";
-    static string RegisterURL = "https://a41.easemob.com/app/chat/user/register";
-    static string FetchAgoraTokenURL = "https://a41.easemob.com/app/chat/user/login";
+    static string RegisterURL = "https://a41.chat.agora.io/app/chat/user/register";
+    static string FetchAgoraTokenURL = "https://a41.chat.agora.io/app/chat/user/login";
 
     public InputField Username;
 

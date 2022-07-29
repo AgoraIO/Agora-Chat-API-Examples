@@ -41,8 +41,8 @@ import io.agora.cloud.HttpResponse;
 public class MainActivity extends AppCompatActivity {
     private static final String NEW_LOGIN = "NEW_LOGIN";
     private static final String RENEW_TOKEN = "RENEW_TOKEN";
-    private static final String LOGIN_URL = "https://a41.easemob.com/app/chat/user/login";
-    private static final String REGISTER_URL = "https://a41.easemob.com/app/chat/user/register";
+    private static final String LOGIN_URL = "https://a41.chat.agora.io/app/chat/user/login";
+    private static final String REGISTER_URL = "https://a41.chat.agora.io/app/chat/user/register";
     private EditText et_username;
     private TextView tv_log;
     private ConnectionListener connectionListener;

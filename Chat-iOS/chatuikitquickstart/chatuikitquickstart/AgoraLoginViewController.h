@@ -3,7 +3,7 @@
 //  ChatDemo-UI3.0
 //
 //  Created by liang on 2021/10/18.
-//  Copyright © 2021 easemob. All rights reserved.
+//  Copyright © 2021 agora. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
