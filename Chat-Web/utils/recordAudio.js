@@ -3,8 +3,8 @@ window.URL = window.URL || window.webkitURL
 
 const HZRecorder = function(stream, config){
     config = config || {}
-    config.sampleBits = config.sampleBits || 16 // 采样数位 8, 16
-    config.sampleRate = config.sampleRate || (16000) // 采样率(1/6 44100)
+    config.sampleBits = config.sampleBits || 16 
+    config.sampleRate = config.sampleRate || (16000)
 
     var context = new AudioContext()
     var audioInput = context.createMediaStreamSource(stream)
@@ -32,12 +32,12 @@ const HZRecorder = function(stream, config){
     }
 
     var audioData = {
-        size: 0, // 录音文件长度
-        buffer: [], // 录音缓存
-        inputSampleRate: context.sampleRate, // 输入采样率
-        inputSampleBits: 16, // 输入采样数位 8, 16
-        outputSampleRate: config.sampleRate, // 输出采样率
-        outputSampleBits: config.sampleBits, // 输出采样数位 8, 16
+        size: 0, // Length of recording file
+        buffer: [], // Recording the cache
+        inputSampleRate: context.sampleRate, // Input sampling rate
+        inputSampleBits: 16, // Input sampling digits 8, 16
+        outputSampleRate: config.sampleRate, // Output sampling rate
+        outputSampleBits: config.sampleBits, // Output sampling digit 8, 16
         input: function(data){
             this.buffer.push(new Float32Array(data))
             this.size += data.length
@@ -63,7 +63,7 @@ const HZRecorder = function(stream, config){
             var buffer = new ArrayBuffer(44 + dataLength)
             var data = new DataView(buffer)
 
-            var channelCount = 1// 单声道
+            var channelCount = 1// mono
             var offset = 0
 
             var writeString = function(str){
@@ -72,46 +72,46 @@ const HZRecorder = function(stream, config){
                 }
             }
 
-            // 资源交换文件标识符
+            // Resource exchange file identifier
             writeString('RIFF')
             offset += 4
-            // 下个地址开始到文件尾总字节数,即文件大小-8
+            // The total number of bytes from the next address to the end of the file, i.e. the file size -8
             data.setUint32(offset, 36 + dataLength, true)
             offset += 4
-            // WAV文件标志
+            // WAV file flag
             writeString('WAVE')
             offset += 4
-            // 波形格式标志
+            // Waveform format mark
             writeString('fmt ')
             offset += 4
-            // 过滤字节,一般为 0x10 = 16
+            // Filter bytes, usually 0x10 = 16
             data.setUint32(offset, 16, true)
             offset += 4
-            // 格式类别 (PCM形式采样数据)
+            // Format category (PCM sampled data)
             data.setUint16(offset, 1, true)
             offset += 2
-            // 通道数
+            // The channel number
             data.setUint16(offset, channelCount, true)
             offset += 2
-            // 采样率,每秒样本数,表示每个通道的播放速度
+            // Sampling rate, the number of samples per second, indicates the playback speed of each channel
             data.setUint32(offset, sampleRate, true)
             offset += 4
-            // 波形数据传输率 (每秒平均字节数) 单声道×每秒数据位数×每样本数据位/8
+            // Waveform data transmission rate (average number of bytes per second) Mono x data bits per second x data bits per sample /8
             data.setUint32(offset, channelCount * sampleRate * (sampleBits / 8), true)
             offset += 4
-            // 快数据调整数 采样一次占用字节数 单声道×每样本的数据位数/8
+            // Fast data adjustment number of bytes consumed per sample monophonic x number of data bits per sample /8
             data.setUint16(offset, channelCount * (sampleBits / 8), true)
             offset += 2
-            // 每样本数据位数
+            // Per sample data bit
             data.setUint16(offset, sampleBits, true)
             offset += 2
-            // 数据标识符
+            // Data identifier
             writeString('data')
             offset += 4
-            // 采样数据总数,即数据总大小-44
+            // The total number of sampled data, namely the total size of data, is -44
             data.setUint32(offset, dataLength, true)
             offset += 4
-            // 写入采样数据
+            // Write sampled data
             if(sampleBits === 8){
                 for(var i = 0; i < bytes.length; i++, offset++){
                     var s = Math.max(-1, Math.min(1, bytes[i]))
@@ -131,15 +131,13 @@ const HZRecorder = function(stream, config){
         }
     }
 
-    // 开始录音
+    // Start the recording
     this.start = function(){
         audioInput.connect(recorder)
         recorder.connect(context.destination)
     }
     this.isEmptyData = function(d){
-        // 基本确定采样得到的语音数据是空，即没有语音输入
-        // 非常简单的基于音量的端点检测算法
-        // 这个循环加操作执行用时不超过1ms
+        // Basically confirm that the sampled voice data is null, that is, there is no voice input
         var l = Math.floor(d.length / 10)
         var vol = 0
         for(var i = 0; i < l; i++){
@@ -161,7 +159,7 @@ const HZRecorder = function(stream, config){
         }
         return false
     }
-    // 停止
+    // stop
     this.stop = function(){
         if(context.state === 'running'){
             context.close()
@@ -170,18 +168,18 @@ const HZRecorder = function(stream, config){
         recorder.disconnect()
     }
 
-    // 获取音频文件
+    // Get audio files
     this.getBlob = function(){
         this.stop()
         return audioData.encodeWAV()
     }
 
-    // 回放
+    // play
     this.play = function(audio){
         audio.src = window.URL.createObjectURL(this.getBlob())
     }
 
-    // 音频采集
+    // Audio collection
     recorder.onaudioprocess = (e) => {
         audioData.input(e.inputBuffer.getChannelData(0))
     }
@@ -190,7 +188,7 @@ HZRecorder.setErrorInfoText = (errorMessage) => {
     HZRecorder.errorMessage = errorMessage
 }
 
-// 获取录音机
+// get recorder
 HZRecorder.get = function(callback, config){
     if(callback){
             navigator.mediaDevices.getUserMedia(

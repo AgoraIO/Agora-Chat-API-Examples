@@ -1522,11 +1522,6 @@ agent-base@6:
   dependencies:
     debug "4"
 
-agora-react-native-chat@^1.0.5-rc.8:
-  version "1.0.5-rc.8"
-  resolved "https://registry.npmjs.org/agora-react-native-chat/-/agora-react-native-chat-1.0.5-rc.8.tgz#81ffe2f84911e657f93b0a5a553750b881fc6772"
-  integrity sha512-O3P9bCEZ2Jfg3kt8CW+vGMlgqb17kQ9jq4rVYy0woCErQgUG4urPIJKHr3ZeW4UHX13pIWHdX6+sWsgGtbsMZA==
-
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
   resolved "https://registry.npmjs.org/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
@@ -5493,6 +5488,11 @@ react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-native-agora-chat@^1.0.5:
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/react-native-agora-chat/-/react-native-agora-chat-1.0.6.tgz#12570adcbeb23f8f13fc4f7c4de3b8355af317d0"
+  integrity sha512-CIa655H7watY1GzleOc3xBv+mY35R2zMd1Dcy6/Ev9XY6ILmMl6YlMUT3YZO7VTJYEgExkqbuU96ex8HHSVN8Q==
 
 react-native-codegen@^0.0.17:
   version "0.0.17"

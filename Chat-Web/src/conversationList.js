@@ -1,7 +1,6 @@
 import WebIM from 'agora-chat'
 
-// 按钮行为定义
-//获取会话列表
+// Get conversation list
 document.getElementById("conversationList").onclick = function () {
     document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList...")
     WebIM.conn.getConversationList().then((res) => {
@@ -25,7 +24,7 @@ document.getElementById("conversationList").onclick = function () {
     })
 }
 
-//获取漫游消息
+// Get roaming message
 document.getElementById("roamingMessage").onclick = function () {
     document.getElementById("log").appendChild(document.createElement('div')).append("getRoamingMessage...")
     let converationId = document.getElementById("converationId").value.toString()

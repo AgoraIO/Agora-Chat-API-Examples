@@ -2,30 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Networking;
+using System.Text;
+using System;
 
 public class TestCode : MonoBehaviour
 {
-    // 初始化SDK用的Appkey，此处的值为演示用，如果正式环境需要使用你申请的Appkey
-    static string APPKEY = "easemob-demo#easeim";
 
-    // user id控件，获取输入的userId可以调用: Username.text
+    static string APPKEY = "41117440#383391";
+    static string RegisterURL = "https://a41.easemob.com/app/chat/user/register";
+    static string FetchAgoraTokenURL = "https://a41.easemob.com/app/chat/user/login";
+
     public InputField Username;
 
-    // password控件，获取输入的password可以调用: Password.text
     public InputField Password;
 
-    // single chat id控件，获取用户输入的singleChatId可以调用: SignChatId.text
     public InputField SignChatId;
 
-    // message content 控件，获取输入的message content可以调用: MessageContent.text
     public InputField MessageContent;
-    
+
     public Button SignInBtn;
     public Button SignUpBtn;
     public Button SignOutBtn;
     public Button SendMsgBtn;
-    
+
     public Text LogText;
 
 
@@ -56,32 +56,35 @@ public class TestCode : MonoBehaviour
         SendMsgBtn.onClick.AddListener(SendMessageAction);
     }
 
-    // 初始化聊天SDK
+    // Init chat sdk
     private void InitSDK()
     {
- 
-    }
-
-    // 添加消息监听
-    private void AddChatDelegate() {
-        
-    }
-
-    // 移除消息监听
-    private void RemoveChatDelegate() {
 
     }
 
-    // 点击SignIn按钮
-    private void SignInAction() {
-        if (Username.text.Length == 0 || Password.text.Length == 0) {
+    // Add chat delegate
+    private void AddChatDelegate()
+    {
+
+    }
+
+    // Remove chat delegate
+    private void RemoveChatDelegate()
+    {
+
+    }
+
+    // Click SignIn button
+    private void SignInAction()
+    {
+        if (Username.text.Length == 0 || Password.text.Length == 0)
+        {
             AddLogToLogText("username or password is null");
             return;
         }
-
     }
 
-    // 点击SignUp按钮
+    // Click SignUp button
     private void SignUpAction()
     {
         if (Username.text.Length == 0 || Password.text.Length == 0)
@@ -89,29 +92,75 @@ public class TestCode : MonoBehaviour
             AddLogToLogText("username or password is null");
             return;
         }
-
     }
 
-    // 点击SignOut按钮
+    // Click SignOut button
     private void SignOutAction()
     {
-       
+
     }
 
-    // 点击Send按钮
-    private void SendMessageAction ()
+    // Click Send message button
+    private void SendMessageAction()
     {
-        if (SignChatId.text.Length == 0 || MessageContent.text.Length == 0) {
+        if (SignChatId.text.Length == 0 || MessageContent.text.Length == 0)
+        {
             AddLogToLogText("Sign chatId or message content is null");
             return;
         }
-
-       
     }
 
-    // 添加日志到控制台
-    private void AddLogToLogText(string str) {
-        LogText.text += System.DateTime.Now +": " + str + "\n";
+    // Add log to app console
+    private void AddLogToLogText(string str)
+    {
+        LogText.text += System.DateTime.Now + ": " + str + "\n";
     }
 
+
+    private IEnumerator RegisterAgoraAccount(string username, string password, Action<string> errorCallback)
+    {
+        Demo.SimpleJSON.JSONObject jo = new Demo.SimpleJSON.JSONObject();
+        jo.Add("userAccount", username);
+        jo.Add("userPassword", password);
+        byte[] databyte = Encoding.UTF8.GetBytes(jo.ToString());
+        var www = UnityWebRequest.Post(RegisterURL, UnityWebRequest.kHttpVerbPOST);
+        www.uploadHandler = new UploadHandlerRaw(databyte);
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+        bool done = www.isDone;
+        if (www.responseCode == 200)
+        {
+            errorCallback?.Invoke(null);
+        }
+        else
+        {
+            Demo.SimpleJSON.JSONNode jn = Demo.SimpleJSON.JSON.Parse(www.downloadHandler.text);
+            string errorInfo = jn["errorInfo"].Value;
+            errorCallback?.Invoke(errorInfo);
+        }
+    }
+
+    private IEnumerator FetchAgoraToken(string username, string password, Action<string> tokenCallback, Action<string> errorCallback)
+    {
+        
+        Demo.SimpleJSON.JSONObject jo = new Demo.SimpleJSON.JSONObject();
+        jo.Add("userAccount", username);
+        jo.Add("userPassword", password);
+        byte[] databyte = Encoding.UTF8.GetBytes(jo.ToString());
+        var www = UnityWebRequest.Post(FetchAgoraTokenURL, UnityWebRequest.kHttpVerbPOST);
+        www.uploadHandler = new UploadHandlerRaw(databyte);
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+        Demo.SimpleJSON.JSONNode jn = Demo.SimpleJSON.JSON.Parse(www.downloadHandler.text);
+        if (www.responseCode == 200)
+        {
+            string accessToken = jn["accessToken"].Value;
+            tokenCallback?.Invoke(accessToken);
+        }
+        else
+        {
+            string errorInfo = jn["errorInfo"].Value;
+            errorCallback?.Invoke(errorInfo);
+        }
+    }
 }

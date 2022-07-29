@@ -8,8 +8,11 @@ import com.easemob.agora.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class AppUserController {
@@ -23,22 +26,22 @@ public class AppUserController {
 
     @PostMapping("/app/user/register")
     public ResponseEntity register(@RequestBody @Valid AppUser appUser) {
-        ResponseParam responseParam = new ResponseParam();
         appUserService.registerUser(appUser);
-        responseParam.setCode(ResCode.RES_OK);
+
+        ResponseParam responseParam = new ResponseParam();
+        responseParam.setCode(ResCode.RES_OK.getCode());
         return ResponseEntity.ok(responseParam);
     }
 
     @PostMapping("/app/user/login")
     public ResponseEntity login(@RequestBody @Valid AppUser appUser) {
-        ResponseParam responseParam = new ResponseParam();
-
         TokenInfo token = appUserService.loginUser(appUser);
+
+        ResponseParam responseParam = new ResponseParam();
         responseParam.setAccessToken(token.getToken());
         responseParam.setExpireTimestamp(token.getExpireTimestamp());
         responseParam.setChatUserName(token.getChatUserName());
         responseParam.setAgoraUid(token.getAgoraUid());
-
         return ResponseEntity.ok(responseParam);
     }
 }

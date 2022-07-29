@@ -1,18 +1,32 @@
-_English | [Chinese](./README.zh.md)_
-
-Update time: 2022-06-16
-
 # Agora Chat IM React-Native Quick Start
+
+_English | [中文](README.zh.md)_
+
+## Overview
 
 Instant messaging connects people wherever they are and allows them to communicate with others in real time. The Agora Chat SDK enables you to embed real-time messaging in any app, on any device, anywhere.
 
 This page shows a sample code to add peer-to-peer messaging into a Windows project by using the Agora Chat SDK.
 
-## Understand the tech
+![image](./res/main.png)
 
-~338e0e30-e568-11ec-8e95-1b7dfd4b7cb0~
+## Project structure
 
-## Prerequisites
+The project uses a single app to combine a variety of functionalities.
+
+| Function              | Location           |
+| --------------------- | ------------------ |
+| Init React Native SDK | [App.js](./App.js) |
+| Set Connect listener  | [App.js](./App.js) |
+| Register account      | [App.js](./App.js) |
+| Login to server       | [App.js](./App.js) |
+| Logout from server    | [App.js](./App.js) |
+| Send text message     | [App.js](./App.js) |
+| receive message       | [App.js](./App.js) |
+
+## How to run the sample project
+
+### Prerequisites
 
 Before proceeding, ensure that your development and run environment meets the following requirements.
 
@@ -25,7 +39,7 @@ If your target platform is iOS:
 - CocoaPods package management tool
 - Yarn compile and run tool
 - Watchman debugging tool
-- A physical or virtual mobile device running iOS 10.0 or later
+- A physical or virtual mobile device running iOS 11.0 or later
 
 If your target platform is Android:
 
@@ -41,48 +55,33 @@ If your target platform is Android:
 
 For more information, see [RN dev](https://reactnative.dev/).
 
-### Other prerequisites
+### Steps to run
 
-A valid Agora [account](https://docs-preprod.agora.io/en/Agora Platform/sign_in_and_sign_up?platform=All Platforms).
-
-## Project setup
-
-Follow the steps to create a React Native project and add Agora Chat into your app.
+#### Create a demo project.
 
 1. Make sure you have set up the development environment based on your operating system and target platform.
 2. In your terminal, run the following command to create a React Native project.
-
    ```sh
-   npx react-native init quick_start_demo
-   cd quick_start_demo
+   npx react-native init token_login_demo
+   cd token_login_demo
    yarn
    ```
-
-   A successful execution of this command generates a project named `quick_start_demo` in the directory that you run the command.
-
+   A successful execution of this command generates a project named `token_login_demo` in the directory that you run the command.
 3. Run the following command to import the Chat SDK using yarn:
-
    ```sh
-   yarn add agora-react-native-chat
+   yarn add react-native-agora-chat
    ```
-
 4. Execute the scripts or tools according to your target platform.
-
    If your target platform is iOS:
-
    ```sh
    cd ios && pod install && cd ..
    ```
 
-## Implementation
-
-This section introduces the codes you need to add to your project to start one-to-one messaging.
-
-### Implement one-to-one messaging
+#### Implement sample code.
 
 To send a one-to-one message, chat users should register a Chat account, log into Agora Chat, and send a text message.
 
-Open `quick_start_demo/App.js`, and replace the code with the following:
+Open `token_login_demo/App.js`, and replace the code with the following:
 
 ```javascript
 // Import depend packages.
@@ -100,7 +99,7 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from 'agora-react-native-chat';
+} from 'react-native-agora-chat';
 
 // The App Object.
 const App = () => {
@@ -478,39 +477,37 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-### Build and run your project
+#### Build and run your project
 
 You are now ready to build and run the project your built!
 
 To build and run the project on an iOS device, take the following steps:
 
 1. Connect an iPhone device to your computer and set the device to Developer mode.
-2. Open `quick_start_demo/ios` and open `quick_start_demo.xcworkspace` with Xcode.
-3. In **Targets** > **quick_start_demo** > **Signing & Capabilities**, set the signing of the project.
+2. Open `token_login_demo/ios` and open `token_login_demo.xcworkspace` with Xcode.
+3. In **Targets** > **token_login_demo** > **Signing & Capabilities**, set the signing of the project.
 4. Click `Build` in Xcode to build the project. When the build succeeds, Xcode runs the project and installs it on your device. You see the app user interface.
 
 To build and run the project on an iOS silumator, take the following steps:
 
-1. Open `quick_start_demo/ios` and open `quick_start_demo.xcworkspace` with Xcode.
+1. Open `token_login_demo/ios` and open `token_login_demo.xcworkspace` with Xcode.
 2. In Xcode, set `iPhone 13` as the iOS simulator.
 3. Click `Build` in Xcode to build the project. When the build succeeds, Xcode runs the project and installs it on the simulater. You see the app user interface.
 
 To build and run the project on an Android device, take the following steps:
 
-1. Open `quick_start_demo/android` in Android Studio.
+1. Open `token_login_demo/android` in Android Studio.
 2. Connect an Android device to your computer and set the device to USB debugging mode.
 3. In terminal, type in `adb reverse tcp:8081 tcp:8081` to set up data forwarding.
 4. Run the following command to execute `"start": "react-native start"` in `package.json`:
 
-   ```sh
-   yarn start
-   ```
+```sh
+yarn start
+```
 
-5. Click `Build` in Android Studio to build the project. When the build succeeds, Android Studio runs the project and installs it on the device. You see the app interface.
+1. Click `Build` in Android Studio to build the project. When the build succeeds, Android Studio runs the project and installs it on the device. You see the app interface.
 
-![img](./res/main.png)
-
-## Test your app
+#### Test your app
 
 Refer to the following steps to register a Chat account, log into Agora Chat and send and receive a message.
 
@@ -521,6 +518,27 @@ Refer to the following steps to register a Chat account, log into Agora Chat and
 
 You can also read from the logs below to see whether you have successfully signed up, signed in, and sent a text message.
 
-## Next steps
+## Feedback
 
-For demonstration purposes, Agora Chat provides an app server that enables you to quickly retrieve a token using the App Key given in this guide. In a production context, the best practice is for you to deploy your own token server, use your own [App Key](./enable_agora_chat?platform=React%20Native#get-the-information-of-the-agora-chat-project) to generate a token, and retrieve the token on the client side to log in to Agora. To see how to implement a server that generates and serves tokens on request, see [Generate a User Token](./generate_user_tokens?platform=React%20Native).
+If you have any problems or suggestions regarding the sample projects, feel free to file an issue.
+
+## Reference
+
+- [Product Overview](https://docs.agora.io/en/Interactive%20Broadcast/product_live?platform=React%20Native)
+- [API Reference](https://docs.agora.io/en/Interactive%20Broadcast/API%20Reference/react_native/index.html)
+
+## Related resources
+
+- Check our [FAQ](https://docs.agora.io/en/faq) to see if your issue has been recorded.
+- Dive into [Agora SDK Samples](https://github.com/AgoraIO) to see more tutorials
+- Take a look at [Agora Use Case](https://github.com/AgoraIO-usecase) for more complicated real use case
+- Repositories managed by developer communities can be found at [Agora Community](https://github.com/AgoraIO-Community)
+- If you encounter problems during integration, feel free to ask questions in [Stack Overflow](https://stackoverflow.com/questions/tagged/agora.io)
+
+## Known issues
+
+Please do not use the latest node version 18, do not use the latest version 0.69 of react-native, and the latest version 18 of react. They have big compatibility issues with previous versions.
+
+## License
+
+The example project is under the MIT license.
