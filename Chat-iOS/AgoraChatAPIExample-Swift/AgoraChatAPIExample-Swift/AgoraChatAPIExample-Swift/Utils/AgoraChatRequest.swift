@@ -41,7 +41,7 @@ final class AgoraChatRequest: NSObject,URLSessionDelegate {
 
     static var shared = AgoraChatRequest.init()
     
-    static let baseUrl = "https://a41.easemob.com"
+    static let baseUrl = "https://a41.chat.agora.io"
 
     static let appKey = "41117440#383391"
     

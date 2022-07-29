@@ -35,7 +35,7 @@
 #import "FetchServerMessageViewController.h"
 #import <Masonry/Masonry.h>
 #import <AgoraChat/AgoraChat.h>
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 ```
 2. 实现相关代理并声明属性
 
@@ -296,7 +296,7 @@
         [weakself printLog:[NSString stringWithFormat:@"login agora chat server fail ! errorDes : %@",aError.errorDescription]];
     };
 
-    [[EMHttpRequest sharedManager] loginToApperServer:[self.nameField.text lowercaseString] pwd:[self.pswdField.text lowercaseString] completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] loginToApperServer:[self.nameField.text lowercaseString] pwd:[self.pswdField.text lowercaseString] completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (response && response.length > 0) {
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -316,15 +316,15 @@
     }];
 }
 ```
-2. 此外 FetchServerMessageViewController 使用到了访问我们 AppServer 进行登陆的工具类 EMHttpRequest，还需在项目中导入该工具类。
+2. 此外 FetchServerMessageViewController 使用到了访问我们 AppServer 进行登陆的工具类 AgoraChatHttpRequest，还需在项目中导入该工具类。
 
-- EMHttpRequest.h
+- AgoraChatHttpRequest.h
 ```objective-c
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EMHttpRequest : NSObject
+@interface AgoraChatHttpRequest : NSObject
 
 + (instancetype)sharedManager;
 
@@ -340,21 +340,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 ```
-- EMHttpRequest.m
+- AgoraChatHttpRequest.m
 ```objective-c
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 
-@interface EMHttpRequest() <NSURLSessionDelegate>
+@interface AgoraChatHttpRequest() <NSURLSessionDelegate>
 @property (readonly, nonatomic, strong) NSURLSession *session;
 @end
-@implementation EMHttpRequest
+@implementation AgoraChatHttpRequest
 
 + (instancetype)sharedManager
 {
     static dispatch_once_t onceToken;
-    static EMHttpRequest *sharedInstance;
+    static AgoraChatHttpRequest *sharedInstance;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[EMHttpRequest alloc] init];
+        sharedInstance = [[AgoraChatHttpRequest alloc] init];
     });
     
     return sharedInstance;
@@ -376,8 +376,8 @@ NS_ASSUME_NONNULL_END
                           pwd:(NSString *)pwd
                    completion:(void (^)(NSInteger statusCode, NSString *aUsername))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/register";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/register"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/register"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -403,8 +403,8 @@ NS_ASSUME_NONNULL_END
                        pwd:(NSString *)pwd
                 completion:(void (^)(NSInteger statusCode, NSString *response))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/login";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/login"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/login"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";

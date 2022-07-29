@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 const String APP_KEY = "41117440#383391";
 
-const String APP_SERVER_HOST = "a41.easemob.com";
+const String APP_SERVER_HOST = "a41.chat.agora.io";
 const String LOGIN_URL = "/app/chat/user/login";
 const String REGISTER_URL = "/app/chat/user/register";
 

@@ -30,7 +30,7 @@ WebIM.conn.addEventHandler('connection&message', {
 
 // Obtain and set the Agora token again
 function refreshToken(username, password) {
-    postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
+    postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             WebIM.conn.renewToken(agoraToken)
@@ -58,7 +58,7 @@ function postData(url, data) {
 document.getElementById("register").onclick = function () {
     username = document.getElementById("userID").value.toString()
     password = document.getElementById("password").value.toString()
-    postData('https://a41.easemob.com/app/chat/user/register', { "userAccount": username, "userPassword": password })
+    postData('https://a41.chat.agora.io/app/chat/user/register', { "userAccount": username, "userPassword": password })
         .then((res) => {
             document.getElementById("log").appendChild(document.createElement('div')).append(`register user ${username} success`)
         })
@@ -71,7 +71,7 @@ document.getElementById("login").onclick = function () {
     document.getElementById("log").appendChild(document.createElement('div')).append("Logging in...")
     username = document.getElementById("userID").value.toString()
     password = document.getElementById("password").value.toString()
-    postData('https://a41.easemob.com/app/chat/user/login', { "userAccount": username, "userPassword": password })
+    postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
             let agoraToken = res.accessToken
             let easemobUserName = res.chatUserName
