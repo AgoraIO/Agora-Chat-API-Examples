@@ -9,7 +9,7 @@
 #import <Masonry/Masonry.h>
 #import <AgoraChat/AgoraChat.h>
 #import "AgoraAudioRecordUtil.h"
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 
 @interface AudioMessageViewController ()<UIScrollViewDelegate>
 
@@ -257,7 +257,7 @@
         [weakself printLog:[NSString stringWithFormat:@"login agora chat server fail ! errorDes : %@",aError.errorDescription]];
     };
 
-    [[EMHttpRequest sharedManager] loginToApperServer:[self.nameField.text lowercaseString] pwd:[self.pswdField.text lowercaseString] completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] loginToApperServer:[self.nameField.text lowercaseString] pwd:[self.pswdField.text lowercaseString] completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (response && response.length > 0) {
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
