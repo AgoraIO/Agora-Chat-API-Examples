@@ -160,10 +160,10 @@ const App = () => {
     });
   };
   const requestGetToken = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/login');
+    return requestHttp('https://a1.chat.agora.io/app/chat/user/login');
   };
   const requestRegistryAccount = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/register');
+    return requestHttp('https://a1.chat.agora.io/app/chat/user/register');
   };
 
   // Register the listener for message.

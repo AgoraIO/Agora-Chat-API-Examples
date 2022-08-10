@@ -7,7 +7,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 1.AgoraChatAPIExample,will show you how to using AgoraChatSDK api build a chat Application.
 
-2.AgoraChatAPIExample-Swift,will show you how to using AgoraChatSDK api build a chat Application of Swift programa lanuage.
+2.AgoraChatAPIExample-Swift,will show you how to using AgoraChatSDK api build a chat Application of Swift program lanuage.
 
 3.Chatuikitquickstart,will show you how to quickly build a chat project with AgoraChat-UIKit base on AgoraChatSDK.
 
@@ -36,7 +36,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 
 2.FetchServerMessage,show you how to fetch historical messages form sever.
 
-3.ImportMessage,show you how to import a sendbird message.
+3.ImportMessage,show you how to import a chat message.
 
 4.SendAudioMessage,show you how to send a audio message.
 
@@ -83,7 +83,7 @@ This repository contains three sample projects using the Agora Chat iOS SDK.
 | Function                                                                        | Location                                                                                                                                 |
 | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | Register and Login                                                                  | [Register and Login Swift](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/Controllers/AgoraChatLoginViewController.swift)   |
-| ViewController,function list.                                                                  | [EMHttpRequest](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/EMHttpRequest.m)                                  |
+| ViewController,function list.                                                                  | [AgoraChatHttpRequest](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample/AgoraChatAPIExample/AgoraChatHttpRequest.m)                                  |
 | Load conversations                                                                  | [Local Conversations](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/Controllers/AgoraChatConversationsViewController.swift)                                  |
 | SendTextMessage swift code                                                                  | [SendTextMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/Controllers/AgoraChatSendTextViewController.swift)                                  |
 | SendImageMessage swift code                                                                  | [SendImageMessage](https://github.com/AgoraIO/Agora-Chat-API-Examples/blob/main/Chat-iOS/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/AgoraChatAPIExample-Swift/Controllers/AgoraChatSendImageVideoController.swift)                                  |

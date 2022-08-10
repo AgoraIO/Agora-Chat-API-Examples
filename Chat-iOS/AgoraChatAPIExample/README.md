@@ -89,7 +89,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 
 ```objective-c
 #import <Masonry/Masonry.h>
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 #import <AgoraChat/AgoraChat.h>
 #import <AgoraChat/AgoraChatOptions+PrivateDeploy.h>
 #import <Photos/Photos.h>
@@ -429,7 +429,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     
     __weak typeof(self) weakself = self;
     //register unify token user
-    [[EMHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(),^{
             NSString *alertStr = @"login.signup.fail";
             if (response != nil) {
@@ -477,7 +477,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         [weakself printLog:[NSString stringWithFormat:@"login fail ! errorDes : %@",aError.errorDescription]];
     };
 
-    [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (response && response.length > 0) {
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -702,7 +702,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         [self printLog:[NSString stringWithFormat:@"========= token expire rennew token ! code : %d",aErrorCode]];
         NSString *name = [self.nameField.text lowercaseString];
         NSString *pswd = [self.pswdField.text lowercaseString];
-        [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+        [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (response && response.length > 0) {
                     NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -766,15 +766,15 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     return _formatter;
 }
 ```
-2. 此外 ViewController 使用到了访问我们 AppServer 进行登陆的工具类 EMHttpRequest，还需在项目中导入该工具类。
+2. 此外 ViewController 使用到了访问我们 AppServer 进行登陆的工具类 AgoraChatHttpRequest，还需在项目中导入该工具类。
 
-- EMHttpRequest.h
+- AgoraChatHttpRequest.h
 ```objective-c
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EMHttpRequest : NSObject
+@interface AgoraChatHttpRequest : NSObject
 
 + (instancetype)sharedManager;
 
@@ -790,21 +790,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 ```
-- EMHttpRequest.m
+- AgoraChatHttpRequest.m
 ```objective-c
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 
-@interface EMHttpRequest() <NSURLSessionDelegate>
+@interface AgoraChatHttpRequest() <NSURLSessionDelegate>
 @property (readonly, nonatomic, strong) NSURLSession *session;
 @end
-@implementation EMHttpRequest
+@implementation AgoraChatHttpRequest
 
 + (instancetype)sharedManager
 {
     static dispatch_once_t onceToken;
-    static EMHttpRequest *sharedInstance;
+    static AgoraChatHttpRequest *sharedInstance;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[EMHttpRequest alloc] init];
+        sharedInstance = [[AgoraChatHttpRequest alloc] init];
     });
     
     return sharedInstance;
@@ -826,8 +826,8 @@ NS_ASSUME_NONNULL_END
                           pwd:(NSString *)pwd
                    completion:(void (^)(NSInteger statusCode, NSString *aUsername))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/register";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/register"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/register"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -853,8 +853,8 @@ NS_ASSUME_NONNULL_END
                        pwd:(NSString *)pwd
                 completion:(void (^)(NSInteger statusCode, NSString *response))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/login";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/login"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/login"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
