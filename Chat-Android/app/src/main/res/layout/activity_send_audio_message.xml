@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="io.agora.quickstart.io.agora.agorachatquickstart.SendAudioMessageActivity">
+    tools:context="io.agora.agorachatquickstart.SendAudioMessageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:minHeight="200dp"
-        android:hint="@string/log_hint"
+        android:hint="Show log area..."
         android:scrollbars="vertical"
         android:padding="10dp"/>
 
