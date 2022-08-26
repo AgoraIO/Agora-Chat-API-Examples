@@ -167,11 +167,6 @@ public class MainActivity extends AppCompatActivity {
         String content = ((TextView)findViewById(R.id.et_msg_content)).getText().toString().trim();
         // Create a text message
         ChatMessage message = ChatMessage.createTextSendMessage(content, toSendName);
-        // Check if the message is null
-        if(message == null) {
-            showLog("Message is null!", true);
-            return;
-        }
         // Set the message callback before sending the message
         message.setMessageStatusCallback(new CallBack() {
             @Override
