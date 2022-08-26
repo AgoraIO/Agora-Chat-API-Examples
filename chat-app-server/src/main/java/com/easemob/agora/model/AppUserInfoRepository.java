@@ -9,7 +9,4 @@ public interface AppUserInfoRepository extends JpaRepository<AppUserInfo, Long> 
 
     @Query(value = "select * from app_user_info where user_account=?", nativeQuery = true)
     AppUserInfo findByUserAccount(String userAccount);
-
-    @Query(value = "select * from app_user_info where agora_uid=?", nativeQuery = true)
-    AppUserInfo findByAgoraUid(String agoraUid);
 }
