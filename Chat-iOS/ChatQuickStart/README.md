@@ -1,10 +1,6 @@
 This page shows how to add one-to-one messaging into your app by using the Agora Chat SDK for iOS.  
 
 
-## Understand the tech
-
-~338e0e30-e568-11ec-8e95-1b7dfd4b7cb0~
-
 ## Prerequisites
 
 Before proceeding, ensure that your development environment meets the following requirements: 
