@@ -30,7 +30,7 @@ const App = () => {
   const requestGetTokenUrl = 'https://a41.chat.agora.io/app/chat/user/login';
   const requestRegistryAccountUrl =
     'https://a41.chat.agora.io/app/chat/user/register';
-  const appKey = '81446724#514456';
+  const appKey = '41117440#383391';
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [userId, setUserId] = React.useState('');
