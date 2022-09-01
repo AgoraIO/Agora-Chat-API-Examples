@@ -11,5 +11,10 @@
     <string name="start_record">Start to record audio</string>
     <string name="stop_record">Stop recording audio</string>
     <string name="start_to_send_audio">Start to send audio message…</string>
-
+    <string name="enter_username">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_up">Sign up</string>
+    <string name="enter_to_send_name">Enter the username you want to send</string>
 </resources>

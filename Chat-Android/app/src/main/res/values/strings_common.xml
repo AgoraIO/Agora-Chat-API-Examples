@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="username_or_pwd_miss">Username or password is empty</string>
+    <string name="sign_up_success">Sign up success!</string>
+    <string name="sign_in_success">Sign in success!</string>
+    <string name="sign_out_success">Sign out success!</string>
+    <string name="sign_in_first">Please sign in first!</string>
+    <string name="not_find_send_name">Enter the username who you want to send first!</string>
+    <string name="message_is_null">Message is null!</string>
+    <string name="message_sent_failed">Message sent failed! code: %1$d error: %2$s</string>
+</resources>
