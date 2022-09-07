@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getAgoraTokenFromAppServer(String username, String pwd, @NonNull ValueCallBack<String> callBack) {
         showLog("begin to getTokenFromAppServer ...", false);
-        executeRequest(getString(R.string.login_url), username, pwd, new ValueCallBack<String>() {
+        executeRequest(getString(R.string.login_url, getString(R.string.base_url)), username, pwd, new ValueCallBack<String>() {
             @Override
             public void onSuccess(String response) {
                 try {
@@ -232,12 +232,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void executeRequest(String url, String username, String password, @NonNull ValueCallBack<String> callBack) {
-        if(TextUtils.isEmpty(url)) {
-            callBack.onError(Error.INVALID_PARAM, "Request url should not be null");
-            return;
-        }
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            callBack.onError(Error.INVALID_PARAM, "Username or password is empty");
+        if(TextUtils.isEmpty(url) || TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            callBack.onError(Error.INVALID_PARAM, "Request url, username or password should not be empty");
             return;
         }
         Map<String, String> headers = new HashMap<>();
@@ -290,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void register(String username, String pwd, @NonNull CallBack callBack) {
         showLog("begin to sign up...",false);
-        executeRequest(getString(R.string.register_url), username, pwd, new ValueCallBack<String>() {
+        executeRequest(getString(R.string.register_url, getString(R.string.base_url)), username, pwd, new ValueCallBack<String>() {
             @Override
             public void onSuccess(String response) {
                 String resultCode = null;
