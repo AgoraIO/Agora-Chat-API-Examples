@@ -45,7 +45,29 @@ This project implements multiple functions in a single app.
 
 ### Running steps
 
-First download the code from the repository and go to the `Chat-RN/quick_start_demo` directory.
+Download the code from the repository and go to the `Chat-RN/quick_start_demo` directory.
+
+```sh
+git clone -b main git@github.com:AgoraIO/Agora-Chat-API-Examples.git
+```
+
+Initialize the project
+
+```sh
+yarn
+```
+
+Execute the pod manually (yarn usually executes it automatically)
+
+```sh
+cd ios && pod install
+```
+
+Update the latest SDK package (optional)
+
+```sh
+yarn upgrade react-native-agora-chat
+```
 
 Compile and run on real iOS device:
 

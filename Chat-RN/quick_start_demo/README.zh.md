@@ -45,7 +45,29 @@ _[English](README.md) | 中文_
 
 ### 运行步骤
 
-首先从仓库下载代码，进入 `Chat-RN/quick_start_demo` 目录。
+从仓库下载代码，进入 `Chat-RN/quick_start_demo` 目录。
+
+```sh
+git clone -b main git@github.com:AgoraIO/Agora-Chat-API-Examples.git
+```
+
+初始化项目
+
+```sh
+yarn
+```
+
+手动执行 pod（yarn 一般会自动执行）
+
+```sh
+cd ios && pod install
+```
+
+更新最新 SDK 包(可选)
+
+```sh
+yarn upgrade react-native-agora-chat
+```
 
 编译并在 iOS 真机运行：
 
