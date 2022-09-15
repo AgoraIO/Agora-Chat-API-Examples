@@ -6,7 +6,7 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat React-Native sdk 的示例项目。
 
-![rn main](./res/main.jpg)
+![rn main](../../Chat-RN/quick_start_demo/res/main.jpg)
 
 ## 项目结构
 
