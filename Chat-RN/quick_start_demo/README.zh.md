@@ -72,13 +72,13 @@ yarn upgrade react-native-agora-chat
 编译并在 iOS 真机运行：
 
 1. 连接苹果手机，设置为开发者模式；
-2. 打开 `token_login_demo/ios`，使用 `xcode` 打开 `token_login_demo.xcworkspace`；
-3. 依次点击 **Targets** > **token_login_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
+2. 打开 `quick_start_demo/ios`，使用 `xcode` 打开 `quick_start_demo.xcworkspace`；
+3. 依次点击 **Targets** > **quick_start_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
 4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
 编译并在 Android 真机运行：
 
-1. 在 Android Studio 中打开 `token_login_demo/android`；
+1. 在 Android Studio 中打开 `quick_start_demo/android`；
 2. 连接 Android 系统手机，设置为开发者模式，并且设置 USB 可调式；
 3. 设置数据转发：在终端命令行输入 `adb reverse tcp:8081 tcp:8081`；
 4. 启动服务：执行 `package.json` 里面的命令：`"start": "react-native start"`，在终端中运行命令 `yarn start`：

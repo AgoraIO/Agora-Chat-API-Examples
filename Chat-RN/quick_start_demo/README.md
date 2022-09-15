@@ -72,13 +72,13 @@ yarn upgrade react-native-agora-chat
 Compile and run on real iOS device:
 
 1. Connect the iPhone and set it to developer mode;
-2. Open `token_login_demo/ios`, use `xcode` to open `token_login_demo.xcworkspace`;
-3. Click **Targets** > **token_login_demo** > **Signing & Capabilities** to set the application signature under the signature option;
+2. Open `quick_start_demo/ios`, use `xcode` to open `quick_start_demo.xcworkspace`;
+3. Click **Targets** > **quick_start_demo** > **Signing & Capabilities** to set the application signature under the signature option;
 4. Click `Build` to build and run the project. After the program is built, it will be automatically installed and run, and the application interface will be displayed.
 
 Compile and run on a real Android device:
 
-1. Open `token_login_demo/android` in Android Studio;
+1. Open `quick_start_demo/android` in Android Studio;
 2. Connect to Android phone, set to developer mode, and set USB adjustable;
 3. Set data forwarding: enter `adb reverse tcp:8081 tcp:8081` in the terminal command line;
 4. Start the service: execute the command in `package.json`: `"start": "react-native start"`, run the command `yarn start` in the terminal:
