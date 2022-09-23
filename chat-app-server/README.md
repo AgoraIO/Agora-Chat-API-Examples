@@ -107,7 +107,7 @@ When you finish the configure, you can just run this app server.
 
 This api is used to register a user for your app. User name and password is used in this sample project, you can use any other format for your user account ,such as phone number.
 
-**Path:** `http://localhost:8080/app/user/register`
+**Path:** `http://localhost:8086/app/user/register`
 
 **HTTP Method:** `POST`
 
@@ -116,6 +116,7 @@ This api is used to register a user for your app. User name and password is used
 | Param        | description      |
 | ------------ | ---------------- |
 | Content-Type | application/json |
+| Accept | application/json |
 
 **Request Body example:** 
 {"userAccount":"jack", "userPassword":"123"}
@@ -131,14 +132,14 @@ This api is used to register a user for your app. User name and password is used
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8080/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
 
 | Param           | Data Type | description          |
 | --------------- | --------- | -------------------- |
-| code            | String    | response status code |
+| code            | Int    | response status code |
 
 **response example:**
 
@@ -154,7 +155,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
 
 User login on your app server and get a agora token for chat service.
 
-**Path:** `http://localhost:8080/app/user/login`
+**Path:** `http://localhost:8086/app/user/login`
 
 **HTTP Method:** `POST`
 
@@ -163,6 +164,7 @@ User login on your app server and get a agora token for chat service.
 | Param        | description      |
 | ------------ | ---------------- |
 | Content-Type | application/json |
+| Accept | application/json |
 
 **Request Body example:** 
 {"userAccount":"jack", "userPassword":"123"}
@@ -177,14 +179,14 @@ User login on your app server and get a agora token for chat service.
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8080/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
 
 | Param           | Data Type | description                |
 | --------------- | --------- | -------------------------- |
-| code            | String    | response status code       |
+| code            | Int    | response status code       |
 | accessToken     | String    | token                      |
 | expireTimestamp | Long      | timestamp for token expire |
 | chatUserName | String    | chat user id               |
@@ -197,5 +199,59 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
     "accessToken": "xxx",
     "expireTimestamp": 1628245967857,
     "chatUserName": "jack"
+}
+```
+---
+
+### Get token
+
+Get a token including user and rtc privileges.
+
+**Path:** `http://localhost:8086/token`
+
+**HTTP Method:** `GET`
+
+**Request Headers:** 
+
+| Param        | description      |
+| ------------ | ---------------- |
+| Accept | application/json |
+
+**Request Body example:** 
+{"userAccount":"jack", "userPassword":"123"}
+
+**Request params:** 
+
+| Param        | Data Type | description   | required |
+| ------------ | --------- | ------------- | -------- |
+| userAccount  | String    | user account  |    Yes   |
+| channelName  | String    | channel name  |    Yes   |
+| publisherRole  | Boolean    | whether the rtc privileges is the publisher role, the default is false   |    No    |
+
+**request example:**
+
+```
+curl -X GET -H 'Accept: application/json' 'http://localhost:8086/token?userAccount={userAccount}&channelName={channelName}&publisherRole=true'
+```
+
+**Response Parameters:**
+
+| Param           | Data Type | description                |
+| --------------- | --------- | -------------------------- |
+| code            | Int    | response status code       |
+| accessToken     | String    | token                      |
+| expireTimestamp | Long      | timestamp for token expire |
+| chatUserName | String    | chat user id               |
+| agoraUid | String    | agora uid              |
+
+**response example:**
+
+```json
+{
+    "code": 200,
+    "accessToken": "xxx",
+    "expireTimestamp": 1628245967857,
+    "chatUserName": "jack",
+    "agoraUid": "12356"
 }
 ```
