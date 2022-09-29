@@ -31,7 +31,7 @@ public class AppUserServiceImpl implements AppUserService {
 
         // 2.Check if user account exists DB
         if (checkIfUserAccountExistsDB(userAccount)) {
-            throw new ASDuplicateUniquePropertyExistsException("userAccount " + userAccount + " already exists");
+            throw new ASDuplicateUniquePropertyExistsException("userAccount " + userAccount + " already exists.");
         }
 
         // 3.Register AgroaChat user for user account,
@@ -56,7 +56,7 @@ public class AppUserServiceImpl implements AppUserService {
 
             // 4.Check whether the login user password is correct
             if (!appUser.getUserPassword().equals(appUserInfo.getUserPassword())) {
-                throw new ASPasswordErrorException("user password error");
+                throw new ASPasswordErrorException("User password error.");
             }
         } else {
             throw new ASNotFoundException(userAccount + " does not exists");
@@ -66,31 +66,12 @@ public class AppUserServiceImpl implements AppUserService {
         return this.agoraChatService.getAgoraChatUserTokenWithAccount(appUserInfo);
     }
 
-    public String generateUniqueAgoraUid() {
-        String uid = RandomUidUtil.getUid();
-
-        while (true) {
-            if (checkIfAgoraUidExistsDB(uid)) {
-                uid = RandomUidUtil.getUid();
-            } else {
-                break;
-            }
-        }
-
-        return uid;
-    }
-
     public AppUserInfo getAppUserInfoFromDB(String userAccount) {
         return this.appUserInfoRepository.findByUserAccount(userAccount);
     }
 
     public boolean checkIfUserAccountExistsDB(String userAccount) {
         AppUserInfo appUserInfo = this.appUserInfoRepository.findByUserAccount(userAccount);
-        return appUserInfo != null;
-    }
-
-    public boolean checkIfAgoraUidExistsDB(String agoraUid) {
-        AppUserInfo appUserInfo = this.appUserInfoRepository.findByAgoraUid(agoraUid);
         return appUserInfo != null;
     }
 
@@ -103,6 +84,6 @@ public class AppUserServiceImpl implements AppUserService {
 
         this.appUserInfoRepository.save(appUserInfo);
 
-        log.info("userAccount info save to db successfully :{}", userAccount);
+        log.info("UserAccount info save to db successfully : {}", userAccount);
     }
 }

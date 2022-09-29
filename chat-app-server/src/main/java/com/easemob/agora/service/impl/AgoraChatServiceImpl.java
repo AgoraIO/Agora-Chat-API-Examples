@@ -29,10 +29,10 @@ public class AgoraChatServiceImpl implements AgoraChatService {
     private String domain;
 
     @Value("${application.agoraAppId}")
-    private String appid;
+    private String appId;
 
-    @Value("${application.agoraCert}")
-    private String appcert;
+    @Value("${application.agoraAppCert}")
+    private String appCert;
 
     @Value("${agora.token.expire.period.seconds}")
     private int expirePeriod;
@@ -72,7 +72,7 @@ public class AgoraChatServiceImpl implements AgoraChatService {
             response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
         } catch (Exception e) {
             log.error("register chat user. chatUserName : {}, error : {}", chatUserName, e.getMessage());
-            throw new RestClientException("register chat user error ");
+            throw new RestClientException("Register chat user error.");
         }
 
         List<Map<String, Object>> results = (List<Map<String, Object>>) response.getBody().get("entities");
@@ -86,7 +86,7 @@ public class AgoraChatServiceImpl implements AgoraChatService {
 
         // 2.Use an Agora App ID,  App Cert and UUID to get the Agora Chat user token
         ChatTokenBuilder2 builder = new ChatTokenBuilder2();
-        String userToken = builder.buildUserToken(appid, appcert, chatUserUuid, expirePeriod);
+        String userToken = builder.buildUserToken(appId, appCert, chatUserUuid, expirePeriod);
 
         TokenInfo tokenInfo = new TokenInfo();
         tokenInfo.setToken(userToken);
@@ -116,7 +116,7 @@ public class AgoraChatServiceImpl implements AgoraChatService {
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
         } catch (Exception e) {
             log.error("get chat user. chatUserName : {}, error : {}", chatUserName, e.getMessage());
-            throw new RestClientException("get chat user error ");
+            throw new RestClientException("Get chat user error.");
         }
 
         List<Map<String, Object>> results = (List<Map<String, Object>>) responseEntity.getBody().get("entities");
@@ -128,13 +128,13 @@ public class AgoraChatServiceImpl implements AgoraChatService {
      * @return Agora app token
      */
     private String getAgoraAppToken() {
-        if (!StringUtils.hasText(appid) || !StringUtils.hasText(appcert)) {
-            throw new IllegalArgumentException("appid or appcert is not empty");
+        if (!StringUtils.hasText(appId) || !StringUtils.hasText(appCert)) {
+            throw new IllegalArgumentException("AppId or AppCert is not empty.");
         }
 
         // Use agora App Id、App Cert to generate agora app token
         ChatTokenBuilder2 builder = new ChatTokenBuilder2();
-        return builder.buildAppToken(appid, appcert, expirePeriod);
+        return builder.buildAppToken(appId, appCert, expirePeriod);
     }
 
     /**
@@ -144,40 +144,12 @@ public class AgoraChatServiceImpl implements AgoraChatService {
     private String getAgoraChatAppTokenFromCache() {
         try {
             return agoraChatAppTokenCache.get("agora-chat-app-token", () -> {
-                return exchangeToken();
+                return getAgoraAppToken();
             });
         } catch (Exception e) {
             log.error("get Agora Chat app token from cache. error : {}", e.getMessage());
-            throw new IllegalArgumentException("Get Agora Chat app token from cache error");
+            throw new IllegalArgumentException("Get Agora Chat app token from cache error.");
         }
-    }
-
-    /**
-     * Convert the Agora app token to Agora Chat app token
-     * @return Agora Chat app token
-     */
-    private String exchangeToken() {
-        String orgName = appkey.split("#")[0];
-        String appName = appkey.split("#")[1];
-        String url = "http://" + domain + "/" + orgName + "/" + appName + "/token";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.setBearerAuth(getAgoraAppToken());
-
-        Map<String, String> body = new HashMap<>();
-        body.put("grant_type", "agora");
-        HttpEntity<Map<String, String>> entity = new HttpEntity<>(body, headers);
-        ResponseEntity<Map> response;
-
-        try {
-            response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-        } catch (Exception e) {
-            log.error("exchange token. error : {}", e.getMessage());
-            throw new RestClientException("exchange token error ");
-        }
-        return (String) Objects.requireNonNull(response.getBody()).get("access_token");
     }
 
 }
