@@ -6,7 +6,30 @@ _[中文](README.zh.md) | English_
 
 This repository contains example projects using the Agora Chat React-Native sdk.
 
-![rn main](./res/main.jpg)
+![main](./res/main.jpg)
+
+## Create a project
+
+1. Into console page [agora.io](https://console.agora.io).
+2. Into project management page.
+3. Create a project that name is `quick_start_demo`.
+   ![image](./res/1.png)
+   ![image](./res/2.png)
+   ![image](./res/3.png)
+
+## Register a user
+
+1. Into project configuration page.
+2. Into chat configuration page in features item.
+3. Create user in operation management item.
+   ![image](./res/4.png)
+
+## Generate a user token
+
+1. Into project configuration page.
+2. Into chat configuration page in features item.
+3. Generate temp token in basic information item.
+   ![image](./res/5.png)
 
 ## project structure
 

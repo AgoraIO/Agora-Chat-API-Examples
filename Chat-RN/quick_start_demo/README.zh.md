@@ -6,7 +6,25 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat React-Native sdk 的示例项目。
 
-![rn main](../../Chat-RN/quick_start_demo/res/main.jpg)
+![main](./res/main.jpg)
+
+##创建一个项目
+
+1.进入控制台页面[agora.io](https://console.agora.io)。 2.进入项目管理页面。 3. 创建一个名为 `quick_start_demo` 的项目。
+![图片](./res/1.png)
+![图片](./res/2.png)
+![图片](./res/3.png)
+
+##注册一个用户
+
+1.进入项目配置页面。 2.进入功能项中的聊天配置页面。
+3、在运营管理项中创建用户。
+![图片](./res/4.png)
+
+## 生成用户令牌
+
+1.进入项目配置页面。 2.进入功能项中的聊天配置页面。 3.在基本信息项中生成临时令牌。
+![图片](./res/5.png)
 
 ## 项目结构
 
