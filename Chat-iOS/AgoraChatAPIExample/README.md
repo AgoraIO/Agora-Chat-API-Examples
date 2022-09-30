@@ -1,44 +1,46 @@
-# 快速发送 Agora Chat 消息
+# Rapidly Send a Message
 
-本文详细介绍如何建立一个简单的项目并使用 Agora Chat SDK 实现消息的发送和加入群组。
+This page shows how to set up a simple project and use the Agora Chat SDK to send a message and join a group.
 
-## 消息发送与接收流程
+## Message sending and receiving process
 
-登录 Agora Chat 系统包括以下流程：
-1. 客户端使用帐号和密码进行注册。
-2. 客户端注册成功后，登录到 Chat 服务器。
+The process of logging in to Agora Chat is as follows:
 
-![登录流程](https://web-cdn.agora.io/docs-files/1636443945728)
+1. The client registers an account via the App Server.
+2. The client obtains the user token via the App Server and logs in to the Agora Chat with the user ID and user token.
 
-发送和接收点对点消息包括以下流程：
-1. 客户端 A 发送点对点消息到 Chat 服务器。
-2. Chat 服务器将消息发送到客户端 B。客户端 B 收到点对点消息。
+![Login process](https://web-cdn.agora.io/docs-files/1636443945728)
 
-## 前提条件
- - iOS 10 及以上版本
- - 有效的 Agora Chat 开发者账号
+The process of sending and receiving a one-to-one message is as follows:
 
- ## 操作步骤
+1. Client A sends a message to the Agora Chat server.
+2. The Agora Chat server sends the message to client B. Client B receives the message.
 
-### 1.创建 Agora Chat 项目
+## Prerequisites
 
-参考以下步骤在 Xcode 中创建一个 iOS 平台下的 Single View App，项目设置如下：
+ - iOS 11 and above
+ - A valid developer account of Agora Chat 
 
-1. Product Name 设为 AgoraChatExamplet。
+## Integration procedure
 
-2. Organization Identifier 设为 agorachat。
-3. User Interface 选择 Storyboard。
-4. Language 选择 Objective-C。
+### 1. Create an Agora Chat project
 
-### 2.集成 Agora Chat SDK
+Create a Single View app in Xcode on the iOS platform by doing the following:
 
-选择以下任意一种方式将 Agora chat SDK 集成到你的项目中。本文使用方法 1 进行集成。
+1. Set `Product Name` to any name you like.
+2. Set `Organization Identifier` to the identifier of your organization.
+2. Select `Storyboard` for `User Interface`.
+3. Select `Objective-C` for `Language`.
 
-**方法 1：使用 pod 方式集成SDK**
+### 2. Integrate the Agora Chat SDK
 
-1. 开始前确保你已安装 Cocoapods。参考 [Getting Started with CocoaPods](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装说明。
-2. 在终端里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 `Podfile` 文本文件。
-3. 打开 `Podfile` 文件，在podfile文件里添加相关SDK。注意将 `AgoraChatAPIExample` 替换为你的 Target 名称。
+You can integrate the Agora chat SDK using either of the following methods. Here, the first method is used.
+
+**Method 1: Integrate the Agora chat SDK by using a pod**
+
+1. Install CocoaPods if you have not. For details, see [Getting Started with CocoaPods](https://guides.cocoapods.org/using/getting-started.html#getting-started).
+2. In the Terminal, navigate to the project root directory and run the `pod init` command. Then the text file `Podfile` will be generated in the project folder.
+3. Open the `Podfile` file and add the SDK to the file. Remember to replace `chatuikitquickstart` with the target name of your project.
 
 ```objective-c
 platform :ios, '11.0'
@@ -51,52 +53,59 @@ target 'AgoraChatAPIExample' do
   	pod 'Masonry'
 end
 ```
-4. 在终端 Terminal cd 到 podfile 文件所在目录，执行如下命令集成 SDK。
+
+4. Run the `cd` command in the Terminal to switch to the directory where the `Podfile` file is located. Then run the following command to integrate the SDK.
 
 ```objective-c
 pod install
 ```
 
-5. 成功安装后，Terminal 中会显示 `Pod installation complete!`，此时项目文件夹下会生成一个 `xcworkspace` 文件，打开新生成的 `xcworkspace` 文件运行项目。
+5. After the pod installation is complete, the message `Pod installation complete!` will be displayed in the Terminal. At this time, the `xcworkspace` file will be generated in the project folder. You can open this new file to run the project.
 
-**方法 2：手动集成 SDK framework 包**
+**Method 2: Manually integrate the SDK framework package**
 
-1. 下载最新版的 [Agora Chat SDK for iOS]([https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.1.zip](https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.0.zip)) 并解压。
-2. 将 SDK 包内的 AgoraChat.framework 加入到项目中，AgoraChat.framework 包含 arm64，armv7，x86_64 指令集。
-3. 选中项目的 Target，并在 General -> Frameworks,libraries,and... -> 将AgoraChat.framework 的 “Embed”选项设置为 “Embed & sign”。
+1. Download the latest [Agora Chat SDK for iOS]([https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.1.zip](https://download.agora.io/sdk/release/Agora_Chat_SDK_for_iOS_v1.0.0.zip)) and decompress it.
 
-### 3.添加权限
+2. Copy AgoraChat.framework in the SDK package to the project folder. AgoraChat.framework contains arm64, armv7, and x86_64 instruction sets.
 
-在项目 info.plist 中添加相关权限：
+3. Open Xcode and navigate to **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**.
+
+4. Click **+ > Add Other… > Add Files** to add AgoraChat.framework and set the **Embed** property to **Embed & Sign**. Then the project automatically links to the required system library.
+
+### 3. Add privileges
+
+Add related privileges in the `info.plist` project:
+
 ```
-Privacy - Photo Library Usage Description //相机权限
-App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
+Privacy - Photo Library Usage Description //Album privileges.
+App Transport Security Settings -> Allow Arbitrary Loads // Enable the network service.
 ```
 
-### 4.实现用户界面和资源文件
+### 4. Implement the UI and resource files
 
-为了帮助你快速实现并理解相关功能，本文通过最简方式，在一个 ViewController 里实现以下操作：
+This page implements the following functions to help you rapidly implement and understand related functions:
 
-- 用户注册
-- 登录和退出
-- 发送文本消息
-- 发送图片
-- 加入群组
+- Register a user account.
+- Log in and log out of the chat app.
+- Send a text message.
+- Send an image message.
+- Join a group.
 
-在项目的 ViewController.m 文件里添加如下相关代码：
+Add the following code in ViewController.m:
 
-1. 导入头文件
+1. Import header files.
 
 ```objective-c
 #import <Masonry/Masonry.h>
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 #import <AgoraChat/AgoraChat.h>
 #import <AgoraChat/AgoraChatOptions+PrivateDeploy.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 ```
-2. 实现相关代理并声明属性
+
+2. Implement the delegates and declare attributes.
 
 ```objective-c
 @interface ViewController ()<UITextFieldDelegate, UIScrollViewDelegate, AgoraChatClientDelegate, AgoraChatManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -130,9 +139,9 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 @end
 ```
 
-3. 页面以及 SDK 初始化
+3. Initialize the SDK.
 
-   需要在 "appkey" 处填入自己创建的 appkey。
+Replace "appkey" with your own App Key.
 
 ```objective-c
 - (void)viewDidLoad {
@@ -156,7 +165,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 }
 ```
 
-4. 加载页面元素
+4. Create UI controls.
 
 ```objective-c
 - (void)handleTapTableViewAction:(UITapGestureRecognizer *)aTap
@@ -410,9 +419,9 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
 }
 ```
 
-### 5.实现注册登录消息收发与加入群组等逻辑
+### 5. Implement registration, login, message sending and receiving, and joining groups
 
-1. 在 ViewController 文件里添加如下代码逻辑
+1. Add the following code logic to the ViewController file.
 
 ```objective-c
 - (void)registerAction
@@ -429,7 +438,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     
     __weak typeof(self) weakself = self;
     //register unify token user
-    [[EMHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(),^{
             NSString *alertStr = @"login.signup.fail";
             if (response != nil) {
@@ -477,7 +486,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         [weakself printLog:[NSString stringWithFormat:@"login fail ! errorDes : %@",aError.errorDescription]];
     };
 
-    [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (response && response.length > 0) {
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -702,7 +711,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
         [self printLog:[NSString stringWithFormat:@"========= token expire rennew token ! code : %d",aErrorCode]];
         NSString *name = [self.nameField.text lowercaseString];
         NSString *pswd = [self.pswdField.text lowercaseString];
-        [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+        [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (response && response.length > 0) {
                     NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -718,7 +727,7 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
                             }
                         }
                     } else {
-                        [self printLog:@"parseing token fail !"];
+                        [self printLog:@"parsing token fail !"];
                     }
                 } else {
                     [self printLog:@"login appserver fail !"];
@@ -766,15 +775,16 @@ App Transport Security Settings -> Allow Arbitrary Loads //开启网络服务
     return _formatter;
 }
 ```
-2. 此外 ViewController 使用到了访问我们 AppServer 进行登陆的工具类 EMHttpRequest，还需在项目中导入该工具类。
 
-- EMHttpRequest.h
+2. The ViewController uses the tool class `AgoraChatHttpRequest` that implements the login to the Agora Chat via the App Server. You need to import this tool class to the project.
+
+- AgoraChatHttpRequest.h
 ```objective-c
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EMHttpRequest : NSObject
+@interface AgoraChatHttpRequest : NSObject
 
 + (instancetype)sharedManager;
 
@@ -790,21 +800,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 ```
-- EMHttpRequest.m
+- AgoraChatHttpRequest.m
 ```objective-c
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 
-@interface EMHttpRequest() <NSURLSessionDelegate>
+@interface AgoraChatHttpRequest() <NSURLSessionDelegate>
 @property (readonly, nonatomic, strong) NSURLSession *session;
 @end
-@implementation EMHttpRequest
+@implementation AgoraChatHttpRequest
 
 + (instancetype)sharedManager
 {
     static dispatch_once_t onceToken;
-    static EMHttpRequest *sharedInstance;
+    static AgoraChatHttpRequest *sharedInstance;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[EMHttpRequest alloc] init];
+        sharedInstance = [[AgoraChatHttpRequest alloc] init];
     });
     
     return sharedInstance;
@@ -826,8 +836,8 @@ NS_ASSUME_NONNULL_END
                           pwd:(NSString *)pwd
                    completion:(void (^)(NSInteger statusCode, NSString *aUsername))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/register";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/register"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/register"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -853,8 +863,8 @@ NS_ASSUME_NONNULL_END
                        pwd:(NSString *)pwd
                 completion:(void (^)(NSInteger statusCode, NSString *response))aCompletionBlock
 {
-    //NSString *hkURl = @"https://hk-test.easemob.com/app/chat/user/login";
-    NSURL *url = [NSURL URLWithString:@"https://a41.easemob.com/app/chat/user/login"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a41.chat.agora.io/app/chat/user/login"];
     NSMutableURLRequest *request = [NSMutableURLRequest
                                                 requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -888,14 +898,15 @@ NS_ASSUME_NONNULL_END
 @end
 ```
 
-### 6.编译并运行项目
+### 6. Compile and run the project
 
-使用 Xcode 在模拟器或真机上编译并运行项目。运行成功之后，你可以进行以下操作：
+Use Xcode to compile and run the project on the simulator or physical device. After the project runs successfully, you can perform the following operations:
 
-- 注册，登录和退出
-- 输入会话 ID
-- 发送文本消息
-- 发送图片消息
-- 加入群组
+- Register an account and log in to or log out of Agora Chat.
+- Type the conversation ID.
+- Send a text message.
+- Send an image message.
+- Join a group.
 
-功能执行结果在页面下半部分会有相关日志记录展示。
+The operation result is indicated in the logs shown in the lower part of the page.
+

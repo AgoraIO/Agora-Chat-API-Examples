@@ -7,7 +7,7 @@
 
 #import "AgoraChatApiExampleViewController.h"
 #import <Masonry/Masonry.h>
-#import "EMHttpRequest.h"
+#import "AgoraChatHttpRequest.h"
 #import <AgoraChat/AgoraChat.h>
 #import <AgoraChat/AgoraChatOptions+PrivateDeploy.h>
 #import <Photos/Photos.h>
@@ -64,10 +64,6 @@
 {
     AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:@"41117440#383391"];
     
-//    options.chatPort = 6717;
-//    options.chatServer = @"hk-tls.easemob.com";
-//    options.restServer = @"https://hk-test.easemob.com";
-//    options.enableDnsConfig = NO;
     options.enableConsoleLog = YES;
     [[AgoraChatClient sharedClient] initializeSDKWithOptions:options];
 
@@ -376,7 +372,7 @@
     
     __weak typeof(self) weakself = self;
     //register unify token user
-    [[EMHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] registerToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(),^{
             NSString *alertStr = @"login.signup.fail";
             if (response != nil) {
@@ -433,7 +429,7 @@
         [weakself printLog:[NSString stringWithFormat:@"login fail ! errorDes : %@",aError.errorDescription]];
     };
 
-    [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+    [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (response && response.length > 0) {
                 NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
@@ -659,7 +655,7 @@
         [self printLog:[NSString stringWithFormat:@"========= token expire rennew token ! code : %d",aErrorCode]];
         NSString *name = [self.nameField.text lowercaseString];
         NSString *pswd = [self.pswdField.text lowercaseString];
-        [[EMHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
+        [[AgoraChatHttpRequest sharedManager] loginToApperServer:name pwd:pswd completion:^(NSInteger statusCode, NSString * _Nonnull response) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (response && response.length > 0) {
                     NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];

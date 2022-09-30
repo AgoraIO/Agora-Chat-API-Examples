@@ -33,7 +33,7 @@ function App() {
 		}
 
 		const getToken = (username, password) => {
-			postData("https://a41.easemob.com/app/chat/user/login", {
+			postData("https://a41.chat.agora.io/app/chat/user/login", {
 				userAccount: username,
 				userPassword: password,
 			})

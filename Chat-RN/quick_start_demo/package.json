@@ -10,9 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "agora-react-native-chat": "^1.0.5-rc.8",
     "react": "17.0.2",
-    "react-native": "0.68.2"
+    "react-native": "0.68.2",
+    "react-native-agora-chat": "^1.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

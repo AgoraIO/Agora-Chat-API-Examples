@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-// import depend packages.
+// Import depend packages.
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
@@ -21,18 +21,20 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from 'agora-react-native-chat';
+} from 'react-native-agora-chat';
 
 // The App Object.
 const App = () => {
-  // variable defines.
+  // The variable defines.
   const title = 'AgoraChatQuickstart';
-  const [appKey, setAppKey] = React.useState('81446724#514456');
+  const appKey = '41117440#383391';
   const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [userId, setUserId] = React.useState('');
+  const [chatToken, setChatToken] = React.useState('');
+  const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
+  const chatClient = ChatClient.getInstance();
+  const chatManager = chatClient.chatManager;
 
   // output console log.
   useEffect(() => {
@@ -43,7 +45,7 @@ const App = () => {
     });
   }, [logText]);
 
-  // output ui log.
+  // Output UI logs.
   const rollLog = text => {
     setWarnText(preLogText => {
       let newLogText = text;
@@ -62,144 +64,94 @@ const App = () => {
     });
   };
 
-  const requestHttp = url => {
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userAccount: username,
-        userPassword: password,
-      }),
-    });
-  };
-  const requestGetToken = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/login');
-  };
-  const requestRegistryAccount = () => {
-    return requestHttp('https://a1.easemob.com/app/chat/user/register');
-  };
+  useEffect(() => {
+    // Register listeners for messaging.
+    const setMessageListener = () => {
+      let msgListener = {
+        onMessagesReceived(messages) {
+          for (let index = 0; index < messages.length; index++) {
+            rollLog('received msgId: ' + messages[index].msgId);
+          }
+        },
+        onCmdMessagesReceived: messages => {},
+        onMessagesRead: messages => {},
+        onGroupMessageRead: groupMessageAcks => {},
+        onMessagesDelivered: messages => {},
+        onMessagesRecalled: messages => {},
+        onConversationsUpdate: () => {},
+        onConversationRead: (from, to) => {},
+      };
 
-  // register listener for message.
-  const setMessageListener = () => {
-    let msgListener = {
-      onMessagesReceived(messages) {
-        for (let index = 0; index < messages.length; index++) {
-          rollLog('received msgId: ' + messages[index].msgId);
-        }
-      },
-      onCmdMessagesReceived: messages => {},
-      onMessagesRead: messages => {},
-      onGroupMessageRead: groupMessageAcks => {},
-      onMessagesDelivered: messages => {},
-      onMessagesRecalled: messages => {},
-      onConversationsUpdate: () => {},
-      onConversationRead: (from, to) => {},
+      chatManager.removeAllMessageListener();
+      chatManager.addMessageListener(msgListener);
     };
 
-    ChatClient.getInstance().chatManager.removeAllMessageListener();
-    ChatClient.getInstance().chatManager.addMessageListener(msgListener);
-  };
+    // Initialize the SDK.
+    // Initialize any interface before calling it.
+    const init = () => {
+      let o = new ChatOptions({
+        autoLogin: false,
+        appKey: appKey,
+      });
+      chatClient.removeAllConnectionListener();
+      chatClient
+        .init(o)
+        .then(() => {
+          rollLog('init success');
+          this.isInitialized = true;
+          let listener = {
+            onTokenWillExpire() {
+              rollLog('token expire.');
+            },
+            onTokenDidExpire() {
+              rollLog('token did expire');
+            },
+            onConnected() {
+              rollLog('onConnected');
+              setMessageListener();
+            },
+            onDisconnected(errorCode) {
+              rollLog('onDisconnected:' + errorCode);
+            },
+          };
+          chatClient.addConnectionListener(listener);
+        })
+        .catch(error => {
+          rollLog(
+            'init fail: ' +
+              (error instanceof Object ? JSON.stringify(error) : error),
+          );
+        });
+    };
 
-  // Init sdk.
-  // Please initialize any interface before calling it.
-  const init = () => {
-    let o = new ChatOptions({
-      autoLogin: false,
-      appKey: appKey,
-    });
-    ChatClient.getInstance().removeAllConnectionListener();
-    ChatClient.getInstance()
-      .init(o)
+    init();
+  }, [chatClient, chatManager, appKey]);
+
+  // Log in with an account ID and token.
+  const login = () => {
+    if (this.isInitialized === false || this.isInitialized === undefined) {
+      rollLog('Perform initialization first.');
+      return;
+    }
+    rollLog('start login ...');
+    chatClient
+      .loginWithAgoraToken(username, chatToken)
       .then(() => {
-        rollLog('init success');
-        this.isInitialized = true;
-        let listener = {
-          onTokenWillExpire() {
-            rollLog('token expire.');
-          },
-          onTokenDidExpire() {
-            rollLog('token did expire');
-          },
-          onConnected() {
-            rollLog('login success.');
-            setMessageListener();
-          },
-          onDisconnected(errorCode) {
-            rollLog('login fail: ' + errorCode);
-          },
-        };
-        ChatClient.getInstance().addConnectionListener(listener);
+        rollLog('login operation success.');
       })
-      .catch(error => {
-        rollLog(
-          'init fail: ' +
-            (error instanceof Object ? JSON.stringify(error) : error),
-        );
+      .catch(reason => {
+        rollLog('login fail: ' + JSON.stringify(reason));
       });
   };
 
-  // register account for login
-  const registerAccount = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
-    rollLog('start register account ...');
-    requestRegistryAccount()
-      .then(response => {
-        rollLog(`register success: userName = ${username}, password = ******`);
-      })
-      .catch(error => {
-        rollLog('register fail: ' + JSON.stringify(error));
-      });
-  };
-
-  // login with account id and token
-  const loginWithToken = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
-    rollLog('start request token ...');
-    requestGetToken()
-      .then(response => {
-        rollLog('request token success.');
-        response
-          .json()
-          .then(value => {
-            rollLog(
-              `response token success: username = ${username}, token = ******`,
-            );
-            const token = value.accessToken;
-            rollLog('start login ...');
-            ChatClient.getInstance()
-              .loginWithAgoraToken(username, token)
-              .then(() => {
-                rollLog('login operation success.');
-              })
-              .catch(reason => {
-                rollLog('login fail: ' + JSON.stringify(reason));
-              });
-          })
-          .catch(error => {
-            rollLog('response token fail:' + JSON.stringify(error));
-          });
-      })
-      .catch(error => {
-        rollLog('request token fail: ' + JSON.stringify(error));
-      });
-  };
-
-  // logout from server.
+  // Log out from server.
   const logout = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog('Perform initialization first.');
       return;
     }
     rollLog('start logout ...');
-    ChatClient.getInstance()
+    chatClient
       .logout()
       .then(() => {
         rollLog('logout success.');
@@ -209,14 +161,14 @@ const App = () => {
       });
   };
 
-  // send text message to somebody
+  // Send a text message to somebody.
   const sendmsg = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog('Perform initialization first.');
       return;
     }
     let msg = ChatMessage.createTextMessage(
-      userId,
+      targetId,
       content,
       ChatMessageChatType.PeerChat,
     );
@@ -232,8 +184,8 @@ const App = () => {
       }
     })();
     rollLog('start send message ...');
-    ChatClient.getInstance()
-      .chatManager.sendMessage(msg, callback)
+    chatClient.chatManager
+      .sendMessage(msg, callback)
       .then(() => {
         rollLog('send message: ' + msg.localMsgId);
       })
@@ -242,27 +194,13 @@ const App = () => {
       });
   };
 
-  // ui render.
+  // Render the UI.
   return (
     <SafeAreaView>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
       </View>
       <ScrollView>
-        <View style={styles.inputCon}>
-          <TextInput
-            multiline
-            style={styles.inputBox}
-            placeholder="Enter appkey"
-            onChangeText={text => setAppKey(text)}
-            value={appKey}
-          />
-        </View>
-        <View style={styles.buttonCon}>
-          <Text style={styles.btn2} onPress={init}>
-            INIT SDK
-          </Text>
-        </View>
         <View style={styles.inputCon}>
           <TextInput
             multiline
@@ -276,16 +214,13 @@ const App = () => {
           <TextInput
             multiline
             style={styles.inputBox}
-            placeholder="Enter password"
-            onChangeText={text => setPassword(text)}
-            value={password}
+            placeholder="Enter chatToken"
+            onChangeText={text => setChatToken(text)}
+            value={chatToken}
           />
         </View>
         <View style={styles.buttonCon}>
-          <Text style={styles.eachBtn} onPress={registerAccount}>
-            SIGN UP
-          </Text>
-          <Text style={styles.eachBtn} onPress={loginWithToken}>
+          <Text style={styles.eachBtn} onPress={login}>
             SIGN IN
           </Text>
           <Text style={styles.eachBtn} onPress={logout}>
@@ -297,8 +232,8 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter the username you want to send"
-            onChangeText={text => setUserId(text)}
-            value={userId}
+            onChangeText={text => setTargetId(text)}
+            value={targetId}
           />
         </View>
         <View style={styles.inputCon}>
@@ -331,7 +266,7 @@ const App = () => {
   );
 };
 
-// ui styles sets.
+// Sets UI styles.
 const styles = StyleSheet.create({
   titleContainer: {
     height: 60,
