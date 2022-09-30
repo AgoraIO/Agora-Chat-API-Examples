@@ -6,7 +6,30 @@ _[中文](README.zh.md) | English_
 
 This repository contains example projects using the Agora Chat React-Native sdk.
 
-![rn main](./res/main.jpg)
+![main](./res/main.jpg)
+
+## Create a project
+
+1. Into console page [agora.io](https://console.agora.io).
+2. Into project management page.
+3. Create a project that name is `quick_start_demo`.
+   ![image](./res/1.png)
+   ![image](./res/2.png)
+   ![image](./res/3.png)
+
+## Register a user
+
+1. Into project configuration page.
+2. Into chat configuration page in features item.
+3. Create user in operation management item.
+   ![image](./res/4.png)
+
+## Generate a user token
+
+1. Into project configuration page.
+2. Into chat configuration page in features item.
+3. Generate temp token in basic information item.
+   ![image](./res/5.png)
 
 ## project structure
 
@@ -45,18 +68,40 @@ This project implements multiple functions in a single app.
 
 ### Running steps
 
-First download the code from the repository and go to the `Chat-RN/quick_start_demo` directory.
+Download the code from the repository and go to the `Chat-RN/quick_start_demo` directory.
+
+```sh
+git clone -b main git@github.com:AgoraIO/Agora-Chat-API-Examples.git
+```
+
+Initialize the project
+
+```sh
+yarn
+```
+
+Execute the pod manually (yarn usually executes it automatically)
+
+```sh
+cd ios && pod install
+```
+
+Update the latest SDK package (optional)
+
+```sh
+yarn upgrade react-native-agora-chat
+```
 
 Compile and run on real iOS device:
 
 1. Connect the iPhone and set it to developer mode;
-2. Open `token_login_demo/ios`, use `xcode` to open `token_login_demo.xcworkspace`;
-3. Click **Targets** > **token_login_demo** > **Signing & Capabilities** to set the application signature under the signature option;
+2. Open `quick_start_demo/ios`, use `xcode` to open `quick_start_demo.xcworkspace`;
+3. Click **Targets** > **quick_start_demo** > **Signing & Capabilities** to set the application signature under the signature option;
 4. Click `Build` to build and run the project. After the program is built, it will be automatically installed and run, and the application interface will be displayed.
 
 Compile and run on a real Android device:
 
-1. Open `token_login_demo/android` in Android Studio;
+1. Open `quick_start_demo/android` in Android Studio;
 2. Connect to Android phone, set to developer mode, and set USB adjustable;
 3. Set data forwarding: enter `adb reverse tcp:8081 tcp:8081` in the terminal command line;
 4. Start the service: execute the command in `package.json`: `"start": "react-native start"`, run the command `yarn start` in the terminal:

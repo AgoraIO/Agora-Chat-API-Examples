@@ -6,7 +6,25 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat React-Native sdk 的示例项目。
 
-![rn main](./res/main.jpg)
+![main](./res/main.jpg)
+
+##创建一个项目
+
+1.进入控制台页面[agora.io](https://console.agora.io)。 2.进入项目管理页面。 3. 创建一个名为 `quick_start_demo` 的项目。
+![图片](./res/1.png)
+![图片](./res/2.png)
+![图片](./res/3.png)
+
+##注册一个用户
+
+1.进入项目配置页面。 2.进入功能项中的聊天配置页面。
+3、在运营管理项中创建用户。
+![图片](./res/4.png)
+
+## 生成用户令牌
+
+1.进入项目配置页面。 2.进入功能项中的聊天配置页面。 3.在基本信息项中生成临时令牌。
+![图片](./res/5.png)
 
 ## 项目结构
 
@@ -45,18 +63,40 @@ _[English](README.md) | 中文_
 
 ### 运行步骤
 
-首先从仓库下载代码，进入 `Chat-RN/quick_start_demo` 目录。
+从仓库下载代码，进入 `Chat-RN/quick_start_demo` 目录。
+
+```sh
+git clone -b main git@github.com:AgoraIO/Agora-Chat-API-Examples.git
+```
+
+初始化项目
+
+```sh
+yarn
+```
+
+手动执行 pod（yarn 一般会自动执行）
+
+```sh
+cd ios && pod install
+```
+
+更新最新 SDK 包(可选)
+
+```sh
+yarn upgrade react-native-agora-chat
+```
 
 编译并在 iOS 真机运行：
 
 1. 连接苹果手机，设置为开发者模式；
-2. 打开 `token_login_demo/ios`，使用 `xcode` 打开 `token_login_demo.xcworkspace`；
-3. 依次点击 **Targets** > **token_login_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
+2. 打开 `quick_start_demo/ios`，使用 `xcode` 打开 `quick_start_demo.xcworkspace`；
+3. 依次点击 **Targets** > **quick_start_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
 4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
 编译并在 Android 真机运行：
 
-1. 在 Android Studio 中打开 `token_login_demo/android`；
+1. 在 Android Studio 中打开 `quick_start_demo/android`；
 2. 连接 Android 系统手机，设置为开发者模式，并且设置 USB 可调式；
 3. 设置数据转发：在终端命令行输入 `adb reverse tcp:8081 tcp:8081`；
 4. 启动服务：执行 `package.json` 里面的命令：`"start": "react-native start"`，在终端中运行命令 `yarn start`：
