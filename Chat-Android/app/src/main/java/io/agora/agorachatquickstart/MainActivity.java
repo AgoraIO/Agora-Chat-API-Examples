@@ -1,41 +1,33 @@
 package io.agora.agorachatquickstart;
 
-import static io.agora.cloud.HttpClientManager.Method_POST;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import io.agora.CallBack;
 import io.agora.ConnectionListener;
 import io.agora.Error;
-import io.agora.ValueCallBack;
 import io.agora.chat.ChatClient;
 import io.agora.chat.ChatMessage;
 import io.agora.chat.ChatOptions;
 import io.agora.chat.TextMessageBody;
-import io.agora.cloud.HttpClientManager;
-import io.agora.cloud.HttpResponse;
 
 
 public class MainActivity extends AppCompatActivity {
-    private EditText et_username;
+    // Create a user from Agora Console or by your app server
+    private static final String USERNAME = "";
+    // Gets token from Agora Console or generates by your app server
+    private static final String TOKEN = "";
+    // Gets AppKey from Agora Console
+    private static final String APP_KEY = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,28 +39,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        et_username = findViewById(R.id.et_username);
         ((TextView)findViewById(R.id.tv_log)).setMovementMethod(new ScrollingMovementMethod());
     }
 
-//=================== init SDK start ========================
     private void initSDK() {
         ChatOptions options = new ChatOptions();
-        // Set your appkey applied from Agora Console
-        String sdkAppkey = getString(R.string.app_key);
-        if(TextUtils.isEmpty(sdkAppkey)) {
+        // Get your appkey applied from Agora Console
+        if(TextUtils.isEmpty(APP_KEY)) {
             Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
             return;
         }
         // Set your appkey to options
-        options.setAppKey(sdkAppkey);
+        options.setAppKey(APP_KEY);
         // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
+        // Show current user
+        ((TextView)findViewById(R.id.tv_username)).setText("Current user: "+USERNAME);
     }
-//=================== init SDK end ========================
-//================= SDK listener start ====================
+
     private void initListener() {
         ChatClient.getInstance().chatManager().addMessageListener(messages -> {
             for(ChatMessage message : messages) {
@@ -102,33 +92,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTokenExpired() {
                 showLog("ConnectionListener onTokenExpired", true);
-                signInWithToken(null);
             }
 
             @Override
             public void onTokenWillExpire() {
                 showLog("ConnectionListener onTokenWillExpire", true);
-                getTokenFromAppServer(true);
-            }
-        });
-    }
-//================= SDK listener end ====================
-//=================== click event start ========================
-    /**
-     * Sign up with username and password
-     */
-    public void signUp(View view) {
-        String username = et_username.getText().toString().trim();
-        String pwd = ((EditText) findViewById(R.id.et_pwd)).getText().toString().trim();
-        register(username, pwd, new CallBack() {
-            @Override
-            public void onSuccess() {
-                showLog("Sign up success!", true);
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                showLog(error, true);
             }
         });
     }
@@ -137,7 +105,25 @@ public class MainActivity extends AppCompatActivity {
      * Login with token
      */
     public void signInWithToken(View view) {
-        getTokenFromAppServer(false);
+        loginToAgora();
+    }
+
+    private void loginToAgora() {
+        if(TextUtils.isEmpty(USERNAME) || TextUtils.isEmpty(TOKEN)) {
+            showLog("Username or token is empty!", true);
+            return;
+        }
+        ChatClient.getInstance().loginWithAgoraToken(USERNAME, TOKEN, new CallBack() {
+            @Override
+            public void onSuccess() {
+                showLog("Sign in success!", true);
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                showLog(error, true);
+            }
+        });
     }
 
     /**
@@ -156,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     showLog(error, true);
                 }
             });
+        }else {
+            showLog("You were not logged in", false);
         }
     }
 
@@ -181,139 +169,6 @@ public class MainActivity extends AppCompatActivity {
         });
         // Send the message
         ChatClient.getInstance().chatManager().sendMessage(message);
-    }
-
-//=================== click event end ========================
-//=================== get token from server start ========================
-
-    private void getTokenFromAppServer(boolean isRenewToken) {
-        if(ChatClient.getInstance().isLoggedInBefore()) {
-            showLog("An account has been signed in, please sign out first and then sign in", false);
-            return;
-        }
-        String username = et_username.getText().toString().trim();
-        String pwd = ((EditText) findViewById(R.id.et_pwd)).getText().toString().trim();
-        getAgoraTokenFromAppServer(username, pwd, new ValueCallBack<String>() {
-            @Override
-            public void onSuccess(String token) {
-                if(isRenewToken) {
-                    ChatClient.getInstance().renewToken(token);
-                }else {
-                    login(username,token);
-                }
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                showLog(errorMsg, true);
-            }
-        });
-    }
-
-    private void getAgoraTokenFromAppServer(String username, String pwd, @NonNull ValueCallBack<String> callBack) {
-        showLog("begin to getTokenFromAppServer ...", false);
-        executeRequest(getString(R.string.login_url, getString(R.string.base_url)), username, pwd, new ValueCallBack<String>() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String token = object.getString("accessToken");
-                    callBack.onSuccess(token);
-                } catch (JSONException e) {
-                    callBack.onError(Error.GENERAL_ERROR, e.getMessage());
-                }
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                callBack.onError(error, errorMsg);
-            }
-        });
-    }
-
-    private void executeRequest(String url, String username, String password, @NonNull ValueCallBack<String> callBack) {
-        if(TextUtils.isEmpty(url) || TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            callBack.onError(Error.INVALID_PARAM, "Request url, username or password should not be empty");
-            return;
-        }
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        JSONObject request = new JSONObject();
-        try {
-            request.putOpt("userAccount", username);
-            request.putOpt("userPassword", password);
-        } catch (JSONException e) {
-            callBack.onError(Error.GENERAL_ERROR, e.getMessage());
-            return;
-        }
-        execute(()-> {
-            try {
-                HttpResponse response = HttpClientManager.httpExecute(url, headers, request.toString(), Method_POST);
-                int code = response.code;
-                String responseInfo = response.content;
-                if (code == 200) {
-                    if (responseInfo != null && responseInfo.length() > 0) {
-                        callBack.onSuccess(responseInfo);
-                    } else {
-                        callBack.onError(Error.SERVER_UNKNOWN_ERROR, responseInfo);
-                    }
-                } else {
-                    callBack.onError(code, responseInfo);
-                }
-            } catch (Exception e) {
-                callBack.onError(Error.GENERAL_ERROR, e.getMessage());
-            }
-        });
-    }
-
-//=================== get token from server end ========================
-//=================== login and register start ========================
-
-    private void login(String username, String token) {
-        ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
-            @Override
-            public void onSuccess() {
-                showLog("Sign in success!", true);
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                showLog(error, true);
-            }
-        });
-    }
-
-    private void register(String username, String pwd, @NonNull CallBack callBack) {
-        showLog("begin to sign up...",false);
-        executeRequest(getString(R.string.register_url, getString(R.string.base_url)), username, pwd, new ValueCallBack<String>() {
-            @Override
-            public void onSuccess(String response) {
-                String resultCode = null;
-                try {
-                    JSONObject object = new JSONObject(response);
-                    resultCode = object.getString("code");
-                    if(resultCode.equals("RES_OK")) {
-                        callBack.onSuccess();
-                    }else{
-                        callBack.onError(Error.GENERAL_ERROR, "Sign up failed!");
-                    }
-                } catch (JSONException e) {
-                    callBack.onError(Error.GENERAL_ERROR, e.getMessage());
-                }
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                callBack.onError(error, errorMsg);
-            }
-        });
-    }
-
-//=================== login and register start ========================
-
-    private void execute(Runnable runnable) {
-        new Thread(runnable).start();
     }
 
     private void showLog(String content, boolean showToast) {
