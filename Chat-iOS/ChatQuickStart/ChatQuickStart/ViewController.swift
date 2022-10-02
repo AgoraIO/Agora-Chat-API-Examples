@@ -2,17 +2,16 @@
 //  ViewController.swift
 //  ChatQuickStart
 //
-//  Created by li xiaoming on 2022/8/26.
+//  Created by li xiaoming on 2022/10/2.
 //
 
 import UIKit
-// Import the AgoraChat SDK
 import AgoraChat
 
 class ViewController: UIViewController {
-    // Define UIViews
-    var userIdField, passwordField, remoteUserIdField, textField: UITextField!
-    var registerButton, loginButton, logoutButton, sendButton: UIButton!
+    // Defines UIViews
+    var userIdField, tokenField, remoteUserIdField, textField: UITextField!
+    var loginButton, logoutButton, sendButton: UIButton!
     var logView: UITextView!
 
     func createField(placeholder: String?) -> UITextField {
@@ -36,17 +35,15 @@ class ViewController: UIViewController {
     }
 
     func initViews() {
-        // create UI controls
+        // creates UI controls
         userIdField = createField(placeholder: "User Id")
         self.view.addSubview(userIdField)
-        passwordField = createField(placeholder: "Password")
-        self.view.addSubview(passwordField)
+        tokenField = createField(placeholder: "Token")
+        self.view.addSubview(tokenField)
         remoteUserIdField = createField(placeholder: "Remote User Id")
         self.view.addSubview(remoteUserIdField)
         textField = createField(placeholder: "Input text message")
         self.view.addSubview(textField)
-        registerButton = createButton(title: "Register", action: #selector(registerAction))
-        self.view.addSubview(registerButton)
         loginButton = createButton(title: "Login", action: #selector(loginAction))
         self.view.addSubview(loginButton)
         logoutButton = createButton(title: "Logout", action: #selector(logoutAction))
@@ -55,16 +52,18 @@ class ViewController: UIViewController {
         self.view.addSubview(sendButton)
         logView = createLogView()
         self.view.addSubview(logView)
+        // Input userId and token which generated on console
+        self.userIdField.text = <#Input Your UserId#>
+        self.tokenField.text = <#Input Your Token#>
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // Layout UI controls
+        // Defines layout UI controls
         let fullWidth = self.view.frame.width
         userIdField.frame = CGRect(x: 30, y: 50, width: fullWidth - 60, height: 30)
-        passwordField.frame = CGRect(x: 30, y: 100, width: fullWidth - 60, height: 30)
-        registerButton.frame = CGRect(x: 30, y: 150, width: 80, height: 30)
-        loginButton.frame = CGRect(x: 130, y: 150, width: 80, height: 30)
+        tokenField.frame = CGRect(x: 30, y: 100, width: fullWidth - 60, height: 30)
+        loginButton.frame = CGRect(x: 30, y: 150, width: 80, height: 30)
         logoutButton.frame = CGRect(x: 230, y: 150, width: 80, height: 30)
         remoteUserIdField.frame = CGRect(x: 30, y: 200, width: fullWidth - 60, height: 30)
         textField.frame = CGRect(x: 30, y: 250, width: fullWidth - 60, height: 30)
@@ -73,23 +72,22 @@ class ViewController: UIViewController {
     }
     
     func initChatSDK() {
-            // Initialize AgoraChat SDK
-            let options = AgoraChatOptions(appkey: "41117440#383391")
+            // Initializes the Agora Chat SDK
+            let options = AgoraChatOptions(appkey: "<#Agora App Key#>")
             options.isAutoLogin = false // disable auto login
             options.enableConsoleLog = true
             AgoraChatClient.shared.initializeSDK(with: options)
-            // add chat delegate to receive messages
-            AgoraChatClient.shared.chatManager.add(self, delegateQueue: nil)
+            // Adds the chat delegate to receive messages
+            AgoraChatClient.shared.chatManager?.add(self, delegateQueue: nil)
         }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
-        // call initialize SDK here
         initChatSDK()
     }
 
-    // Output running log
+    // Outputs running log
     func printLog(_ log: Any...) {
         DispatchQueue.main.async {
             self.logView.text.append(
@@ -104,42 +102,22 @@ class ViewController: UIViewController {
 // Button action
 extension ViewController {
 
-    // register an account via app server
-    @objc func registerAction() {
-        guard let userId = userIdField.text, let password = passwordField.text else {
-            return
-        }
-        AgoraChatHttpRequest.register(userId: userId, password: password) { result in
-            if result.isEmpty {
-                self.printLog("register failed")
-            } else {
-                self.printLog("register result:\(result)")
-            }
-        }
-    }
-
-    // get user token via app server and login
+    // login with the token.
     @objc func loginAction() {
-        guard let userId = userIdField.text, let password = passwordField.text else {
-            return
+        guard let userId = self.userIdField.text,
+              let token = self.tokenField.text else {
+            self.printLog("userId or token is empty")
+            return;
         }
-        AgoraChatHttpRequest.loginWith(userId: userId, password: password) { result in
-            guard let data = result.data(using: .utf8),
-                  let dic: Dictionary<String, AnyHashable> = try? JSONSerialization.jsonObject(with: data) as? Dictionary<String, AnyHashable>,
-                  let token = dic["accessToken"] else {
-                self.printLog("login failed \(result)")
-                return
-            }
-            let err = AgoraChatClient.shared.login(withUsername: userId, agoraToken: token as! String)
-            if err == nil {
-                self.printLog("login success")
-            } else {
-                self.printLog("login failed:\(err?.errorDescription ?? "")")
-            }
+        let err = AgoraChatClient.shared.login(withUsername: userId, agoraToken: token)
+        if err == nil {
+            self.printLog("login success")
+        } else {
+            self.printLog("login failed:\(err?.errorDescription ?? "")")
         }
     }
 
-    // logout
+    // Logs out.
     @objc func logoutAction() {
         AgoraChatClient.shared.logout(false) { err in
             if err == nil {
@@ -150,7 +128,7 @@ extension ViewController {
 }
 
 extension ViewController: AgoraChatManagerDelegate  {
-    // send a text message
+    // Sends a text message.
     @objc func sendAction() {
         guard let remoteUser = remoteUserIdField.text,
               let text = textField.text,
@@ -162,7 +140,7 @@ extension ViewController: AgoraChatManagerDelegate  {
             conversationId: remoteUser, from: currentUserName,
             to: remoteUser, body: .text(text), ext: nil
         )
-        AgoraChatClient.shared.chatManager.send(msg, progress: nil) { msg, err in
+        AgoraChatClient.shared.chatManager?.send(msg, progress: nil) { msg, err in
             if let err = err {
                 self.printLog("send msg error.\(err.errorDescription)")
             } else {

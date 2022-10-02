@@ -14,7 +14,6 @@
 		C01BC17228B9128C0064DF80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C01BC17128B9128C0064DF80 /* Assets.xcassets */; };
 		C01BC17528B9128C0064DF80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C01BC17328B9128C0064DF80 /* LaunchScreen.storyboard */; };
 		C01BC17E28B912B80064DF80 /* AgoraChat in Frameworks */ = {isa = PBXBuildFile; productRef = C01BC17D28B912B80064DF80 /* AgoraChat */; };
-		C01BC18028B912EA0064DF80 /* AgoraChatHttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01BC17F28B912EA0064DF80 /* AgoraChatHttpRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,6 @@
 		C01BC17128B9128C0064DF80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C01BC17428B9128C0064DF80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C01BC17628B9128C0064DF80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C01BC17F28B912EA0064DF80 /* AgoraChatHttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraChatHttpRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +65,6 @@
 				C01BC17128B9128C0064DF80 /* Assets.xcassets */,
 				C01BC17328B9128C0064DF80 /* LaunchScreen.storyboard */,
 				C01BC17628B9128C0064DF80 /* Info.plist */,
-				C01BC17F28B912EA0064DF80 /* AgoraChatHttpRequest.swift */,
 			);
 			path = ChatQuickStart;
 			sourceTree = "<group>";
@@ -149,7 +146,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C01BC18028B912EA0064DF80 /* AgoraChatHttpRequest.swift in Sources */,
 				C01BC16D28B9128A0064DF80 /* ViewController.swift in Sources */,
 				C01BC16928B9128A0064DF80 /* AppDelegate.swift in Sources */,
 				C01BC16B28B9128A0064DF80 /* SceneDelegate.swift in Sources */,
