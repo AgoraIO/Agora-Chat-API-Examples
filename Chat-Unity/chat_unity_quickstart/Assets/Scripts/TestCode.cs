@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -9,20 +8,15 @@ using System;
 public class TestCode : MonoBehaviour
 {
 
-    static string APPKEY = "41117440#383391";
-    static string RegisterURL = "https://a41.chat.agora.io/app/chat/user/register";
-    static string FetchAgoraTokenURL = "https://a41.chat.agora.io/app/chat/user/login";
-
     public InputField Username;
 
-    public InputField Password;
+    public InputField AgoraToken;
 
     public InputField SignChatId;
 
     public InputField MessageContent;
 
     public Button SignInBtn;
-    public Button SignUpBtn;
     public Button SignOutBtn;
     public Button SendMsgBtn;
 
@@ -51,7 +45,6 @@ public class TestCode : MonoBehaviour
     private void SetupUI()
     {
         SignInBtn.onClick.AddListener(SignInAction);
-        SignUpBtn.onClick.AddListener(SignUpAction);
         SignOutBtn.onClick.AddListener(SignOutAction);
         SendMsgBtn.onClick.AddListener(SendMessageAction);
     }
@@ -77,19 +70,9 @@ public class TestCode : MonoBehaviour
     // Click SignIn button
     private void SignInAction()
     {
-        if (Username.text.Length == 0 || Password.text.Length == 0)
+        if (Username.text.Length == 0 || AgoraToken.text.Length == 0)
         {
-            AddLogToLogText("username or password is null");
-            return;
-        }
-    }
-
-    // Click SignUp button
-    private void SignUpAction()
-    {
-        if (Username.text.Length == 0 || Password.text.Length == 0)
-        {
-            AddLogToLogText("username or password is null");
+            AddLogToLogText("username or token is null");
             return;
         }
     }
@@ -114,53 +97,5 @@ public class TestCode : MonoBehaviour
     private void AddLogToLogText(string str)
     {
         LogText.text += System.DateTime.Now + ": " + str + "\n";
-    }
-
-
-    private IEnumerator RegisterAgoraAccount(string username, string password, Action<string> errorCallback)
-    {
-        Demo.SimpleJSON.JSONObject jo = new Demo.SimpleJSON.JSONObject();
-        jo.Add("userAccount", username);
-        jo.Add("userPassword", password);
-        byte[] databyte = Encoding.UTF8.GetBytes(jo.ToString());
-        var www = UnityWebRequest.Post(RegisterURL, UnityWebRequest.kHttpVerbPOST);
-        www.uploadHandler = new UploadHandlerRaw(databyte);
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-        bool done = www.isDone;
-        if (www.responseCode == 200)
-        {
-            errorCallback?.Invoke(null);
-        }
-        else
-        {
-            Demo.SimpleJSON.JSONNode jn = Demo.SimpleJSON.JSON.Parse(www.downloadHandler.text);
-            string errorInfo = jn["errorInfo"].Value;
-            errorCallback?.Invoke(errorInfo);
-        }
-    }
-
-    private IEnumerator FetchAgoraToken(string username, string password, Action<string> tokenCallback, Action<string> errorCallback)
-    {
-        
-        Demo.SimpleJSON.JSONObject jo = new Demo.SimpleJSON.JSONObject();
-        jo.Add("userAccount", username);
-        jo.Add("userPassword", password);
-        byte[] databyte = Encoding.UTF8.GetBytes(jo.ToString());
-        var www = UnityWebRequest.Post(FetchAgoraTokenURL, UnityWebRequest.kHttpVerbPOST);
-        www.uploadHandler = new UploadHandlerRaw(databyte);
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-        Demo.SimpleJSON.JSONNode jn = Demo.SimpleJSON.JSON.Parse(www.downloadHandler.text);
-        if (www.responseCode == 200)
-        {
-            string accessToken = jn["accessToken"].Value;
-            tokenCallback?.Invoke(accessToken);
-        }
-        else
-        {
-            string errorInfo = jn["errorInfo"].Value;
-            errorCallback?.Invoke(errorInfo);
-        }
     }
 }
