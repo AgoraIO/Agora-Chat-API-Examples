@@ -26,19 +26,19 @@ namespace windows_example
         // Initialize chat sdk.
         private void InitSDK()
         {
-
+            //TODO:
         }
 
         // add chat delegate
         private void AddChatDelegate()
         {
-
+            //TODO:
         }
 
         // remove chat delegate
         private void RemoveChatDelegate()
         {
-
+            //TODO:
         }
 
 
@@ -49,7 +49,7 @@ namespace windows_example
         }
 
         // sign in btn click
-        private async void SignIn_Click(object sender, RoutedEventArgs e)
+        private void SignIn_Click(object sender, RoutedEventArgs e)
         {
             if (UserIdTextBox.Text.Length == 0 || AgoraTokenBox.Text.Length == 0)
             {
@@ -80,9 +80,8 @@ namespace windows_example
                 AddLogToLogText("message content is null !");
                 return;
             }
-            
-            // TODO:
 
+            // TODO:
         }
 
         // add log to log text
