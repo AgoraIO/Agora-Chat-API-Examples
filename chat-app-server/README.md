@@ -31,7 +31,7 @@ This project developed based on Spring Boot.
 
 ## Component
 
-* [AgoraTools](https://github.com/AgoraIO/Tools/tree/dev/accesstoken2/DynamicKey/AgoraDynamicKey/java/src/main/java/io/agora)
+* [AgoraTools](https://github.com/AgoraIO/Tools/tree/master/DynamicKey/AgoraDynamicKey/java/src/main/java/io/agora)
 * MySQL
 
 ## Prepare
