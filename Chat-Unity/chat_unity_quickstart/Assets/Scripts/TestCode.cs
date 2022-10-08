@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-using System.Text;
-using System;
+using System.Collections.Generic;
 
 public class TestCode : MonoBehaviour
 {
@@ -52,19 +49,19 @@ public class TestCode : MonoBehaviour
     // Init chat sdk
     private void InitSDK()
     {
-
+        //TODO:
     }
 
     // Add chat delegate
     private void AddChatDelegate()
     {
-
+        //TODO:
     }
 
     // Remove chat delegate
     private void RemoveChatDelegate()
     {
-
+        //TODO:
     }
 
     // Click SignIn button
@@ -75,12 +72,14 @@ public class TestCode : MonoBehaviour
             AddLogToLogText("username or token is null");
             return;
         }
+
+        //TODO:
     }
 
     // Click SignOut button
     private void SignOutAction()
     {
-
+        //TODO:
     }
 
     // Click Send message button
@@ -91,6 +90,7 @@ public class TestCode : MonoBehaviour
             AddLogToLogText("Sign chatId or message content is null");
             return;
         }
+        //TODO:
     }
 
     // Add log to app console

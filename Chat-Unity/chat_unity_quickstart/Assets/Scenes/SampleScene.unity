@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Username: {fileID: 1924091023}
-  AgoraToken: {fileID: 0}
+  AgoraToken: {fileID: 2111345461}
   SignChatId: {fileID: 377192643}
   MessageContent: {fileID: 217742706}
   SignInBtn: {fileID: 1142213589}
