@@ -44,10 +44,9 @@ An Android simulator or a real Android device running Android SDK API level 21 o
 2. open `chat_flutter`.
 3. run `flutter pub get`;
 4. If you want to use your own App Key for the experience, you can edit the `chat_flutter/lib/main.dart` file.
-   - Replace `APP_KEY` with your App KEY.
-   - Replace `APP_SERVER_HOST` with the host of the App Server you built to get Agora Chat Token.
-   - Replace `LOGIN_URL` with the address of the App Server you built to get Agora Chat Token.
-   - Replace `REGISTER_URL` with the address of the registered Agora Chat user on the App Server you built.
+   - Replace `AgoraChatConfig.appKey` with your App KEY.
+   - Replace `AgoraChatConfig.userId` with your registered user id.
+   - Replace `AgoraChatConfig.agoraToken` agoraToken corresponds to the user id
 
    > See [Enable and Configure Agora Chat Service](https://docs.agora.io/cn/agora-chat/enable_agora_chat?platform=flutter) to learn how to enable and configure Agora Chat Service.
 

@@ -44,10 +44,10 @@ _[English](README.md) | 中文_
 2. 进入到项目目录 `chat_flutter`;
 3. 执行 `flutter pub get`;
 4. 如果你想使用自己的 App Key 进行体验，你可以编辑 `chat_flutter/lib/main.dart` 文件。
-   - 将 `APP_KEY` 替换为你的 App Key。
-   - 将 `APP_SERVER_HOST` 替换为你搭建的 App Server 的 Host 地址。
-   - 将 `LOGIN_URL` 替换为你搭建的 App Server 获取 Agora Chat Token 的地址。
-   - 将 `REGISTER_URL` 替换为你搭建的 App Server 注册 Agora Chat 用户的地址。
+   - 将 `AgoraChatConfig.appKey` 替换为你的 App Key。
+   - 将 `AgoraChatConfig.userId` 替换为你注册的userId。
+   - 将 `AgoraChatConfig.agoraToken` 替换为你userId对应的agoraToken。
+
 
 
    > 参考 [开启和配置即时通讯服务](https://docs.agora.io/cn/agora-chat/enable_agora_chat?platform=flutter) 了解如何开启并配置即时通讯服务。

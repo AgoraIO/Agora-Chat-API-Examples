@@ -1,29 +1,29 @@
 PODS:
-  - Flutter (1.0.0)
-  - HyphenateChat (3.9.0)
-  - im_flutter_sdk (0.0.1):
+  - agora_chat_sdk (0.0.1):
     - Flutter
-    - HyphenateChat (= 3.9.0)
+    - HyphenateChat (= 3.9.5)
+  - Flutter (1.0.0)
+  - HyphenateChat (3.9.5)
 
 DEPENDENCIES:
+  - agora_chat_sdk (from `.symlinks/plugins/agora_chat_sdk/ios`)
   - Flutter (from `Flutter`)
-  - im_flutter_sdk (from `.symlinks/plugins/im_flutter_sdk/ios`)
 
 SPEC REPOS:
-  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+  trunk:
     - HyphenateChat
 
 EXTERNAL SOURCES:
+  agora_chat_sdk:
+    :path: ".symlinks/plugins/agora_chat_sdk/ios"
   Flutter:
     :path: Flutter
-  im_flutter_sdk:
-    :path: ".symlinks/plugins/im_flutter_sdk/ios"
 
 SPEC CHECKSUMS:
+  agora_chat_sdk: aa8f156a28144f8740010b6fb408719d2ab617d2
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  HyphenateChat: fc53c79682cdc775eb788296627331e135b49a52
-  im_flutter_sdk: d45af91571764b99e044537b055133fb43407d8c
+  HyphenateChat: 5d79b45587802839f56e5fa77565493ad51c7bd1
 
-PODFILE CHECKSUM: bc441215a21e5fa0e902975ebba6e4f6fce5cda9
+PODFILE CHECKSUM: eb77cd5a845e928c3a70e9656aa1e50b7131e89b
 
 COCOAPODS: 1.11.3
