@@ -53,8 +53,8 @@ _[English](README.md) | 中文_
 3. 执行 `flutter pub get`;
 4. 如果你想使用自己的 App Key 进行体验，你可以编辑 `chat_flutter/lib/main.dart` 文件。
    - 将 `AgoraChatConfig.appKey` 替换为你的 App Key。
-   - 将 `AgoraChatConfig.userId` 替换为你注册的userId。
-   - 将 `AgoraChatConfig.agoraToken` 替换为你userId对应的agoraToken。
+   - 将 `AgoraChatConfig.userId` 替换为你注册的 userId。
+   - 将 `AgoraChatConfig.agoraToken` 替换为你 userId 对应的 agoraToken。
 
 
 
