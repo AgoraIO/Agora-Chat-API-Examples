@@ -4,17 +4,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import io.agora.CallBack;
 import io.agora.ConnectionListener;
-import io.agora.Error;
 import io.agora.chat.ChatClient;
 import io.agora.chat.ChatMessage;
 import io.agora.chat.ChatOptions;
@@ -151,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
      * Send your first message
      */
     public void sendFirstMessage(View view) {
-        String toSendName = ((TextView)findViewById(R.id.et_to_chat_name)).getText().toString().trim();
-        String content = ((TextView)findViewById(R.id.et_msg_content)).getText().toString().trim();
+        String toSendName = ((EditText)findViewById(R.id.et_to_chat_name)).getText().toString().trim();
+        String content = ((EditText)findViewById(R.id.et_msg_content)).getText().toString().trim();
         // Create a text message
         ChatMessage message = ChatMessage.createTextSendMessage(content, toSendName);
         // Set the message callback before sending the message
