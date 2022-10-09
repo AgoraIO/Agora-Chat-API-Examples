@@ -6,7 +6,7 @@ _English | [中文](README.zh.md)_
 
 This repository contains sample projects using the Agora Chat flutter sdk.
 
-![flutter main](/images/flutter_main.jpeg)
+![flutter main](flutter_main.png)
 
 ## Project structure
 
@@ -36,6 +36,14 @@ Dart 2.16 or later
 macOS or Windows
 Android Studio 4.0 or later with JDK 1.8 or later
 An Android simulator or a real Android device running Android SDK API level 21 or later
+
+**note** Permission for Android has been added to the sdk.
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+```
 
 ### Steps to run
 
