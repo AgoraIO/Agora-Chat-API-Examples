@@ -128,7 +128,7 @@ If you have any problems or suggestions regarding the sample projects, feel free
 ## Reference
 
 - [Product Overview](https://docs.agora.io/en/agora-chat/agora_chat_get_started_ios?platform=iOS)
-- [API Reference](https://docs-preprod.agora.io/en/agora-chat/agora_chat_overview?platform=iOS)
+- [API Reference](https://docs.agora.io/en/agora-chat/agora_chat_overview?platform=iOS)
 
 ## Related resources
 
