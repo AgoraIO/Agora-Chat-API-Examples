@@ -56,7 +56,7 @@ If you have any problems or suggestions regarding the sample projects, feel free
 
 ## Reference
 
-- [Get Started with Agora Chat UIKit](https://docs-preprod.agora.io/en/agora-chat/agora_chat_uikit_web?platform=Web#reference)
+- [Get Started with Agora Chat UIKit](https://docs.agora.io/en/agora-chat/get-started/get-started-uikit)
 - [Agora Chat UIKIT Repository](https://github.com/AgoraIO-Usecase/AgoraChat-UIKit-web)
 
 ## Related resources

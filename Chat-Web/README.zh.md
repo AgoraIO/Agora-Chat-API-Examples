@@ -58,8 +58,8 @@ _[English](README.md) | 中文_
 
 ## 参考文档
 
-- [Agora Chat SDK 产品概述](https://docs-preprod.agora.io/en/agora-chat/agora_chat_overview?platform=Web)
-- [Agora Chat SDK API 参考](https://docs-preprod.agora.io/en/agora-chat/API%20Reference/im_ts/index.html?transId=4dbea540-f2cd-11ec-bafe-3fe630a7aac4)
+- [Agora Chat SDK 产品概述](https://docs.agora.io/en/agora-chat/agora_chat_overview?platform=Web)
+- [Agora Chat SDK API 参考](https://docs.agora.io/en/api-reference?platform=web)
 
 ## 相关资源
 

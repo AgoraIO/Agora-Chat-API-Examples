@@ -58,8 +58,8 @@ If you have any problems or suggestions regarding the sample projects, feel free
 
 ## Reference
 
-- [Agora Chat SDK Product Overview](https://docs-preprod.agora.io/en/agora-chat/agora_chat_overview?platform=Web)
-- [Agora Chat SDK API Reference](https://docs-preprod.agora.io/en/agora-chat/API%20Reference/im_ts/index.html?transId=4dbea540-f2cd-11ec-bafe-3fe630a7aac4)
+- [Agora Chat SDK Product Overview](https://docs.agora.io/en/agora-chat/agora_chat_overview?platform=Web)
+- [Agora Chat SDK API Reference](https://docs.agora.io/en/api-reference?platform=web)
 
 ## Related resources
 
