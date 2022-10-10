@@ -289,23 +289,7 @@ public class SendAudioMessageActivity extends AppCompatActivity implements Conne
 
     @Override
     public void onDisconnected(int error) {
-        if (error == Error.USER_REMOVED) {
-            onUserException("account_removed");
-        } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
-            onUserException("account_conflict");
-        } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
-            onUserException("account_forbidden");
-        } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
-            onUserException("account_kicked_by_change_password");
-        } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
-            onUserException("account_kicked_by_other_device");
-        } else if(error == Error.USER_BIND_ANOTHER_DEVICE) {
-            onUserException("user_bind_another_device");
-        } else if(error == Error.USER_DEVICE_CHANGED) {
-            onUserException("user_device_changed");
-        } else if(error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
-            onUserException("user_login_too_many_devices");
-        }
+        LogUtils.showErrorLog(tv_log, "onDisconnected: " + error);
     }
 
     @Override
@@ -320,11 +304,9 @@ public class SendAudioMessageActivity extends AppCompatActivity implements Conne
                 etPwd.getText().toString().trim(), AccountHelper.RENEW_TOKEN);
     }
 
-    /**
-     * user met some exception: conflict, removed or forbidden， goto login activity
-     */
-    protected void onUserException(String exception) {
-        LogUtils.showErrorLog(tv_log, "onUserException: " + exception);
+    @Override
+    public void onLogout(int errorCode) {
+        LogUtils.showErrorLog(tv_log, "onLogout: " + errorCode);
         AccountHelper.signOut(this, tv_log, null);
     }
 
