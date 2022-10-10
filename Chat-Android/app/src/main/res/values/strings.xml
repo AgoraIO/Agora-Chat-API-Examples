@@ -2,6 +2,4 @@
     <string name="app_name">AgoraChatQuickstart</string>
 
     <string name="app_key">41117440#383391</string>
-    <string name="login_url">https://a41.chat.agora.io/app/chat/user/login</string>
-    <string name="register_url">https://a41.chat.agora.io/app/chat/user/register</string>
 </resources>
