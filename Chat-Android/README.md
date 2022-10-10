@@ -62,7 +62,7 @@ If you have any problems or suggestions regarding the sample projects, feel free
 ## Reference
 
 - [Agora Chat Overview](https://docs.agora.io/en/agora-chat/agora_chat_overview?platform=Android)
-- [API Reference]()
+- [API Reference](https://api-ref.agora.io/en/chat-sdk/android/1.x/annotated.html)
 
 ## Related resources
 
