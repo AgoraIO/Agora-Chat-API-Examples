@@ -6,7 +6,7 @@ _[English](README.md) | 中文_
 
 该仓库包含了使用 Agora Chat flutter sdk 的示例项目。
 
-![flutter main](/images/flutter_main.jpeg)
+![flutter main](flutter_main.png)
 
 ## 项目结构
 
@@ -38,16 +38,24 @@ _[English](README.md) | 中文_
 - JDK (1.8以上)
 - 真实的 Android 设备或 Android 虚拟机 安卓21或以上版本
 
+**注意** 安卓需要的权限已经在sdk中添加。
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+```
+
 ### 运行步骤
 
 1. 克隆本项目到本地;
 2. 进入到项目目录 `chat_flutter`;
 3. 执行 `flutter pub get`;
 4. 如果你想使用自己的 App Key 进行体验，你可以编辑 `chat_flutter/lib/main.dart` 文件。
-   - 将 `APP_KEY` 替换为你的 App Key。
-   - 将 `APP_SERVER_HOST` 替换为你搭建的 App Server 的 Host 地址。
-   - 将 `LOGIN_URL` 替换为你搭建的 App Server 获取 Agora Chat Token 的地址。
-   - 将 `REGISTER_URL` 替换为你搭建的 App Server 注册 Agora Chat 用户的地址。
+   - 将 `AgoraChatConfig.appKey` 替换为你的 App Key。
+   - 将 `AgoraChatConfig.userId` 替换为你注册的 userId。
+   - 将 `AgoraChatConfig.agoraToken` 替换为你 userId 对应的 agoraToken。
+
 
 
    > 参考 [开启和配置即时通讯服务](https://docs.agora.io/cn/agora-chat/enable_agora_chat?platform=flutter) 了解如何开启并配置即时通讯服务。

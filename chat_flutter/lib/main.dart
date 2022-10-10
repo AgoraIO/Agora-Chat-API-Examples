@@ -1,16 +1,11 @@
-// ignore_for_file: constant_identifier_names
-
-import 'dart:convert' as convert;
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
-import 'package:http/http.dart' as http;
 
-const String APP_KEY = "41117440#383391";
-
-const String APP_SERVER_HOST = "a41.chat.agora.io";
-const String LOGIN_URL = "/app/chat/user/login";
-const String REGISTER_URL = "/app/chat/user/register";
+class AgoraChatConfig {
+  static const String appKey = "<#Your app key#>";
+  static const String userId = "<#Your created user#>";
+  static const String agoraToken = "<#User Token#>";
+}
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter SDK Demo'),
     );
   }
 }
@@ -41,15 +36,9 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    implements ChatManagerListener {
-  final String appKey = APP_KEY;
-
+class _MyHomePageState extends State<MyHomePage> {
   ScrollController scrollController = ScrollController();
-  String _username = "";
-  String _password = "";
-  String _messageContent = "";
-  String _chatId = "";
+  String? _messageContent, _chatId;
   final List<String> _logText = [];
 
   @override
@@ -57,6 +46,12 @@ class _MyHomePageState extends State<MyHomePage>
     super.initState();
     _initSDK();
     _addChatListener();
+  }
+
+  @override
+  void dispose() {
+    ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    super.dispose();
   }
 
   @override
@@ -71,14 +66,9 @@ class _MyHomePageState extends State<MyHomePage>
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,
           children: [
-            TextField(
-              decoration: const InputDecoration(hintText: "Enter username"),
-              onChanged: (username) => _username = username,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: "Enter password"),
-              onChanged: (password) => _password = password,
-            ),
+            const SizedBox(height: 10),
+            const Text("login userId: ${AgoraChatConfig.userId}"),
+            const Text("agoraToken: ${AgoraChatConfig.agoraToken}"),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -107,28 +97,19 @@ class _MyHomePageState extends State<MyHomePage>
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextButton(
-                    onPressed: _signUp,
-                    child: const Text("SIGN UP"),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
-                    ),
-                  ),
-                ),
               ],
             ),
             const SizedBox(height: 10),
             TextField(
               decoration: const InputDecoration(
-                  hintText: "Enter recipient's user name"),
+                hintText: "Enter recipient's userId",
+              ),
               onChanged: (chatId) => _chatId = chatId,
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Enter message"),
+              decoration: const InputDecoration(
+                hintText: "Enter message",
+              ),
               onChanged: (msg) => _messageContent = msg,
             ),
             const SizedBox(height: 10),
@@ -157,43 +138,28 @@ class _MyHomePageState extends State<MyHomePage>
 
   void _initSDK() async {
     ChatOptions options = ChatOptions(
-      appKey: appKey,
+      appKey: AgoraChatConfig.appKey,
       autoLogin: false,
     );
     await ChatClient.getInstance.init(options);
   }
 
   void _addChatListener() {
-    ChatClient.getInstance.chatManager.addChatManagerListener(this);
-  }
-
-  @override
-  void dispose() {
-    ChatClient.getInstance.chatManager.removeChatManagerListener(this);
-    super.dispose();
+    ChatClient.getInstance.chatManager.addEventHandler(
+      "UNIQUE_HANDLER_ID",
+      ChatEventHandler(onMessagesReceived: onMessagesReceived),
+    );
   }
 
   void _signIn() async {
-    if (_username.isEmpty || _password.isEmpty) {
-      _addLogToConsole("username or password is null");
-      return;
-    }
-
-    String? agoraToken = await HttpRequestManager.loginToAppServer(
-      username: _username,
-      password: _password,
-    );
-    if (agoraToken != null) {
-      _addLogToConsole("fetch agora token succeed, begin login");
-      try {
-        await ChatClient.getInstance.loginWithAgoraToken(_username, agoraToken);
-        _addLogToConsole("login succeed, username: $_username");
-      } on ChatError catch (e) {
-        _addLogToConsole(
-            "login failed, code: ${e.code}, desc: ${e.description}");
-      }
-    } else {
-      _addLogToConsole("fetch agora token failed");
+    try {
+      await ChatClient.getInstance.loginWithAgoraToken(
+        AgoraChatConfig.userId,
+        AgoraChatConfig.agoraToken,
+      );
+      _addLogToConsole("login succeed, userId: ${AgoraChatConfig.userId}");
+    } on ChatError catch (e) {
+      _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
     }
   }
 
@@ -207,31 +173,15 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
-  void _signUp() async {
-    if (_username.isEmpty || _password.isEmpty) {
-      _addLogToConsole("username or password is null");
-      return;
-    }
-    bool ret = await HttpRequestManager.registerToAppServer(
-      username: _username,
-      password: _password,
-    );
-    if (ret) {
-      _addLogToConsole("sign up succeed, username: $_username");
-    } else {
-      _addLogToConsole("sign up failed");
-    }
-  }
-
   void _sendMessage() async {
-    if (_chatId.isEmpty || _messageContent.isEmpty) {
+    if (_chatId == null || _messageContent == null) {
       _addLogToConsole("single chat id or message content is null");
       return;
     }
 
     var msg = ChatMessage.createTxtSendMessage(
-      targetId: _chatId,
-      content: _messageContent,
+      targetId: _chatId!,
+      content: _messageContent!,
     );
     msg.setMessageStatusCallBack(MessageStatusCallBack(
       onSuccess: () {
@@ -246,39 +196,6 @@ class _MyHomePageState extends State<MyHomePage>
     ChatClient.getInstance.chatManager.sendMessage(msg);
   }
 
-  void _addLogToConsole(String log) {
-    _logText.add(_timeString + ": " + log);
-    setState(() {
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
-    });
-  }
-
-  String get _timeString {
-    return DateTime.now().toString().split(".").first;
-  }
-
-  @override
-  void onCmdMessagesReceived(List<ChatMessage> messages) {}
-
-  @override
-  void onConversationRead(String from, String to) {}
-
-  @override
-  void onConversationsUpdate() {}
-
-  @override
-  void onGroupMessageRead(List<ChatGroupMessageAck> groupMessageAcks) {}
-
-  @override
-  void onMessagesDelivered(List<ChatMessage> messages) {}
-
-  @override
-  void onMessagesRead(List<ChatMessage> messages) {}
-
-  @override
-  void onMessagesRecalled(List<ChatMessage> messages) {}
-
-  @override
   void onMessagesReceived(List<ChatMessage> messages) {
     for (var msg in messages) {
       switch (msg.body.type) {
@@ -333,81 +250,20 @@ class _MyHomePageState extends State<MyHomePage>
           }
           break;
         case MessageType.CMD:
-          {
-            // Receiving command messages does not trigger the `onMessagesReceived` callback, but triggers the `onCmdMessagesReceived` callback instead.
-          }
+          {}
           break;
       }
     }
   }
 
-  @override
-  void onMessageReactionDidChange(List<ChatMessageReactionChange> list) {}
-
-  @override
-  void onReadAckForGroupMessageUpdated() {}
-}
-
-class HttpRequestManager {
-  static Future<bool> registerToAppServer({
-    required String username,
-    required String password,
-  }) async {
-    bool ret = false;
-    Map<String, String> params = {};
-    params["userAccount"] = username;
-    params["userPassword"] = password;
-
-    var uri = Uri.https(APP_SERVER_HOST, REGISTER_URL);
-
-    var client = http.Client();
-
-    var response = await client.post(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(params),
-    );
-
-    do {
-      if (response.statusCode != 200) {
-        break;
-      }
-      Map<String, dynamic>? map = convert.jsonDecode(response.body);
-      if (map != null) {
-        if (map["code"] == "RES_OK") {
-          ret = true;
-        }
-      }
-    } while (false);
-
-    return ret;
+  void _addLogToConsole(String log) {
+    _logText.add(_timeString + ": " + log);
+    setState(() {
+      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    });
   }
 
-  static Future<String?> loginToAppServer({
-    required String username,
-    required String password,
-  }) async {
-    Map<String, String> params = {};
-    params["userAccount"] = username;
-    params["userPassword"] = password;
-
-    var uri = Uri.https(APP_SERVER_HOST, LOGIN_URL);
-
-    var client = http.Client();
-
-    var response = await client.post(
-      uri,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(params),
-    );
-    if (response.statusCode == 200) {
-      Map<String, dynamic>? map = convert.jsonDecode(response.body);
-      if (map != null) {
-        if (map["code"] == "RES_OK") {
-          return map["accessToken"];
-        }
-      }
-    }
-    return null;
+  String get _timeString {
+    return DateTime.now().toString().split(".").first;
   }
 }
