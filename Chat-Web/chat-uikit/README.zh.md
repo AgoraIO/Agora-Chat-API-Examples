@@ -56,7 +56,7 @@ yarn
 
 ## 参考文档
 
-- [Agora Chat UIKIT 快速开始](https://docs-preprod.agora.io/en/agora-chat/agora_chat_uikit_web?platform=Web#reference)
+- [Agora Chat UIKIT 快速开始](https://docs.agora.io/en/agora-chat/agora_chat_uikit_web?platform=Web#reference)
 - [Agora Chat UIKIT 源代码](https://github.com/AgoraIO-Usecase/AgoraChat-UIKit-web)
 
 ## 相关资源
