@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace windows_example
 {
@@ -12,7 +10,6 @@ namespace windows_example
     public partial class MainWindow : Window
     {
         private readonly System.Windows.Threading.Dispatcher Dip = null;
-        private static readonly HttpClient client = new HttpClient();
 
         public MainWindow()
         {
