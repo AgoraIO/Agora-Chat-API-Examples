@@ -27,9 +27,12 @@ import {
 const App = () => {
   // Defines the variable.
   const title = 'AgoraChatQuickstart';
-  const appKey = '41117440#383391';
-  const [username, setUsername] = React.useState('');
-  const [chatToken, setChatToken] = React.useState('');
+  // Replaces <your appKey> with your app key.
+  const appKey = '<your appKey>';
+  // Replaces <your userId> with your user ID.
+  const [username, setUsername] = React.useState('<your userId>');
+  // Replaces <your agoraToken> with your Agora token.
+  const [chatToken, setChatToken] = React.useState('<your agoraToken>');
   const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
