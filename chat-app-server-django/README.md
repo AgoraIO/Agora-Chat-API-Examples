@@ -75,14 +75,15 @@ After having setup the configuration, you need to prepare the app server.
 ### (Optional) Step 1: Create your virtual environment
 1. Create your virtual environment with the below command in the project root.
 ```
-python3 -m pip venv venv
+python3 -m venv venv
 ```
+This will create a folder named `venv`.
 
 2. Activate the virtual environment.
    1. For Unix or Mac OS, run `source venv/bin/activate`
-   2. For Windows, run `source venv\Scripts\activate.bat`
+   2. For Windows, run `.\venv\Scripts\activate.bat`
 
-### Step 2: Install the required modules
+### Step 2: Install the required dependencies
 This app servers relies on Django 4.10 and the [Requests](https://requests.readthedocs.io/en/latest/) library.
 You can install the required modules from the `requirements.txt` file.
 ```
