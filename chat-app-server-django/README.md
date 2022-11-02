@@ -100,7 +100,7 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-This will run on the port `8000` by default.
+This will make the server run on the port `8000` by default. However, you are free to use another port, for example `python3 manage.py runserver 80` to run on port `80`.
 
 ## API
 
@@ -134,7 +134,7 @@ This api is used to register a user for your app. User name and password is used
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8000/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -157,7 +157,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
 
 User login on your app server and get a agora token for chat service.
 
-**Path:** `http://localhost:8086/app/user/login`
+**Path:** `http://localhost:8000/app/user/login`
 
 **HTTP Method:** `POST`
 
@@ -181,7 +181,7 @@ User login on your app server and get a agora token for chat service.
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8000/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -209,7 +209,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
 
 Get a token including user and rtc privileges.
 
-**Path:** `http://localhost:8086/token`
+**Path:** `http://localhost:8000/token`
 
 **HTTP Method:** `GET`
 
@@ -233,7 +233,7 @@ Get a token including user and rtc privileges.
 **request example:**
 
 ```
-curl -X GET -H 'Accept: application/json' 'http://localhost:8086/token?userAccount={userAccount}&channelName={channelName}&publisherRole=true'
+curl -X GET -H 'Accept: application/json' 'http://localhost:8000/token?userAccount={userAccount}&channelName={channelName}&publisherRole=true'
 ```
 
 **Response Parameters:**
