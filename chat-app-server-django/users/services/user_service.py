@@ -65,7 +65,7 @@ def get_token(user_account, channel_name, publisher_role) -> TokenInfo:
 
         # The random number is used as the agoraUid here, but the uniqueness cannot be guaranteed.
         # In actual development, please use the agoraUid that guarantees the uniqueness.
-        agora_uid = randrange(1, sys.maxsize)
+        agora_uid = str(randrange(1, sys.maxsize))
         service_chat = ServiceChat(chat_user_uuid)
         service_chat.add_privilege(ServiceChat.kPrivilegeUser, expire_period)
 
