@@ -20,8 +20,7 @@ WebIM.conn.addEventHandler('connection&message', {
         refreshToken(username, password)
     },
     onTokenExpired: (params) => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired")
-        refreshToken(username, password)
+        document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired, please login again.")
     },
     onError: (error) => {
         console.log('on error', error)
