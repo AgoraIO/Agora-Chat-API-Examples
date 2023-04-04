@@ -138,7 +138,7 @@ extension ViewController: AgoraChatManagerDelegate  {
         }
         let msg = AgoraChatMessage(
             conversationId: remoteUser, from: currentUserName,
-            to: remoteUser, body: .text(text), ext: nil
+            to: remoteUser, body: .text(content: text), ext: nil
         )
         AgoraChatClient.shared.chatManager?.send(msg, progress: nil) { msg, err in
             if let err = err {
