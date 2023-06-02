@@ -38,5 +38,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Required: Agora Chat SDK
-    implementation 'io.agora.rtc:chat-sdk:1.0.7'
+    implementation 'io.agora.rtc:chat-sdk:1.1.0'
 }
