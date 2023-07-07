@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "message_demo_ts",
+    "slug": "message_demo_ts",
+    "version": "1.0.0",
+    "sdkVersion": "45.0.0",
+    "assetBundlePatterns": ["**/*"],
+    "platforms": ["ios", "android", "web"],
+    "android": {
+      "package": "com.example.rn.message.demo"
+    },
+    "ios": {
+      "bundleIdentifier": "com.example.rn.message.demo",
+      "usesIcloudStorage": false
+    },
+    "plugins": ["expo-image-picker", "expo-document-picker"]
+  }
+}
