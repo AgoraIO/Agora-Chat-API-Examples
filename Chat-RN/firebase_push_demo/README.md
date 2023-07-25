@@ -1,8 +1,8 @@
 # Documentation
 
 This project mainly demonstrates how to use FCM to implement offline message push notification.
-Users need to pay attention to how to integrate FCM components, how to configure ios or android related information, how to obtain FCM senderID and token, and how to send FCM information to the server to complete the settings. And these can be found in the example project.
-Whether the message is pushed through FCM is mainly determined by the user's online status, the user's device information, and the FCM configuration of the server. If the user has sent senderID and token to the server, the user is offline (for example: the application is not started, the application is killed) and the server has set FCM, the server will forward the message to the FCM server. For the application switching to the background, if the connection status is still there, FCM will not be used for message push.
+Users need to pay attention to how to integrate FCM components, how to configure ios or android related information, how to obtain FCM senderID and token, and how to send FCM information to the chat server to complete the settings. And these can be found in the example project.
+Whether the message is pushed through FCM is mainly determined by the user's online status, the user's device information, and the FCM configuration of the chat server. If the user has sent senderID and token to the chat server, the user is offline (for example: the application is not started, the application is killed) and the chat server has set FCM, the chat server will forward the message to the FCM server. For the application switching to the background, if the connection status is still there, FCM will not be used for message push.
 
 How to test the push function, please see the instructions below.
 

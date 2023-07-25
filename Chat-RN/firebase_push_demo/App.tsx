@@ -8,6 +8,7 @@
 
 import * as React from 'react';
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -58,6 +59,26 @@ async function requestFcmToken() {
   console.log('fcm token: ', fcmToken);
   return fcmToken;
 }
+
+function registerMessageHandler() {
+  const ret = messaging().onMessage(async remoteMessage => {
+    console.log(
+      'A new FCM message arrived!',
+      Platform.OS,
+      JSON.stringify(remoteMessage),
+    );
+  });
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log(
+      'Message handled in the background!',
+      Platform.OS,
+      remoteMessage,
+    );
+  });
+  return ret;
+}
+
+registerMessageHandler();
 
 // The App Object.
 const App = (): React.JSX.Element => {
@@ -112,13 +133,7 @@ const App = (): React.JSX.Element => {
 
   // listen received message.
   React.useEffect(() => {
-    const sub1 = messaging().onMessage(async remoteMessage => {
-      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage);
-    });
-    return sub1;
+    // return registerMessageHandler();
   }, [logText]);
 
   // output ui log.
