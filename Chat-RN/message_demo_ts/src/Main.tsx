@@ -11,7 +11,7 @@ import {
   dlog,
 } from './config';
 import { TextInput } from 'react-native';
-import { ChatClient } from 'react-native-chat-sdk';
+import { ChatClient } from 'react-native-agora-chat';
 import { AppServerClient } from './AppServerClient';
 
 export function MainScreen({

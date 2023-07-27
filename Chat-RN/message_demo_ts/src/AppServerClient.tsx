@@ -1,5 +1,5 @@
 import { dlog } from './config';
-import { ChatClient } from 'react-native-chat-sdk';
+import { ChatClient } from 'react-native-agora-chat';
 
 export class AppServerClient {
   private static _rtcTokenUrl: string =
