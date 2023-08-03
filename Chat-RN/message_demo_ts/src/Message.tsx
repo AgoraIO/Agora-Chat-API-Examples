@@ -31,7 +31,7 @@ import {
   ChatTextMessageBody,
   ChatVideoMessageBody,
   ChatVoiceMessageBody,
-} from 'react-native-chat-sdk';
+} from 'react-native-agora-chat';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { dlog, RootParamsList } from './config';
 import { FileHandler } from './FileHandler';

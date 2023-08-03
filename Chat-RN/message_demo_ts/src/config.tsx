@@ -1,17 +1,17 @@
-import { ChatLog } from 'react-native-chat-sdk';
+import { ChatLog } from 'react-native-agora-chat';
 
 export const RootParamsList: Record<string, object | undefined> = {
   Main: {},
   Message: {},
 };
-export let appKey = '1135220126133718#demo';
+export let appKey = '';
 export let agoraAppId = '';
-export let defaultId = 'asterisk001';
-export let defaultPs = 'qwerty';
+export let defaultId = '';
+export let defaultPs = '';
 export let accountType: 'agora' | 'easemob' | undefined;
 export const autoLogin = false;
 export const debugModel = true;
-export let defaultTargetId = 'du005';
+export let defaultTargetId = '';
 
 try {
   appKey = require('../env').appKey;

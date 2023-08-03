@@ -32,6 +32,48 @@ TypeScript is a superset of JavaScript which gives you static types and powerful
 
 > 💡 You can disable the TypeScript setup in Expo CLI with the environment variable `EXPO_NO_TYPESCRIPT_SETUP=1 expo start`
 
+## How to run this example project?
+
+1. initial project
+
+```sh
+yarn
+```
+
+2. generate env.ts
+
+```sh
+yarn run env
+```
+
+Set initialization options.
+** `accountType` is `agora`. **
+
+3. run ios app
+
+Initialize the ios application.
+
+```sh
+pod install
+```
+
+** If it is a real device, you need to set the signature.**
+** If xcode version 14 need to pay attention to FAQ. **
+
+```sh
+yarn run ios
+```
+
+4. run android app
+
+Initialize the ios application.
+
+Use android studio to open the android folder, execute `sync` to initialize the project.
+
+```sh
+yarn run android
+```
+
 ## 📝 Notes
 
 - [Expo TypeScript guide](https://docs.expo.dev/versions/latest/guides/typescript/)

@@ -13,7 +13,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import * as React from 'react';
-import { ChatDownloadStatus, ChatMessageType } from 'react-native-chat-sdk';
+import { ChatDownloadStatus, ChatMessageType } from 'react-native-agora-chat';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import { FileHandler } from './FileHandler';

@@ -133,7 +133,7 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.68.5)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - HyphenateChat (4.0.0)
+  - HyphenateChat (4.0.2)
   - libwebp (1.2.4):
     - libwebp/demux (= 1.2.4)
     - libwebp/mux (= 1.2.4)
@@ -354,8 +354,8 @@ PODS:
   - React-jsinspector (0.68.5)
   - React-logger (0.68.5):
     - glog
-  - react-native-chat-sdk (1.1.2-beta.3):
-    - HyphenateChat (= 4.0.0)
+  - react-native-chat-sdk (1.1.3):
+    - HyphenateChat (= 4.0.2)
     - React-Core
   - react-native-safe-area-context (4.5.2):
     - RCT-Folly
@@ -523,7 +523,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
-  - react-native-chat-sdk (from `../node_modules/react-native-chat-sdk`)
+  - react-native-chat-sdk (from `../node_modules/react-native-agora-chat`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -645,7 +645,7 @@ EXTERNAL SOURCES:
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-chat-sdk:
-    :path: "../node_modules/react-native-chat-sdk"
+    :path: "../node_modules/react-native-agora-chat"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -715,7 +715,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 0e0d384ef17a33b385f13f0c7f97702c7cd17858
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
-  HyphenateChat: 9f6e4ac3b290e52cc0e52491f85d86097b35c285
+  HyphenateChat: add908a7200ba951a5b27a0fa2514ea6f532e69c
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
   lottie-ios: 8f97d3271e155c2d688875c29cd3c74908aef5f8
   lottie-react-native: 8f9d4be452e23f6e5ca0fdc11669dc99ab52be81
@@ -732,7 +732,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 45c0496ca8cef6b02d9fa0274c25cf458fe91a56
   React-jsinspector: eb202e43b3879aba9a14f3f65788aec85d4e1ea9
   React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
-  react-native-chat-sdk: 23b97b9987f60324f848c18b975f137312e7d976
+  react-native-chat-sdk: c9c61e39d0ffa63cef5425cb1a5d9563d5450bae
   react-native-safe-area-context: 1d596539b05a78f2b346e954e7c577f6f9be7544
   React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
   React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9

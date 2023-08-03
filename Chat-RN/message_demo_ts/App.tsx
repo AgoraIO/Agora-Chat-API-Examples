@@ -15,7 +15,7 @@ import { accountType, appKey, dlog } from './src/config';
 import { MainScreen } from './src/Main';
 import { MessageScreen } from './src/Message';
 import { AppServerClient } from './src/AppServerClient';
-import { ChatClient, ChatOptions } from 'react-native-chat-sdk';
+import { ChatClient, ChatOptions } from 'react-native-agora-chat';
 import {
   ActivityIndicator,
   Platform,
