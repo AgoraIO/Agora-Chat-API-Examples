@@ -5,10 +5,10 @@ packages:
     dependency: "direct main"
     description:
       name: agora_chat_sdk
-      sha256: "406f30a940e6a79ea96d8fb3858e8638613f35b65a2411024e60e2ef555bf6da"
+      sha256: "033bdb239f23e7d6ea7fa2b92a8872e1c4b0fcab02d476c47d26ef04a2ab35ff"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0+1"
+    version: "1.1.1"
   async:
     dependency: transitive
     description:
