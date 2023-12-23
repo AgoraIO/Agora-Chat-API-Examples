@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "142290967082",
+    "project_id": "chatim-9b3ae",
+    "storage_bucket": "chatim-9b3ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142290967082:android:fa1734c82786f78184c153",
+        "android_client_info": {
+          "package_name": "io.agora.chatdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142290967082-kffai4lca6v8f70lbku18hquh72747qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE682uNgGqIfEL7o6BkShzx5Pi2nuIIS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142290967082-kffai4lca6v8f70lbku18hquh72747qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142290967082:android:096ac679236ff8d084c153",
+        "android_client_info": {
+          "package_name": "io.agora.fcmquickstart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142290967082-kffai4lca6v8f70lbku18hquh72747qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE682uNgGqIfEL7o6BkShzx5Pi2nuIIS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142290967082-kffai4lca6v8f70lbku18hquh72747qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
