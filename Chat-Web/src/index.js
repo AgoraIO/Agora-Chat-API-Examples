@@ -61,7 +61,7 @@ document.getElementById("register").onclick = function () {
         .then((res) => {
             document.getElementById("log").appendChild(document.createElement('div')).append(`register user ${username} success`)
         })
-        .catch((res)=> {
+        .catch((res) => {
             document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
         })
 }
@@ -79,7 +79,7 @@ document.getElementById("login").onclick = function () {
                 agoraToken: agoraToken
             });
         })
-        .catch((res)=> {
+        .catch((res) => {
             document.getElementById("log").appendChild(document.createElement('div')).append(`Login failed`)
         })
 }
@@ -100,7 +100,7 @@ document.getElementById("send_peer_message").onclick = function () {
         to: peerId,                // The user receiving the message (user ID)
         msg: peerMessage           // The message content
     }
-    let msg = WebIM.message.create(option); 
+    let msg = WebIM.message.create(option);
     WebIM.conn.send(msg).then((res) => {
         console.log('send private text success');
         document.getElementById("log").appendChild(document.createElement('div')).append("Message send to: " + peerId + " Message: " + peerMessage)
