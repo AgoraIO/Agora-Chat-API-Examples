@@ -3,10 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from 'agora-chat-uikit'
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<Provider initConfig={{
+			appKey: "41117440#383391",
+		}}>
+			<App />
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

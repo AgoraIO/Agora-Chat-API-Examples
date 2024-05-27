@@ -1,31 +1,40 @@
 .App {
-  text-align: left;
-  margin-left: 20px;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
 }
 
-.App-to {
-  margin-left: 60px;
+.form-item{
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .App-input {
-  width: 160px !important;
+  width: 200px !important;
   height: 20px !important;
   margin: 5px 0 0 5px !important;
 }
 
-.App-lable {
-  margin-left: 5px;
-}
 
 .App-btn {
+  min-width: 100px;
   margin: 5px 0 0 5px !important;
 }
 
-.container {
-  height: calc(100% - 135px);
+.uikit-container {
   margin-top: 5px;
-  width: 100%;
-  position: absolute;
+  display: flex;
+  flex: 1;
+  height: calc(110vh - 248px);
+}
+
+.conversation-container{
+  width: 350px;
+  border-right: 1px solid transparent;
+}
+.chat-container{
+  flex: 1;
 }
