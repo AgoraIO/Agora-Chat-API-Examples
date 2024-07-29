@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from "react";
-import { EaseApp } from "agora-chat-uikit";
+import React, { useState, useCallback, useEffect } from "react";
+import { ConversationList, Chat, useClient, useConversationContext, Button, Input } from "agora-chat-uikit";
+import "agora-chat-uikit/style.css";
 import "./App.css";
 
 function App() {
@@ -7,7 +8,21 @@ function App() {
 		username: "",
 		password: "",
 	});
+	const client = useClient()
+	const conversationStore = useConversationContext();
 	const [authToken, setAuthToken] = useState("");
+
+	useEffect(() => {
+		client.addEventHandler('connection_state_change', {
+			onConnected: () => {
+				alert('login success')
+			},
+			onDisconnected: () => {
+				alert('logout success')
+			},
+		})
+	}, [])
+
 	const handleChange = (prop) => (event) => {
 		let value = event.target.value;
 		if (prop === "username") {
@@ -25,6 +40,20 @@ function App() {
 		setTo(toValue);
 	};
 
+	function postData(url, data) {
+		return fetch(url, {
+			body: JSON.stringify(data),
+			cache: "no-cache",
+			headers: {
+				"content-type": "application/json",
+			},
+			method: "POST",
+			mode: "cors",
+			redirect: "follow",
+			referrer: "no-referrer",
+		}).then((response) => response.json());
+	}
+
 	const onLogin = useCallback(() => {
 		if (!values.username) {
 			return alert("username is required");
@@ -38,112 +67,91 @@ function App() {
 				userPassword: password,
 			})
 				.then((res) => {
-					console.log("res>>>11", res);
 					const { accessToken } = res;
+					console.log("accessToken", accessToken);
+					client.open({
+						user: values.username,
+						agoraToken: accessToken,
+					})
 					setAuthToken(accessToken);
 				})
 				.catch((err) => {
-					alert("登陆失败，用户名或密码无效！");
+					alert("get token failed");
 				});
 		};
 
-		function postData(url, data) {
-			return fetch(url, {
-				body: JSON.stringify(data),
-				cache: "no-cache",
-				headers: {
-					"content-type": "application/json",
-				},
-				method: "POST",
-				mode: "cors",
-				redirect: "follow",
-				referrer: "no-referrer",
-			}).then((response) => response.json());
-		}
+
 		getToken(values.username, values.password);
 	}, [values]);
 
-	const loginSuccessCallback = (e) => {
-		const WebIM = EaseApp.getSdk();
-		WebIM.conn.addEventHandler("Logout", {
-			onDisconnected: () => {
-				setAuthToken("");
-			},
-		});
-	};
 
 	const onClose = () => {
-		window.WebIM.conn.close();
+		client.close();
 	};
 	const createConversation = () => {
-		let conversationItem = {
-			conversationType: "singleChat",
+		conversationStore.addConversation({
+			chatType: 'singleChat',
 			conversationId: to,
-		};
-		EaseApp.addConversationItem(conversationItem);
-		setTo("");
+			lastMessage: {},
+		});
 	};
 
 	return (
 		<div className="App">
 			<h2> Agora Chat UIkit Examples </h2>
 			<div>
-				<div>
-					<label className="App-lable"> Username </label>
-					<input
+				<div className="form-item">
+					<Input
 						placeholder="Username"
 						className="App-input"
 						onChange={handleChange("username")}
 						value={values.username}
-					></input>
-					<label className="App-lable"> Password </label>
-					<input
+					></Input>
+					<Input
 						placeholder="Password"
 						className="App-input"
 						onChange={handleChange("password")}
 						value={values.password}
-					></input>
-					<button
+					></Input>
+					<Button
 						type="primary"
 						className="App-btn"
 						onClick={onLogin}
 					>
 						Login
-					</button>
-					<button
+					</Button>
+					<Button
 						type="primary"
 						className="App-btn"
 						onClick={onClose}
 					>
 						Logout
-					</button>
+					</Button>
 				</div>
-				<div className="App-to">
-					<label className="App-lable">To</label>
-					<input
-						placeholder="UserID"
+				<div className="form-item">
+					<Input
+						placeholder="Target User ID"
 						className="App-input"
 						onChange={handleChangeToValue}
 						value={to}
-					></input>
-					<button
+					></Input>
+					<Button
 						type="primary"
 						className="App-btn"
 						onClick={createConversation}
 					>
-						CreateConversation
-					</button>
+						Create Conversation
+					</Button>
 				</div>
 			</div>
-			<div className="container">
-				{authToken && (
-					<EaseApp
-						appkey="41117440#383391"
-						username={values.username}
-						agoraToken={authToken}
-						successLoginCallback={loginSuccessCallback}
-					/>
-				)}
+			<div className="uikit-container">
+
+				<div className="conversation-container">
+					<ConversationList style={{ background: "#10a597" }}></ConversationList>
+				</div>
+				<div className="chat-container">
+					<Chat></Chat>
+				</div>
 			</div>
 		</div>
 	);

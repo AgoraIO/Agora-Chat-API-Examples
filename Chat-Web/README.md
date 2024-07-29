@@ -10,13 +10,13 @@ The repository contains sample projects that implement single Chat using the Ago
 
 The project uses a single app to combine a variety of functionalities.
 
-| Function         | Location                                             |
-| ------------ | ------------------------------------------------ |
-| The page content     | [index.html](./index.html)                       |
-| Sending text messages | [index.js](./src/index.js)                       |
+| Function                | Location                                         |
+| ----------------------- | ------------------------------------------------ |
+| The page content        | [index.html](./index.html)                       |
+| Sending text messages   | [index.js](./src/index.js)                       |
 | Sending a Voice Message | [sendAudioMessage.js](./src/sendAudioMessage.js) |
-| The recording         | [recordAudio.js](./utils/recordAudio.js)         |
-| Get conversation list | [conversationList.js](./src/conversationList.js) |
+| The recording           | [recordAudio.js](./utils/recordAudio.js)         |
+| Get conversation list   | [conversationList.js](./src/conversationList.js) |
 | Get historical messages | [conversationList.js](./src/conversationList.js) |
 
 ## How to run the sample project
@@ -51,6 +51,23 @@ The project uses a single app to combine a variety of functionalities.
 4. Open your browser to https://localhost:9000 and run the project.
 
 You are all set! Feel free to play with this sample project and explore features of the Agora Chat SDK.
+
+## Frequently asked questions
+
+Why does the error digital envelope routes:: unsupported occur when running a the project locally?
+
+The project in this article is packaged through webpack and runs locally. Due to changes in the dependency on OpenSSL in Node.js 16 and above versions, it has affected the dependency on the local development environment in the project (see [webpack issue](https://github.com/webpack/webpack/issues/14532) for details)
+）Running the project will result in errors. The solution is as follows:
+
+- (Recommended) Run the following command to set temporary environment variables:
+
+```Bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+- Temporarily switch to a lower version of Node.js.
+
+Then try running the project again.
 
 ## Feedback
 
