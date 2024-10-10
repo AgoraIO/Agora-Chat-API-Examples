@@ -20,7 +20,8 @@ target 'messagedemots' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :hermes_enabled => flags[:hermes_enabled] || podfile_properties['expo.jsEngine'] == 'hermes',
+    # :hermes_enabled => flags[:hermes_enabled] || podfile_properties['expo.jsEngine'] == 'hermes',
+    :hermes_enabled => false,
     :fabric_enabled => flags[:fabric_enabled],
     # An absolute path to your application root.
     :app_path => "#{Dir.pwd}/.."

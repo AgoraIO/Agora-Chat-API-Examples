@@ -49,25 +49,26 @@ const App = () => {
     AppServerClient.mapUrl = 'https://a41.easemob.com/agora/channel/mapper';
   }
 
-  if (ready === false) {
-    const init = () => {
-      ChatClient.getInstance()
-        .init(
-          new ChatOptions({
-            appKey: appKey,
-            autoLogin: false,
-            debugModel: enableLog,
-          })
-        )
-        .then(() => {
-          setReady(true);
+  const init = () => {
+    ChatClient.getInstance()
+      .init(
+        new ChatOptions({
+          appKey: appKey,
+          autoLogin: false,
+          debugModel: enableLog,
         })
-        .catch((e) => {
-          console.warn('init:error:', e);
-        });
-    };
+      )
+      .then(() => {
+        setReady(true);
+      })
+      .catch((e) => {
+        console.warn('init:error:', e);
+      });
+  };
+
+  React.useEffect(() => {
     init();
-  }
+  }, []);
 
   if (ready === false) {
     return <ActivityIndicator />;
