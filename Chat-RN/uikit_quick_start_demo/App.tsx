@@ -14,10 +14,10 @@ import {
   useChatContext,
 } from 'react-native-chat-uikit';
 
-const appKey = 'easemob#easeim';
-const userId = 'du004';
-const userPs = '1';
-const peerId = 'du005';
+const appKey = 'xxx';
+const userId = 'xxx';
+const userPs = 'xxx';
+const peerId = 'xxx';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
