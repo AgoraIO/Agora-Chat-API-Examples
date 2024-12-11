@@ -495,7 +495,7 @@ Replace "appkey" with your own App Key.
                 NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                 if (token && token.length > 0) {
                     [weakself printLog:@"login appserver success !"];
-                    [[AgoraChatClient sharedClient] loginWithUsername:loginName agoraToken:token completion:finishBlock];
+                    [[AgoraChatClient sharedClient] loginWithUsername:loginName token:token completion:finishBlock];
                 } else {
                     [weakself printLog:@"parseing token fail !"];
                 }

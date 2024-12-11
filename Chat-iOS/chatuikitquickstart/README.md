@@ -202,7 +202,7 @@ To implement the the login logic, do the following:
                    NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                    if (token && token.length > 0) {
                        //Log in to the Agora Chat SDK.
-                       [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] agoraToken:token completion:^(NSString *aUsername, AgoraChatError *aError) {
+                       [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] token:token completion:^(NSString *aUsername, AgoraChatError *aError) {
                            if (!aError) {
                              //Upon the successful login to the Agora Chat SDK, `ViewController` appears.
                              ViewController *chatsVC = [[ViewController alloc] init];
