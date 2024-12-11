@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             showLog("Username or token is empty!", true);
             return;
         }
-        ChatClient.getInstance().loginWithAgoraToken(USERNAME, TOKEN, new CallBack() {
+        ChatClient.getInstance().loginWithToken(USERNAME, TOKEN, new CallBack() {
             @Override
             public void onSuccess() {
                 showLog("Sign in success!", true);
