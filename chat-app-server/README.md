@@ -5,22 +5,25 @@
 This repository contains sample project for chat app server, which include user registration and login.
 When you plan to use agora chat service, you may need mapping your user profile with agora chat account and generate token for chat account. This project demonstrate how to create chat account and map to your own user profile and generate the token for chat account
 
+Contact [support@agora.io](mailto:support@agora.io) to enable automatic user registration. Once enabled, you can use `chatUsername` to generate a user-permission token. When logging into Chat, if `chatUsername` is not registered, the Chat server will automatically use `chatUsername` to register the Chat user and log in. `chatUsername` must be consistent with the username. 
 
 * workflow for create account
 
-![register](images/register.png)
+![user-register](https://github.com/user-attachments/assets/d84e914f-0618-4be4-b1b3-72fde73a7a2c)
+
 
 ---
 
 * workflow for login
 
-![login](images/login.png)
+![user-login](https://github.com/user-attachments/assets/69836f5d-7a29-4712-a531-6d3666338d9d)
+
 
 ## Features
 
 - App Server support user registration and will create a chat account and map it to the user.
-- App Server support user login and generate a token for chat service(use aogra appId, appcert, chat user's uuid).
-- App Server support store user information with database, which include account name, acount password, chat username and chat user's uuid.
+- App Server support user login and generate a token for chat service(use aogra appId, appcert, chat username).
+- App Server support store user information with database, which include account name, acount password, chat username.
 
 
 ## Technical
