@@ -109,7 +109,7 @@ extension ViewController {
             self.printLog("userId or token is empty")
             return;
         }
-        let err = AgoraChatClient.shared.login(withUsername: userId, agoraToken: token)
+        let err = AgoraChatClient.shared.login(withUsername: userId, token: token)
         if err == nil {
             self.printLog("login success")
         } else {

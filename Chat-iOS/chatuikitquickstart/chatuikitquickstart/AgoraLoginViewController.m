@@ -299,7 +299,7 @@
                 NSString *token = [responsedict objectForKey:@"accessToken"];
                 NSString *loginName = [responsedict objectForKey:@"chatUserName"];
                 if (token && token.length > 0) {
-                    [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] agoraToken:token completion:^(NSString *aUsername, AgoraChatError *aError) {
+                    [[AgoraChatClient sharedClient] loginWithUsername:[loginName lowercaseString] token:token completion:^(NSString *aUsername, AgoraChatError *aError) {
                         finishBlock(aUsername, aError);
                     }];
                     return;
