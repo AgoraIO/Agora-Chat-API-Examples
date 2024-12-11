@@ -28,7 +28,4 @@ public class AppUserInfo {
     @Column(name = "agora_chat_user_name")
     private String agoraChatUserName;
 
-    @Column(name = "agora_chat_user_uuid")
-    private String agoraChatUserUuid;
-
 }

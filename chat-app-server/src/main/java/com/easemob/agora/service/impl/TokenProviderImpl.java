@@ -7,8 +7,8 @@ import com.easemob.agora.model.AppUserInfoRepository;
 import com.easemob.agora.model.TokenInfo;
 import com.easemob.agora.service.TokenProvider;
 import com.easemob.agora.utils.RandomUidUtil;
-import com.easemob.agora.utils.agoratools.media.AccessToken2;
-import com.easemob.agora.utils.agoratools.media.RtcTokenBuilder2;
+import io.agora.media.AccessToken2;
+import io.agora.media.RtcTokenBuilder2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class TokenProviderImpl implements TokenProvider {
         if (appUserInfo == null) {
             throw new ASNotFoundException(userAccount + " does not exists.");
         } else {
-            String chatUserUuid = appUserInfo.getAgoraChatUserUuid();
+            String chatUserUsername = appUserInfo.getAgoraChatUserName();
 
             // The random number is used as the agoraUid here, but the uniqueness cannot be guaranteed. In actual development, please use the agoraUid that guarantees the uniqueness.
             String agoraUid = RandomUidUtil.getUid();
@@ -47,7 +47,7 @@ public class TokenProviderImpl implements TokenProvider {
 
             AccessToken2 accessToken = new AccessToken2(appId, appCert, expirePeriod);
 
-            AccessToken2.Service serviceChat = new AccessToken2.ServiceChat(chatUserUuid);
+            AccessToken2.Service serviceChat = new AccessToken2.ServiceChat(chatUserUsername);
             serviceChat
                     .addPrivilegeChat(AccessToken2.PrivilegeChat.PRIVILEGE_CHAT_USER, expirePeriod);
             accessToken.addService(serviceChat);
