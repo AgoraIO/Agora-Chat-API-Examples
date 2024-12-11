@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, fragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_fragment, fragment).show(fragment).commit();
     }
 //=================== click event end ========================
 //=================== get token from server start ========================

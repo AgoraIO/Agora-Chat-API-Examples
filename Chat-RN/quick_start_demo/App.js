@@ -23,20 +23,23 @@ import {
   ChatMessage,
 } from 'react-native-agora-chat';
 
-// The App Object.
+// Defines the App object.
 const App = () => {
-  // The variable defines.
+  // Defines the variable.
   const title = 'AgoraChatQuickstart';
-  const appKey = '41117440#383391';
-  const [username, setUsername] = React.useState('');
-  const [chatToken, setChatToken] = React.useState('');
+  // Replaces <your appKey> with your app key.
+  const appKey = '<your appKey>';
+  // Replaces <your userId> with your user ID.
+  const [username, setUsername] = React.useState('<your userId>');
+  // Replaces <your agoraToken> with your Agora token.
+  const [chatToken, setChatToken] = React.useState('<your agoraToken>');
   const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
   const chatClient = ChatClient.getInstance();
   const chatManager = chatClient.chatManager;
 
-  // output console log.
+  // Outputs console logs.
   useEffect(() => {
     logText.split('\n').forEach((value, index, array) => {
       if (index === 0) {
@@ -45,7 +48,7 @@ const App = () => {
     });
   }, [logText]);
 
-  // Output UI logs.
+  // Outputs UI logs.
   const rollLog = text => {
     setWarnText(preLogText => {
       let newLogText = text;
@@ -65,7 +68,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Register listeners for messaging.
+    // Registers listeners for messaging.
     const setMessageListener = () => {
       let msgListener = {
         onMessagesReceived(messages) {
@@ -86,8 +89,8 @@ const App = () => {
       chatManager.addMessageListener(msgListener);
     };
 
-    // Initialize the SDK.
-    // Initialize any interface before calling it.
+    // Initializes the SDK.
+    // Initializes any interface before calling it.
     const init = () => {
       let o = new ChatOptions({
         autoLogin: false,
@@ -127,7 +130,7 @@ const App = () => {
     init();
   }, [chatClient, chatManager, appKey]);
 
-  // Log in with an account ID and token.
+  // Logs in with an account ID and a token.
   const login = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog('Perform initialization first.');
@@ -144,7 +147,7 @@ const App = () => {
       });
   };
 
-  // Log out from server.
+  // Logs out from server.
   const logout = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog('Perform initialization first.');
@@ -161,7 +164,7 @@ const App = () => {
       });
   };
 
-  // Send a text message to somebody.
+  // Sends a text message to somebody.
   const sendmsg = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog('Perform initialization first.');
@@ -194,7 +197,7 @@ const App = () => {
       });
   };
 
-  // Render the UI.
+  // Renders the UI.
   return (
     <SafeAreaView>
       <View style={styles.titleContainer}>

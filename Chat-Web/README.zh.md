@@ -52,6 +52,23 @@ _[English](README.md) | 中文_
 
 一切就绪。你可以自由探索示例项目，体验 Agora Chat SDK 的丰富功能。
 
+## 常见问题
+
+为什么在本地运行项目时会报错 digital envelope routines::unsupported？
+
+本文中的项目通过 webpack 打包并在本地运行。由于 Node.js 16 及以上版本更改了对 OpenSSL 的依赖，影响了项目中本地开发环境的依赖（详见 [webpack issue](https://github.com/webpack/webpack/issues/14532)
+），运行项目会发生错误。解决方案如下：
+
+- （推荐）运行如下命令，设置临时的环境变量：
+
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+- 暂时换用低版本的 Node.js。
+
+然后再次尝试运行项目。
+
 ## 反馈
 
 如果你有任何问题或建议，可以通过 issue 的形式反馈。

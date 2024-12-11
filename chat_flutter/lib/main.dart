@@ -50,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.chatManager.removeEventHandler('UNIQUE_HANDLER_ID');
+    ChatClient.getInstance.chatManager.removeMessageEvent('UNIQUE_HANDLER_ID');
     super.dispose();
   }
 
@@ -146,8 +147,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _addChatListener() {
     ChatClient.getInstance.chatManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
+      'UNIQUE_HANDLER_ID',
       ChatEventHandler(onMessagesReceived: onMessagesReceived),
+    );
+
+    ChatClient.getInstance.chatManager.addMessageEvent(
+      'UNIQUE_HANDLER_ID',
+      ChatMessageEvent(
+        onSuccess: (msgId, msg) {
+          _addLogToConsole("send message: $_messageContent");
+        },
+        onError: (msgId, msg, error) {
+          _addLogToConsole(
+            "send message failed, code: ${error.code}, desc: ${error.description}",
+          );
+        },
+      ),
     );
   }
 
@@ -183,16 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
       targetId: _chatId!,
       content: _messageContent!,
     );
-    msg.setMessageStatusCallBack(MessageStatusCallBack(
-      onSuccess: () {
-        _addLogToConsole("send message: $_messageContent");
-      },
-      onError: (e) {
-        _addLogToConsole(
-          "send message failed, code: ${e.code}, desc: ${e.description}",
-        );
-      },
-    ));
+
     ChatClient.getInstance.chatManager.sendMessage(msg);
   }
 

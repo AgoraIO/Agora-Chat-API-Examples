@@ -8,13 +8,13 @@ When you plan to use agora chat service, you may need mapping your user profile 
 
 * workflow for create account
 
-![register](https://user-images.githubusercontent.com/15087647/177251615-e13e8848-10a2-46ea-ba17-46422f6840d8.png)
+![register](images/register.png)
 
 ---
 
 * workflow for login
 
-![login](https://user-images.githubusercontent.com/15087647/177251650-bea0ae76-1e6e-4ad5-9e21-6fd93bb1f9a5.png)
+![login](images/login.png)
 
 ## Features
 
@@ -39,7 +39,7 @@ This project developed based on Spring Boot.
 Before start, you need prepare agora chat appkey, agora AppId and agora AppCert.
 
 * Setup aogra chat and get the AppKey：
-  - Please login agora developer console, you can reference the link for detail. [Here](https://docs-preprod.agora.io/en/agora-chat/enable_agora_chat?platform=RESTful)
+  - Please login agora developer console, you can reference the link for detail. [Here](https://docs.agora.io/en/agora-chat/get-started/enable)
 
 * You need setup your auth mechanism for your own user profile.
 

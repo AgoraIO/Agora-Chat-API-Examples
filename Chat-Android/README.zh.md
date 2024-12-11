@@ -63,7 +63,7 @@ _[English](README.md) | 中文_
 ## 参考文档
 
 - [Agora Chat SDK 产品概述](https://docs.agora.io/cn/agora-chat/agora_chat_overview?platform=Android)
-- [Agora Chat SDK API 参考]()
+- [Agora Chat SDK API 参考](https://api-ref.agora.io/en/chat-sdk/android/1.x/annotated.html)
 
 ## 相关资源
 
