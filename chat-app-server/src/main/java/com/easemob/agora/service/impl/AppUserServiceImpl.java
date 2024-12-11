@@ -34,12 +34,9 @@ public class AppUserServiceImpl implements AppUserService {
             throw new ASDuplicateUniquePropertyExistsException("userAccount " + userAccount + " already exists.");
         }
 
-        // 3.Register AgroaChat user for user account,
+        // 3.Save user account and Agora Chat user name to DB
         // The Agora Chat user name used here is the same as the user account name, it is not recommended to do this in actual use
-        String agoraChatUserUuid = this.agoraChatService.registerAgoraChatUser(userAccount);
-
-        // 4.Save user account and Agora Chat user name、uuid to DB
-        saveAppUserToDB(userAccount, appUser.getUserPassword(), userAccount, agoraChatUserUuid);
+        saveAppUserToDB(userAccount, appUser.getUserPassword(), userAccount);
     }
 
     @Override
@@ -75,12 +72,11 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserInfo != null;
     }
 
-    public void saveAppUserToDB(String userAccount, String userPassword, String agoraChatUserName, String agoraChatUserUuid) {
+    public void saveAppUserToDB(String userAccount, String userPassword, String agoraChatUserName) {
         AppUserInfo appUserInfo = new AppUserInfo();
         appUserInfo.setUserAccount(userAccount);
         appUserInfo.setUserPassword(userPassword);
         appUserInfo.setAgoraChatUserName(agoraChatUserName);
-        appUserInfo.setAgoraChatUserUuid(agoraChatUserUuid);
 
         this.appUserInfoRepository.save(appUserInfo);
 

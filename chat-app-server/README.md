@@ -54,7 +54,6 @@ CREATE TABLE `app_user_info` (
   `user_account` varchar(32) NOT NULL COMMENT 'user account',
   `user_password` varchar(32) DEFAULT NULL COMMENT 'user password',
   `agora_chat_user_name` varchar(32) NOT NULL COMMENT 'Agora Chat user name',
-  `agora_chat_user_uuid` varchar(36) DEFAULT NULL COMMENT 'Agora Chat user uuid',
   PRIMARY KEY (`id`,`user_account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
@@ -66,12 +65,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
 * Configure file is：[application.properties](./agora-app-server/src/main/resources/application.properties)
 
   ```
-      ## configure with your own appkey
-      application.appkey=xxx
-      
-      ## configure REST API domain
-      application.base.uri=xxx
-      
+ 
       ## configure with your own appid
       application.agoraAppId=xxx
       ## config with your own appcert
@@ -83,7 +77,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       spring.datasource.driver-class-name=com.mysql.jdbc.Driver
       spring.datasource.url=jdbc:mysql://127.0.0.1:3306/app_server?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
       spring.datasource.username=root
-      spring.datasource.password=123456
+      spring.datasource.password=123456789
       spring.datasource.hikari.maximum-pool-size=50
       spring.datasource.hikari.minimum-idle=20
   
@@ -91,7 +85,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       spring.jpa.show_sql=false
       spring.jpa.properties.hibernate.format_sql=true
       spring.jpa.properties.hibernate.generate_statistics=false
-      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
+      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
       spring.jpa.hibernate.ddl-auto=validate
       
   ```

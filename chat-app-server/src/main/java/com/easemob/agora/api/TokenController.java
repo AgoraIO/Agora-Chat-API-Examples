@@ -3,7 +3,6 @@ package com.easemob.agora.api;
 import com.easemob.agora.model.ResponseParam;
 import com.easemob.agora.model.TokenInfo;
 import com.easemob.agora.service.TokenProvider;
-import com.easemob.agora.utils.agoratools.media.RtcTokenBuilder2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
