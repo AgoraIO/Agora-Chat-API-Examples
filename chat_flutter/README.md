@@ -20,10 +20,13 @@ The project uses a single app to combine a variety of functionalities.Each funct
 
 ### Prerequisites
 
+### flutter
+
+- Flutter 3.3.0 or later
+- Dart 3.3.0 or later
+
 #### iOS
 
-- Flutter 2.10 or later
-- Dart 2.16 or later
 - macOS
 - Xcode 12.4 or later with Xcode Command Line Tools
 - CocoaPods
@@ -31,13 +34,11 @@ The project uses a single app to combine a variety of functionalities.Each funct
 
 #### Android
 
-Flutter 2.10 or later
-Dart 2.16 or later
-macOS or Windows
 Android Studio 4.0 or later with JDK 1.8 or later
 An Android simulator or a real Android device running Android SDK API level 21 or later
 
 **note** Permission for Android has been added to the sdk.
+
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
