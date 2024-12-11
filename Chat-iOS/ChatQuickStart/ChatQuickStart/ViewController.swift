@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     
     func initChatSDK() {
             // Initializes the Agora Chat SDK
-            let options = AgoraChatOptions(appkey: "<#Agora App Key#>")
+            let options = AgoraChatOptions(appkey: <#Agora App Key#>)
             options.isAutoLogin = false // disable auto login
             options.enableConsoleLog = true
             AgoraChatClient.shared.initializeSDK(with: options)
