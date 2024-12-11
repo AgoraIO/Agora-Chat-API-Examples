@@ -28,7 +28,7 @@ document.getElementById("conversationList").onclick = function () {
 document.getElementById("roamingMessage").onclick = function () {
     document.getElementById("log").appendChild(document.createElement('div')).append("getRoamingMessage...")
     let converationId = document.getElementById("converationId").value.toString()
-    WebIM.conn.getHistoryMessages({ targetId: converationId }).then((res) => {
+    WebIM.conn.getHistoryMessages({ targetId: converationId, chatType: "singleChat" }).then((res) => {
         console.log('getRoamingMessage success')
         document.getElementById("log").appendChild(document.createElement('div')).append("getRoamingMessage success")
         let str='';

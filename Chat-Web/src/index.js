@@ -27,12 +27,11 @@ WebIM.conn.addEventHandler('connection&message', {
     }
 })
 
-// Obtain and set the Agora token again
+// Obtain and set the access token again
 function refreshToken(username, password) {
     postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
-            let agoraToken = res.accessToken
-            WebIM.conn.renewToken(agoraToken)
+            WebIM.conn.renewToken(res.accessToken)
             document.getElementById("log").appendChild(document.createElement('div')).append("Token has been updated")
         })
 }
@@ -72,11 +71,10 @@ document.getElementById("login").onclick = function () {
     password = document.getElementById("password").value.toString()
     postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
         .then((res) => {
-            let agoraToken = res.accessToken
-            let easemobUserName = res.chatUserName
+            const { accessToken, chatUserName } = res;
             WebIM.conn.open({
-                user: easemobUserName,
-                agoraToken: agoraToken
+                user: chatUserName,
+                accessToken
             });
         })
         .catch((res) => {
