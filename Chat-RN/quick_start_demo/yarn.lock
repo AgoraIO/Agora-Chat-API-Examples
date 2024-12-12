@@ -5648,10 +5648,10 @@ react-is@^16.13.1:
   resolved "https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-agora-chat@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmmirror.com/react-native-agora-chat/-/react-native-agora-chat-1.1.2.tgz#c6da943d2df21c7166a22e2497e93e36502801c8"
-  integrity sha512-COuDC35VnK7tCROC/Rt4mro6M1g/sfS1NtO63RkAgrIK7Fc9LKbqWnzuOqMZ62BLS63jhnjjyYyt7zD0dcv1Mw==
+react-native-agora-chat@^1.3.0-1:
+  version "1.3.0-1"
+  resolved "https://registry.yarnpkg.com/react-native-agora-chat/-/react-native-agora-chat-1.3.0-1.tgz#5b7fa2528d3a612850477e05c4706a68294b477d"
+  integrity sha512-cR5mVwJJsGdGFDCaxfxrzl9CZrKCXD0AF+ZF4o2muAGAs6F6FqL3hycftJn7PQuA6aP0I6wspMoApGjR2qkGCg==
 
 react-native-codegen@^0.0.18:
   version "0.0.18"
