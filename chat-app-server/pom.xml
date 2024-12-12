@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>easemob.example</groupId>
+    <groupId>agora.example</groupId>
     <artifactId>chat-app-server</artifactId>
     <version>1.0</version>
 
@@ -110,7 +110,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.easemob.agora.AgoraServerApplication</mainClass>
+                            <mainClass>com.agora.AgoraServerApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
