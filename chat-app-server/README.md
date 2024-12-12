@@ -72,7 +72,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       ## configure with your own appid
       application.agoraAppId=xxx
       ## config with your own appcert
-      application.agoraCert=xxx
+      application.agoraAppCert=xxx
       ## token valid duration(suggest not over one day)
       agora.token.expire.period.seconds=86400
       
@@ -104,7 +104,7 @@ When you finish the configure, you can just run this app server.
 
 This api is used to register a user for your app. User name and password is used in this sample project, you can use any other format for your user account ,such as phone number.
 
-**Path:** `http://localhost:8086/app/user/register`
+**Path:** `http://localhost:8086/app/chat/user/register`
 
 **HTTP Method:** `POST`
 
@@ -129,7 +129,7 @@ This api is used to register a user for your app. User name and password is used
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/chat/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -152,7 +152,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
 
 User login on your app server and get a agora token for chat service.
 
-**Path:** `http://localhost:8086/app/user/login`
+**Path:** `http://localhost:8086/app/chat/user/login`
 
 **HTTP Method:** `POST`
 
@@ -176,7 +176,7 @@ User login on your app server and get a agora token for chat service.
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/chat/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -213,9 +213,6 @@ Get a token including user and rtc privileges.
 | Param        | description      |
 | ------------ | ---------------- |
 | Accept | application/json |
-
-**Request Body example:** 
-{"userAccount":"jack", "userPassword":"123"}
 
 **Request params:** 
 
