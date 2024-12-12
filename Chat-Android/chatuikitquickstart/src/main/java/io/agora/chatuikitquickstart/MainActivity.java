@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
 //=================== get token from server end ========================
 //=================== login and register start ========================
     private void login(String username, String token) {
-        ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+        ChatClient.getInstance().loginWithToken(username, token, new CallBack() {
             @Override
             public void onSuccess() {
                 LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));

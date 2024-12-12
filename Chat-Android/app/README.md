@@ -376,7 +376,7 @@ To enable your app to send and receive messages between individual users, do the
            showLog("Username or token is empty!", true);
            return;
        }
-       ChatClient.getInstance().loginWithAgoraToken(USERNAME, TOKEN, new CallBack() {
+       ChatClient.getInstance().loginWithToken(USERNAME, TOKEN, new CallBack() {
            @Override
            public void onSuccess() {
                showLog("Sign in success!", true);

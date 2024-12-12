@@ -109,7 +109,7 @@ public class AccountHelper {
                             JSONObject object = new JSONObject(responseInfo);
                             String token = object.getString("accessToken");
                             if(TextUtils.equals(requestType, NEW_LOGIN)) {
-                                ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+                                ChatClient.getInstance().loginWithToken(username, token, new CallBack() {
                                     @Override
                                     public void onSuccess() {
                                         LogUtils.showToast(context, tv_log, context.getString(R.string.sign_in_success));
