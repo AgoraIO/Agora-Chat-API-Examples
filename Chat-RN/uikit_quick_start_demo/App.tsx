@@ -8,11 +8,12 @@
 import * as React from 'react';
 import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import {
-  Container,
-  ConversationDetail,
+  ChatFragment,
   TextInput,
-  useChatContext,
-} from 'react-native-chat-uikit';
+  useChatSdkContext,
+} from 'react-native-agora-chat-uikit';
+
+import {GlobalContainer} from 'react-native-agora-chat-uikit';
 
 const appKey = 'xxx';
 const userId = 'xxx';
@@ -25,7 +26,7 @@ function SendMessage() {
   const [id, setId] = React.useState(userId);
   const [ps, setPs] = React.useState(userPs);
   const [peer, setPeer] = React.useState(peerId);
-  const im = useChatContext();
+  const im = useChatSdkContext();
 
   if (page === 0) {
     return (
@@ -55,14 +56,16 @@ function SendMessage() {
           onPress={() => {
             console.log('test:zuoyu:login', id, ps);
             im.login({
-              userId: id,
-              userToken: ps,
-              usePassword: true,
-              result: res => {
+              id: id,
+              pass: ps,
+              type: 'agora',
+              onResult: res => {
                 console.log('login result', res);
                 console.log('test:zuoyu:error', res);
-                if (res.isOk === true) {
+                if (res.result === true) {
                   setPage(1);
+                } else {
+                  console.warn('login failed');
                 }
               },
             });
@@ -72,7 +75,9 @@ function SendMessage() {
         <Pressable
           onPress={() => {
             im.logout({
-              result: () => {},
+              onResult: result => {
+                console.log('logout result', result);
+              },
             });
           }}>
           <Text>{'Logout'}</Text>
@@ -83,17 +88,7 @@ function SendMessage() {
     // 聊天页面
     return (
       <SafeAreaView style={{flex: 1}}>
-        <ConversationDetail
-          convId={peer}
-          convType={0}
-          onBack={() => {
-            setPage(0);
-            im.logout({
-              result: () => {},
-            });
-          }}
-          type={'chat'}
-        />
+        <ChatFragment screenParams={{params: {chatId: peer, chatType: 0}}} />
       </SafeAreaView>
     );
   } else {
@@ -102,11 +97,12 @@ function SendMessage() {
 }
 
 function App(): React.JSX.Element {
-  // 初始化 UIKit
+  // return <View><Text>{'test'}</Text></View>;
   return (
-    <Container options={{appKey: appKey, autoLogin: false}}>
+    <GlobalContainer
+      option={{appKey: appKey, autoLogin: false, debugModel: true}}>
       <SendMessage />
-    </Container>
+    </GlobalContainer>
   );
 }
 
