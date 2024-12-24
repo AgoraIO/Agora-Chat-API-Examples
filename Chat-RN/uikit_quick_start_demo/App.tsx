@@ -8,17 +8,19 @@
 import * as React from 'react';
 import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import {
-  ChatFragment,
+  ChatConversationType,
+  ConversationDetail,
   TextInput,
-  useChatSdkContext,
+  useChatContext,
 } from 'react-native-agora-chat-uikit';
 
-import {GlobalContainer} from 'react-native-agora-chat-uikit';
+import {Container} from 'react-native-agora-chat-uikit';
 
-const appKey = 'xxx';
-const userId = 'xxx';
-const userPs = 'xxx';
-const peerId = 'xxx';
+const appKey = 'easemob#easeim';
+const userId = 'zuoyu';
+const userPs =
+  'YWMt1MnJtLxsEe-BRI0OrKx9iVzzvlQ7sUrSpVuQGlyIzFR0-qKAZz4R7pnDi6mwsod0AwMAAAGT1HK4iTeeSAB26nGOzMM-YzVzt027k45U2uofkCB_oU4AvREXvykrqA';
+const peerId = 'zuoyu2';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
@@ -26,7 +28,7 @@ function SendMessage() {
   const [id, setId] = React.useState(userId);
   const [ps, setPs] = React.useState(userPs);
   const [peer, setPeer] = React.useState(peerId);
-  const im = useChatSdkContext();
+  const im = useChatContext();
 
   if (page === 0) {
     return (
@@ -56,13 +58,12 @@ function SendMessage() {
           onPress={() => {
             console.log('test:zuoyu:login', id, ps);
             im.login({
-              id: id,
-              pass: ps,
-              type: 'agora',
-              onResult: res => {
+              userId: id,
+              userToken: ps,
+              result: res => {
                 console.log('login result', res);
                 console.log('test:zuoyu:error', res);
-                if (res.result === true) {
+                if (res.isOk === true) {
                   setPage(1);
                 } else {
                   console.warn('login failed');
@@ -75,7 +76,7 @@ function SendMessage() {
         <Pressable
           onPress={() => {
             im.logout({
-              onResult: result => {
+              result: result => {
                 console.log('logout result', result);
               },
             });
@@ -88,7 +89,24 @@ function SendMessage() {
     // 聊天页面
     return (
       <SafeAreaView style={{flex: 1}}>
-        <ChatFragment screenParams={{params: {chatId: peer, chatType: 0}}} />
+        <ConversationDetail
+          type={'chat'}
+          convId={peerId}
+          convType={ChatConversationType.PeerChat}
+          NavigationBar={
+            <View
+              style={{height: 40, width: 40, backgroundColor: 'green'}}
+              onTouchEnd={() => {
+                im.logout({
+                  result: result => {
+                    console.log('logout result', result);
+                    setPage(0);
+                  },
+                });
+              }}
+            />
+          }
+        />
       </SafeAreaView>
     );
   } else {
@@ -99,10 +117,9 @@ function SendMessage() {
 function App(): React.JSX.Element {
   // return <View><Text>{'test'}</Text></View>;
   return (
-    <GlobalContainer
-      option={{appKey: appKey, autoLogin: false, debugModel: true}}>
+    <Container options={{appKey: appKey, autoLogin: false, debugModel: true}}>
       <SendMessage />
-    </GlobalContainer>
+    </Container>
   );
 }
 
