@@ -32,7 +32,7 @@ const App = () => {
   // Replaces <your userId> with your user ID.
   const [username, setUsername] = React.useState('<your userId>');
   // Replaces <your agoraToken> with your Agora token.
-  const [chatToken, setChatToken] = React.useState('<your agoraToken>');
+  const [chatToken, setChatToken] = React.useState('<your token>');
   const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
