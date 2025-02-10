@@ -8,19 +8,17 @@
 import * as React from 'react';
 import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import {
+  Container,
   ChatConversationType,
   ConversationDetail,
   TextInput,
   useChatContext,
 } from 'react-native-agora-chat-uikit';
 
-import {Container} from 'react-native-agora-chat-uikit';
-
-const appKey = 'easemob#easeim';
-const userId = 'zuoyu';
-const userPs =
-  'YWMt1MnJtLxsEe-BRI0OrKx9iVzzvlQ7sUrSpVuQGlyIzFR0-qKAZz4R7pnDi6mwsod0AwMAAAGT1HK4iTeeSAB26nGOzMM-YzVzt027k45U2uofkCB_oU4AvREXvykrqA';
-const peerId = 'zuoyu2';
+const appKey = '<your app key>';
+const userId = '<current user ID>';
+const userPs = '<current user token>';
+const peerId = '<peer user ID>';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);

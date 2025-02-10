@@ -20,6 +20,5 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
-  },
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  }
 }
