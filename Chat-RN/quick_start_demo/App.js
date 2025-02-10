@@ -32,7 +32,7 @@ const App = () => {
   // Replaces <your userId> with your user ID.
   const [username, setUsername] = React.useState('<your userId>');
   // Replaces <your agoraToken> with your Agora token.
-  const [chatToken, setChatToken] = React.useState('<your agoraToken>');
+  const [chatToken, setChatToken] = React.useState('<your token>');
   const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
@@ -101,7 +101,6 @@ const App = () => {
         .init(o)
         .then(() => {
           rollLog('init success');
-          this.isInitialized = true;
           let listener = {
             onTokenWillExpire() {
               rollLog('token expire.');
@@ -132,10 +131,6 @@ const App = () => {
 
   // Logs in with an account ID and a token.
   const login = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
     rollLog('start login ...');
     chatClient
       .loginWithToken(username, chatToken)
@@ -149,10 +144,6 @@ const App = () => {
 
   // Logs out from server.
   const logout = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
     rollLog('start logout ...');
     chatClient
       .logout()
@@ -166,10 +157,6 @@ const App = () => {
 
   // Sends a text message to somebody.
   const sendmsg = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
     let msg = ChatMessage.createTextMessage(
       targetId,
       content,
@@ -211,6 +198,7 @@ const App = () => {
             placeholder="Enter username"
             onChangeText={text => setUsername(text)}
             value={username}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.inputCon}>
@@ -220,6 +208,7 @@ const App = () => {
             placeholder="Enter chatToken"
             onChangeText={text => setChatToken(text)}
             value={chatToken}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.buttonCon}>
@@ -237,6 +226,7 @@ const App = () => {
             placeholder="Enter the username you want to send"
             onChangeText={text => setTargetId(text)}
             value={targetId}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.inputCon}>
@@ -246,6 +236,7 @@ const App = () => {
             placeholder="Enter content"
             onChangeText={text => setContent(text)}
             value={content}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.buttonCon}>
@@ -254,9 +245,7 @@ const App = () => {
           </Text>
         </View>
         <View>
-          <Text style={styles.logText} multiline={true}>
-            {logText}
-          </Text>
+          <Text style={styles.logText}>{logText}</Text>
         </View>
         <View>
           <Text style={styles.logText}>{}</Text>

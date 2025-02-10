@@ -5834,6 +5834,16 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-agora-chat-uikit@2.0.0:
+  version "2.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-native-agora-chat-uikit/-/react-native-agora-chat-uikit-2.0.0-beta.0.tgz#70864675d380ca455224c06fdb77c3d2cedac1c2"
+  integrity sha512-b4PPermYrA4cJwmWMGxLalFvoMOIDynJLMoq5mvAEVAbE7LyOcC2WJMO5RmLk7P8r+lE6L0YDdCKkZhK8lXR1Q==
+
+react-native-agora-chat@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-agora-chat/-/react-native-agora-chat-1.3.1.tgz#cec34088112e08b3705c5ddbe7868aa28303180e"
+  integrity sha512-Pgu6UFEj6Mhd2X7SOBQNnISEhz4ipeIVHRWaxyjcqwQW2rFxQybCvshOpSqa6xuOOO4JrtFCuOLqfHD9q/EbDw==
+
 react-native-agora@^4.2.6:
   version "4.3.2"
   resolved "https://registry.npmjs.org/react-native-agora/-/react-native-agora-4.3.2.tgz#b4b53d3c8002efc6b811766de38823bff53de18f"
@@ -5850,16 +5860,6 @@ react-native-audio-recorder-player@^3.5.3:
   integrity sha512-7luG1ZgS9Hro7dmWRr1XAdiuxcNH67gniPn2hF0TIOUgZdwMeIY0RgFIWYJK/94ALssGRqhZ+OjJ/vN3SfkGSA==
   dependencies:
     dooboolab-welcome "^1.3.2"
-
-react-native-chat-sdk@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/react-native-chat-sdk/-/react-native-chat-sdk-1.5.1.tgz#7b7b66c5f5beaec6d9296aa8b1bffae4c1035f1d"
-  integrity sha512-7DcsQR2Swh+v7i6b2st0cJu648pbJRNGhZsuJhCBpSIw637Ol7mHPBi3j8SiEv7+VhLYuGyb0DSUsy0xitKTww==
-
-react-native-chat-uikit@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/react-native-chat-uikit/-/react-native-chat-uikit-2.2.1.tgz#e53bf7235dbe3ce283bad87cb876d2107507a41b"
-  integrity sha512-6BAkR2kUrYyCZh8idC7nJdSzZLx08jw73HnFqPh6eIHobFKndweZTZRZmp61V8bjJPS1kdHMwhsiGLphy8BAbw==
 
 react-native-device-info@^10.6.0:
   version "10.14.0"
@@ -6754,7 +6754,7 @@ twemoji-parser@14.0.0:
 
 twemoji@14.0.2:
   version "14.0.2"
-  resolved "https://registry.npmjs.org/twemoji/-/twemoji-14.0.2.tgz#c53adb01dab22bf4870f648ca8cc347ce99ee37e"
+  resolved "https://registry.yarnpkg.com/twemoji/-/twemoji-14.0.2.tgz#c53adb01dab22bf4870f648ca8cc347ce99ee37e"
   integrity sha512-BzOoXIe1QVdmsUmZ54xbEH+8AgtOKUiG53zO5vVP2iUu6h5u9lN15NcuS6te4OY96qx0H7JK9vjjl9WQbkTRuA==
   dependencies:
     fs-extra "^8.0.1"

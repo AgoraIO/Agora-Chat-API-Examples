@@ -9,15 +9,16 @@ import * as React from 'react';
 import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import {
   Container,
+  ChatConversationType,
   ConversationDetail,
   TextInput,
   useChatContext,
-} from 'react-native-chat-uikit';
+} from 'react-native-agora-chat-uikit';
 
-const appKey = 'xxx';
-const userId = 'xxx';
-const userPs = 'xxx';
-const peerId = 'xxx';
+const appKey = '<your app key>';
+const userId = '<current user ID>';
+const userPs = '<current user token>';
+const peerId = '<peer user ID>';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
@@ -57,12 +58,13 @@ function SendMessage() {
             im.login({
               userId: id,
               userToken: ps,
-              usePassword: true,
               result: res => {
                 console.log('login result', res);
                 console.log('test:zuoyu:error', res);
                 if (res.isOk === true) {
                   setPage(1);
+                } else {
+                  console.warn('login failed');
                 }
               },
             });
@@ -72,7 +74,9 @@ function SendMessage() {
         <Pressable
           onPress={() => {
             im.logout({
-              result: () => {},
+              result: result => {
+                console.log('logout result', result);
+              },
             });
           }}>
           <Text>{'Logout'}</Text>
@@ -84,15 +88,22 @@ function SendMessage() {
     return (
       <SafeAreaView style={{flex: 1}}>
         <ConversationDetail
-          convId={peer}
-          convType={0}
-          onBack={() => {
-            setPage(0);
-            im.logout({
-              result: () => {},
-            });
-          }}
           type={'chat'}
+          convId={peerId}
+          convType={ChatConversationType.PeerChat}
+          NavigationBar={
+            <View
+              style={{height: 40, width: 40, backgroundColor: 'green'}}
+              onTouchEnd={() => {
+                im.logout({
+                  result: result => {
+                    console.log('logout result', result);
+                    setPage(0);
+                  },
+                });
+              }}
+            />
+          }
         />
       </SafeAreaView>
     );
@@ -102,9 +113,9 @@ function SendMessage() {
 }
 
 function App(): React.JSX.Element {
-  // 初始化 UIKit
+  // return <View><Text>{'test'}</Text></View>;
   return (
-    <Container options={{appKey: appKey, autoLogin: false}}>
+    <Container options={{appKey: appKey, autoLogin: false, debugModel: true}}>
       <SendMessage />
     </Container>
   );
