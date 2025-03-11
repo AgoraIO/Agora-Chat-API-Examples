@@ -2,25 +2,25 @@ import WebIM from 'agora-chat'
 
 // Get conversation list
 document.getElementById("conversationList").onclick = function () {
-    document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList...")
-    WebIM.conn.getConversationList().then((res) => {
-        console.log('getConversationList success',res)
-        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList success")
+    document.getElementById("log").appendChild(document.createElement('div')).append("getServerConversations...")
+    WebIM.conn.getServerConversations().then((res) => {
+        console.log('getServerConversations success',res)
+        document.getElementById("log").appendChild(document.createElement('div')).append("getServerConversations success")
         let str='';
-        res.data.channel_infos.map((item) => {
-            const chanelId = item.channel_id;
-            let reg = /(?<=_).*?(?=@)/;
-            const username = chanelId.match(reg)[0];
-            str += '\n'+ JSON.stringify({
-                conversationId:username,
-                conversationType:chanelId.indexOf('@conference.easemob.com')>=0 ? 'groupChat':'singleChat'
-            })
-        })
+        res.data.conversations.map((item) => {
+          str +=
+            "\n" +
+            JSON.stringify({
+              conversationId: item.conversationId,
+              conversationType: item.conversationType
+            });
+        });
         var odIV = document.createElement("div");
         odIV.style.whiteSpace = "pre";
-        document.getElementById("log").appendChild(odIV).append('getConversationList:', str)
-    }).catch(() => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList failed")
+        document.getElementById("log").appendChild(odIV).append('getServerConversations:', str)
+    }).catch((e) => {
+        console.log('getServerConversations failed',e)
+        document.getElementById("log").appendChild(document.createElement('div')).append("getServerConversations failed")
     })
 }
 
