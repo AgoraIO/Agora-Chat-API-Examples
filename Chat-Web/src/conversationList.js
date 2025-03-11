@@ -2,10 +2,10 @@ import WebIM from 'agora-chat'
 
 // Get conversation list
 document.getElementById("conversationList").onclick = function () {
-    document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList...")
-    WebIM.conn.getConversationList().then((res) => {
-        console.log('getConversationList success',res)
-        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList success")
+    document.getElementById("log").appendChild(document.createElement('div')).append("getConversationlist...")
+    WebIM.conn.getConversationlist().then((res) => {
+        console.log('getConversationlist success',res)
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationlist success")
         let str='';
         res.data.channel_infos.map((item) => {
             const chanelId = item.channel_id;
@@ -18,9 +18,9 @@ document.getElementById("conversationList").onclick = function () {
         })
         var odIV = document.createElement("div");
         odIV.style.whiteSpace = "pre";
-        document.getElementById("log").appendChild(odIV).append('getConversationList:', str)
+        document.getElementById("log").appendChild(odIV).append('getConversationlist:', str)
     }).catch(() => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationList failed")
+        document.getElementById("log").appendChild(document.createElement('div')).append("getConversationlist failed")
     })
 }
 
