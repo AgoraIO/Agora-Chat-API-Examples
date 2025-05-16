@@ -12,7 +12,7 @@ The AI chatbot works in the following way:
 
 Following is the flowchat of the chat between a user and the chatbot in a group:
 
-![wecom-temp-9681206a6f7a75f524bdb3c49f040622](/Users/easemob-dn0164/Desktop/wecom-temp-9681206a6f7a75f524bdb3c49f040622.png)
+![img](demo-server-seq.png)
 
 - This service provides the following functions:
 
