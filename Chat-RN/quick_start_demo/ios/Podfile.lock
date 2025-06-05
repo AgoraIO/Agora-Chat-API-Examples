@@ -73,7 +73,7 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - HyphenateChat (4.5.0)
+  - HyphenateChat (4.10.2)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.06.28.00-v2):
@@ -283,8 +283,8 @@ PODS:
   - React-jsinspector (0.68.7)
   - React-logger (0.68.7):
     - glog
-  - react-native-chat-sdk (1.3.0-1):
-    - HyphenateChat (= 4.5.0)
+  - react-native-chat-sdk (1.3.4):
+    - HyphenateChat (= 4.10.2)
     - React-Core
   - React-perflogger (0.68.7)
   - React-RCTActionSheet (0.68.7):
@@ -516,7 +516,7 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
-  HyphenateChat: bf4cfa65a83ffa210803fdc91263b4891fb510ee
+  HyphenateChat: 6924f613947f6301bee909fc12c3bb01b50f52c6
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -525,14 +525,14 @@ SPEC CHECKSUMS:
   React: 097b19fbc7aecb3bd23de54b462d2051d7ca8a38
   React-callinvoker: 4f118545cf884f0d8fce5bcd6e1847147ea9cc05
   React-Codegen: 24e59be16f8ed24b3e49e5ff0738dad91988c760
-  React-Core: 0b464d0bec18dde90fa819c4be14dbcbdbf3077f
+  React-Core: 39b1d8e1204b99a5f25131d78ee722d6995b8833
   React-CoreModules: 9bb7d5d5530d474cf8514e2dc8274af82a0bcf2f
-  React-cxxreact: 027e192b8008ba5c200163ab6ded55d134c839d5
-  React-jsi: 9019a0a0b42e9eac6c1e8c251a8dffe65055a2f1
-  React-jsiexecutor: 7c0bd030a84f2ec446fb104b7735af2f5ed11eea
+  React-cxxreact: 89392d0c9e849f80c8561c9622aafe702e9945d8
+  React-jsi: 69ddd236ad9c6868fe76362dfa88f729425d3785
+  React-jsiexecutor: f7523ab3fa30f259a27e8486d5db54903e7f47c8
   React-jsinspector: cab4d37ebde480f84c79ac89568abbf76b916c3e
-  React-logger: b75b80500ea80457b2cf169427d66de986cdcb29
-  react-native-chat-sdk: ab3990a9f99a173eaffb61f05e9ab2a6b6c547d2
+  React-logger: f35fe2daafb5dcd77f3f3f1083b770ca196da6e8
+  react-native-chat-sdk: e4cb9196ae4d7944920cf75d03f8ebd017db6549
   React-perflogger: 44436b315d757100a53dfb1ab6b77c58cb646d7d
   React-RCTActionSheet: 1888a229684762c40cc96c7ff4716f809655dc09
   React-RCTAnimation: f05da175751867521d14b02ab4d3994a7b96f131
@@ -544,7 +544,7 @@ SPEC CHECKSUMS:
   React-RCTText: bd1da1cd805e0765e3ba9089a9fd807d4860a901
   React-RCTVibration: 2a4bf853281d4981ab471509102300d3c9e6c693
   React-runtimeexecutor: 18932e685b4893be88d1efc18f5f8ca1c9cd39d8
-  ReactCommon: 29bb6fad3242e30e9d049bc9d592736fa3da9e50
+  ReactCommon: 877ba412e796d454f58f764e421ef516d547aad1
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 0bc4b37c3b8a345336ff601e2cf7d9704bab7e93
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
