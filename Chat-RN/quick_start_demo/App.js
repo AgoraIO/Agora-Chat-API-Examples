@@ -28,11 +28,11 @@ const App = () => {
   // Defines the variable.
   const title = 'AgoraChatQuickstart';
   // Replaces <your appKey> with your app key.
-  const appKey = '<your appKey>';
+  const appKey = '61117440#231694';
   // Replaces <your userId> with your user ID.
-  const [username, setUsername] = React.useState('<your userId>');
+  const [username, setUsername] = React.useState('zy001');
   // Replaces <your agoraToken> with your Agora token.
-  const [chatToken, setChatToken] = React.useState('<your token>');
+  const [chatToken, setChatToken] = React.useState('007eJxTYNh4xW7XukK/X4xiqd7LZnLdXrlHLCskl8+OL1BQ0vn5em8FBkPT5CSDFCOLJAvzJBMj09REM0PjtGQTszTzZMs0S3OT48yOGQ2BjAxTc7VYGBlYGRiBEMRXYTBItTQ2BmrWNTK0MNM1NEwz0E1MSjTWtTROtTBKsTA3TjJKAgBjrCQj');
   const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
