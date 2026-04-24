@@ -9,18 +9,19 @@
 // Import depend packages.
 import React, {useEffect} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   ChatClient,
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
+  ChatConnectEventListener,
 } from 'react-native-agora-chat';
 
 // Defines the App object.
@@ -41,7 +42,7 @@ const App = () => {
 
   // Outputs console logs.
   useEffect(() => {
-    logText.split('\n').forEach((value, index, array) => {
+    logText.split('\n').forEach((value, index) => {
       if (index === 0) {
         console.log(value);
       }
@@ -49,18 +50,18 @@ const App = () => {
   }, [logText]);
 
   // Outputs UI logs.
-  const rollLog = text => {
+  const rollLog = (text: string) => {
     setWarnText(preLogText => {
       let newLogText = text;
       preLogText
         .split('\n')
-        .filter((value, index, array) => {
+        .filter((value, index) => {
           if (index > 8) {
             return false;
           }
           return true;
         })
-        .forEach((value, index, array) => {
+        .forEach((value) => {
           newLogText += '\n' + value;
         });
       return newLogText;
@@ -71,18 +72,11 @@ const App = () => {
     // Registers listeners for messaging.
     const setMessageListener = () => {
       let msgListener = {
-        onMessagesReceived(messages) {
+        onMessagesReceived(messages: ChatMessage[]) {
           for (let index = 0; index < messages.length; index++) {
             rollLog('received msgId: ' + messages[index].msgId);
           }
         },
-        onCmdMessagesReceived: messages => {},
-        onMessagesRead: messages => {},
-        onGroupMessageRead: groupMessageAcks => {},
-        onMessagesDelivered: messages => {},
-        onMessagesRecalled: messages => {},
-        onConversationsUpdate: () => {},
-        onConversationRead: (from, to) => {},
       };
 
       chatManager.removeAllMessageListener();
@@ -101,7 +95,7 @@ const App = () => {
         .init(o)
         .then(() => {
           rollLog('init success');
-          let listener = {
+          let listener: ChatConnectEventListener = {
             onTokenWillExpire() {
               rollLog('token expire.');
             },
@@ -112,8 +106,8 @@ const App = () => {
               rollLog('onConnected');
               setMessageListener();
             },
-            onDisconnected(errorCode) {
-              rollLog('onDisconnected:' + errorCode);
+            onDisconnected() {
+              rollLog('onDisconnected');
             },
           };
           chatClient.addConnectionListener(listener);
@@ -163,13 +157,13 @@ const App = () => {
       ChatMessageChatType.PeerChat,
     );
     const callback = new (class {
-      onProgress(locaMsgId, progress) {
+      onProgress(locaMsgId: string, progress: number) {
         rollLog(`send message process: ${locaMsgId}, ${progress}`);
       }
-      onError(locaMsgId, error) {
+      onError(locaMsgId: string, error: any) {
         rollLog(`send message fail: ${locaMsgId}, ${JSON.stringify(error)}`);
       }
-      onSuccess(message) {
+      onSuccess(message: ChatMessage) {
         rollLog('send message success: ' + message.localMsgId);
       }
     })();
@@ -186,7 +180,7 @@ const App = () => {
 
   // Renders the UI.
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.containerStyle}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
       </View>
@@ -260,6 +254,10 @@ const App = () => {
 
 // Sets UI styles.
 const styles = StyleSheet.create({
+  containerStyle: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   titleContainer: {
     height: 60,
     backgroundColor: '#6200ED',
