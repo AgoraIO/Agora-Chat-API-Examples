@@ -28,8 +28,8 @@ import {
 const App = () => {
   // Defines the variable.
   const title = 'AgoraChatQuickstart';
-  // Replaces <your appKey> with your app key.
-  const appKey = '<your appKey>';
+  // Replaces <your appId> with your app ID.
+  const appId = '<your appId>';
   // Replaces <your userId> with your user ID.
   const [username, setUsername] = React.useState('<your userId>');
   // Replaces <your agoraToken> with your Agora token.
@@ -88,7 +88,7 @@ const App = () => {
     const init = () => {
       let o = new ChatOptions({
         autoLogin: false,
-        appKey: appKey,
+        appId: appId,
       });
       chatClient.removeAllConnectionListener();
       chatClient
