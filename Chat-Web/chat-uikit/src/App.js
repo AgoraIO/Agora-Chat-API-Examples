@@ -66,18 +66,18 @@ function App() {
 				userAccount: username,
 				userPassword: password,
 			})
-				.then((res) => {
-					const { accessToken } = res;
-					console.log("accessToken", accessToken);
-					client.open({
-						user: values.username,
-						agoraToken: accessToken,
-					})
-					setAuthToken(accessToken);
-				})
-				.catch((err) => {
-					alert("get token failed");
+			.then((res) => {
+				const { accessToken } = res;
+				console.log("accessToken", accessToken);
+				client.open({
+					user: values.username,
+					accessToken: accessToken,
 				});
+				setAuthToken(accessToken);
+			})
+			.catch((err) => {
+				alert("get token failed");
+			});
 		};
 
 

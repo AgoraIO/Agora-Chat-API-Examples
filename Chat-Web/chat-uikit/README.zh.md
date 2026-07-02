@@ -21,7 +21,20 @@ _[English](README.md) | 中文_
 
 ### 运行步骤
 
-1. 安装依赖
+1. 配置 AppId
+   在运行项目之前，首先需要在 `Agora-Chat-API-Examples/Chat-Web/chat-uikit/src/index.js` 文件中配置你的 Agora Chat AppId：
+   
+   ```javascript
+   <Provider
+     initConfig={{
+       appId: "your appId", // 替换为你的 Agora Chat SDK App ID
+     }}
+   >
+   ```
+   
+   将 `"your appId"` 替换为你在 Agora 控制台获取的实际 AppId。
+
+2. 安装依赖
 
 npm
 ```bash
@@ -33,7 +46,7 @@ yarn
   yarn
 ```
 
-2. 启动项目
+3. 启动项目
 
 npm
 ```bash
@@ -45,7 +58,7 @@ yarn
   yarn start
 ```
 
-3. 浏览器打开 http://localhost:3000/ 运行项目。
+4. 浏览器打开 http://localhost:3000/ 运行项目。
 
 一切就绪。你可以自由探索示例项目，体验 Agora Chat UIKIT 的丰富功能。
 

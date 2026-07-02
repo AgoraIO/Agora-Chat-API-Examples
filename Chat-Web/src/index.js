@@ -1,8 +1,8 @@
 import WebIM from 'agora-chat'
 var username, password
 WebIM.conn = new WebIM.connection({
-    appKey: "41117440#383391",
-})
+  appId: "your appId", // Replace with your Agora Chat SDK App ID
+});
 // Register listening events
 WebIM.conn.addEventHandler('connection&message', {
     onConnected: () => {

@@ -21,7 +21,20 @@ The project uses a single app to combine a variety of functionalities.
 
 ### Steps to run
 
-1. Install dependencies
+1. Configure AppId
+   Before running the project, first configure your Agora Chat AppId in the `Agora-Chat-API-Examples/Chat-Web/chat-uikit/src/index.js` file:
+   
+   ```javascript
+   <Provider
+     initConfig={{
+       appId: "your appId", // Replace with your Agora Chat SDK App ID
+     }}
+   >
+   ```
+   
+   Replace `"your appId"` with your actual AppId obtained from the Agora console.
+
+2. Install dependencies
 
 npm
 ```bash
@@ -33,7 +46,7 @@ yarn
   yarn
 ```
 
-2. Start the project
+3. Start the project
 
 npm
 ```bash
@@ -45,7 +58,7 @@ yarn
   yarn start
 ```
 
-3. Open your browser to http://localhost:3000 and run the project.
+4. Open your browser to http://localhost:3000 and run the project.
 
 You are all set! Feel free to play with this sample project and explore features of the Agora Chat UIKIT.
 
