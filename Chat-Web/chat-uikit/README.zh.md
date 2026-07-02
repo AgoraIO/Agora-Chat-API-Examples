@@ -34,6 +34,8 @@ _[English](README.md) | 中文_
    
    将 `"your appId"` 替换为你在 Agora 控制台获取的实际 AppId。
 
+   示例项目不再内置密码登录服务。启动后请在页面中输入已注册的 User ID 和该用户的 access token 后登录。
+
 2. 安装依赖
 
 npm

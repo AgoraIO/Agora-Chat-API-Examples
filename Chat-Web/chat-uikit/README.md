@@ -34,6 +34,8 @@ The project uses a single app to combine a variety of functionalities.
    
    Replace `"your appId"` with your actual AppId obtained from the Agora console.
 
+   The sample project no longer includes a password-login service. After starting the app, enter a registered User ID and that user's access token to log in.
+
 2. Install dependencies
 
 npm

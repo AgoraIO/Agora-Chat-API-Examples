@@ -25,6 +25,7 @@ The project uses a single app to combine a variety of functionalities.
 
 - A valid Agora Chat developer account.
 - [Create the Agora Chat project and get the AppKey](https://docs-im.easemob.com/im/quickstart/guide/experience) 。
+- A registered Agora Chat user ID and an access token for that user.
 - [npm](https://www.npmjs.com/get-npm)
 - SDK supports Internet explorer 9+, FireFox10+, Chrome54+, Safari6+ text, expression, picture, audio, address messages sent to each other.
 
@@ -40,6 +41,8 @@ The project uses a single app to combine a variety of functionalities.
    ```
    
    Replace `"your appId"` with your actual AppId obtained from the Agora console.
+
+   The sample project no longer includes a registration or password-login service. After starting the app, enter a registered User ID and that user's access token to log in.
 
 2. Install dependencies
 
