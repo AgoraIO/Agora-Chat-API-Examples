@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">AgoraChatQuickstart</string>
 
-    <string name="app_key">41117440#383391</string>
+    <string name="app_id">Your Agora App ID</string>
 </resources>
