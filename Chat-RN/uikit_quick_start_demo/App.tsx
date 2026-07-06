@@ -16,7 +16,7 @@ import {
   useChatContext,
 } from 'react-native-agora-chat-uikit';
 
-const gAppId = '<your app key>';
+const gAppId = '<your app ID>';
 const userId = '<current user ID>';
 const userPs = '<current user token>';
 const peerId = '<peer user ID>';
@@ -34,7 +34,7 @@ function SendMessage() {
       // login page
       <SafeAreaView style={{flex: 1}}>
         <TextInput
-          placeholder="Please App Key."
+          placeholder="Please App ID."
           value={appId}
           onChangeText={setAppId}
         />
