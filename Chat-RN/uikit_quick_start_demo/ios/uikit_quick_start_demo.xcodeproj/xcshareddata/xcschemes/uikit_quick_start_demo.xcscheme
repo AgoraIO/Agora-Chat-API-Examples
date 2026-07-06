@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "TestUIKitDemo074.app"
-               BlueprintName = "TestUIKitDemo074"
-               ReferencedContainer = "container:TestUIKitDemo074.xcodeproj">
+               BuildableName = "uikit_quick_start_demo.app"
+               BlueprintName = "uikit_quick_start_demo"
+               ReferencedContainer = "container:uikit_quick_start_demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TestUIKitDemo074Tests.xctest"
-               BlueprintName = "TestUIKitDemo074Tests"
-               ReferencedContainer = "container:TestUIKitDemo074.xcodeproj">
+               BuildableName = "uikit_quick_start_demoTests.xctest"
+               BlueprintName = "uikit_quick_start_demoTests"
+               ReferencedContainer = "container:uikit_quick_start_demo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TestUIKitDemo074.app"
-            BlueprintName = "TestUIKitDemo074"
-            ReferencedContainer = "container:TestUIKitDemo074.xcodeproj">
+            BuildableName = "uikit_quick_start_demo.app"
+            BlueprintName = "uikit_quick_start_demo"
+            ReferencedContainer = "container:uikit_quick_start_demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TestUIKitDemo074.app"
-            BlueprintName = "TestUIKitDemo074"
-            ReferencedContainer = "container:TestUIKitDemo074.xcodeproj">
+            BuildableName = "uikit_quick_start_demo.app"
+            BlueprintName = "uikit_quick_start_demo"
+            ReferencedContainer = "container:uikit_quick_start_demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
