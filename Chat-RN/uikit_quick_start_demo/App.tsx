@@ -6,7 +6,8 @@
  */
 
 import * as React from 'react';
-import {Pressable, SafeAreaView, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   Container,
   ChatConversationType,
@@ -15,14 +16,14 @@ import {
   useChatContext,
 } from 'react-native-agora-chat-uikit';
 
-const appKey = '<your app key>';
+const gAppId = '<your app key>';
 const userId = '<current user ID>';
 const userPs = '<current user token>';
 const peerId = '<peer user ID>';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
-  const [appkey, setAppkey] = React.useState(appKey);
+  const [appId, setAppId] = React.useState(gAppId);
   const [id, setId] = React.useState(userId);
   const [ps, setPs] = React.useState(userPs);
   const [peer, setPeer] = React.useState(peerId);
@@ -30,12 +31,12 @@ function SendMessage() {
 
   if (page === 0) {
     return (
-      // 登录页面
+      // login page
       <SafeAreaView style={{flex: 1}}>
         <TextInput
           placeholder="Please App Key."
-          value={appkey}
-          onChangeText={setAppkey}
+          value={appId}
+          onChangeText={setAppId}
         />
         <TextInput
           placeholder="Please Login ID."
@@ -84,7 +85,7 @@ function SendMessage() {
       </SafeAreaView>
     );
   } else if (page === 1) {
-    // 聊天页面
+    // chat page
     return (
       <SafeAreaView style={{flex: 1}}>
         <ConversationDetail
@@ -113,9 +114,8 @@ function SendMessage() {
 }
 
 function App(): React.JSX.Element {
-  // return <View><Text>{'test'}</Text></View>;
   return (
-    <Container options={{appKey: appKey, autoLogin: false, debugModel: true}}>
+    <Container options={{appId: gAppId, autoLogin: false, debugModel: true}}>
       <SendMessage />
     </Container>
   );
