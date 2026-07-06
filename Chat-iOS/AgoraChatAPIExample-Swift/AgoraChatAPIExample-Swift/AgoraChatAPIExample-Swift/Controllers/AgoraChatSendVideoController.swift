@@ -1,16 +1,17 @@
 //
-//  AgoraChatSendImageVideoController.swift
+//  AgoraChatSendVideoController.swift
 //  AgoraChatAPIExample-Swift
 //
-//  Created by 朱继超 on 2022/6/20.
+//  Created by 朱继超 on 2022/10/8.
 //
 
 import UIKit
-import Photos
+import AgoraChat
 import ZSwiftBaseLib
+import Photos
 
-final class AgoraChatSendImageVideoController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate, AgoraChatManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+final class AgoraChatSendVideoController: UIViewController,UITableViewDelegate,UITableViewDataSource,AgoraChatClientDelegate, AgoraChatManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     private var filePath = ""
         
     private var messages: [AgoraChatMessage] = [AgoraChatMessage]()
@@ -34,7 +35,7 @@ final class AgoraChatSendImageVideoController: UIViewController,UITableViewDeleg
     
     convenience init(_ conversationId: String) {
         self.init()
-        self.conversation = AgoraChatClient.shared().chatManager.getConversationWithConvId(conversationId)
+        self.conversation = AgoraChatClient.shared().chatManager?.getConversationWithConvId(conversationId)
         let messages = self.conversation?.loadMessagesStart(fromId: "", count: 50, searchDirection: AgoraChatMessageSearchDirection.init(rawValue: 0)!) ?? []
         for message in messages {
             if message.body.type == .image {
@@ -47,20 +48,23 @@ final class AgoraChatSendImageVideoController: UIViewController,UITableViewDeleg
         super.viewDidLoad()
         self.view.addSubViews([self.messagesList,self.sendImage])
         AgoraChatClient.shared().add(self, delegateQueue: .main)
-        AgoraChatClient.shared().chatManager.add(self, delegateQueue: .main)
+        AgoraChatClient.shared().chatManager?.add(self, delegateQueue: .main)
         // Do any additional setup after loading the view.
     }
     
     deinit {
         AgoraChatClient.shared().removeDelegate(self)
-        AgoraChatClient.shared().chatManager.remove(self)
+        AgoraChatClient.shared().chatManager?.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
 
+    
+
 }
 
+
 //MARK: - Private method
-extension AgoraChatSendImageVideoController {
+extension AgoraChatSendVideoController {
     
     @objc private func sendImageAction() {
         PHPhotoLibrary.requestAuthorization { status in
@@ -93,27 +97,23 @@ extension AgoraChatSendImageVideoController {
 //
 //        let tracks = assert.tracks(withMediaType: .video)
         
-        if !type.hasSuffix("image") {
-            
-        } else {
-            guard let image = info[.originalImage] as? UIImage else {
-                picker.dismiss(animated: true)
+        if !type.hasSuffix("image") || type.hasSuffix("movie") {
+//            NSURL *videoURL = info[UIImagePickerControllerMediaURL];
+//            // we will convert it to mp4 format
+//            NSURL *mp4 = [self _videoConvert2Mp4:videoURL];
+//            NSFileManager *fileman = [NSFileManager defaultManager];
+//            if ([fileman fileExistsAtPath:videoURL.path]) {
+//                NSError *error = nil;
+//                [fileman removeItemAtURL:videoURL error:&error];
+//                if (error) {
+//                    NSLog(@"failed to remove file, error:%@.", error);
+//                }
+//            }
+            guard let url = info[.mediaURL] as? URL else {
                 return
             }
-            let data = image.jpegData(compressionQuality: 0.01)
-            let body = AgoraChatImageMessageBody(data: data, displayName: "\(Date().z.dateString)")
-            let to = self.conversation?.conversationId ?? ""
-            let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: body, ext: nil)
-            ProgressHUD.show("sending image...")
-            AgoraChatClient.shared().chatManager.send(message, progress: nil) { msg, error in
-                ProgressHUD.dismiss()
-                if error == nil {
-                    self.messages.append(msg!)
-                    self.messagesList.reloadData()
-                } else {
-                    ProgressHUD.showError("\(error?.errorDescription ?? "")")
-                }
-            }
+        } else {
+            
         }
         picker.dismiss(animated: true)
     }
@@ -149,5 +149,63 @@ extension AgoraChatSendImageVideoController {
             self.messagesList.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
         }
     }
+//    - (NSURL *)_videoConvert2Mp4:(NSURL *)movUrl
+//    {
+//        NSURL *mp4Url = nil;
+//        AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:movUrl options:nil];
+//        NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+//
+//        if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+//            AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset presetName:AVAssetExportPresetHighestQuality];
+//            NSString *mp4Path = [NSString stringWithFormat:@"%@/%d%d.mp4", [self getAudioOrVideoPath], (int)[[NSDate date] timeIntervalSince1970], arc4random() % 100000];
+//            mp4Url = [NSURL fileURLWithPath:mp4Path];
+//            exportSession.outputURL = mp4Url;
+//            exportSession.shouldOptimizeForNetworkUse = YES;
+//            exportSession.outputFileType = AVFileTypeMPEG4;
+//            dispatch_semaphore_t wait = dispatch_semaphore_create(0l);
+//            [exportSession exportAsynchronouslyWithCompletionHandler:^{
+//                switch ([exportSession status]) {
+//                    case AVAssetExportSessionStatusFailed: {
+//                        NSLog(@"failed, error:%@.", exportSession.error);
+//                    } break;
+//                    case AVAssetExportSessionStatusCancelled: {
+//                        NSLog(@"cancelled.");
+//                    } break;
+//                    case AVAssetExportSessionStatusCompleted: {
+//                        NSLog(@"completed.");
+//                    } break;
+//                    default: {
+//                        NSLog(@"others.");
+//                    } break;
+//                }
+//                dispatch_semaphore_signal(wait);
+//            }];
+//            long timeout = dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
+//            if (timeout) {
+//                NSLog(@"timeout.");
+//            }
+//
+//            if (wait) {
+//                //dispatch_release(wait);
+//                wait = nil;
+//            }
+//        }
+//
+//        return mp4Url;
+//    }
+    func convertVideoType() -> String {
+        ""
+    }
     
+    func videoPath() -> String {
+        let path = String.cachesPath + "AgoraChatApiExampleVideo"
+        if !FileManager.default.fileExists(atPath: path) {
+            do {
+                try FileManager.default.createDirectory(at: URL(string: path)!, withIntermediateDirectories: true)
+            } catch {
+                assert(false,"\(error.localizedDescription)")
+            }
+        }
+        return path
+    }
 }

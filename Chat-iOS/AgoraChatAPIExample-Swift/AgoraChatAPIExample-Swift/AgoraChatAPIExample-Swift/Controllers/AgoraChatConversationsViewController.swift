@@ -23,7 +23,7 @@ final class AgoraChatConversationsViewController: UIViewController,UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let datas = AgoraChatClient.shared().chatManager.getAllConversations() else { return }
+        guard let datas = AgoraChatClient.shared().chatManager?.getAllConversations() else { return }
         if self.title == "Join a group" {
             self.conversations = datas.filter({ $0.type == .groupChat })
         } else {
@@ -32,12 +32,12 @@ final class AgoraChatConversationsViewController: UIViewController,UITableViewDe
         // Do any additional setup after loading the view.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addChat))
         self.view.addSubview(self.conversationList)
-        AgoraChatClient.shared().chatManager.add(self, delegateQueue: .main)
+        AgoraChatClient.shared().chatManager?.add(self, delegateQueue: .main)
     }
     
     deinit {
         AgoraChatClient.shared().removeDelegate(self)
-        AgoraChatClient.shared().chatManager.remove(self)
+        AgoraChatClient.shared().chatManager?.remove(self)
     }
 }
 
@@ -71,7 +71,7 @@ extension AgoraChatConversationsViewController {
         case "Send text message":
             VC = AgoraChatSendTextViewController.init(to)
         case "Send image message":
-            VC = AgoraChatSendImageVideoController.init(to)
+            VC = AgoraChatSendImageController.init(to)
         default:
             VC = AgoraChatSendTextViewController.init(to)
         }
@@ -102,7 +102,7 @@ extension AgoraChatConversationsViewController {
             return
         }
         if self.title == "Join a group" {
-            AgoraChatClient.shared().groupManager.joinPublicGroup(self.toChatId) { group, error in
+            AgoraChatClient.shared().groupManager?.joinPublicGroup(self.toChatId) { group, error in
                 if error == nil {
                     self.createConversation(.groupChat)
                 } else {
@@ -116,16 +116,17 @@ extension AgoraChatConversationsViewController {
     }
     
     private func createConversation(_ type: AgoraChatConversationType) {
-        let item: AgoraChatConversation = AgoraChatClient.shared().chatManager.getConversation(self.toChatId, type: type, createIfNotExist: true)!
-        let temp = self.conversations.filter { $0.conversationId == item.conversationId
+        if let item: AgoraChatConversation = AgoraChatClient.shared().chatManager?.getConversation(self.toChatId, type: type, createIfNotExist: true) {
+            let temp = self.conversations.filter { $0.conversationId == item.conversationId
+            }
+            if temp.count <= 0 {
+                self.conversations.append(item)
+                self.conversationList.reloadData()
+            }
+            let to = self.toChatId
+            let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: AgoraChatTextMessageBody(text: "Hello!"), ext: [:])
+            AgoraChatClient.shared().chatManager?.send(message, progress: nil)
         }
-        if temp.count <= 0 {
-            self.conversations.append(item)
-            self.conversationList.reloadData()
-        }
-        let to = self.toChatId
-        let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: AgoraChatTextMessageBody(text: "Hello!"), ext: [:])
-        AgoraChatClient.shared().chatManager.send(message, progress: nil)
     }
     
     //MARK: - UITextFieldDelegate
@@ -136,11 +137,12 @@ extension AgoraChatConversationsViewController {
     //MARK: - AgoraChatManagerDelegate
     func messagesDidReceive(_ aMessages: [AgoraChatMessage]) {
         for message in aMessages {
-            let item: AgoraChatConversation = AgoraChatClient.shared().chatManager.getConversation(message.conversationId, type: AgoraChatConversationType.init(rawValue: 0)!, createIfNotExist: true)!
-            let temp = self.conversations.filter { $0.conversationId == item.conversationId
-            }
-            if temp.count <= 0 {
-                self.conversations.append(item)
+            if let item: AgoraChatConversation = AgoraChatClient.shared().chatManager?.getConversation(message.conversationId, type: AgoraChatConversationType(rawValue: 0) ?? .chat, createIfNotExist: true) {
+                let temp = self.conversations.filter { $0.conversationId == item.conversationId
+                }
+                if temp.count <= 0 {
+                    self.conversations.append(item)
+                }
             }
         }
         DispatchQueue.main.async {
