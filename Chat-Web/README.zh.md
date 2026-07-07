@@ -25,30 +25,44 @@ _[English](README.md) | 中文_
 
 - 有效的 Agora Chat 开发者账号。
 - [创建 Agora Chat 项目并获取 AppKey](https://docs-im.easemob.com/im/quickstart/guide/experience) 。
+- 一个已注册的 Agora Chat 用户 ID，以及该用户对应的访问 token。
 - [npm](https://www.npmjs.com/get-npm)
 - SDK 支持 IE9+、FireFox10+、Chrome54+、Safari6+ 之间文本、表情、图片、音频、地址消息相互发送。
 
 ### 运行步骤
 
-1. 安装依赖
+1. 配置 AppId
+   在运行项目之前，首先需要在 `Agora-Chat-API-Examples/Chat-Web/src/index.js` 文件中配置你的 Agora Chat AppId：
+   
+   ```javascript
+   WebIM.conn = new WebIM.connection({
+     appId: "your appId", // 替换为你的 Agora Chat SDK App ID
+   });
+   ```
+   
+   将 `"your appId"` 替换为你在 Agora 控制台获取的实际 AppId。
+
+   示例项目不再内置注册或密码登录服务。启动后请在页面中输入已注册的 User ID 和该用户的 access token 后登录。
+
+2. 安装依赖
 
 ```bash
   npm install
 ```
 
-2. 打包项目
+3. 打包项目
 
 ```bash
   npm run build
 ```
 
-3. 启动项目
+4. 启动项目
 
 ```bash
   npm run start:dev
 ```
 
-4. 浏览器打开 https://localhost:9000 运行项目。
+5. 浏览器打开 https://localhost:9000 运行项目。
 
 一切就绪。你可以自由探索示例项目，体验 Agora Chat SDK 的丰富功能。
 
