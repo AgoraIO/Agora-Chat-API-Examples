@@ -271,17 +271,19 @@ To enable your app to send and receive messages between individual users, do the
    In `app/java/io.agora.agorachatquickstart/MainActivity`,  before adding the following lines after `AppCompatActivity {`, ensure you delete the `onCreate` function created by default.
 
    ```java
-   // Replaces <Your username>, <Your token>, and <Your AppKey> with your own App Key, user ID, and user token generated in Agora Console.
+   // Replaces <Your username>, <Your token>, and <Your App ID> with your own App ID, user ID, and user token generated in Agora Console.
    private static final String USERNAME = "<Your username>";
    private static final String TOKEN = "<Your token>";
-   private static final String APP_KEY = "<Your AppKey>";
+   private static final String APP_ID = "<Your App ID>";
    
    @Override
    protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_main);
        initView();
-       initSDK();
+       if(!initSDK()) {
+           return;
+       }
        initListener();
    }
    ```
@@ -295,21 +297,22 @@ To enable your app to send and receive messages between individual users, do the
        ((TextView)findViewById(R.id.tv_log)).setMovementMethod(new ScrollingMovementMethod());
    }
    // Initializes the SDK.
-   private void initSDK() {
+   private boolean initSDK() {
        ChatOptions options = new ChatOptions();
-       // Gets your App Key applied from Agora Console.
-       if(TextUtils.isEmpty(APP_KEY)) {
-           Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
-           return;
+       // Gets your App ID applied from Agora Console.
+       if(TextUtils.isEmpty(APP_ID)) {
+           Toast.makeText(MainActivity.this, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
+           return false;
        }
-       // Sets your App Key to options.
-       options.setAppKey(APP_KEY);
+       // Sets your App ID to options.
+       options.setAppId(APP_ID);
        // Initializes the Agora Chat SDK.
        ChatClient.getInstance().init(this, options);
        // Makes the Agora Chat SDK debuggable.
        ChatClient.getInstance().setDebugMode(true);
        // Shows the current user.
        ((TextView)findViewById(R.id.tv_username)).setText("Current user: "+USERNAME);
+       return true;
    }
    ```
 
@@ -468,7 +471,7 @@ To enable your app to send and receive messages between individual users, do the
 To validate the peer-to-peer messaging you have just integrated into your app using Agora Chat, perform the following operations:
 
 1. Log in  
-   a. In the [`MainActivity`](#sign-in) file, replace the placeholders of `USERNAME`, `TOKEN`, and `APP_KEY` to the user Id, Agora token, and App Key of the sender (Som).  
+   a. In the [`MainActivity`](#sign-in) file, replace the placeholders of `USERNAME`, `TOKEN`, and `APP_ID` to the user Id, Agora token, and App ID of the sender (Som).  
    b. In **Android Studio**, select the device to run the project and click **Run 'app'**.  
    c. On your simulator or physical device, click **SIGN IN** to log in with the sender account.
    ![](https://web-cdn.agora.io/docs-files/1665302124510)
@@ -481,14 +484,14 @@ To validate the peer-to-peer messaging you have just integrated into your app us
    Click **SIGN OUT** to log out of the sender account.
 
 4. Receive the message  
-   a. After signing out, change the values of `USERNAME`, `TOKEN`, and `APP_KEY` to the user Id, Agora token, and App Key of the receiver (Neil) in the [`MainActivity`](#sign-in) file.  
+   a. After signing out, change the values of `USERNAME`, `TOKEN`, and `APP_ID` to the user Id, Agora token, and App ID of the receiver (Neil) in the [`MainActivity`](#sign-in) file.  
    b. Run the app on another Android device or simulator with the receiver account and receive the message "How are you doing?" sent in step 2.  
    ![](https://web-cdn.agora.io/docs-files/1665302134132)
 
 
 ## Next Steps
 
-For demonstration purposes, Agora Chat uses temporary tokens generated from Agora Console for authentication in this guide. In a production context, the best practice is for you to deploy your own token server, use your own [App Key](./enable_agora_chat?platform=Android#get-the-information-of-the-agora-chat-project) to generate a token, and retrieve the token on the client side to log in to Agora. To see how to implement a server that generates and serves tokens on request, see [Generate a User Token](./generate_user_tokens).
+For demonstration purposes, Agora Chat uses temporary tokens generated from Agora Console for authentication in this guide. In a production context, the best practice is for you to deploy your own token server, use your own [App ID](./enable_agora_chat?platform=Android#get-the-information-of-the-agora-chat-project) to generate a token, and retrieve the token on the client side to log in to Agora. To see how to implement a server that generates and serves tokens on request, see [Generate a User Token](./generate_user_tokens).
 
 
 ## See also

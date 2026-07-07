@@ -28,19 +28,19 @@ The project uses a single app to combine a variety of functionalities.Each funct
 
 - Physical Android device or Android simulator with Android 5.0+
 - Android Studio (latest version recommended)
-- JDK (1.8+)
+- JDK (17+)
 
 ### Steps to run
 
 1. Clone this project to local
 2. In Android Studio, open `/Chat-Android/`.
 3. Sync the project with Gradle files.
-4. If you want to use your own App Key for the experience, you can edit the `Chat-Android/app/src/main/res/values/strings.xml` file.
-   - Replace `YOUR APP KEY` with your App KEY.
+4. If you want to use your own App ID for the experience, you can edit the `Chat-Android/app/src/main/res/values/strings.xml` file.
+   - Replace `YOUR APP ID` with your App ID.
    - Replace `YOUR LOGIN URL` with the address of the App Server you built to get Agora Chat Token.
    - Replace `YOUR REGISTER USER URL` with the address of the registered Agora Chat user on the App Server you built.
    ```xml
-   <string name="app_key">YOUR APP KEY</string>
+   <string name="app_id">YOUR APP ID</string>
    <string name="login_url">YOUR LOGIN URL</string>
    <string name="register_url">YOUR REGISTER URL</string>
    ```

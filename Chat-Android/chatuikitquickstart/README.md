@@ -120,7 +120,7 @@ This section shows how to use the Agora Chat UIKit to implement peer-to-peer mes
     <string name="sign_in_first">Please sign in first</string>
     <string name="not_find_send_name">Please enter the username who you want to send first!</string>
 
-    <string name="app_key">41117440#383391</string>
+    <string name="app_id">Your Agora App ID</string>
 </resources>
 ```
 
@@ -320,7 +320,9 @@ To enable your app to send and receive messages between individual users, do the
             setContentView(R.layout.activity_main);
             initView();
             requestPermissions();
-            initSDK();
+            if(!initSDK()) {
+                return;
+            }
             addConnectionListener();
         }
 
@@ -335,16 +337,16 @@ To enable your app to send and receive messages between individual users, do the
         }
 
     //=================== init SDK start ========================
-        private void initSDK() {
+        private boolean initSDK() {
             ChatOptions options = new ChatOptions();
-            // Set your appkey applied from Agora Console
-            String sdkAppkey = getString(R.string.app_key);
-            if(TextUtils.isEmpty(sdkAppkey)) {
-                Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
-                return;
+            // Set your App ID applied from Agora Console
+            String sdkAppId = getString(R.string.app_id);
+            if(TextUtils.isEmpty(sdkAppId)) {
+                Toast.makeText(MainActivity.this, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
+                return false;
             }
-            // Set your appkey to options
-            options.setAppKey(sdkAppkey);
+            // Set your App ID to options
+            options.setAppId(sdkAppId);
             // Set whether confirmation of delivery is required by the recipient. Default: false
             options.setRequireDeliveryAck(true);
             // Set not to log in automatically
@@ -353,6 +355,7 @@ To enable your app to send and receive messages between individual users, do the
             EaseUIKit.getInstance().init(this, options);
             // Make Agora Chat SDK debuggable
             ChatClient.getInstance().setDebugMode(true);
+            return true;
         }
     //=================== init SDK end ========================
     //================= SDK listener start ====================
@@ -852,7 +855,7 @@ To validate the peer-to-peer messaging you have just integrated into your app us
    
 ## Next Step
 
-For demonstration purposes, Agora Chat provides an app server that enables you to quickly retrieve a token using the App Key given in this guide. In a production context, the best practice is for you to deploy your own token server, use your own [App Key](.enable_agora_chat?platform=Android#get-the-information-of-the-agora-chat-project) to generate a token, and retrieve the token on the client side to log in to Agora. To see how to implement a server that generates and serves tokens on request, see [Generate a User Token](./generate_user_tokens?platform=All%20Platforms).
+For demonstration purposes, Agora Chat provides an app server that enables you to quickly retrieve a token using the App ID given in this guide. In a production context, the best practice is for you to deploy your own token server, use your own [App ID](.enable_agora_chat?platform=Android#get-the-information-of-the-agora-chat-project) to generate a token, and retrieve the token on the client side to log in to Agora. To see how to implement a server that generates and serves tokens on request, see [Generate a User Token](./generate_user_tokens?platform=All%20Platforms).
 
 ## Reference
 

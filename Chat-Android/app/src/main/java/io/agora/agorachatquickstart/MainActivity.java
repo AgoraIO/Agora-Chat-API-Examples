@@ -24,15 +24,17 @@ public class MainActivity extends AppCompatActivity {
     private static final String USERNAME = "";
     // Gets token from Agora Console or generates by your app server
     private static final String TOKEN = "";
-    // Gets AppKey from Agora Console
-    private static final String APP_KEY = "";
+    // Gets App ID from Agora Console
+    private static final String APP_ID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initSDK();
+        if(!initSDK()) {
+            return;
+        }
         initListener();
     }
 
@@ -40,21 +42,22 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.tv_log)).setMovementMethod(new ScrollingMovementMethod());
     }
 
-    private void initSDK() {
+    private boolean initSDK() {
         ChatOptions options = new ChatOptions();
-        // Get your appkey applied from Agora Console
-        if(TextUtils.isEmpty(APP_KEY)) {
-            Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
-            return;
+        // Get your App ID applied from Agora Console
+        if(TextUtils.isEmpty(APP_ID)) {
+            Toast.makeText(MainActivity.this, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        // Set your appkey to options
-        options.setAppKey(APP_KEY);
+        // Set your App ID to options
+        options.setAppId(APP_ID);
         // To initialize Agora Chat SDK
         ChatClient.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
         // Show current user
         ((TextView)findViewById(R.id.tv_username)).setText("Current user: "+USERNAME);
+        return true;
     }
 
     private void initListener() {

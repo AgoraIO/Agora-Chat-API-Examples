@@ -32,14 +32,14 @@ public class AccountHelper {
      */
     public static void initSDK(Context context) {
         ChatOptions options = new ChatOptions();
-        // Set your appkey applied from Agora Console
-        String sdkAppkey = context.getString(R.string.app_key);
-        if(TextUtils.isEmpty(sdkAppkey)) {
-            Toast.makeText(context, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
+        // Set your App ID applied from Agora Console
+        String sdkAppId = context.getString(R.string.app_id);
+        if(TextUtils.isEmpty(sdkAppId)) {
+            Toast.makeText(context, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Set your appkey to options
-        options.setAppKey(sdkAppkey);
+        // Set your App ID to options
+        options.setAppId(sdkAppId);
         // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
         options.setAutoLogin(false);

@@ -19,5 +19,5 @@
     <string name="sign_in_first">Please sign in first</string>
     <string name="not_find_send_name">Please enter the username who you want to send first!</string>
 
-    <string name="app_key">41117440#383391</string>
+    <string name="app_id">Your Agora App ID</string>
 </resources>

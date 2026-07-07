@@ -29,19 +29,19 @@ _[English](README.md) | 中文_
 
 - 真实的 Android 设备或 Android 虚拟机
 - Android Studio (推荐最新版)
-- JDK (1.8以上)
+- JDK (17及以上)
 
 ### 运行步骤
 
 1. 克隆本项目到本地
 2. 在 Android Studio 中，打开 /Chat-Android/。
 3. 将项目与 Gradle 文件同步。
-4. 如果你想使用自己的 App Key 进行体验，你可以编辑 `Chat-Android/app/src/main/res/values/strings.xml` 文件。
-   - 将 `YOUR APP KEY` 替换为你的 App Key。
+4. 如果你想使用自己的 App ID 进行体验，你可以编辑 `Chat-Android/app/src/main/res/values/strings.xml` 文件。
+   - 将 `YOUR APP ID` 替换为你的 App ID。
    - 将 `YOUR LOGIN URL` 替换为你搭建的 App Server 获取 Agora Chat Token 的地址。
    - 将 `YOUR REGISTER USER URL` 替换为你搭建的 App Server 注册 Agora Chat 用户的地址。
       ```xml
-      <string name="app_key">YOUR APP KEY</string>
+      <string name="app_id">YOUR APP ID</string>
       <string name="login_url">YOUR LOGIN URL</string>
       <string name="register_url">YOUR REGISTER URL</string>
       ```
