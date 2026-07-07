@@ -41,9 +41,7 @@ final class AgoraChatRequest: NSObject,URLSessionDelegate {
 
     static var shared = AgoraChatRequest.init()
     
-    static let baseUrl: String = "https://a41.chat.agora.io"
-
-    static let appKey: String = <#App Key#>
+    static let baseUrl: String = "https://a41-appserver.chat.agora.io"
     
     static let appID: String = <#App Id#>
     
