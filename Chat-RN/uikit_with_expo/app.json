@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "my-uikit-test-example",
+    "slug": "my-uikit-test-example",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.anonymous.myuikittestexample"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.myuikittestexample"
+    }
+  }
+}

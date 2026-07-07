@@ -1,9 +1,9 @@
 import WebIM from 'agora-chat'
-var username, password
+var username, accessToken
 WebIM.conn = new WebIM.connection({
-    appKey: "41117440#383391",
-})
-// Register listening events
+  appId: "your appId", // Replace with your Agora Chat SDK App ID
+});
+// Listen for connection and message events
 WebIM.conn.addEventHandler('connection&message', {
     onConnected: () => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Connect success !")
@@ -17,7 +17,12 @@ WebIM.conn.addEventHandler('connection&message', {
     },
     onTokenWillExpire: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("Token is about to expire")
-        refreshToken(username, password)
+        if (accessToken) {
+            WebIM.conn.renewToken(accessToken)
+            document.getElementById("log").appendChild(document.createElement('div')).append("Token has been updated")
+        } else {
+            document.getElementById("log").appendChild(document.createElement('div')).append("Please enter a new token and login again.")
+        }
     },
     onTokenExpired: (params) => {
         document.getElementById("log").appendChild(document.createElement('div')).append("The token has expired, please login again.")
@@ -27,61 +32,25 @@ WebIM.conn.addEventHandler('connection&message', {
     }
 })
 
-// Obtain and set the Agora token again
-function refreshToken(username, password) {
-    postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
-        .then((res) => {
-            let agoraToken = res.accessToken
-            WebIM.conn.renewToken(agoraToken)
-            document.getElementById("log").appendChild(document.createElement('div')).append("Token has been updated")
-        })
-}
-
-function postData(url, data) {
-    return fetch(url, {
-        body: JSON.stringify(data),
-        cache: 'no-cache',
-        headers: {
-            'content-type': 'application/json'
-        },
-        method: 'POST',
-        mode: 'cors',
-        redirect: 'follow',
-        referrer: 'no-referrer',
-    })
-        .then(response => response.json())
-}
-
 // Button behavior definition
-// register
-document.getElementById("register").onclick = function () {
-    username = document.getElementById("userID").value.toString()
-    password = document.getElementById("password").value.toString()
-    postData('https://a41.chat.agora.io/app/chat/user/register', { "userAccount": username, "userPassword": password })
-        .then((res) => {
-            document.getElementById("log").appendChild(document.createElement('div')).append(`register user ${username} success`)
-        })
-        .catch((res) => {
-            document.getElementById("log").appendChild(document.createElement('div')).append(`${username} already exists`)
-        })
-}
 // login
 document.getElementById("login").onclick = function () {
     document.getElementById("log").appendChild(document.createElement('div')).append("Logging in...")
     username = document.getElementById("userID").value.toString()
-    password = document.getElementById("password").value.toString()
-    postData('https://a41.chat.agora.io/app/chat/user/login', { "userAccount": username, "userPassword": password })
-        .then((res) => {
-            let agoraToken = res.accessToken
-            let easemobUserName = res.chatUserName
-            WebIM.conn.open({
-                user: easemobUserName,
-                agoraToken: agoraToken
-            });
-        })
-        .catch((res) => {
-            document.getElementById("log").appendChild(document.createElement('div')).append(`Login failed`)
-        })
+    accessToken = document.getElementById("token").value.toString()
+    if (!username) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("User ID is required")
+        return
+    }
+    if (!accessToken) {
+        document.getElementById("log").appendChild(document.createElement('div')).append("Access token is required")
+        return
+    }
+
+    WebIM.conn.open({
+        user: username,
+        accessToken
+    });
 }
 
 // logout
@@ -108,4 +77,3 @@ document.getElementById("send_peer_message").onclick = function () {
         console.log('send private text fail', err);
     })
 }
-

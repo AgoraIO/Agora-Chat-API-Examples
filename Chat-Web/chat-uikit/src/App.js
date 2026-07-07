@@ -6,11 +6,10 @@ import "./App.css";
 function App() {
 	const [values, setValues] = useState({
 		username: "",
-		password: "",
+		token: "",
 	});
 	const client = useClient()
 	const conversationStore = useConversationContext();
-	const [authToken, setAuthToken] = useState("");
 
 	useEffect(() => {
 		client.addEventHandler('connection_state_change', {
@@ -40,49 +39,18 @@ function App() {
 		setTo(toValue);
 	};
 
-	function postData(url, data) {
-		return fetch(url, {
-			body: JSON.stringify(data),
-			cache: "no-cache",
-			headers: {
-				"content-type": "application/json",
-			},
-			method: "POST",
-			mode: "cors",
-			redirect: "follow",
-			referrer: "no-referrer",
-		}).then((response) => response.json());
-	}
-
 	const onLogin = useCallback(() => {
 		if (!values.username) {
 			return alert("username is required");
-		} else if (!values.password) {
-			return alert("password is required");
+		} else if (!values.token) {
+			return alert("access token is required");
 		}
 
-		const getToken = (username, password) => {
-			postData("https://a41.chat.agora.io/app/chat/user/login", {
-				userAccount: username,
-				userPassword: password,
-			})
-				.then((res) => {
-					const { accessToken } = res;
-					console.log("accessToken", accessToken);
-					client.open({
-						user: values.username,
-						agoraToken: accessToken,
-					})
-					setAuthToken(accessToken);
-				})
-				.catch((err) => {
-					alert("get token failed");
-				});
-		};
-
-
-		getToken(values.username, values.password);
-	}, [values]);
+		client.open({
+			user: values.username,
+			accessToken: values.token,
+		});
+	}, [client, values]);
 
 
 	const onClose = () => {
@@ -102,16 +70,16 @@ function App() {
 			<div>
 				<div className="form-item">
 					<Input
-						placeholder="Username"
+						placeholder="User ID"
 						className="App-input"
 						onChange={handleChange("username")}
 						value={values.username}
 					></Input>
 					<Input
-						placeholder="Password"
+						placeholder="Access token"
 						className="App-input"
-						onChange={handleChange("password")}
-						value={values.password}
+						onChange={handleChange("token")}
+						value={values.token}
 					></Input>
 					<Button
 						type="primary"

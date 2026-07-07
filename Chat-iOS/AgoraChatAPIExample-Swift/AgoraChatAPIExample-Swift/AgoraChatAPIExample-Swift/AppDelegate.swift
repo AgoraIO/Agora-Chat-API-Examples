@@ -41,11 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func agoraChatInitlize() {
-        let options = AgoraChatOptions(appkey: AgoraChatRequest.appKey)
+        let options = AgoraChatOptions(appId: AgoraChatRequest.appID)
         options.enableConsoleLog = true
         options.isAutoLogin = true
-        options.pushKitCertName = "com.easemob.enterprise.demo.ui.voip"
-        options.apnsCertName = "ChatDemoDevPush"
+       
         AgoraChatClient.shared().initializeSDK(with: options)
     }
 }

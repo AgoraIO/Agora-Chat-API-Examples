@@ -1,9 +1,9 @@
 PODS:
   - agora_chat_sdk (0.0.1):
     - Flutter
-    - HyphenateChat (= 4.0.0)
+    - HyphenateChat (= 4.5.0)
   - Flutter (1.0.0)
-  - HyphenateChat (4.0.0)
+  - HyphenateChat (4.5.0)
 
 DEPENDENCIES:
   - agora_chat_sdk (from `.symlinks/plugins/agora_chat_sdk/ios`)
@@ -20,10 +20,10 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  agora_chat_sdk: ce66fe2e4f70ee969f006d5c200fde9ac9613d45
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  HyphenateChat: 9f6e4ac3b290e52cc0e52491f85d86097b35c285
+  agora_chat_sdk: b748c59817b13c72b2e168f0477d950e94d3e560
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  HyphenateChat: bf4cfa65a83ffa210803fdc91263b4891fb510ee
 
-PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2

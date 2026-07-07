@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         requestPermissions();
-        initSDK();
+        if(!initSDK()) {
+            return;
+        }
         addConnectionListener();
     }
 
@@ -68,16 +70,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 //=================== init SDK start ========================
-    private void initSDK() {
+    private boolean initSDK() {
         ChatOptions options = new ChatOptions();
-        // Set your appkey applied from Agora Console
-        String sdkAppkey = getString(R.string.app_key);
-        if(TextUtils.isEmpty(sdkAppkey)) {
-            Toast.makeText(MainActivity.this, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
-            return;
+        // Set your App ID applied from Agora Console
+        String sdkAppId = getString(R.string.app_id);
+        if(TextUtils.isEmpty(sdkAppId)) {
+            Toast.makeText(MainActivity.this, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        // Set your appkey to options
-        options.setAppKey(sdkAppkey);
+        // Set your App ID to options
+        options.setAppId(sdkAppId);
         // Set whether confirmation of delivery is required by the recipient. Default: false
         options.setRequireDeliveryAck(true);
         // Set not to log in automatically
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         EaseUIKit.getInstance().init(this, options);
         // Make Agora Chat SDK debuggable
         ChatClient.getInstance().setDebugMode(true);
+        return true;
     }
 //=================== init SDK end ========================
 //================= SDK listener start ====================
@@ -213,9 +216,9 @@ public class MainActivity extends AppCompatActivity {
                 .setOnChatExtendMenuItemClickListener(new OnChatExtendMenuItemClickListener() {
                     @Override
                     public boolean onChatExtendMenuItemClick(View view, int itemId) {
-                        if(itemId == R.id.extend_item_take_picture) {
+                        if(itemId == io.agora.chat.uikit.R.id.extend_item_take_picture) {
                             return !checkPermissions(Manifest.permission.CAMERA, 111);
-                        }else if(itemId == R.id.extend_item_picture || itemId == R.id.extend_item_file || itemId == R.id.extend_item_video) {
+                        }else if(itemId == io.agora.chat.uikit.R.id.extend_item_picture || itemId == io.agora.chat.uikit.R.id.extend_item_file || itemId == io.agora.chat.uikit.R.id.extend_item_video) {
                             return !checkPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, 112);
                         }
                         return false;
@@ -314,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 //=================== get token from server end ========================
 //=================== login and register start ========================
     private void login(String username, String token) {
-        ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+        ChatClient.getInstance().loginWithToken(username, token, new CallBack() {
             @Override
             public void onSuccess() {
                 LogUtils.showToast(MainActivity.this, tv_log, getString(R.string.sign_in_success));

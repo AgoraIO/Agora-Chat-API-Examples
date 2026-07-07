@@ -5,22 +5,25 @@
 This repository contains sample project for chat app server, which include user registration and login.
 When you plan to use agora chat service, you may need mapping your user profile with agora chat account and generate token for chat account. This project demonstrate how to create chat account and map to your own user profile and generate the token for chat account
 
+Contact [support@agora.io](mailto:support@agora.io) to enable automatic user registration. Once enabled, you can use `chatUsername` to generate a user-permission token. When logging into Chat, if `chatUsername` is not registered, the Chat server will automatically use `chatUsername` to register the Chat user and log in. `chatUsername` must be consistent with the username. 
 
 * workflow for create account
 
-![register](images/register.png)
+![user-register](https://github.com/user-attachments/assets/d84e914f-0618-4be4-b1b3-72fde73a7a2c)
+
 
 ---
 
 * workflow for login
 
-![login](images/login.png)
+![user-login](https://github.com/user-attachments/assets/69836f5d-7a29-4712-a531-6d3666338d9d)
+
 
 ## Features
 
 - App Server support user registration and will create a chat account and map it to the user.
-- App Server support user login and generate a token for chat service(use aogra appId, appcert, chat user's uuid).
-- App Server support store user information with database, which include account name, acount password, chat username and chat user's uuid.
+- App Server support user login and generate a token for chat service(use aogra appId, appcert, chat username).
+- App Server support store user information with database, which include account name, acount password, chat username.
 
 
 ## Technical
@@ -54,7 +57,6 @@ CREATE TABLE `app_user_info` (
   `user_account` varchar(32) NOT NULL COMMENT 'user account',
   `user_password` varchar(32) DEFAULT NULL COMMENT 'user password',
   `agora_chat_user_name` varchar(32) NOT NULL COMMENT 'Agora Chat user name',
-  `agora_chat_user_uuid` varchar(36) DEFAULT NULL COMMENT 'Agora Chat user uuid',
   PRIMARY KEY (`id`,`user_account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
@@ -66,16 +68,11 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
 * Configure file is：[application.properties](./agora-app-server/src/main/resources/application.properties)
 
   ```
-      ## configure with your own appkey
-      application.appkey=xxx
-      
-      ## configure REST API domain
-      application.base.uri=xxx
-      
+ 
       ## configure with your own appid
       application.agoraAppId=xxx
       ## config with your own appcert
-      application.agoraCert=xxx
+      application.agoraAppCert=xxx
       ## token valid duration(suggest not over one day)
       agora.token.expire.period.seconds=86400
       
@@ -83,7 +80,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       spring.datasource.driver-class-name=com.mysql.jdbc.Driver
       spring.datasource.url=jdbc:mysql://127.0.0.1:3306/app_server?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
       spring.datasource.username=root
-      spring.datasource.password=123456
+      spring.datasource.password=123456789
       spring.datasource.hikari.maximum-pool-size=50
       spring.datasource.hikari.minimum-idle=20
   
@@ -91,7 +88,7 @@ Configure the below file with appkey, AppId and AppCert you get from the above s
       spring.jpa.show_sql=false
       spring.jpa.properties.hibernate.format_sql=true
       spring.jpa.properties.hibernate.generate_statistics=false
-      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
+      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
       spring.jpa.hibernate.ddl-auto=validate
       
   ```
@@ -107,7 +104,7 @@ When you finish the configure, you can just run this app server.
 
 This api is used to register a user for your app. User name and password is used in this sample project, you can use any other format for your user account ,such as phone number.
 
-**Path:** `http://localhost:8086/app/user/register`
+**Path:** `http://localhost:8086/app/chat/user/register`
 
 **HTTP Method:** `POST`
 
@@ -132,7 +129,7 @@ This api is used to register a user for your app. User name and password is used
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/chat/user/register' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -155,7 +152,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' '
 
 User login on your app server and get a agora token for chat service.
 
-**Path:** `http://localhost:8086/app/user/login`
+**Path:** `http://localhost:8086/app/chat/user/login`
 
 **HTTP Method:** `POST`
 
@@ -179,7 +176,7 @@ User login on your app server and get a agora token for chat service.
 **request example:**
 
 ```
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' 'http://localhost:8086/app/chat/user/login' -d '{"userAccount": "jack","userPassword":"123"}'
 ```
 
 **Response Parameters:**
@@ -216,9 +213,6 @@ Get a token including user and rtc privileges.
 | Param        | description      |
 | ------------ | ---------------- |
 | Accept | application/json |
-
-**Request Body example:** 
-{"userAccount":"jack", "userPassword":"123"}
 
 **Request params:** 
 

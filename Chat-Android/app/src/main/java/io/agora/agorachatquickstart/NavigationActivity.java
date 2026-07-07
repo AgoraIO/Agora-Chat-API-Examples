@@ -23,6 +23,12 @@ public class NavigationActivity extends AppCompatActivity {
             R.string.send_audio_message,
             R.string.fetch_messages_from_server
     };
+    private static final Class<?>[] targetActivities = {
+            MainActivity.class,
+            ImportMessagesActivity.class,
+            SendAudioMessageActivity.class,
+            FetchMessagesFromServerActivity.class
+    };
     private RecyclerView rvList;
     private Activity mContext;
 
@@ -56,25 +62,8 @@ public class NavigationActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent;
-                    switch (titles[myPosition]) {
-                        case R.string.quick_start :
-                            intent = new Intent(mContext, MainActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.string.import_messages :
-                            intent = new Intent(mContext, ImportMessagesActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.string.send_audio_message :
-                            intent = new Intent(mContext, SendAudioMessageActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.string.fetch_messages_from_server :
-                            intent = new Intent(mContext, FetchMessagesFromServerActivity.class);
-                            startActivity(intent);
-                            break;
-                    }
+                    Intent intent = new Intent(mContext, targetActivities[myPosition]);
+                    startActivity(intent);
                 }
             });
         }

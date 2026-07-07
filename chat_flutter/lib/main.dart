@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _signIn() async {
     try {
-      await ChatClient.getInstance.loginWithAgoraToken(
+      await ChatClient.getInstance.loginWithToken(
         AgoraChatConfig.userId,
         AgoraChatConfig.agoraToken,
       );
@@ -258,6 +258,10 @@ class _MyHomePageState extends State<MyHomePage> {
         case MessageType.CMD:
           {}
           break;
+        case MessageType.COMBINE:
+          _addLogToConsole(
+            "receive combine message, from: ${msg.from}",
+          );
       }
     }
   }

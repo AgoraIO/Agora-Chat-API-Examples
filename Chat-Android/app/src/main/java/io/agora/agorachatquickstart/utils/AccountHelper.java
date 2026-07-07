@@ -32,14 +32,14 @@ public class AccountHelper {
      */
     public static void initSDK(Context context) {
         ChatOptions options = new ChatOptions();
-        // Set your appkey applied from Agora Console
-        String sdkAppkey = context.getString(R.string.app_key);
-        if(TextUtils.isEmpty(sdkAppkey)) {
-            Toast.makeText(context, "You should set your AppKey first!", Toast.LENGTH_SHORT).show();
+        // Set your App ID applied from Agora Console
+        String sdkAppId = context.getString(R.string.app_id);
+        if(TextUtils.isEmpty(sdkAppId)) {
+            Toast.makeText(context, "You should set your App ID first!", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Set your appkey to options
-        options.setAppKey(sdkAppkey);
+        // Set your App ID to options
+        options.setAppId(sdkAppId);
         // Set you to use HTTPS only
         options.setUsingHttpsOnly(true);
         options.setAutoLogin(false);
@@ -109,7 +109,7 @@ public class AccountHelper {
                             JSONObject object = new JSONObject(responseInfo);
                             String token = object.getString("accessToken");
                             if(TextUtils.equals(requestType, NEW_LOGIN)) {
-                                ChatClient.getInstance().loginWithAgoraToken(username, token, new CallBack() {
+                                ChatClient.getInstance().loginWithToken(username, token, new CallBack() {
                                     @Override
                                     public void onSuccess() {
                                         LogUtils.showToast(context, tv_log, context.getString(R.string.sign_in_success));
