@@ -28,7 +28,7 @@ final class AgoraChatSendTextViewController: UIViewController,UITableViewDelegat
     
     convenience init(_ conversationId: String) {
         self.init()
-        self.conversation = AgoraChatClient.shared().chatManager.getConversationWithConvId(conversationId)
+        self.conversation = AgoraChatClient.shared().chatManager?.getConversationWithConvId(conversationId)
         let messages = self.conversation?.loadMessagesStart(fromId: "", count: 50, searchDirection: .up) ?? []
         for message in messages {
             if message.body.type == .text {
@@ -45,14 +45,14 @@ final class AgoraChatSendTextViewController: UIViewController,UITableViewDelegat
         self.view.addSubViews([self.messagesList,self.messageField])
         self.messageField.returnKeyType = .send
         AgoraChatClient.shared().add(self, delegateQueue: .main)
-        AgoraChatClient.shared().chatManager.add(self, delegateQueue: .main)
+        AgoraChatClient.shared().chatManager?.add(self, delegateQueue: .main)
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notify:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         // Do any additional setup after loading the view.
     }
     
     deinit {
         AgoraChatClient.shared().removeDelegate(self)
-        AgoraChatClient.shared().chatManager.remove(self)
+        AgoraChatClient.shared().chatManager?.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
 }
@@ -95,7 +95,7 @@ extension AgoraChatSendTextViewController {
     private func sendTextMessage(_ text: String) {
         let to = self.conversation?.conversationId ?? ""
         let message = AgoraChatMessage(conversationID: to, from: AgoraChatClient.shared().currentUsername!, to: to, body: AgoraChatTextMessageBody(text: text), ext: [:])
-        AgoraChatClient.shared().chatManager.send(message, progress: nil) { sendMessage, error in
+        AgoraChatClient.shared().chatManager?.send(message, progress: nil) { sendMessage, error in
             if error == nil {
                 if self.heightMap[message.messageId] ?? 0 <= 0 {
                     self.heightMap[message.messageId] = AgoraChatTextCell.contentHeight(message)+52

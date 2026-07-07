@@ -41,9 +41,9 @@ final class AgoraChatRequest: NSObject,URLSessionDelegate {
 
     static var shared = AgoraChatRequest.init()
     
-    static let baseUrl = "https://a41.chat.agora.io"
-
-    static let appKey = "41117440#383391"
+    static let baseUrl: String = "https://a41-appserver.chat.agora.io"
+    
+    static let appID: String = <#App Id#>
     
     private lazy var config: URLSessionConfiguration = {
         //MARK: - session config

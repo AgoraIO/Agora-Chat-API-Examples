@@ -53,8 +53,6 @@ class ViewController: UIViewController {
         logView = createLogView()
         self.view.addSubview(logView)
         // Input userId and token which generated on console
-        self.userIdField.text = <#Input Your UserId#>
-        self.tokenField.text = <#Input Your Token#>
     }
 
     override func viewDidLayoutSubviews() {
@@ -73,7 +71,7 @@ class ViewController: UIViewController {
     
     func initChatSDK() {
             // Initializes the Agora Chat SDK
-            let options = AgoraChatOptions(appkey: <#Agora App Key#>)
+        let options = AgoraChatOptions(appId: <#app id#>)
             options.isAutoLogin = false // disable auto login
             options.enableConsoleLog = true
             AgoraChatClient.shared.initializeSDK(with: options)

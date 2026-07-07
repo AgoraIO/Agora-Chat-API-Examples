@@ -45,7 +45,7 @@ extension AgoraChatImageCell {
         guard let body = message.body as? AgoraChatImageMessageBody else { return }
         if body.localPath.isEmpty,body.thumbnailLocalPath.isEmpty {
             ProgressHUD.show("downloading image...")
-            AgoraChatClient.shared().chatManager.downloadMessageAttachment(message, progress: nil) { msg, error in
+            AgoraChatClient.shared().chatManager?.downloadMessageAttachment(message, progress: nil) { msg, error in
                 ProgressHUD.dismiss()
                 if error == nil {
                     self.picture.image = UIImage(contentsOfFile: body.thumbnailLocalPath.isEmpty ? body.localPath:body.thumbnailLocalPath)
