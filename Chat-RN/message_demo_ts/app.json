@@ -3,16 +3,76 @@
     "name": "message_demo_ts",
     "slug": "message_demo_ts",
     "version": "1.0.0",
-    "sdkVersion": "45.0.0",
-    "assetBundlePatterns": ["**/*"],
-    "platforms": ["ios", "android", "web"],
-    "android": {
-      "package": "com.example.rn.message.demo"
-    },
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "messagedemots",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.example.rn.message.demo",
-      "usesIcloudStorage": false
+      "supportsTablet": true,
+      "bundleIdentifier": "com.asteriskzuo.message-demo-ts",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "需要访问相册以选择图片和视频",
+        "NSPhotoLibraryAddUsageDescription": "需要保存图片到相册",
+        "NSCameraUsageDescription": "需要访问相机以拍摄照片和视频",
+        "NSMicrophoneUsageDescription": "需要访问麦克风以录制语音和视频"
+      }
     },
-    "plugins": ["expo-image-picker", "expo-document-picker"]
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.asteriskzuo.message_demo_ts",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "需要访问相册以选择图片和视频",
+          "cameraPermission": "需要访问相机以拍摄照片和视频",
+          "microphonePermission": "需要访问麦克风以录制视频"
+        }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
   }
 }

@@ -6,22 +6,24 @@
  */
 
 import * as React from 'react';
-import {Pressable, SafeAreaView, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   Container,
+  ChatConversationType,
   ConversationDetail,
   TextInput,
   useChatContext,
-} from 'react-native-chat-uikit';
+} from 'react-native-agora-chat-uikit';
 
-const appKey = 'xxx';
-const userId = 'xxx';
-const userPs = 'xxx';
-const peerId = 'xxx';
+const gAppId = '<your app ID>';
+const userId = '<current user ID>';
+const userPs = '<current user token>';
+const peerId = '<peer user ID>';
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
-  const [appkey, setAppkey] = React.useState(appKey);
+  const [appId, setAppId] = React.useState(gAppId);
   const [id, setId] = React.useState(userId);
   const [ps, setPs] = React.useState(userPs);
   const [peer, setPeer] = React.useState(peerId);
@@ -29,12 +31,12 @@ function SendMessage() {
 
   if (page === 0) {
     return (
-      // 登录页面
+      // login page
       <SafeAreaView style={{flex: 1}}>
         <TextInput
-          placeholder="Please App Key."
-          value={appkey}
-          onChangeText={setAppkey}
+          placeholder="Please App ID."
+          value={appId}
+          onChangeText={setAppId}
         />
         <TextInput
           placeholder="Please Login ID."
@@ -57,12 +59,13 @@ function SendMessage() {
             im.login({
               userId: id,
               userToken: ps,
-              usePassword: true,
               result: res => {
                 console.log('login result', res);
                 console.log('test:zuoyu:error', res);
                 if (res.isOk === true) {
                   setPage(1);
+                } else {
+                  console.warn('login failed');
                 }
               },
             });
@@ -72,7 +75,9 @@ function SendMessage() {
         <Pressable
           onPress={() => {
             im.logout({
-              result: () => {},
+              result: result => {
+                console.log('logout result', result);
+              },
             });
           }}>
           <Text>{'Logout'}</Text>
@@ -80,19 +85,26 @@ function SendMessage() {
       </SafeAreaView>
     );
   } else if (page === 1) {
-    // 聊天页面
+    // chat page
     return (
       <SafeAreaView style={{flex: 1}}>
         <ConversationDetail
-          convId={peer}
-          convType={0}
-          onBack={() => {
-            setPage(0);
-            im.logout({
-              result: () => {},
-            });
-          }}
           type={'chat'}
+          convId={peerId}
+          convType={ChatConversationType.PeerChat}
+          NavigationBar={
+            <View
+              style={{height: 40, width: 40, backgroundColor: 'green'}}
+              onTouchEnd={() => {
+                im.logout({
+                  result: result => {
+                    console.log('logout result', result);
+                    setPage(0);
+                  },
+                });
+              }}
+            />
+          }
         />
       </SafeAreaView>
     );
@@ -102,9 +114,8 @@ function SendMessage() {
 }
 
 function App(): React.JSX.Element {
-  // 初始化 UIKit
   return (
-    <Container options={{appKey: appKey, autoLogin: false}}>
+    <Container options={{appId: gAppId, autoLogin: false, debugModel: true}}>
       <SendMessage />
     </Container>
   );
