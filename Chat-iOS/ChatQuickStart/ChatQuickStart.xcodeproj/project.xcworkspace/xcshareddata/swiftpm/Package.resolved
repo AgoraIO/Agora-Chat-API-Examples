@@ -6,7 +6,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AgoraIO/AgoraChat_iOS",
       "state" : {
-        "revision" : "fafa4833ed87f676d92b2c00ff486376ec679246",
+        "revision" : "9b7898e41c222687439a7306af7297a03cfa5b89",
         "version" : "1.4.0"
       }
     },
