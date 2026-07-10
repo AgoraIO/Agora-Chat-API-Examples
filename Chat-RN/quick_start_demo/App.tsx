@@ -86,7 +86,7 @@ const App = () => {
     // Initializes the SDK.
     // Initializes any interface before calling it.
     const init = () => {
-      let o = new ChatOptions({
+      let o = ChatOptions.withAppId({
         autoLogin: false,
         appId: appId,
       });
@@ -121,7 +121,7 @@ const App = () => {
     };
 
     init();
-  }, [chatClient, chatManager, appKey]);
+  }, [chatClient, chatManager, appId]);
 
   // Logs in with an account ID and a token.
   const login = () => {
