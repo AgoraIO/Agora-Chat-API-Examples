@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 
 class AgoraChatConfig {
-  static const String appKey = "<#Your app key#>";
+  static const String appId = "<#Your app id#>";
   static const String userId = "<#Your created user#>";
   static const String agoraToken = "<#User Token#>";
 }
@@ -12,23 +12,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const MyHomePage(title: 'Flutter SDK Demo'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -58,9 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Container(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
@@ -78,24 +74,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 1,
                   child: TextButton(
                     onPressed: _signIn,
-                    child: const Text("SIGN IN"),
                     style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
+                      foregroundColor: WidgetStateProperty.all(Colors.white),
+                      backgroundColor: WidgetStateProperty.all(
+                        Colors.lightBlue,
+                      ),
                     ),
+                    child: const Text("SIGN IN"),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextButton(
                     onPressed: _signOut,
-                    child: const Text("SIGN OUT"),
                     style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
+                      foregroundColor: WidgetStateProperty.all(Colors.white),
+                      backgroundColor: WidgetStateProperty.all(
+                        Colors.lightBlue,
+                      ),
                     ),
+                    child: const Text("SIGN OUT"),
                   ),
                 ),
               ],
@@ -108,19 +106,17 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (chatId) => _chatId = chatId,
             ),
             TextField(
-              decoration: const InputDecoration(
-                hintText: "Enter message",
-              ),
+              decoration: const InputDecoration(hintText: "Enter message"),
               onChanged: (msg) => _messageContent = msg,
             ),
             const SizedBox(height: 10),
             TextButton(
               onPressed: _sendMessage,
-              child: const Text("SEND TEXT"),
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
+                foregroundColor: WidgetStateProperty.all(Colors.white),
+                backgroundColor: WidgetStateProperty.all(Colors.lightBlue),
               ),
+              child: const Text("SEND TEXT"),
             ),
             Flexible(
               child: ListView.builder(
@@ -138,8 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _initSDK() async {
-    ChatOptions options = ChatOptions(
-      appKey: AgoraChatConfig.appKey,
+    ChatOptions options = ChatOptions.withAppId(
+      AgoraChatConfig.appId,
       autoLogin: false,
     );
     await ChatClient.getInstance.init(options);
@@ -184,7 +180,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _addLogToConsole("sign out succeed");
     } on ChatError catch (e) {
       _addLogToConsole(
-          "sign out failed, code: ${e.code}, desc: ${e.description}");
+        "sign out failed, code: ${e.code}, desc: ${e.description}",
+      );
     }
   }
 
@@ -215,59 +212,45 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         case MessageType.IMAGE:
           {
-            _addLogToConsole(
-              "receive image message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive image message, from: ${msg.from}");
           }
           break;
         case MessageType.VIDEO:
           {
-            _addLogToConsole(
-              "receive video message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive video message, from: ${msg.from}");
           }
           break;
         case MessageType.LOCATION:
           {
-            _addLogToConsole(
-              "receive location message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive location message, from: ${msg.from}");
           }
           break;
         case MessageType.VOICE:
           {
-            _addLogToConsole(
-              "receive voice message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive voice message, from: ${msg.from}");
           }
           break;
         case MessageType.FILE:
           {
-            _addLogToConsole(
-              "receive image message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive image message, from: ${msg.from}");
           }
           break;
         case MessageType.CUSTOM:
           {
-            _addLogToConsole(
-              "receive custom message, from: ${msg.from}",
-            );
+            _addLogToConsole("receive custom message, from: ${msg.from}");
           }
           break;
         case MessageType.CMD:
           {}
           break;
         case MessageType.COMBINE:
-          _addLogToConsole(
-            "receive combine message, from: ${msg.from}",
-          );
+          _addLogToConsole("receive combine message, from: ${msg.from}");
       }
     }
   }
 
   void _addLogToConsole(String log) {
-    _logText.add(_timeString + ": " + log);
+    _logText.add("$_timeString: $log");
     setState(() {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
     });
