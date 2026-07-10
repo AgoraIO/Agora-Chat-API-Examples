@@ -7154,7 +7154,7 @@ __metadata:
     prettier: "npm:2.8.8"
     react: "npm:19.2.0"
     react-native: "npm:0.83.2"
-    react-native-agora-chat: "npm:1.4.0"
+    react-native-agora-chat: "npm:^1.4.1"
     react-native-safe-area-context: "npm:^5.5.2"
     react-test-renderer: "npm:19.2.0"
     typescript: "npm:^5.8.3"
@@ -7211,13 +7211,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-agora-chat@npm:1.4.0":
-  version: 1.4.0
-  resolution: "react-native-agora-chat@npm:1.4.0"
+"react-native-agora-chat@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "react-native-agora-chat@npm:1.4.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/45742867ad2d72c3c81241e8b28c25e56a8f45dbf52228577b194c89188f3d245a48cba7008e278fd032de22cf1cff2e0e54977b735aa93c1afe496825dd2fb7
+  checksum: 10c0/becabf96568fb26d0165bb92a0681e2a5bfacad0b1d9ebbf2f6a5cf7b2493a6048b530cf7bebcb360ea5bd850ff65d7f0af1734ba9facf925f43aa7451b91e31
   languageName: node
   linkType: hard
 
